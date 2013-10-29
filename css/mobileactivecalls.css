@@ -1,0 +1,144 @@
+#dialbox .ui-input-search { width:auto; display: block }
+
+#activecalls span {
+font-family:arial,sans-serif;
+}
+
+#activecalls ul {
+display:none;
+}
+
+#activecalls ul.outbound,#activecalls ul.inbound {
+display:block;
+}
+
+#activecalls .direction {
+font-size: 14px;
+font-weight: bold;
+color: #FFF;
+padding-left:30px;
+padding-right:20px;
+}
+
+#activecalls .outbound .direction {
+background-image:url('../images/Outbound_Call.png');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .inbound .direction {
+background-image:url('../images/Inbound_Call.png');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+
+#activecalls .busy .ui-block-a .ui-btn {
+background: rgba(100, 255, 100, 0.9);
+}
+
+#activecalls .ringing .ui-block-a .ui-btn {
+background: rgba(251, 138, 49, 0.9);
+}
+
+#activecalls .hold .ui-block-a .ui-btn {
+background: rgba(251, 138, 49, 0.9);
+}
+
+#activecalls .hangup .ui-block-a .ui-btn {
+background: rgba(255, 100, 100, 0.9);
+}
+
+#activecalls .ui-select {
+margin-left: auto;
+margin-right: auto;
+display: block;
+}
+
+#activecalls .ui-block-a .ui-icon-callstatus {
+background: none;
+border:none;
+}
+
+#activecalls .busy .ui-icon-callstatus {
+background-image:url('../images/progress.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .ringing .ui-icon-callstatus {
+background-image:url('../images/ringing.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .hold .ui-icon-callstatus {
+background-image:url('../images/pause.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .hangup .ui-icon-callstatus {
+background-image:url('../images/stop.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .crmactions span.phone {
+background-image:url('../images/ac_phone_dis.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+cursor: pointer;
+}
+
+#activecalls .crmactions span.flash {
+background-image:url('../images/ac_headset_dis.gif');
+background-repeat:no-repeat;
+background-position:center center; 
+cursor: pointer;
+}
+
+#activecalls .crmactions span.mobile {
+background-image:url('../images/ac_mobile_dis.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+cursor: pointer;
+}
+
+
+#activecalls .phone .crmactions span.phone {
+background-image:url('../images/ac_phone_ena.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+cursor: default;
+}
+
+#activecalls .flash .crmactions span.flash {
+background-image:url('../images/ac_headset_ena.gif');
+background-repeat:no-repeat;
+background-position:center center; 
+cursor: default;
+}
+
+#activecalls .mobile .crmactions span.mobile {
+background-image:url('../images/ac_mobile_ena.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+#activecalls .mobiletrying .crmactions span.mobile {
+background-image:url('../images/ac_mobile_try.gif');
+background-repeat:no-repeat;
+background-position:left center; 
+}
+
+/* CSS rules */ 
+/* Default tooltip class name: .tooltip */
+ .tooltip {
+position: absolute;
+top: 0;
+left: 0;
+z-index: 3;
+display: none;
+}
+

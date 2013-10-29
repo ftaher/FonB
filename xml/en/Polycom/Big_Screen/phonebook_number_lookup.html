@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>{{Num}}</title>
+	</head>
+	<body>
+
+		<table>
+			<tbody>
+					{{#Internal}}
+					<tr>
+						<td>
+							<img src="img/ch_internal.bmp"/>&nbsp;<a href="tel://{{Num}}">Internal Extension</a>
+						</td>
+					</tr>
+					{{/Internal}}
+					{{#MyContacts}}
+					<tr>
+						<td>
+							<img src="img/ch_mycontacts.bmp"/>&nbsp;<a href="tel://{{Num}}">MyContacts: {{MyContacts}} ({{MyContactsType}})</a>
+						</td>
+					</tr>
+					{{/MyContacts}}
+					{{#GContacts}}
+					<tr>
+						<td>
+							<img src="img/ch_gcontacts.bmp"/>&nbsp;<a href="tel://{{Num}}">GContacts: {{GContacts}} ({{GContactsType}})</a>
+						</td>
+					</tr>
+					{{/GContacts}}
+					{{#Highrise}}
+					<tr>
+						<td>
+							<img src="img/ch_highrise.bmp"/>&nbsp;<a href="tel://{{Num}}">Highrise: {{Highrise}} ({{HighriseType}})</a>
+						</td>
+					</tr>
+					{{/Highrise}}
+			</tbody>
+		</table>
+	</body>
+</html>

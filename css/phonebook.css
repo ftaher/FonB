@@ -1,0 +1,544 @@
+/*
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+ */
+#phonebookpage 
+{
+display:none;
+}
+
+#searchbox 
+{
+background-color:#F7F7F7;
+height:37px;
+width:716px;
+position:relative;
+top:0;
+left:0;
+margin-top:8px;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+#searchbox h1
+{
+position:absolute;
+top:7px;
+left:23px;
+font-size:14px;
+font-weight:bold;
+color:#656565;
+}
+
+#searchbox input 
+{
+position:absolute;
+top:9px;
+left:214px;
+width:247px;
+height:16px;
+font-size:14px;
+font-weight:bold;
+color:#656565;
+border:1px;
+border-style:solid;
+border-color:#a3a29e;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+}
+
+#phonebookheader {
+width: 716px;
+height: 64px;
+margin-top:8px;
+/* padding-top: 23px; */
+background-color:#F7F7F7;
+position:relative;
+top:0;
+left:0;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+#phonebookheader h1 {
+position:absolute;
+top:7px;
+left:23px;
+text-align:right;
+font-size:14px;
+font-weight:bold;
+color:#656565;
+}
+
+#phonebookheader ul {
+position:absolute;
+top:11px;
+left:203px;
+width:490px;
+height:10px;
+text-align:right;
+/*font-weight:bold;*/
+color:#656565;
+}
+
+#phonebookheader ul li {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:10px;
+/*font-weight:bold;*/
+color:#656565;
+margin-left:20px;
+cursor: pointer;
+}
+
+#phonebookheader ul li.currentli {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:11px;
+font-weight:bold;
+color:#5D5D5D;
+margin-left:20px;
+cursor: default;
+}
+
+#phonebookheader #delete {
+position:absolute;
+top:36px;
+left:22px;
+width:100px;
+height:20px;
+text-align:middle;
+font-size:10px;
+color:#656565;
+}
+
+#phonebookheader #sync {
+position:absolute;
+top:36px;
+left:600px;
+width:100px;
+height:20px;
+text-align:middle;
+font-size:10px;
+color:#656565;
+}
+
+
+
+#phonebookheader #showaction {
+position:absolute;
+top:38px;
+left:392px;
+width:150px;
+height:18px;
+background-color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+color:#656565;
+border:1px;
+border-color:#656565;
+border-style:solid;
+}
+
+
+#phonebookheader #showdate {
+position:absolute;
+top:38px;
+left:553px;
+width:150px;
+height:18px;
+background-color:#FFFFFF;
+font-size:10px;
+font-weight:bold;
+color:#656565;
+border:1px;
+border-color:#656565;
+border-style:solid;
+}
+
+
+
+#phonebookfooter {
+width: 716px;
+height: 64px;
+margin-top:8px;
+/* padding-top: 23px; */
+background-color:#F7F7F7;
+position:relative;
+top:0;
+left:0;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+
+#phonebookfooter ul {
+position:absolute;
+top:36px;
+left:203px;
+width:490px;
+height:10px;
+text-align:right;
+/*font-weight:bold;*/
+color:#656565;
+}
+
+#phonebookfooter ul li {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:10px;
+/*font-weight:bold;*/
+color:#656565;
+margin-left:20px;
+cursor: pointer;
+}
+
+#phonebookfooter ul li.currentli {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:11px;
+font-weight:bold;
+color:#5D5D5D;
+margin-left:20px;
+cursor: default;
+}
+
+#phonebookfooter #delete {
+position:absolute;
+top:11px;
+left:22px;
+width:60px;
+height:20px;
+text-align:middle;
+font-size:10px;
+color:#656565;
+}
+
+
+#phonebookfooter #pageinfo {
+position:absolute;
+top:11px;
+left:550px;
+font-size:11px;
+/* font-weight:bold; */
+color:#656565;
+
+}
+
+
+.label {
+background-color: gray;
+color: #fff;
+padding: 0px 2px 0px 5px;
+font-family: Verdana,Arial,Helvetica,sans-serif;
+font-weight: 100;
+line-height: 13px;
+margin: 0px 5px 0px 0px;
+
+}
+
+span.label a.search {
+font-size: 9px;
+font-weight: normal:
+white-space: nowrap;
+padding: 0px 3px;
+vertical-align: middle;
+}
+
+span.label a.del {
+border-width: 0px 0px 0px 0.5px;
+border-color: #fff;
+border-style: dotted;
+padding: 0 2px 0 4px;
+}
+
+#phonebookbg {
+	position: absolute;
+	top: 50px;
+	left: 618px;
+	left:50px;
+	width: 617px;
+	height: 597px;
+	/* opacity: 0.7; */
+	background-image:url("phonebook01.png");
+	background-repeat: no-repeat;
+	display: block;
+}
+
+
+
+
+.phonebookheader {
+        /* background-color: #00006b; */
+	empty-cells: show;
+	font-size: 12px;
+}
+
+.phonebookheader td {
+	empty-cells: show;
+	font-size: 12px;
+	padding: 10px;
+}
+
+.phonebooktools {
+        background-color: #EFEFEF;
+	empty-cells: show;
+	font-size: 12px;
+	height: 3em;
+}
+
+
+.phonebooktools td {
+        background-color: #EFEFEF;
+	empty-cells:show;
+        border-color: black;
+	border-style: inset none outset none;
+        border-width: 0px;
+}
+
+
+.selectall {
+	padding-left: 10px;
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+.selectall strong {
+	padding-left: 5px;
+	font-weight:bold;
+	font-size: 11px;
+	vertical-align: middle;
+}
+
+
+.selectall input {
+	vertical-align: middle;
+}
+
+.phonebooktools div.labels {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+
+.phonebooktools div.moreactions {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+
+.phonebooktools div.nextnav {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 200px;
+	float: right;
+}
+
+
+
+.phonebooktrempty {
+        background-color: #FFFFFF;
+	width: 100%;
+	/* height: 24px; */
+}
+
+.phonebooktrempty h2 {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.phonebooktrempty td {
+	font-weight: bold;
+        empty-cells:show;
+	/* height: 24px; */
+        border-color: #D6D6D6;
+	border-style: solid;
+        border-width: 0px 0px 1px 0px;
+	overflow: hidden;
+	padding: 10px 5px 5px 50px;
+	white-space: nowrap;
+}
+
+
+.phonebooktr {
+        background-color: #FFFFFF;
+        cursor: pointer;
+	width: 100%;
+	/* height: 24px; */
+}
+
+
+.phonebooktr td {
+        cursor: pointer;
+        empty-cells:show;
+	/* height: 24px; */
+        border-color: #D6D6D6;
+	border-style: solid;
+        border-width: 0px 0px 1px 0px;
+	overflow: hidden;
+	padding: 10px 5px 5px 5px;
+	white-space: nowrap;
+}
+
+.phonebooktr td span {
+	white-space: nowrap;
+}
+
+
+.phonebooksb {
+	width: 30px;
+        color: #000;
+	padding: 0 0 0 10px;
+}
+
+.phonebooktype {
+	width: 30px;
+        color: #000;
+	padding: 0 0 0 10px;
+}
+
+.phonebookname {
+	width: 160px;
+	font-size: 12px;
+	color: #000;
+}
+
+.phonebookname a {
+        padding: 0 15px;
+        font-size: 11px;
+        color: #000;
+	font-weight: bold;
+	text-decoration: none;
+	height: 13px;
+	white-space: nowrap;
+}
+
+.phonebookcompany {
+	width: 160px;
+        font-size: 12px;
+        color: #333;
+}
+
+.phonebooknumbers {
+	width: 115px;
+        font-size: 11px;
+        color: #333;
+}
+
+.clearrow {
+	width: 1px;
+        font-size: 11px;
+        color: #333;
+}
+
+.phonebookedit {
+	width: 100%;
+	background-color: #B7D2E3;
+}
+
+.phonebookedit td {
+	width: 100%;
+	background-color: #B7D2E3;
+}
+
+.phonebookedit div {
+	display: none;
+	width: 98%;
+	/* height: 24px; */
+	border-style: solid;
+        border-width: 0px 0px 0px 0px;
+	overflow: hidden;
+	padding: 10px 5px 5px 5px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom: 5px;
+	white-space: nowrap;
+	/* Do rounding (native in Firefox and Safari) */
+	/*
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	*/
+}
+.showControl{
+	padding-top:5px;
+	display:inline-block;
+}
+.pagination{
+	margin:0px !important;display: inline-block;min-width: 484px;padding-left:14px;
+}
+.select-links{
+	display:inline-block;margin-left:20px;padding-right:5px;vertical-align: top;margin-top: 5px;
+}
+.action-button{
+	display:inline-block;margin-left:20px;vertical-align: top;
+}
+#noContactsModal{
+	top: 50px;
+	left: 41px;
+	width: 1200px;
+	height: 542px;
+	margin: 0 auto;
+}
+#noContactsModal .modal-body{
+	max-height: auto;
+	height: 510px;
+}
+.contacts-progress{
+	display: block;
+	margin: 0px;
+	min-height: 0px;
+	width: 1045px;
+	margin-left: 4px;
+	height: 7px !important;
+	margin-bottom: 0px !important;
+}
+#phonebookpage .help-block{
+	margin-left: 4px;
+	display: none;
+}

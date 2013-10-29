@@ -1,0 +1,38 @@
+<AastraIPPhoneDirectory destroyOnExit="yes" style="none" defaultIndex="1">
+	<Title>Contact Details</Title>
+
+	<MenuItem>
+		<Prompt>{{Num}}</Prompt>
+		<URI>Dial:{{Num}}</URI>
+	</MenuItem>
+
+	{{#Internal}}
+	<MenuItem>
+		<Prompt>Internal Extension</Prompt>
+		<URI>Dial:{{Num}}</URI>
+	</MenuItem>
+	{{/Internal}}
+
+
+	{{#MyContacts}}
+	<MenuItem>
+		<Prompt>MyContacts:{{MyContactsType}}</Prompt>
+		<URI>Dial:{{Num}}</URI>
+	</MenuItem>
+	{{/MyContacts}}
+
+	{{#GContacts}}
+	<MenuItem>
+		<Prompt>GContacts:{{GContactsType}}</Prompt>
+		<URI>Dial:{{Num}}</URI>
+	</MenuItem>
+	{{/GContacts}}
+
+	{{#Highrise}}
+	<MenuItem>
+		<Prompt>Highrise:{{HighriseType}}</Prompt>
+		<URI>Dial:{{Num}}</URI>
+	</MenuItem>
+	{{/Highrise}}
+
+</AastraIPPhoneDirectory>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>Call History</title>
+	</head>
+	<body>
+		{{^CallHistoryList}}
+			<p>No Call History Found</p>
+		{{/CallHistoryList}}
+		<table>
+			<tbody>
+				{{#CallHistoryList}}
+					{{#CallerClid}}
+					<tr>
+						{{#Internal}}
+							<td>{{Internal}}</td> <td>{{Direction}}</td>
+						{{/Internal}}
+						{{^Internal}}
+							{{#MyContacts}}
+								<td>{{MyContacts}}</td> <td>{{Direction}}</td>
+							{{/MyContacts}}
+							{{^MyContacts}}
+								{{#GContacts}}
+									<td>{{GContacts}}</td> <td>{{Direction}}</td>
+								{{/GContacts}}
+								{{^GContacts}}
+									{{#Highrise}}
+										<td>{{Highrise}}</td> <td>{{Direction}}</td>
+									{{/Highrise}}
+								{{/GContacts}}
+							{{/MyContacts}}
+						{{/Internal}}
+					</tr>
+					<tr>
+						<td colspan="2">{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
+					</tr>
+					{{/CallerClid}}
+				{{/CallHistoryList}}
+			</tbody>
+		</table>
+	</body>
+</html>

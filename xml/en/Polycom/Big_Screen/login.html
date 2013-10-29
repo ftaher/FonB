@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>Login to FonB Polycom App</title>
+	</head>
+	<body>
+		<form method="get" action="http://{{Host}}/xml/en/Polycom/Big_Screen/menu.html">
+			<p>
+				<label for="user">Extension:</label><br/>
+				<input name="user" id="user" type="text" value="{{Extension}}"/><br/>
+				<label for="pass">Password:</label><br/>
+				<input type="password" name="pass" id="pass"/>
+			</p>
+			<p>
+				<input type="submit" value="Log In"/> 
+			</p>
+		</form>
+	</body>
+</html>

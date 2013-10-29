@@ -1,0 +1,82 @@
+{
+	"Department": 
+		[
+			{
+				"Name":"Extensions",
+				"Extensions": 
+					[
+						{
+							"Exten":201,
+							"Terminal":"SIP/000E08D5C50F",
+							"Name":"Feras Taher(EP)"
+						},
+						{
+							"Exten":202,
+							"Terminal":"SIP/00085D1939EC",
+							"Name":"MAMA"
+						},
+						{
+							"Exten":204,
+							"Terminal":"SCCP/00235EB90068",
+							"Name":"Saloon"
+						},
+						{
+							"Exten":205,
+							"Terminal":"SIP/00085D195BCF",
+							"Name":"TV Room"
+						},
+						{
+							"Exten":206,
+							"Terminal":"SIP/00085D036248",
+							"Name":"Office"
+						},
+						{
+							"Exten":207,
+							"Terminal":"SIP/00085D1938F0",
+							"Name":"Kitchen"
+						},
+						{
+							"Exten":210,
+							"Terminal":"SIP/002414D362B8",
+							"Name":"Kamal Al-Taher"
+						},
+						{
+							"Exten":223,
+							"Terminal":"SIP/00085D031224",
+							"Name":"Nokia"
+						},
+						{
+							"Exten":225,
+							"Terminal":"",
+							"Name":"feras Testing"
+						}
+				]
+			},
+			{
+				"Name":"Sales",
+				"Extensions": 	
+					[
+						{
+							"Exten":208,
+							"Terminal":"SIP/000E08D610AB",
+							"Name":""
+						},
+						{
+							"Exten":209,
+							"Terminal":"SIP/000E08D706CB",
+							"Name":""
+						},
+						{
+							"Exten":214,
+							"Terminal":"SCCP/0021A084EA86",
+							"Name":"John B"
+						},
+						{
+							"Exten":222,
+							"Terminal":"SIP/002414D362B8",
+							"Name":"Dina Al Taher"
+						}
+					]
+			}
+	]
+}

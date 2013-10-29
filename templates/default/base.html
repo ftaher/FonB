@@ -1,0 +1,127 @@
+<div id="basetemplate">
+  <div class="row-fluid">
+    <div class="topHeader">
+      <div class="boxWide"> 
+        <!-- <div class="span2">
+              <div  id="nav-switchboard" class="row-fluid">
+    <div class="seprator">|</div>
+                <div class="span10 offset1 nav-text">
+                  <a href="#switchboard" onclick="show_switchboard();"><i class="icon-cog"></i>&nbsp;Switchboard</a>
+                </div>
+              </div>            
+            </div> -->
+        <div class="logo"> <img src="images/logo.png" alt="logo" border="0"/> </div>
+        <div class="threeBtnNav">
+          <div id="nav-callhistory" class="row-fluid nav-active">
+            <div class="nav-text"> <a href="#callhistory" onclick="show_callhistory();"><i class="icon-list"></i>&nbsp;{{t "Call History"}}</a> </div>
+          </div>
+        </div>
+        <div class="threeBtnNav">
+          <div id="nav-phonebook" class="row-fluid nav-after-active">
+            <div class="nav-text"> <a href="#contacts" onclick="show_phonebook();"><i class="icon-list-alt"></i>&nbsp;{{t "Contacts"}}</a> </div>
+          </div>
+        </div>
+        <div class="threeBtnNav">
+          <div class="row-fluid" id="nav-settings">
+            <div class="nav-text"> <a href="#settings" onclick="show_settings();"><i class="icon-wrench"></i>&nbsp;{{t "Settings"}}</a> </div>
+          </div>
+        </div>
+        <div class="accountName">
+          <div class="row-fluid" id="nav-username">
+            <div class="seprator">|</div>
+            <div class="nav-text"> <i class="icon-user"></i>&nbsp;<span class="label label-info">{{Extension}}, {{Name}}</span> </div>
+          </div>
+        </div>
+        <div class="mute">
+          <div class="row-fluid">
+            <div class="seprator">|</div>
+            <div class="nav-text"> <a href="javascript:;" onclick="muteBuzzer();"><i class="icon-volume-off"></i>&nbsp;{{t "Mute"}}</a> </div>
+          </div>
+        </div>
+        
+        <div class="logout"> <span class="label label-warning"><a href="javascript:;" onclick="location.href='/logout'">{{t "Logout"}}</a></span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="boxWideBlueNav">
+    <div class="row-fluid headerBg" >
+      <div class="boxWide">
+        <div class="row-fluid">
+          <div class="row-fluid boxWide" style="margin-top:10px;">
+            <div class="quickdialWidth">
+              <div class="input-prepend input-append quickdial-search quickdialWidthInput"> <span class="add-on" style="border-right:0px;"> <i style="color: black;" class="icon-search"></i> </span>
+                <input class="input-xlarge" type="text" placeholder="{{t "Quick Dial"}}" id="quickdial"/>
+                <span class="add-on" style="border-left:0px;"> <a href="javascript:;" onclick='$("input#quickdial").val("");$("#quickdial-info").html("Search contacts or type number to dial");'><i style="color: black;" class="icon-remove"></i></a> </span> </div>
+            </div>
+            <div class="quickdialNav">
+              <div class="row-fluid noflash nophone nomobile" id="quickdialbox">
+                <div class="flash qdicons">
+                  <div class="row-fluid">
+                    <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('WebPhone', $('#quickdial').val()  , '');"><i class="icon web-icon"></i>&nbsp;{{t "Webphone"}}</a> </div>
+                  </div>
+                </div>
+                <div class="seprator"> | </div>
+                <div class="phone qdicons">
+                  <div class="row-fluid">
+                    <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('Phone', $('#quickdial').val()  , '');"><i class="icon phone-icon"></i>&nbsp;{{t "IP Phone"}}</a> </div>
+                  </div>
+                </div>
+                <div class="seprator"> | </div>
+                <div class="mobile qdicons">
+                  <div class="row-fluid">
+                    <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('Mobile', $('#quickdial').val()  , '');"><i class="icon mobile-icon"></i>&nbsp;{{t "Mobile"}}</a> </div>
+                  </div>
+                </div>
+                <div class="span2 conference">
+                  <div class="row-fluid">
+                    <div class="seprator"> | </div>
+                    <div class="span11 quickdial-text"> <i class="icon icon-plus"></i>&nbsp;{{t "Conference"}} </div>
+                  </div>
+                </div>
+                <div class="span2 transfer">
+                  <div class="row-fluid">
+                    <div class="seprator"> | </div>
+                    <div class="quickdial-text"> <a href="javascript:;" onclick="blindTransfer($('#quickdial').val());"><i class="icon transfer-icon" style=""></i>&nbsp;{{t "Transfer"}}</a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="DialPadInfo">
+              <div class="dialPadLine" id="quickdial-info">{{t "Search contacts or type number to dial"}}</div>
+              <div class="dialpad" style="margin-left:15px;"> <a href="javascript:;" id="quickdial-dialpad"><i class="icon icon-th"></i>&nbsp;{{t "Dial Pad"}}</a> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-fluid move-down-more boxWide">
+    <div class="row-fluid">
+      <div class="PageWide body-container">
+        <div class="row-fluid" id="activecalls-container">
+          <div class="span12 noflash nomobile nophone" id="activecalls">
+            <div class="row-fluid" id="noline">
+              <div class="alert alert-success" style="margin-bottom:0px;">
+                <h3>{{t "No Active Calls"}}</h3>
+              </div>
+            </div>
+          </div id="activecalls">
+        </div>
+        <!-- header, navigation and active call blocks end here -->
+        <div class="row-fluid">
+          <!-- pagebox contains all pages from other templates -->
+          <div class="span12" id="pagebox"> 
+          </div>
+          <!-- pagebox ends -->
+        </div> <!-- pagebox row ends -->
+      </div><!-- body container ends -->
+    </div>  <!-- body container row ends -->
+  </div><!-- Contents end here -->
+</div><!--base template ends -->
+<audio loop id="soundHandle" style="display: none;">
+    <source src="flash/ring.mp3" type="audio/mpeg" />
+    <source src="flash/ring.ogg" type="audio/ogg" />
+    <source src="flash/ring.wav" type="audio/wav" />
+</audio>
+<div class='notifications top-right'></div>
+<div class="media"></div>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- begin MAIN -->
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>APTUS End-User Portal</title>
+<link rel="shortcut icon" href="images/CommManager_1.png">
+
+<!-- Adding All CSS Files here -->
+<link rel="stylesheet" href="css/bonevojage.min.css" />
+<link href="css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+<link href="css/jquery.keypad.css" rel="stylesheet" type="text/css" />
+<!-- FoneB css -->
+<link href="css/settings.css" rel="stylesheet" type="text/css" />
+<link href="css/responsive.css" rel="stylesheet" type="text/css" />
+<link href="css/phonebook.css" rel="stylesheet" type="text/css" />
+<link href="css/addcontact.css" rel="stylesheet" type="text/css" />
+
+<!-- Placing it in end temporarily to avoid conflicts with above files. 
+Using bootstrap to control grid, dropdowns, buttons and Layout-->
+<link href="css/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+<link href="css/mainheader.css" rel="stylesheet" type="text/css" />
+<link href="css/activecalls.css" rel="stylesheet" type="text/css" />
+<link href="css/callhistory.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" type="text/css" rel="stylesheet"/>
+<!-- CSS FILE END  -->
+
+<!-- Adding All JS and JS Files here -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<!-- JQuery Ui for sortable, datepicker and slider -->
+<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<!-- bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<script type='text/javascript' src='js/bootstrap-notify.js'></script>
+<script type='text/javascript' src='js/fancyselect.js'></script>
+<!-- Jquery URL parser plugin - used in settings for parsing google authorization token -->
+<script type="text/javascript" src="js/purl.js"></script>
+<!-- Timer for showing call duration -->
+<script type='text/javascript' src='js/jquery.timers.js'></script>
+<!-- We are using handlebars for templating support -->
+<script type="text/javascript" src="js/handlebars.js"></script>
+<!-- using in import csv to submit file using ajax without page reload -->
+<script type="text/javascript" src="js/jquery.form.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<!-- dialpad for quickdial -->
+<script type='text/javascript' src='js/jquery.keypad.min.js'></script>
+<!--feature tour -->
+<script type="text/javascript" src="js/jquery.bonevojage.min.js"></script>
+<!-- Load the WebPhone -->
+<script type="text/javascript" src="js/jquery.phono.js"></script>
+<!-- <script type="text/javascript" src="http://s.phono.com/releases/1.1/jquery.phono.min.js"></script> -->
+<!-- i18n module -->
+<script type="text/javascript" src="js/i18n.js"></script>
+<!-- Custom javascript  -->
+<!-- It is highly discouraged that you put js code in this file unless it needs something from server by Mustache rendered template -->
+<script type="text/javascript">
+/**
+ * @var {string} ourcontext
+ * @memberOf global
+ */
+var ourcontext = "{{Context}}";
+/**
+ * @var {string} ourterminal
+ * @memberOf global
+ */
+var ourterminal = "{{Terminal}}";
+/**
+ * @var {string} ourextension
+ * @memberOf global
+ */
+var ourextension = "{{Extension}}";
+/**
+ * @var {string} ourpassword
+ * @memberOf global
+ */
+var ourpassword = "{{Password}}";
+/**
+ * @var {string} ourmobile
+ * @memberOf global
+ */
+var ourmobile = "{{Mobile}}";
+/**
+ * @var {string} TemplateLanguage
+ * @memberOf global
+ */
+var TemplateLanguage = "{{Language}}";
+</script>
+{{^HighriseLicense}}
+<style type="text/css">
+    .highrise-license{
+      display: none;
+    }
+</style>
+{{/HighriseLicense}}
+
+<!-- MUST BE FIRST CUSTOM JS FILE! 
+	Functions and code that is common to all our files -->
+<script type="text/javascript" src="js/global.js"></script> 
+<!-- Get JSON for Global variables -->
+<script type="text/javascript" src="js/templates.js"></script>
+<script type='text/javascript' src='js/activecalls.js'></script>
+<script type="text/javascript" src="js/callhistory.js"></script>
+<script type="text/javascript" src="js/settings.js"></script>
+<script type="text/javascript" src="js/phonebook.js"></script>
+<!-- code that is needed after rendering and doesn't fall in any of above feature specific js files-->
+<script type="text/javascript" src="js/common.js"></script>
+<!-- JS Ends -->
+</head>
+<body>
+<div class='notifications top-right'></div>
+<div class="media"></div>
+<div class="row-fluid">
+<div class="topHeader">
+  <div class="boxWide"> 
+    <!-- <div class="span2">
+					<div  id="nav-switchboard" class="row-fluid">
+<div class="seprator">|</div>
+						<div class="span10 offset1 nav-text">
+							<a href="#switchboard" onclick="show_switchboard();"><i class="icon-cog"></i>&nbsp;Switchboard</a>
+						</div>
+					</div>						
+				</div> -->
+    <div class="logo"> <img src="images/logo.png" alt="logo" border="0"/> </div>
+    <div class="threeBtnNav">
+      <div id="nav-callhistory" class="row-fluid nav-active">
+        <div class="nav-text"> <a href="#callhistory" onclick="show_callhistory();"><i class="icon-list"></i>&nbsp;Call History</a> </div>
+      </div>
+    </div>
+    <div class="threeBtnNav">
+      <div id="nav-phonebook" class="row-fluid nav-after-active">
+        <div class="nav-text"> <a href="#contacts" onclick="show_phonebook();"><i class="icon-list-alt"></i>&nbsp;Contacts</a> </div>
+      </div>
+    </div>
+    <div class="threeBtnNav">
+      <div class="row-fluid" id="nav-settings">
+        <div class="nav-text"> <a href="#settings" onclick="show_settings();"><i class="icon-wrench"></i>&nbsp;Settings</a> </div>
+      </div>
+    </div>
+    <div class="accountName">
+      <div class="row-fluid" id="nav-username">
+        <div class="seprator">|</div>
+        <div class="nav-text"> <i class="icon-user"></i>&nbsp;<span class="label label-info">{{Extension}}, {{Name}}</span> </div>
+      </div>
+    </div>
+    <div class="mute">
+      <div class="row-fluid">
+        <div class="seprator">|</div>
+        <div class="nav-text"> <a href="javascript:;" onclick="muteBuzzer();"><i class="icon-volume-off"></i>&nbsp;Mute</a> </div>
+      </div>
+    </div>
+    
+    <div class="logout"> <span class="label label-warning"><a href="javascript:;" onclick="location.href='/logout'">Logout</a></span> </div>
+  </div>
+</div>
+</div>
+<div class="boxWideBlueNav">
+  <div class="row-fluid headerBg" >
+    <div class="boxWide">
+      <div class="row-fluid">
+        <div class="row-fluid boxWide" style="margin-top:10px;">
+          <div class="quickdialWidth">
+            <div class="input-prepend input-append quickdial-search quickdialWidthInput"> <span class="add-on" style="border-right:0px;"> <i style="color: black;" class="icon-search"></i> </span>
+              <input class="input-xlarge" type="text" placeholder="Quick Dial" id="quickdial"/>
+              <span class="add-on" style="border-left:0px;"> <a href="javascript:;" onclick='$("input#quickdial").val("");$("#quickdial-info").html("Search contacts or type number to dial");'><i style="color: black;" class="icon-remove"></i></a> </span> </div>
+          </div>
+          <div class="quickdialNav">
+            <div class="row-fluid noflash nophone nomobile" id="quickdialbox">
+              <div class="flash qdicons">
+                <div class="row-fluid">
+                  <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('WebPhone', $('#quickdial').val()  , '');"><i class="icon web-icon"></i>&nbsp;Webphone</a> </div>
+                </div>
+              </div>
+              <div class="seprator"> | </div>
+              <div class="phone qdicons">
+                <div class="row-fluid">
+                  <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('Phone', $('#quickdial').val()  , '');"><i class="icon phone-icon"></i>&nbsp;IP Phone</a> </div>
+                </div>
+              </div>
+              <div class="seprator"> | </div>
+              <div class="mobile qdicons">
+                <div class="row-fluid">
+                  <div class="span11 quickdial-text"> <a href="javascript:;" onclick="Quickdial('Mobile', $('#quickdial').val()  , '');"><i class="icon mobile-icon"></i>&nbsp;Mobile</a> </div>
+                </div>
+              </div>
+              <div class="span2 conference">
+                <div class="row-fluid">
+                  <div class="seprator"> | </div>
+                  <div class="span11 quickdial-text"> <i class="icon icon-plus"></i>&nbsp;Conference </div>
+                </div>
+              </div>
+              <div class="span2 transfer">
+                <div class="row-fluid">
+                  <div class="seprator"> | </div>
+                  <div class="quickdial-text"> <a href="javascript:;" onclick="blindTransfer($('#quickdial').val());"><i class="icon transfer-icon" style=""></i>&nbsp;Transfer</a> </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="DialPadInfo">
+            <div class="dialPadLine" id="quickdial-info"> Search contacts or type number to dial </div>
+            <div class="dialpad" style="margin-left:15px;"> <a href="javascript:;" id="quickdial-dialpad"><i class="icon icon-th"></i>&nbsp;Dial Pad</a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-fluid move-down-more boxWide">
+<div class="row-fluid">
+<div class="PageWide body-container">
+<div class="row-fluid" id="activecalls-container">
+  <div class="span12 noflash nomobile nophone" id="activecalls">
+    <div class="row-fluid" id="noline">
+      <div class="alert alert-success" style="margin-bottom:0px;">
+        <h3>No Active Calls</h3>
+      </div>
+    </div>
+  </div id="activecalls">
+</div>
+<!-- header, navigation and active call blocks end here -->
+<div class="row-fluid">
+<div class="span12" id="pagebox">
+<!--Settings page start-->
+<div class="row-fluid pagebox" id="settingspage"> </div>
+<!--settings page end--> 

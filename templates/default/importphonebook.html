@@ -1,0 +1,83 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<!-- BEGIN: main -->
+
+
+<div id="importphonebook" style="width:500px;">
+
+
+<p class="lead">{{t "Please upload your personal phonebook in Microsoft Outlook CSV file format:"}}</p>
+
+<form class="form" id="csvphonebookupload" action="php/uploadphonebook.php" method="post" enctype="multipart/form-data">
+	<div style="position:relative;">
+		<a class='btn' href='javascript:;'>{{t "Choose File..."}}<input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+		</a>
+		&nbsp;
+		<span class='label label-info' id="upload-file-info"></span>
+	</div>
+	<br>
+	<br>
+
+	<br>
+		<input type="submit" name="Go" value="{{t "Upload"}}" class="btn btn-primary">
+	<br>
+</form>
+
+
+</div>
+
+<script>
+
+// jQuery Form Plugin options
+var uploadfileOptions = {
+  beforeSubmit:  formBeforeSubmit,
+  iframe: true,
+  success:       formAfterSubmit
+};
+ 
+function formBeforeSubmit() {
+  // PERFORM ACTIONS BEFORE FORM SUBMIT HERE
+  return true;
+}
+ 
+function formAfterSubmit(responseText, statusText)  {
+	// PERFORM ACTIONS AFTER FORM SUBMIT HERE
+	$(".top-right").notify({
+			message: '<strong>{{t "CSV File Upload"}}</strong><br/>' + responseText
+		}
+	).show();
+	$("#importCSVModal").modal('hide');
+	PhonebookRefreshSource();
+	PhonebookShowSource("all", 1, false);
+	return false;
+}
+$('#csvphonebookupload').ajaxForm(uploadfileOptions);
+
+</script>
+<!-- END: main -->

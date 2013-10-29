@@ -1,0 +1,41 @@
+{
+	"TotalContacts": 100,
+        "Phonebooks":	
+		[
+			{
+				"Name":"Internal",
+				"Source":"internal",
+				"Count": 20
+			},
+			{
+				"Name":"Personal",
+				"Source":"personal",
+				"Count": 30
+			},
+			{
+				"Name":"Google",
+				"Source":"gcontacts",
+				"Count": 30,
+				"Sync": true
+			},
+			{
+				"Name":"Highrise",
+				"Source":"crm",
+				"Count": 30,
+				"Sync": true
+			}
+		],
+        "Imports":	
+		[
+			{
+				"Uploaded":"2013-02-04 06:55:52",
+				"Source":"2013-02-04 06:55:52",
+				"Count": 575
+			},
+			{
+				"Uploaded":"2012-10-19 09:05:04",
+				"Source":"2012-10-19 09:05:04",
+				"Count": 332
+			}
+		]
+}

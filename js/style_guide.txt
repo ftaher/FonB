@@ -1,0 +1,20 @@
+1- Always use semicolons ; to end statements.
+2- Don't use conditions or loops without braces {}. 
+	Don't write if (abc == true) alert("hello");
+	Write 
+		if(abc == true){
+			alert("hello");
+		}
+3- Starting Curly bracket should begin on same line the function declaration or loop or condition or try/catch block begins. It should not be on second line.
+	WRONG WAY:
+		if(abc == true)
+		{
+			alert("hello");
+		}
+	CORRECT WAY:	
+		if(abc == true){
+			alert("hello");
+		}
+5- Use camelCase for variables and function names. Constants start with capital letters.
+4- Always begin new variables with var keyword so that reader knows that this variables is being declared for first time.
+5- Use double quotes as much as possible, unless you are appending html in string. Use double quotes inside HTML in that case and use single quotes for javascript.

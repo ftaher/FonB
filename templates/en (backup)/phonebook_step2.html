@@ -1,0 +1,51 @@
+<!-- BEGIN: main -->
+
+<div style="text-align: center"><small>
+  [Step 2 out of 3] - Define fields mapping
+</small></div><hr/>
+
+<!-- BEGIN: error -->
+<span style="font-weight: bold; color: red">{error}</span><hr/>
+<!-- END: error -->
+
+<form method="post">
+  <table border="1" align="center">
+    <tr>
+      <th>Table column</th>
+      <th>CSV header</th>
+      <th>CSV example</th>
+    </tr>
+
+
+
+<!-- BEGIN: row -->
+    <tr>
+	<td>
+		<select name="mapping_{id}" id="select_{id}">
+			<option value="csv_{id}">- select -</option>
+			<option value="display_name">display_name</option>
+			<option value="lname">lname</option>
+			<option value="fname">fname</option>
+			<option value="company">company</option>
+			<option value="title">title</option>
+			<option value="office_phone">office_phone</option>
+			<option value="home_phone">home_phone</option>
+			<option value="cell_phone">cell_phone</option>
+			<option value="other_phone">other_phone</option>
+		</select>
+	</td>
+      <td class="header">{header}</td>
+      <td><i>{example}</i></td>
+    </tr>
+
+<!-- END: row -->
+
+
+  </table>
+  <br/>
+  <div style="text-align: center">
+    <input type="submit" name="submit" class="btn" value="I am ready. Let's import it to database" />
+  </div>
+</form>
+
+<!-- END: main -->

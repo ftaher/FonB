@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>phone Javascript API</title>
+
+<script type="text/javascript" src="swfobject.js"></script>
+
+<script type="text/javascript">
+	var phone;
+	var fo;
+
+	function registrationSucess(msg) {
+
+		display("registrationSucess " + msg);
+	}
+
+	function registrationFailure(msg) {
+
+		display("registrationFailure " + msg);
+	}
+
+	function phoneError(msg) {
+
+		display("phoneError " + msg);
+	}
+
+	function phoneReady(msg) {
+
+		display("phoneReady");
+	}
+
+	function callIncoming(source) {
+
+		display("callIncoming from " + source);
+	}
+
+	function callConnected(stream) {
+
+		display( "callConnected play: " + stream);
+	}
+
+	function callState(msg) {
+
+		display("callState " + msg);
+	}
+
+	function display(msg) {
+
+		var phoneOut = document.getElementById("phoneview");
+		phoneOut.innerHTML = phoneOut.innerHTML + msg + "<br>"
+	}
+
+
+	function setupApp() {
+
+		fo = new SWFObject("phoneAPI.lzx.swf", "lzapp", "0", "0", "8");
+		fo.addParam("swLiveConnect", "true");
+		fo.addParam("name", "lzapp");
+		fo.addParam("id", "lzapp");
+		fo.write("phoneapi");
+
+		phone = document.getElementById("lzapp");
+
+		if (phone == null)
+			alert("Can't get red5phone Flash object");
+		console.dir(phone);
+	}
+
+
+</script>
+</head>
+<body topmargin="0" leftmargin="0" bottommargin="0" rightmargin="0" onload="setupApp()">
+<div id="phoneapi"></div>
+<div id="phoneview"></div>
+<hr>
+<button onclick='phone.login(224, 224, 3333, "aptus", "10.0.0.5", "rtmp://10.0.0.5/sip");'>Connect</button>
+<button onClick="phone.register()">Register</button><p>
+<button onClick="phone.call(214)">Call</button>
+<button onClick="phone.hangup()">Hangup</button>
+<button onClick="phone.accept()">Accept</button>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<AastraIPPhoneDirectory destroyOnExit="no" style="none" defaultIndex="1">
+	<Title>CallHistory</Title>
+	{{^CallHistoryList}}
+	<MenuItem>
+		<Prompt>No Contacts Found</Prompt>
+		<URI></URI>
+	</MenuItem>
+	{{/CallHistoryList}}
+	{{#CallHistoryList}}
+	<MenuItem>
+		<Prompt>
+			{{#CallerClid}}
+				{{#Internal}}
+					{{Internal}}
+				{{/Internal}}
+				{{^Internal}}
+					{{#MyContacts}}
+						{{MyContacts}}
+					{{/MyContacts}}
+					{{^MyContacts}}
+						{{#GContacts}}
+							{{GContacts}}
+						{{/GContacts}}
+						{{^GContacts}}
+							{{#Highrise}}
+								{{Highrise}}
+							{{/Highrise}}
+							{{^Highrise}}
+								{{Num}}
+							{{/Highrise}}
+						{{/GContacts}}
+					{{/MyContacts}}
+				{{/Internal}}
+			{{/CallerClid}}
+		</Prompt>
+		<URI>Dial:{{#CallerClid}}{{Num}}{{/CallerClid}}</URI>
+	</MenuItem>
+	{{/CallHistoryList}}
+</AastraIPPhoneDirectory>

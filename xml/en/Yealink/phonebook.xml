@@ -1,0 +1,10 @@
+<FonbInputScreen type="string" Timeout="15" Beep="yes" editable="yes">
+	<Title wrap="yes">Phonebook Search</Title>
+	<Prompt>Contact Name:</Prompt>
+	<URL>http://{{Host}}/xml/en/Yealink/listphonebook.xml</URL>
+	<InputField editable="yes" type="string">
+		<Prompt>Contact Name:</Prompt>
+		<URL>http://{{Host}}/xml/en/Yealink/listphonebook.xml</URL>
+		<Parameter>FilterSearch</Parameter>
+	</InputField>
+</FonbInputScreen>

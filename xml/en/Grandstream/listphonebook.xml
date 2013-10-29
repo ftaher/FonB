@@ -1,0 +1,15 @@
+<AddressBook>
+	{{#Contacts}}
+	<Contact>
+		<LastName>{{LastName}} {{Source}}</LastName>
+		<FirstName>{{FirstName}}</FirstName>
+		<Phone>
+			<phonenumber>{{PhoneNumber}}</phonenumber>
+			<accountindex>1</accountindex>
+		</Phone>
+		<Groups>
+			<groupid>0</groupid>
+		</Groups>
+	</Contact>
+	{{/Contacts}}
+</AddressBook>

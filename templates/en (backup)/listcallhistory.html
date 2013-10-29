@@ -1,0 +1,84 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+{{#if CallHistoryList}}
+	{{#CallHistoryList}}
+<table width="100%" border="0" cellspacing="2" cellpadding="3" class="call-history-grid-row Summary {{Direction}}" id="CONTACT_{{Id}}">
+  <tr class="OneRow">
+    <td width="20%" class="CallOwner"><img src="images/ch_internal.png" alt="user"/><span class="contact-name">{{CallOwner.Internal}}</a></td>
+    <td class="CallDirection" width="15%"><img src="images/{{Direction}}_Call.png" alt="{{Direction}}"/>&nbsp;<span>{{Direction}}</span></td>
+    <td class="CallerClid" width="20%"> 
+      {{#if CallerClid.Internal}} <img class="internal" style="display:none;" src="images/ch_internal.png"/> {{/if}}
+      {{#if CallerClid.MyContacts}} <img class="personal" style="display:none;" src="images/ch_mycontacts.png"/> {{/if}}
+      {{#if CallerClid.GContacts}} <img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/> {{/if}}
+      {{#if CallerClid.Highrise}} <img class="crm" style="display:none;" src="images/ch_highrise.png"/> {{/if}}
+      {{#if CallerClid.iPhone}} <img class="crm" style="display:none;" src="images/ch_iPhone.png"/> {{/if}}
+      <span class="dst" style="display:none;">{{CallerClid.Num}}</span> 
+      {{#if CallerClid.MyContacts}} 
+      <span class="personal contact-name" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.MyContactsLastName}}{{CallerClid.MyContactsLastName}}, {{/if}}{{CallerClid.MyContactsFirstName}}{{else}}{{CallerClid.MyContacts}}{{/if}}</span>       
+      <span class="personal phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.MyContactsType}}</span> {{/if}}
+      {{#if CallerClid.GContacts}} 
+      <span class="gcontacts" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.GContactsLastName}}{{CallerClid.GContactsLastName}}, {{/if}}{{CallerClid.GContactsFirstName}}{{else}}{{CallerClid.GContacts}}{{/if}}</span> <span class="gcontacts phonetype" style="display:none;font-weight:normal;font-size:10px;color:#09F;">{{CallerClid.GContactsType}}</span> {{/if}}
+      {{#if CallerClid.Highrise}} 
+      <span class="crm" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.HighriseLastName}}{{CallerClid.HighriseLastName}}, {{/if}}{{CallerClid.HighriseFirstName}}{{else}}{{CallerClid.Highrise}}{{/if}}</span> <span class="crm phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.HighriseType}}</span> {{/if}}
+      {{#if CallerClid.iPhone}} 
+      <span class="crm" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.iPhoneLastName}}{{CallerClid.iPhoneLastName}}, {{/if}}{{CallerClid.iPhoneFirstName}}{{else}}{{CallerClid.iPhone}}{{/if}}</span> <span class="crm phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.iPhoneType}}</span> {{/if}}
+      {{#if CallerClid.Internal}} 
+      <span class="internal contact-name" style="display:none;">{{CallerClid.Internal}}</span> {{/if}} 
+    </td>
+    <td style="width:140px;float:left;overflow:hidden;border:0px;">
+    {{#each CallerClid.GContactsGroups}}
+		<span class="gcontacts label label-important">{{this}}</span>
+	 {{/each}}
+    {{#each CallerClid.HighriseGroups}}
+    <span class="crm label label-info">{{this}}</span>
+   {{/each}}
+    </td>
+    <td width="5%">{{#recordingfile}}<img style="display:block;" src="images/Call_Attachment.png" alt="call recording"/>{{/recordingfile}}</td>
+    <td class="Duration">{{Duration}}</td>
+    <td class="DateSummary" width="130px" align="right">{{DateSummary}}</td>
+  </tr>
+</table>
+<div class="row-fluid call-history-grid-row Detailed {{Direction}}" id="detailed_{{Id}}" style="background-color:#fff;padding:0px;">
+		<div class="span12 column{{Direction}}">
+			<div class="row-fluid main">
+				
+			</div>
+		</div>
+	</div>
+
+{{/CallHistoryList}}
+{{else}}
+	<div class="row-fluid call-history-grid-row">
+		<div class="span12">
+			<div class="alert alert-success">
+				No logs for call history could be found. Start calling now to get stats here.
+			</div>
+		</div>
+	</div>
+{{/if}}

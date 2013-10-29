@@ -1,0 +1,167 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<!-- BEGIN: main -->
+
+<div id="addContactModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
+	<form action="javascript:;" class="form-horizontal" id="new_person" method="post">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="addContactLabel">Add New Contact</h3>
+		</div>
+		<div class="modal-body">
+			<div id="addcontactpage">
+				<!-- BEGIN: personcontacts -->
+				<div class="addcontact" style="">
+					<div style="background-color:#f0fff8;padding:10px 0px 1px 0px;margin-bottom:20px;">
+						<div class="control-group">
+							<label class="control-label" for="person_first_name">First Name</label>
+							<div class="controls">
+								<input type="text" name="FirstName" placeholder="First Name" id="person_first_name" value="{{FirstName}}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="person_last_name">Last Name</label>
+							<div class="controls">
+								<input type="text" placeholder="Last Name" name="LastName"  value="{{LastName}}" id="person_last_name"/>
+							</div>
+						</div>						
+						<div class="control-group">
+							<label class="control-label" for="person_company_name">Company</label>
+							<div class="controls">
+								<input type="text" value="{{Company}}" name="Company" placeholder="Company Name" id="person_company_name"/>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div class="control-group">
+							<label class="control-label">Add phone number</label>
+							<div class="controls">
+								<div class="contact-add-number">
+									<input class="input-medium" id="contacts_data_number" name="PhoneNumber" size="30" type="text" placeholder="Number" value="{{PhoneNumber}}"/>
+									<input id="person_contact_data_phone_numbers__location" class="person_contact_input_type input-small" name="Type" type="text" value="{{Type}}" style="padding-left:2px;margin-left:4px;display:inline;" placeholder="e.g. Mobile"/>
+								</div>
+							</div>
+						</div>
+						{{#if Add}}
+						<div id="contact_checkboxes" class="control-group">
+							<label class="control-label">Where to save this contact?</label>
+							<div class="controls">
+								<label class="checkbox">
+									<input type="checkbox" name="savein[mycontacts]" id="savein_personal"/> My Contacts
+								</label>
+								{{#if GContacts}}
+								<label class="checkbox">
+									<input type="checkbox" name="savein[gcontacts]" id="savein_gcontacts"/> Google Contacts
+								</label>
+								{{/if}}
+								{{#if Highrise}}
+								<label class="checkbox">
+									<input type="checkbox" name="savein[highrise]" id="savein_highrise"/> Highrise CRM Contacts
+								</label>
+								{{/if}}
+							</div>
+						</div>
+						{{/if}}
+						{{#if Edit}}
+							<input type="hidden" name="Id" value="{{Id}}"/>
+							<input type="hidden" name="savein[mycontacts]" value="on"/>
+						{{/if}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+	    <input type="submit" class="btn btn-primary" value="{{#if Add}}Add this contact{{/if}}{{#if Edit}}Update this Contact{{/if}}" name="commit"/>
+	    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+	  </div>
+	</form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	setupTypeAutocomplete();
+	$("#new_person").submit(function(e){
+		//validation
+		$(this).find(".control-group").removeClass("error");
+		var error = false;
+		if($.trim($("#person_first_name").val()) == ""){
+			error = true;
+			$("#person_first_name").parents(".control-group").addClass("error");
+		}
+		if($.trim($("#contacts_data_number").val()) == ""){
+			error = true;
+			$("#contacts_data_number").parents(".control-group").addClass("error");
+		}
+		if($(this).find("input[type=checkbox]").length > 0){
+			if($(this).find("input[type=checkbox]:checked").length == 0) {
+				error = true;
+				$("#contact_checkboxes").addClass("error");
+			}
+		}
+		if(error) return false;
+
+		$.ajax({
+			type : "post",
+			data : $(this).serialize(),
+			url : "php/phonebook_edit.php",
+			success : function(data){
+				console.log($.parseJSON(data));				
+				$(".top-right").notify({
+					message : "Contact updated successfully"
+				}).show();
+				PhonebookRefreshSource();
+				PhonebookShowSource("all", 1, false);
+				$("#addContactModal").modal("hide");
+				if($("#callhistorypage:visible").length == 1){
+					search_request($(".pagination .active a:eq(0)").text());
+				}
+			},
+			error : function(xhr, status, error){
+				console.log(error);
+			}
+		});
+		e.preventDefault();
+		return false;
+	});
+	$("#contacts_data_number").on("keydown", function(event){
+		return ( event.ctrlKey || event.altKey 
+                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9) 
+                    || (event.keyCode>34 && event.keyCode<40) 
+                    || (event.keyCode==46) );
+	});
+});
+function setupTypeAutocomplete(){
+	var phonetypes = "Work Mobile Home Car Fax Skype Other Pager".split(" ");
+	$('input.person_contact_input_type').focusout(function(){
+		if ( $(this).val() == "" &&  $(this).prev().val() != "") $(this).val("Mobile");
+	}).typeahead({ source: phonetypes, multiple: true});
+}
+</script>
+<!-- END: main -->

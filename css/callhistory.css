@@ -1,0 +1,610 @@
+/*
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+ */
+.input {
+position:relative;
+top:0;
+left:0;
+/* margin-top: 2px; */
+height:25px;
+width:700px;
+}
+.OneRow {height:25px;border-top:#CCC thin solid;}
+#iscompanywide {
+position:absolute;
+top:40px;
+left:360px;
+/* margin-top: 2px; */
+height:22px;
+width:160px;
+}
+
+
+
+#slider-range {
+width:90%;
+height:5px;
+font-size:14px;
+font-weight:bold;
+background-color:#656565;
+color:#656565;
+border:1px;
+border-style:solid;
+border-color:#a3a29e;
+border-radius: 3px;
+-moz-border-radius:3px;
+-webkit-border-radius:3px;
+margin:0px 0px 5px 5px;
+}
+#slider-range .ui-slider-handle{
+	background-color: #efefef;
+	border:1px;
+	border-style:solid;
+	border-color:#a3a29e;
+	border-radius: 3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	top: -6px;
+}
+#callhistoryheader {
+width: 716px;
+height: 64px;
+margin-top:8px;
+/* padding-top: 23px; */
+background-color:#F7F7F7;
+position:relative;
+top:0;
+left:0;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+#callhistoryheader h1 {
+position:absolute;
+top:7px;
+left:23px;
+text-align:right;
+font-size:14px;
+font-weight:bold;
+color:#656565;
+}
+
+#callhistoryheader ul.ch_pagenumber {
+position:absolute;
+top:11px;
+left:203px;
+width:490px;
+height:10px;
+text-align:right;
+/*font-weight:bold;*/
+color:#656565;
+}
+
+#callhistoryheader ul.ch_pagenumber li {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:10px;
+/*font-weight:bold;*/
+color:#656565;
+margin-left:20px;
+cursor: pointer;
+}
+.Detailed{
+	display:none;
+}
+#callhistoryheader ul.ch_pagenumber li.currentli {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:11px;
+font-weight:bold;
+color:#5D5D5D;
+margin-left:20px;
+cursor: default;
+}
+
+#callhistoryheader #delete {
+display:none;
+position:absolute;
+top:36px;
+left:22px;
+width:60px;
+height:20px;
+text-align:middle;
+font-size:10px;
+color:#656565;
+}
+
+
+#callhistoryheader #ShowByUser {
+position:absolute;
+top:32px;
+left:20px;
+font-size:10px;
+font-weight:bold;
+}
+
+
+#callhistoryheader #ShowByDirection {
+position:absolute;
+top:32px;
+left:392px;
+width:150px;
+font-size:10px;
+font-weight:bold;
+}
+
+
+#callhistoryheader #ShowByDate {
+position:absolute;
+top:32px;
+left:553px;
+width:150px;
+font-size:10px;
+font-weight:bold;
+}
+
+
+
+#callhistoryfooter {
+width: 716px;
+height: 64px;
+margin-top:8px;
+/* padding-top: 23px; */
+background-color:#F7F7F7;
+position:relative;
+top:0;
+left:0;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+
+#callhistoryfooter ul.ch_pagenumber {
+position:absolute;
+top:36px;
+left:203px;
+width:490px;
+height:10px;
+text-align:right;
+/*font-weight:bold;*/
+color:#656565;
+}
+
+#callhistoryfooter ul.ch_pagenumber li {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:10px;
+/*font-weight:bold;*/
+color:#656565;
+margin-left:20px;
+cursor: pointer;
+}
+
+#callhistoryfooter ul.ch_pagenumber li.currentli {
+position:normal;
+display: inline;
+list-style-type: none;
+text-align:right;
+font-size:11px;
+font-weight:bold;
+color:#5D5D5D;
+margin-left:20px;
+cursor: default;
+}
+
+#callhistoryfooter #delete {
+display:none;
+position:absolute;
+top:11px;
+left:22px;
+width:60px;
+height:20px;
+text-align:middle;
+font-size:10px;
+color:#656565;
+}
+
+
+#callhistoryfooter #pageinfo {
+position:absolute;
+top:11px;
+left:550px;
+font-size:11px;
+/* font-weight:bold; */
+color:#656565;
+
+}
+
+
+
+#callhistorybg {
+	position: absolute;
+	top: 50px;
+	left: 618px;
+	left:50px;
+	width: 617px;
+	height: 597px;
+	/* opacity: 0.7; */
+	background-image:url("callhistory01.png");
+	background-repeat: no-repeat;
+	display: block;
+}
+
+
+
+#callhistory table {
+	font-family:arial,sans-serif;
+	width: 100%;
+	border: 0px;
+	padding: 0px;
+	border-style: none;
+	table-layout:fixed;
+}
+
+
+.callhistoryheader {
+        /* background-color: #00006b; */
+	empty-cells: show;
+	font-size: 12px;
+}
+
+.callhistoryheader td {
+	empty-cells: show;
+	font-size: 12px;
+	padding: 10px;
+}
+
+.callhistorytools {
+        background-color: #EFEFEF;
+	empty-cells: show;
+	font-size: 12px;
+	height: 3em;
+}
+
+
+.callhistorytools td {
+        background-color: #EFEFEF;
+	empty-cells:show;
+        border-color: black;
+	border-style: inset none outset none;
+        border-width: 0px;
+}
+
+
+.selectall {
+	padding-left: 10px;
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+.selectall strong {
+	padding-left: 5px;
+	font-weight:bold;
+	font-size: 11px;
+	vertical-align: middle;
+}
+
+
+.selectall input {
+	vertical-align: middle;
+}
+
+.callhistorytools div.labels {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+
+.callhistorytools div.moreactions {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 120px;
+	float: left;
+}
+
+
+.callhistorytools div.nextnav {
+        background-color: #EFEFEF;
+	empty-cells:show;
+	width: 200px;
+	float: right;
+}
+
+
+
+.Summary {
+        background-color: #FFFFFF;
+        cursor: pointer;
+	width: 100%;
+	/* height: 24px; */
+}
+
+
+.Summary td {
+        cursor: pointer;
+        empty-cells:show;
+	/* height: 24px; */
+        border-color: #D6D6D6;
+	border-style: solid;
+        border-width: 0px 0px 1px 0px;
+	overflow: hidden;
+	padding: 7px 4px 3px 4px;
+	white-space: nowrap;
+}
+
+.Summary td span {
+	white-space: nowrap;
+}
+
+
+.Summary.Outbound .CallDirection { color: #1f81be;}
+.Summary.Inbound  .CallDirection { color: #249335;}
+.Summary.Missed   .CallDirection { color: #e2534b;}
+.Summary.transfer .CallDirection { color: #FF7F00;}
+
+
+.Summary.Outbound { color: rgb(51,51,51);}
+.Summary.Inbound  { color: rgb(51,51,51);}
+.Summary.Missed   { color: rgb(51,51,51);}
+.Summary.transfer { color: rgb(51,51,51);}
+
+.InternalImg {
+	width: 20px;
+        font-size: 12px;
+        color: #333;
+}
+
+
+
+
+.CallDirection {
+}
+
+
+.CallDirection img {
+	padding: 0px 0px 0px 0px;
+	vertical-align: middle;
+}
+
+.CallDirection span {
+	padding: 0px 0px 0px 5px;
+	vertical-align: middle;
+}
+
+.CallDirection {
+        padding: 0 0px 0 0px;
+        font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	height: 13px;
+	white-space: nowrap;
+}
+
+.CallOwner img {
+	padding:0px 4px 0px 0px;
+}
+
+.CallerClid {
+
+}
+
+.Attachment {
+	width: 20px;
+        font-size: 12px;
+}
+
+.Duration {
+	width: 65px;
+        font-size: 11px;
+	font-weight: bold;
+        color: #777;
+}
+
+.Date {
+	width: 120px;
+        font-size: 12px;
+	font-weight: bold;
+	text-align:center;
+}
+
+.Summary .clearrow {
+	width: 5px;
+        font-size: 11px;
+}
+
+
+.Detailed {
+	width: 100%;
+}
+
+.Detailed td {
+	width: 100%;
+}
+
+.Detailed div.detailedrecord {
+	white-space: nowrap;
+	/* Do rounding (native in Firefox and Safari) */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+}
+
+
+.Detailed.Outbound div.detailedrecord {background-color: #ecfaff; color: #000;  }
+.Detailed.Inbound  div.detailedrecord {background-color: #deffde; color: #000;  }
+.Detailed.Missed   div.detailedrecord {background-color: #fff2f2; color: #000;  }
+.Detailed.transfer div.detailedrecord {background-color: #fff39b; color: #000;  }
+
+.Detailed.Outbound div.detailedrecord div.to {color: #1f81be;font-weight:bold; }
+.Detailed.Outbound div.detailedrecord div.to h4 {color: #1f81be;font-weight:bold; }
+.Detailed.Inbound  div.detailedrecord div.from {color: #249335;font-weight:bold;  }
+.Detailed.Missed   div.detailedrecord div.from {color: #e2534b;font-weight:bold;  }
+.Detailed.Inbound  div.detailedrecord div.from h4 {color: #249335;font-weight:bold;  }
+.Detailed.Missed   div.detailedrecord div.from h4 {color: #e2534b;font-weight:bold;  }
+.Detailed.transfer div.detailedrecord div.from {color: #FF7F00;font-weight:bold;  }
+.Detailed.transfer div.detailedrecord div.to {color: #FF7F00;font-weight:bold;  }
+
+.Detailed.Outbound div.header {background-color: #ecfaff; color: #1f81be;  }
+.Detailed.Inbound  div.header {background-color: #deffde; color: #249335;  }
+.Detailed.Missed   div.header {background-color: #fff2f2; color: #e2534b;  }
+.Detailed.transfer div.header {background-color: #fff39b; color: #FF7F00;  }
+
+
+span.error {
+	background-color: #AC0000;
+	color: #fff;
+	padding: 0px 10px 0px 10px;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-weight: 100;
+	line-height: 13px;
+	margin: 0px 5px 0px 0px;
+	
+}
+
+
+span.dontshow {
+	display: none;
+}
+
+
+/* Call Transfer detailed Table */
+
+.calltransfertr {
+        background-color: #FFFFFF;
+        cursor: pointer;
+	width: 100%;
+	/* height: 24px; */
+}
+
+
+.calltransfertr td {
+        cursor: pointer;
+        empty-cells:show;
+	/* height: 24px; */
+        border-color: #D6D6D6;
+	border-style: solid;
+        border-width: 0px 0px 1px 0px;
+	overflow: hidden;
+	padding: 3px 4px 4px 4px;
+	white-space: nowrap;
+}
+
+.calltransfertr td span {
+	white-space: nowrap;
+}
+
+
+.calltransfertr.Outbound { color: #1f81be;}
+.calltransfertr.Inbound  { color: #249335;}
+.calltransfertr.Missed   { color: #e2534b;}
+.calltransfertr.transfer { color: #FF7F00;}
+
+
+
+.calltransferaction {
+	width: 16%;
+	font-size: 12px;
+}
+
+
+.calltransferaction img {
+	padding: 0px 0px 0px 0px;
+	vertical-align: middle;
+}
+
+.calltransferaction span {
+	padding: 0px 0px 0px 5px;
+	vertical-align: middle;
+}
+
+.calltransferaction {
+        padding: 0 0px 0 0px;
+        font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	height: 18px;
+	white-space: nowrap;
+}
+
+.calltransfersrc {
+	width: 16%;
+        font-size: 12px;
+	font-weight: bold;
+	color: #000;
+}
+
+.calltransferdst {
+	width: 25%;
+        font-size: 12px;
+	font-weight: bold;
+}
+
+.calltransferduration {
+	width: 12%;
+        font-size: 11px;
+	font-weight: bold;
+        color: #777;
+}
+
+.calltransferdate {
+	width: 22%;
+        font-size: 12px;
+	font-weight: bold;
+	text-align:center;
+}
+
+.calltransfertr .clearrow {
+	width: 1%;
+        font-size: 11px;
+}
+.columnOutbound{
+	border: 3px solid #ECFAFF;
+	border-top:none;
+	margin-top:-2px;
+}
+.columnInbound{
+	border: 3px solid #DEFFDE;	
+}
+.columnMissed{
+	border: 3px solid #FFF2F2;
+}

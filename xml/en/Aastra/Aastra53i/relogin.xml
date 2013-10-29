@@ -1,0 +1,4 @@
+<AastraIPPhoneTextScreen destroyOnExit="yes">
+<Title>Error</Title>
+<Text>{{Error}}</Text>
+</AastraIPPhoneTextScreen>

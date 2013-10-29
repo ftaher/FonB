@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SnomIPPhoneDirectory clearlight="true">
+	<Title>Call History</Title>
+	{{#CallHistoryList}}
+	<DirectoryEntry>
+		<Name>{{#CallerClid}}{{#Internal}}{{Internal}}|{{Direction}}{{/Internal}}{{^Internal}}{{#MyContacts}}{{MyContacts}}|{{Direction}}{{/MyContacts}}{{^MyContacts}}{{#GContacts}}{{GContacts}}|{{Direction}}{{/GContacts}}{{^GContacts}}{{#Highrise}}{{Highrise}}|{{Direction}}{{/Highrise}}{{^Highrise}}{{Num}}{{/Highrise}}{{/GContacts}}{{/MyContacts}}{{/Internal}}{{/CallerClid}}</Name>
+		<Telephone>{{#CallerClid}}{{Num}}{{/CallerClid}}</Telephone>
+	</DirectoryEntry>
+	{{/CallHistoryList}}
+	{{^CallHistoryList}}
+	<DirectoryEntry>
+		<Name>Nothing # - menu</Name>
+		<Telephone></Telephone>
+	</DirectoryEntry>
+	{{/CallHistoryList}}
+	<SoftKeyItem>
+		<Name>#</Name>
+		<URL>http://{{Host}}/xml/en/snom/menu.xml</URL>
+	</SoftKeyItem>
+</SnomIPPhoneDirectory>

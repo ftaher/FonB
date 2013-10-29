@@ -1,0 +1,320 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<div class="span12 noflash nomobile nophone" id="activecalls">
+	<div class="row-fluid well acheight" id="noline">
+		<div class="alert alert-success" style="margin-bottom:0px;">
+				<h3>{{t "No Active Calls"}}</h3>
+		</div>
+	</div>
+	<div class="row-fluid well activecall hide" id="line0">
+		<div class="span3">
+			<div class="row-fluid">
+				<div class="span12 activepaneltop">
+					<span class="direction">
+						<span class="outbound">
+							<h3>{{t "Outbound"}}</h3>
+						</span>
+						<span class="inbound">
+							<h3>{{t "Inbound"}}</h3>
+						</span>
+					</span>
+					<span style="vertical-align:middle;" class="duration muted"></span>
+					<br/>
+					<span class="clidnum"></span><span class="clidname"></span>
+				</div>
+			</div>
+		</div>
+		<div class="span9">
+			<div class="row-fluid align-center callactions callswitch">
+				<div class="span1">
+					<div class="highrise">
+						{{t "CRM"}}
+					</div>
+					<div class="gcontacts">
+						{{t "Google"}}
+					</div>
+					<div class="internal">
+						{{t "Internal"}}
+					</div>
+					<div class="personal">
+						{{t "Personal"}}
+					</div>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="hold">
+					<a href="javascript:;" onclick="callaction('Hold', 0);">{{t "Hold"}}</a>
+				</div>
+				<div class="conference">
+					<a href="javascript:;" onclick="callaction('Conference', 0);">{{t "Conference"}}</a>
+				</div>
+				<div class="transfer">
+					<a href="javascript:;" onclick="callaction('Transfer', 0);">{{t "Transfer"}}</a>
+				</div>
+				<div class="drop">
+					<a href="javascript:;" onclick="callaction('Drop', 0);">{{t "Drop"}}</a>
+				</div>
+				<div class="span1 answer">
+					<a href="javascript:;" onclick="callaction('Answer', 0);">{{t "Answer"}}</a>
+				</div>
+				<div class="span1 unhold">
+					<a href="javascript:;" onclick="callaction('Unhold', 0);">{{t "Unhold"}}</a>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 flash">
+					<a href="javascript:;" onclick="callswitch('Flash', 0);">{{t "Flash"}}</a>
+				</div>
+				<div class="span1 phone activephone">
+					<a href="javascript:;" onclick="callswitch('Phone', 0);">{{t "Phone"}}</a>
+				</div>
+				<div class="span1 mobile activephone">
+					<a href="javascript:;" onclick="callswitch('Mobile', 0);">{{t "Mobile"}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end line0 -->
+	<div class="row-fluid well activecall hide" id="line1">
+		<div class="span3">
+			<div class="row-fluid">
+				<div class="span12">
+					<span class="direction">
+						<span class="outbound">
+							<h3>{{t "Outbound"}}</h3>
+						</span>
+						<span class="inbound">
+							<h3>{{t "Inbound"}}</h3>
+						</span>
+					</span>
+					<span style="vertical-align:middle;" class="duration muted"></span>
+					<br/>
+					<span class="clidnum"></span>, <span class="clidname"></span>
+				</div>
+			</div>
+		</div>
+		<div class="span9">
+			<div class="row-fluid align-center callactions callswitch">
+				<div class="span1">
+					<div class="crm">
+						{{t "CRM"}}
+					</div>
+					<div class="google">
+						{{t "Google"}}
+					</div>
+					<div class="internal">
+						{{t "Internal"}}
+					</div>
+					<div class="personal">
+						{{t "Personal"}}
+					</div>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 hold">
+					<a href="javascript:;" onclick="callaction('Hold', 1);">{{t "Hold"}}</a>
+				</div>
+				<div class="span2 conference">
+					<a href="javascript:;" onclick="callaction('Conference', 1);">{{t "Conference"}}</a>
+				</div>
+				<div class="span1 transfer">
+					<a href="javascript:;" onclick="callaction('Transfer', 1);">{{t "Transfer"}}</a>
+				</div>
+				<div class="span1 drop">
+					<a href="javascript:;" onclick="callaction('Drop', 1);">{{t "Drop"}}</a>
+				</div>
+				<div class="span1 answer">
+					<a href="javascript:;" onclick="callaction('Answer', 1);">{{t "Answer"}}</a>
+				</div>
+				<div class="span1 unhold">
+					<a href="javascript:;" onclick="callaction('Unhold', 1);">{{t "Unhold"}}</a>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 flash">
+					<a href="javascript:;" onclick="callswitch('Flash', 1);">{{t "Flash"}}</a>
+				</div>
+				<div class="span1 phone">
+					<a href="javascript:;" onclick="callswitch('Phone', 1);">{{t "Phone"}}</a>
+				</div>
+				<div class="span1 mobile">
+					<a href="javascript:;" onclick="callswitch('Mobile', 1);">{{t "Mobile"}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end line1 -->
+	<div class="row-fluid well activecall hide" id="line2">
+		<div class="span3">
+			<div class="row-fluid">
+				<div class="span12">
+					<span class="direction">
+						<span class="outbound">
+							<h3>{{t "Outbound"}}</h3>
+						</span>
+						<span class="inbound">
+							<h3>{{t "Inbound"}}</h3>
+						</span>
+					</span>
+					<span style="vertical-align:middle;" class="duration muted"></span>
+					<br/>
+					<span class="clidnum"></span>, <span class="clidname"></span>
+				</div>
+			</div>
+		</div>
+		<div class="span9">
+			<div class="row-fluid align-center callactions callswitch">
+				<div class="span1">
+					<div class="crm">
+						{{t "CRM"}}
+					</div>
+					<div class="google">
+						{{t "Google"}}
+					</div>
+					<div class="internal">
+						{{t "Internal"}}
+					</div>
+					<div class="personal">
+						{{t "Personal"}}
+					</div>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 hold">
+					<a href="javascript:;" onclick="callaction('Hold', 2);">{{t "Hold"}}</a>
+				</div>
+				<div class="span2 conference">
+					<a href="javascript:;" onclick="callaction('Conference', 2);">{{t "Conference"}}</a>
+				</div>
+				<div class="span1 transfer">
+					<a href="javascript:;" onclick="callaction('Transfer', 2);">{{t "Transfer"}}</a>
+				</div>
+				<div class="span1 drop">
+					<a href="javascript:;" onclick="callaction('Drop', 2);">{{t "Drop"}}</a>
+				</div>
+				<div class="span1 answer">
+					<a href="javascript:;" onclick="callaction('Answer', 2);">{{t "Answer"}}</a>
+				</div>
+				<div class="span1 unhold">
+					<a href="javascript:;" onclick="callaction('Unhold', 2);">{{t "Unhold"}}</a>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 flash">
+					<a href="javascript:;" onclick="callswitch('Flash', 2);">{{t "Flash"}}</a>
+				</div>
+				<div class="span1 phone">
+					<a href="javascript:;" onclick="callswitch('Phone', 2);">{{t "Phone"}}</a>
+				</div>
+				<div class="span1 mobile">
+					<a href="javascript:;" onclick="callswitch('Mobile', 2);">{{t "Mobile"}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end line2 -->
+	<div class="row-fluid well activecall hide" id="line3">
+		<div class="span3">
+			<div class="row-fluid">
+				<div class="span12">
+					<span class="direction">
+						<span class="outbound">
+							<h3>{{t "Outbound"}}</h3>
+						</span>
+						<span class="inbound">
+							<h3>{{t "Inbound"}}</h3>
+						</span>
+					</span>
+					<span style="vertical-align:middle;" class="duration muted"></span>
+					<br/>
+					<span class="clidnum"></span>, <span class="clidname"></span>
+				</div>
+			</div>
+		</div>
+		<div class="span9">
+			<div class="row-fluid align-center callactions callswitch">
+				<div class="span1">
+					<div class="crm">
+						{{t "CRM"}}
+					</div>
+					<div class="google">
+						{{t "Google"}}
+					</div>
+					<div class="internal">
+						{{t "Internal"}}
+					</div>
+					<div class="personal">
+						{{t "Personal"}}
+					</div>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 hold">
+					<a href="javascript:;" onclick="callaction('Hold', 3);">{{t "Hold"}}</a>
+				</div>
+				<div class="span2 conference">
+					<a href="javascript:;" onclick="callaction('Conference', 3);">{{t "Conference"}}</a>
+				</div>
+				<div class="span1 transfer">
+					<a href="javascript:;" onclick="callaction('Transfer', 3);">{{t "Transfer"}}</a>
+				</div>
+				<div class="span1 drop">
+					<a href="javascript:;" onclick="callaction('Drop', 3);">{{t "Drop"}}</a>
+				</div>
+				<div class="span1 answer">
+					<a href="javascript:;" onclick="callaction('Answer', 3);">{{t "Answer"}}</a>
+				</div>
+				<div class="span1 unhold">
+					<a href="javascript:;" onclick="callaction('Unhold', 3);">{{t "Unhold"}}</a>
+				</div>
+				<div class="span1  hidden-mobile">
+					<div class="vertical-separator"></div>
+				</div>
+				<div class="span1 flash">
+					<a href="javascript:;" onclick="callswitch('Flash', 3);">{{t "Flash"}}</a>
+				</div>
+				<div class="span1 phone">
+					<a href="javascript:;" onclick="callswitch('Phone', 3);">{{t "Phone"}}</a>
+				</div>
+				<div class="span1 mobile">
+					<a href="javascript:;" onclick="callswitch('Mobile', 3);">{{t "Mobile"}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end line3 -->
+</div>
+<!-- end active calls -->

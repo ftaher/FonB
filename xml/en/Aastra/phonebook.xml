@@ -1,0 +1,7 @@
+<AastraIPPhoneInputScreen type="string" password="no" editable="yes" destroyOnExit="no">
+	<Title>Phonebook</Title>
+	<Prompt>Phonebook Search</Prompt>
+	<URL>http://{{Host}}/xml/en/Aastra/listphonebook.xml</URL>
+	<Parameter>FilterSearch</Parameter>
+	<Default></Default>
+</AastraIPPhoneInputScreen>

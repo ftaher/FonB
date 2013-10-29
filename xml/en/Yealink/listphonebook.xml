@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<FonbPhoneBookTextMenu defaultIndex="0" style="none" Beep="no">
+	<Title>FonB Contacts</Title>
+	{{^Contacts}}
+	<MenuItem>
+		<Prompt>No Contacts Found</Prompt>
+	</MenuItem>
+	{{/Contacts}}
+	{{#Contacts}}
+	<MenuItem>
+		<Prompt>{{FirstName}} {{#LastName}}{{LastName}}{{/LastName}}</Prompt>
+		<Dial>{{PhoneNumber}}</Dial>
+		<URI>http://{{Host}}/xml/en/Yealink/phonebook_number_lookup.xml?Num={{PhoneNumber}}</URI>
+	</MenuItem>
+	{{/Contacts}}
+</FonbPhoneBookTextMenu>

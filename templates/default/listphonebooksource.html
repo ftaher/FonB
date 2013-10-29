@@ -1,0 +1,90 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<!-- BEGIN: main -->
+	<div id="gcontactsTour" class="alert alert-warning hide">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p>{{t "Haven't synchronized google contacts?"}}</p>
+		<a href="javascript:;" onclick="googleContactsTour();"><h3>{{t "Begin Now"}}</h3></a>
+	</div>
+	<div id="rewriteTour" class="alert alert-warning hide">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p>{{t "No rewrite rules set!"}}</p>
+		<a href="javascript:;" onclick="rewriteTour();"><h3>{{t "Begin Now"}}</h3></a>
+	</div>
+	<div>
+		<h3 style="padding-top:10px;margin:0px;">{{t "Contacts"}}</h3>
+		<hr style="margin:5px 0px;">
+		<ul class="unstyled">
+			{{#Phonebooks}}
+			<!-- BEGIN: {{Name}} Source -->
+			<li id="{{Source}}source">
+			    <img src="images/ch_{{Source}}.png" style="width:15px;padding-right:5px;"/>
+			      <a {{#if Sync}}{{#if LastSync}} title="Last synched at: {{LastSync}}" class="tooltip1" {{/if}}{{/if}} href="javascript:;" onclick="PhonebookShowSource('{{Source}}',1,true)"><span class="count">{{Count}}</span> {{Name}} Contacts</a> 
+			      {{#if Sync}}
+			      <img  {{#if LastSync}} title="{{t "Last synched at:"}} {{LastSync}}" {{/if}}  class="tooltip1 sync" style="margin-left:4px;position:relative;top:4px;cursor:pointer;" src="images/sync.gif" onclick="PhonebookSync('{{Source}}')"/>
+			      <img  class="syncactive" style="margin-left:4px;position:relative;top:4px;display:none;" src="images/sync_active.gif"/>
+			      {{/if}}
+			</li>
+			<!-- END: {{Name}} Source -->
+			{{/Phonebooks}}
+
+		</ul>
+		<hr style="margin-bottom:0px;">
+		<!-- BEGIN: all -->
+		<ul class="unstyled">
+		    <li>
+				<strong>
+					<a href="javascript:;" onclick="PhonebookShowSource('all',1,true)" style="margin-left:23px;">{{TotalContacts}}</a>&nbsp;{{t "Total contacts"}}</strong>
+		    </li>
+		<!-- END: all -->
+		</ul>
+	</div>
+
+<br>
+<br>
+	<div>
+		<h3 style="padding:0px;margin:0px;">{{t "Recent Imports"}}</h3>
+		<hr style="padding:0px;margin:0px;">
+		<ul>
+			{{#Imports}}
+		<!-- BEGIN: IMPORT {{Uploaded}} -->
+		    <li>
+                      <img src="images/ch_personal.png" style="width:15px;padding-right:5px;"/>
+		      <a href="javascript:;" onclick="PhonebookShowSource('mycontactscsv',1,false,'{{Uploaded}}')">{{Count}} {{t "contacts"}}</a>,<br>
+		      <small>{{Uploaded}} (CSV)</small>
+		    </li>
+		<!-- END: IMPORT {{Uploaded}} -->
+			{{/Imports}}
+			<br>
+		    <li>
+				<a data-target="#importCSVModal" id="importCSVLink" data-toggle="modal" href="#">{{t "Import"}}</a>&nbsp;{{t "a new personal list"}}</li>
+		</ul>
+	</div>
+
+<!-- END: main -->

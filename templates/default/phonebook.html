@@ -1,0 +1,211 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<!-- Begin contacts page template: phonebook.html -->
+<div id="importCSVModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">{{t "Import Contacts in Outlook format CSV"}}</h3>
+	</div>
+	<div class="modal-body">
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">{{t "Close"}}</button>
+	</div>
+</div>
+<div id="phonebookpage" class="row-fluid pagebox">
+	<div class="span12">
+		<div class="well" style="height: 49px;padding: 0px;margin: 0px;">
+			<div class="PageTitle" style="padding-top:12px;">
+				<h2>
+					<i class="icon-list-alt"></i>&nbsp;{{t "Contacts"}}</h2>
+			</div>
+			<div class="span7 move-down" style="padding-top:5px;">
+				<div class="input-prepend input-append quickdial-search">
+					<span class="add-on" style="border-right:0px;">
+						<i class="icon-search"></i>
+					</span>
+					<input style="" type="text" class="input-xxlarge" placeholder="{{t "Quick Search"}}" id="phonebooksearch" autocomplete="off">
+					<span class="add-on" style="border-left:0px;">
+						<a href="javascript:;" onclick="$('#phonebooksearch').val('');"><i class="icon-remove"></i></a>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid" style="background-color:#fff;">
+			<div class="span12">
+				<div class="row-fluid phonebook-meta">
+					<div class="span12">
+						<div class="pagination">
+							<ul class="phonebookpagenumber">
+							</ul>
+						</div>
+						<div class="select-links">&nbsp;{{t "Select"}}&nbsp;<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.mycontacts").prop("checked", true)'>{{t "All"}}</a> 
+							&nbsp;{{t "Select"}}&nbsp;<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.mycontacts").prop("checked", false)'>{{t "None"}}</a>
+						</div>	
+						<div class="action-button">						
+							<div class="btn-group">
+							  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">{{t "Action"}}<span class="caret"></span>
+							  </a>
+							  <ul class="dropdown-menu">
+							    <li><a href="javascript:;" onclick="addContact();">{{t "Add New Contact"}}</a></li>						    
+							    <li><a href="javascript:;" onclick="deleteContact();">{{t "Delete Selected Contacts"}}</a></li>
+							    <li class="divider"></li>
+							    <li><a data-target="#importCSVModal" data-toggle="modal" href="templates/en/importphonebook.html">{{t "Import from CSV"}}</a></li>
+							    <li class="divider"></li>
+							    <li class="dropdown-submenu">
+							    	<a href="javascript:;">{{t "Filter"}}</a>
+							    	<ul class="dropdown-menu">
+							    		<li>
+							    			<a href="javascript:;"  onclick="PhonebookShowSource('all',1,true);">{{t "All Contacts"}}</a>
+							    		</li>
+							    		<li>
+							    			<a href="javascript:;"  onclick="PhonebookShowSource('internal',1,true);">{{t "Internal Contacts"}}</a>
+							    		</li>						    
+									    <li>
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('personal',1,true);">{{t "Personal Contacts"}}</a>
+									    </li>
+									    <li  id="menuFilterGContacts">
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('gcontacts',1,true);">{{t "Google Contacts"}}</a>
+									    </li>
+									    <li  id="menuFilterHighrise">
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('highrise',1,true);">{{t "Highrise Contacts"}}</a>
+									    </li>
+								    </ul>
+							    </li>
+							    <li class="divider"></li>
+							    <li class="dropdown-submenu" id="menuSynchronize">
+							    	<a href="javascript:;">{{t "Synchronize"}}</a>
+							    	<ul class="dropdown-menu">
+									    <li id="menuSynchronizeGcontacts">
+									    	<a href="javascript:;" onclick="PhonebookSync('gcontacts')">{{t "Google Contacts"}}</a>
+									    </li>
+									    <li id="menuSynchronizeHighrise">
+									    	<a href="javascript:;" onclick="PhonebookSync('highrise')">{{t "Highrise Contacts"}}</a>
+									    </li>
+								    </ul>
+							    </li>
+							  </ul>
+							</div>
+						</div>	
+					</div>
+				</div>
+				<div style="display: none;" class="row-fluid" id="contactsGcontactsProgress">
+					<div class="span12">
+						 <div class="contacts-progress progress progress-striped active">
+						 	<div class="bar" style="width: 0%;"></div>
+						 </div>
+						 <div class="help-block"></div>
+					</div>
+				</div>
+				<div style="display: none;" class="row-fluid" id="contactsHighriseProgress">
+					<div class="span12">
+						 <div class="contacts-progress progress progress-striped active">
+						 	<div class="bar" style="width: 0%;"></div>
+						 </div>
+						 <div class="help-block"></div>
+					</div>
+				</div>
+				<div class="row-fluid" style="border-top: 1px solid #ccc;width: 97%;margin-left: 1%;">
+					<div id="phonebook" class="span9">
+					</div>
+					<div id="sourceselect" class="span3 phonebook-meta">
+					</div>
+				</div>
+				<div class="row-fluid phonebook-meta">
+					<div class="span5">
+						<div class="pagination" style="margin:0px;">
+							<ul class="phonebookpagenumber">
+							</ul>
+						</div>
+					</div>
+					<div class="span4" style="padding-right:5px;">
+						<div class="select-links">{{t "Select"}}<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.personal").prop("checked", true)'>{{t "All"}}</a> 
+							&nbsp;{{t "Select"}} <a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.personal").prop("checked", false)'>{{t "None"}}</a>
+							&nbsp;
+						</div>
+						<div class="action-button">						
+							<div class="btn-group dropup">
+							  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">{{t "Action"}}<span class="caret"></span>
+							  </a>
+							  <ul class="dropdown-menu">
+							    <li><a href="javascript:;" onclick="addContact();">{{t "Add New Contact"}}</a></li>						    
+							    <li><a href="javascript:;" onclick="deleteContact();">{{t "Delete Selected Contacts"}}</a></li>
+							    <li class="divider"></li>
+							    <li><a data-target="#importCSVModal" data-toggle="modal" href="templates/en/importphonebook.html">{{t "Import from CSV"}}</a></li>
+							    <li class="divider"></li>
+							    <li class="dropdown-submenu">
+							    	<a href="javascript:;">{{t "Filter"}}</a>
+							    	<ul class="dropdown-menu">
+							    		<li>
+							    			<a href="javascript:;"  onclick="PhonebookShowSource('all',1,true);">{{t "All Contacts"}}</a>
+							    		</li>
+							    		<li>
+							    			<a href="javascript:;"  onclick="PhonebookShowSource('internal',1,true);">{{t "Internal Contacts"}}</a>
+							    		</li>						    
+									    <li>
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('personal',1,true);">{{t "Personal Contacts"}}</a>
+									    </li>
+									    <li>
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('gcontacts',1,true);">{{t "Google Contacts"}}</a>
+									    </li>
+									    <li>
+									    	<a href="javascript:;"  onclick="PhonebookShowSource('highrise',1,true);">{{t "Highrise Contacts"}}</a>
+									    </li>
+								    </ul>
+							    </li>
+							    <li class="divider"></li>
+							    <li class="dropdown-submenu" id="menuSynchronize">
+							    	<a href="javascript:;">{{t "Synchronize"}}</a>
+							    	<ul class="dropdown-menu">
+									    <li id="menuSynchronizeGcontacts">
+									    	<a href="javascript:;" onclick="PhonebookSync('gcontacts')">{{t "Google Contacts"}}</a>
+									    </li>
+									    <li id="menuSynchronizeHighrise">
+									    	<a href="javascript:;" onclick="PhonebookSync('highrise')">{{t "Highrise Contacts"}}</a>
+									    </li>
+								    </ul>
+							    </li>
+							  </ul>
+							</div>
+						</div>		
+					</div>			
+					<div class="span3 align-right move-down" style="padding-right:20px;">
+						<p class="phonebook-pagination-meta">
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			PhonebookShowSource("all",1,true);
+			PhonebookRefreshSource(); 
+		</script>
+	</div>
+</div>
+<!-- end contacts page phonebook.html template -->

@@ -1,0 +1,103 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<form id="listphonebook-form" action="javascript:;" method="get">
+	<table class="table">
+		<tbody>
+			{{#if Contacts}}
+			{{#each Contacts}}
+			<!-- BEGIN: Contact # {{Id}} -->
+				<tr class="CONTACT_row" data-index="{{@index}}">
+					<td>
+						<input class="contact_check {{Source}}" value="{{Id}}" name="contacts[]" aria-labelledby="" type="checkbox">
+					</td>
+					<td>
+						<img class="phonetype" src="images/ch_{{Source}}.png"/>
+					</td>
+					<td>
+						<span class="contactName"><a class="edit-contact {{Source}}" href="javascript:;"  data-index="{{@index}}">{{#if ../last_name}}{{#if LastName}}{{LastName}}{{#if FirstName}}, {{/if}}{{/if}}{{FirstName}}{{else}}{{FirstName}} {{LastName}}{{/if}}</a><span style="font-weight:normal;font-size:10px;">&nbsp;{{Label}}</span></span>
+					</td>
+					<td class="contactNumber">{{PhoneNumber}}</td>
+					<td>
+						<span>{{Company}}</span>
+					</td>
+					<td>
+						{{#each Groups}}
+						<span class="label">{{this}}</span>
+						{{/each}}
+					</td>
+				</tr>
+				<tr class="CONTACT_detail hide" id="CONTACT_edit_{{Id}}">
+					<td colspan="6" class="CONTACT_edit_wrapper">
+					</td>
+				</tr>
+			  <!-- BEGIN: END # {{Id}} -->
+			  {{/each}}
+			  {{else}}
+			  	{{#if Source_mycontacts}}
+			 	<tr>
+					<td colspan="6">
+						<div class="hero-unit">
+						  <h1>No Contacts <small>Yet...</small></h1>
+						  <p>You can either import a csv in outlook format or add contact manually. Click one of following for tutorial:</p>
+						  <p>
+						    <a href="javascript:;" onclick="csvTour();" class="btn btn-primary btn-large">
+						      Import CSV
+						    </a>
+						    <a href="javascript:;" onclick="addContactTour();" class="btn btn-primary btn-large">
+						      Add Contact
+						    </a>
+						  </p>
+						</div>
+					</td>
+			   </tr>
+			   {{/if}}
+			   {{#if Source_all}}
+			 	<tr>
+					<td colspan="6">
+						<div class="hero-unit">
+						  <h1>Just installed application?</h1>
+						  <p>Ask your system admin to setup extensions in users.cfg. Once they set them up, you will see contacts here.</p>
+						</div>
+					</td>
+			   </tr>
+			   {{/if}}
+			   {{#if Source_internal}}
+			 	<tr>
+					<td colspan="6">
+						<div class="hero-unit">
+						  <h1>Just installed application?</h1>
+						  <p>Ask your system admin to setup extensions in users.cfg. Once they set them up, you will see extensions here.</p>
+						</div>
+					</td>
+			   </tr>
+			   {{/if}}
+			  {{/if}}
+		</tbody>
+	</table>
+</form>

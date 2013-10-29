@@ -1,0 +1,15 @@
+<div id="contact-area">
+<div style='margin:5px; float: right;'>
+<img src="images/telephone_128.png" width=128 height=128 />
+</div>
+<div style='margin:15px; '>
+<label for='exten' id='extenlabel'>Extension:</label>
+<input type='text' name='exten' id='exten' tabindex='1' value='' onKeyPress="if(event.keyCode==13) { Modalbox.hide()}">
+<br/>
+<br/>
+<label for='password' id='secretlabel'>Clave:</label>
+<input type='password' name='seccode' id='secucode' tabindex='2' value='' onKeyPress="if(event.keyCode==13) { Modalbox.hide()}">
+</div>
+<br/>
+<div style='text-align:center;'><input type='submit' class='submit-button' tabindex='3' value='Ok' onclick='Modalbox.hide()'></div>
+</div>

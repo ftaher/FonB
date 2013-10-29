@@ -1,0 +1,20 @@
+{
+	"TotalCount": 100,
+	"PageSize": 25,
+	"CurrentPageNumber": 1,
+	"ContactsSource": "gcontacts",
+        "Contacts":	
+		[
+			{
+				"Id":"https://google.com/contacts/418904328",
+				"FirstName":"John",
+				"LastName":"Gray",
+				"Company":"APTUS",
+				"PhoneNumber":"911",
+				"PhoneType":"work",
+				"Label":"Sales",
+				"Tags":"Sales",
+				"Source":"gcontacts"
+			}
+		]
+}

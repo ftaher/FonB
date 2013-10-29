@@ -1,0 +1,82 @@
+.selectpicker {
+	display: inline-block;
+	border-left: solid 1px #b0b0b0;
+	border-right: solid 1px #b0b0b0;
+	vertical-align: middle;
+}
+	.selectpicker:hover {
+		border-left: solid 1px #777777;
+		border-right: solid 1px #777777;
+	}
+	.selectpicker select {
+		width: 100%;
+	}
+.selectpicker .innards {
+	display: block;
+	border-top: solid 1px #b0b0b0;
+	border-bottom: solid 1px #b0b0b0;
+	padding: 0 22px 0 5px;
+	margin: -1px 0;
+	cursor: pointer;
+	line-height: 20px;
+	height: 20px;
+	white-space: nowrap;
+	background: url("images/background.png") right top no-repeat;
+}
+	.selectpicker:hover .innards {
+		background-color: transparent;
+		color: #000000;
+		border-top: solid 1px #777777;
+		border-bottom: solid 1px #777777;
+	}
+.selectpicker .innards .cutoff {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+}
+.selectpicker.active {
+	color: #ffffff;
+	border-left: solid 1px #777777;
+	border-right: solid 1px #777777;
+}
+.selectpicker.active .innards {
+	border-top: solid 1px #777777;
+	border-bottom: solid 1px #777777;
+	background: url("images/background.png") right -20px no-repeat;
+}
+	.selectpicker.active:hover .innards {
+		color: #ffffff;
+	}
+
+
+/* window */
+.selectpicker-window {
+	position: absolute;
+	border: solid 3px #565656;
+	background-color: #f3f3f3;
+	margin-top: -2px;
+	-webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+   	-moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+   	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+	.selectpicker-window select {
+		cursor: default;
+		border: 0px;
+		border-bottom: solid 1px #e2e2e2;
+		outline: none !important;
+		width: 100% !important;
+	}
+	.selectpicker-window p {
+		padding: 5px;
+		color: #474747;
+		font-size: 11px;
+		line-height: 14px;
+		margin: 0px;
+		width: 100%; /* IE6 */
+	}
+.selectpicker-window-close {
+	display: block;
+	padding: 9px 0 18px 0;	
+	text-align: center;
+	width: 100%; /* IE6 */
+}

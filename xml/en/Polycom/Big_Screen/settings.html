@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>FonB Settings</title>
+	</head>
+	<body>
+		<form method="post" action="http://{{Host}}/xml/settings.html">
+			<label for="general_mobile_phone">Mobile Number:</label><br/>
+			<input name="general_mobile_phone" id="general_mobile_phone" type="text" value="{{general_mobile_phone}}"/><br/>
+			<label for="general_pagesize">Max Records Fetched:</label><br/>
+			<input type="text" name="general_pagesize" value="{{general_pagesize}}" id="general_pagesize"/><br/>
+			<input type="hidden" value="{{cal_token}}" name="cal_token"/>
+			<input type="hidden" value="{{general_orderby}}" name="general_orderby"/>
+			<input type="hidden" value="{{general_language}}" name="general_language"/>
+			<input type="hidden" value="{{highrise_token}}" name="highrise_token"/>
+			<input type="hidden" value="{{highrise_sitename}}" name="highrise_sitename"/>
+			<input type="submit" value="Update"/> 
+		</form>
+	</body>
+</html>

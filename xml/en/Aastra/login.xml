@@ -1,0 +1,18 @@
+{{#Extension}}
+<AastraIPPhoneInputScreen type="number" password="yes" editable="yes" destroyOnExit="no">
+	<Title>Login</Title>
+	<Prompt>Enter your Pin</Prompt>
+	<URL>http://{{Host}}/xml/en/Aastra/menu.xml?user={{Extension}}</URL>
+	<Parameter>pass</Parameter>
+	<Default></Default>
+</AastraIPPhoneInputScreen>
+{{/Extension}}
+{{^Extension}}
+<AastraIPPhoneInputScreen type="number" password="no" editable="yes" destroyOnExit="no">
+	<Title>Login</Title>
+	<Prompt>Enter your Extension</Prompt>
+	<URL>http://{{Host}}/xml/en/Aastra/menu.xml</URL>
+	<Parameter>user</Parameter>
+	<Default>{{Extension}}</Default>
+</AastraIPPhoneInputScreen>
+{{/Extension}}

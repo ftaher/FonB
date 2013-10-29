@@ -1,0 +1,239 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<!-- begin settings template -->
+<div class="span12">
+  <div class="row-fluid well" style="margin-bottom:0px;">
+    <div class="span12">
+      <h2>
+        <i class="icon-wrench"></i>
+        Settings
+      </h2>
+    </div>
+  </div>
+  <div class="row-fluid" style="background-color:#fff;">
+    <div class="span12">
+        <div class="tabbable">
+          <ul  class="nav nav-tabs">
+            <li class="active">
+              <a href="#settings-general" data-toggle="tab">General</a>
+            </li>
+            <li>
+              <a href="#settings-contacts" data-toggle="tab">Contacts</a>
+            </li>
+            <li>
+              <a href="#settings-rewrite" data-toggle="tab">Rewrite rules</a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="settings-general">
+              <form class="form-horizontal" onsubmit="return false;">
+                <fieldset>
+                  <legend>General Settings</legend>
+                  <div class="control-group">
+                    <label class="control-label">Language:</label>
+                    <div class="controls">
+                      <select id="general_language">
+                        <option value="en">
+                          English 
+                        </option>
+                        <option value="es">
+                          Español
+                        </option>
+
+                        <option value="it">
+                          Italiano
+                        </option>
+
+                        <option value="nl">
+                          Nederlands
+                        </option>
+
+                        <option value="ar">
+                          Arabic
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Mobile Phone:</label>
+                    <div class="controls">
+                      <input type="text" size="40" id="general_mobile_phone" value="{{general_mobile_phone}}" name="general_mobile_phone"  placeholder="Ex: 0097553621684"/>
+                      <div class="help-block">Your mobile number is used for transferring calls.</div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Flash Mic Settings:</label>
+                    <div class="controls">
+                      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,29,0" >
+                        <param name="movie" value="flash/mictest.swf">
+                        <param name="quality" value="high">
+                        <embed src="flash/mictest.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+                      </object>
+                      <div class="help-block">
+                        <strong>Select Allow</strong> : This application can capture what your microphone hears, until you close the website.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Display Preferences:</label>
+                    <div class="controls">
+                      <label class="radio">
+                        <input type="radio" name="general_orderby" value="lname" id="general_orderby_lastname" />&nbsp;
+                        Display by "Last Name"
+                      </label>
+                      <label class="radio">
+                        <input type="radio" name="general_orderby" value="fname" id="general_orderby_firstname" />&nbsp;
+                        Display by "First Name"
+                      </label>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Maximum page size:</label>
+                    <div class="controls">
+                      Show&nbsp; 
+                      <select id="general_pagesize" name="general_pagesize">
+                        <option value="25">
+                          25
+                        </option>
+
+                        <option value="50">
+                          50
+                        </option>
+
+                        <option value="100">
+                          100
+                        </option>
+                      </select> 
+                      &nbsp;conversations per page
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="controls">
+                      <button name="save_settings" value="save" class="btn btn-primary" onclick="SettingsPostData()">Save Changes</button>&nbsp;&nbsp;<button class="btn" onclick="SettingsCancelChanges()">Cancel</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="tab-pane" id="settings-contacts">
+              <form class="form-horizontal" onsubmit="return false;">
+                <fieldset>
+                  <legend>Contacts Settings</legend>
+                  <div class="control-group">
+                    <label class="control-label">Google Contacts:</label>
+                    <div class="controls">
+                      <button type="button" class="btn btn-success grant-google" id="gcontactsgrant" value="Grant access to Google Contacts" onclick="SettingsGrantGoogleContacts()">Grant access to Google contacts</button>
+                      <button type="button" class="btn btn-danger" id="gcontactsrevoke" value="Revoke access to Google Contacts" onclick="SettingsRevokeGoogleContacts()">Revoke access to Google contacts</button>
+                      <img src="images/gcontacts_logo.png" style="float:right;"/>
+                      <div class="help-block grant-google">Now you can synchronize your personal contacts with your Google account&nbsp;
+                        <a target="_blank" aria-label="Learn more google sync" href="http://www.google.com/mobile/sync/">
+                          Learn more
+                        </a>
+                      </div>
+                      <div id="gcontactsProgress" class="hide">
+                        <div class="hide progress progress-striped active">
+                          <div class="bar" style="width: 0%;"></div>
+                        </div>
+                        <div class="help-block">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="highrise-license control-group">
+                    <label class="control-label">Highrise Contacts:</label>
+                    <div class="controls">
+                      <div style="padding:7px;">
+                        <label>Highrise site name:</label>
+                        <div>https://<input type="text" id="highrise_sitename" value="{{highrise_sitename}}" >.highrisehq.com</div>
+                        <br>
+                        <label>Highrise authentication token:</label>
+                        <input type="text" size="50" id="highrise_token" value="{{highrise_token}}" >
+                        <p class="help-block">Log into your Highrise account, click the "My Info" link (top right), then click the "API token" tab.</p>
+                        <br>
+                        <button type="button" class="btn btn-primary" id="highrise_verify" value="Verify Settings" onclick="SettingsHighriseConfigure()">Verify and Sync Highrise</button>
+                        <div style="display:none;" id="highriseProgress">
+                          <div style="display:none;" class="progress progress-striped active">
+                            <div class="bar" style="width: 0%;"></div>
+                          </div>
+                          <div class="help-block"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">Delete Contacts:</label>
+                    <div class="controls">
+                      <button type="button" id="deleteAll" class="btn btn-danger" name="Delete" value="Delete All Your Contacts" onclick="SettingsDeleteAllContacts()">Delete All Your Contacts</button>
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+
+            <div class="tab-pane" id="settings-rewrite">
+              <form class="form-horizontal" onsubmit="return false;">
+                <fieldset>
+                  <div style="width: 1000px;margin: 0 auto;" class="control-group clearfix">
+                    <div id="rewrite-rule-select-container" style="float:left;">
+                      <select name="rewritenumber-select" id="rewrite-rule-select"  title="Match" class="input-medium" onchange="ruleChange(this);">
+                        <option value="0" selected="selected">Match</option>
+                        <option value="1">Replace</option>
+                        <option value="2">Match All Numbers</option>
+                      </select>
+                      &nbsp;
+                      <input class="numberOnly rewrite match" type="text" name="rewritenumber-text" id="rewrite-rule-text"/>
+                      &nbsp;
+                      <strong class="rewrite beginning">in the beginning</strong>
+                      &nbsp;&nbsp;
+                      <strong class="rewrite and">AND</strong>
+                      &nbsp;&nbsp;
+                      <strong class="rewrite prefix">prefix it</strong> <strong class="rewrite with">with</strong>
+                      &nbsp;
+                      <input class="numberOnly" type="text" name="rewritenumber-replacement" id="rewrite-rule-replacement"/>
+                    </div>
+                    <a href="javascript:;" onclick="SettingsAddReWriteRule();" class="btn btn-success pull-right" style="margin-right:10px;">Add</a>
+                  </div>
+                  <div style="width: 1000px;margin: 10px auto;" class="control-group">
+                    <div class="new_rules alert alert-error hide"></div>
+                    <div id="current_rewrite_rules" style="border:1px dashed #ccc;">
+                    <!-- BEGIN: rewrite_rule -->
+
+                    <!-- END: rewrite_rule -->
+                    </div> <!-- end of current_rewrite_rules -->
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>      
+    </div>
+  </div>
+</div>
+<!-- end of settings template -->

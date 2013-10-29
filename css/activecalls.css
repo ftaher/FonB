@@ -1,0 +1,506 @@
+/*
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+ */
+
+.direction span{
+  display:none;
+}
+#sourceselect li a {
+	color:#ff7800;
+	border-bottom:dashed thin;
+}
+#sourceselect .unstyled li:nth-child(2) a span {
+	padding-left: 17px;
+}
+#sourceselect .unstyled li:nth-child(2) {
+    background: url(../images/lock.png ) no-repeat 25px;
+}
+#sourceselect .unstyled li:nth-child(3) a span {
+	padding-left: 17px;
+}
+#sourceselect .unstyled li:nth-child(3) {
+    background: url(../images/lock.png ) no-repeat 25px 5px;
+}
+#sourceselect .unstyled li:nth-child(4) a span {
+	padding-left: 17px;
+}
+#sourceselect .unstyled li:nth-child(4) {
+    background: url(../images/lock.png ) no-repeat 25px 5px;
+}
+.direction h3{
+  margin:0px;
+  vertical-align:middle;
+  display:inline-block;
+}
+.direction .outbound{
+  color:#019adf;
+}
+.direction .inbound{
+  color: #28a223;
+}
+span.duration {
+margin-left:8px;
+display:inline-block;
+font-size: 12px;
+font-weight: bold;
+color: #555;
+}
+/**
+ * Call Switching css
+ * */
+.callswitch .phone a{
+background-image:url('../images/active_calls/ac_phone_disabled.png');
+background-repeat:no-repeat;
+background-position:center top; 
+cursor: default;
+width: 66px;
+}
+
+.callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_disabled.png');
+background-repeat:no-repeat;
+background-position:center top; 
+cursor: default;
+}
+
+.callswitch .mobile a{
+background-image:url('../images/active_calls/ac_mobile_disabled.png');
+background-repeat:no-repeat;
+background-position:center top; 
+cursor: default;
+}
+.ringing .hold a,.ringing .hold a:hover,.activecall.hold .hold a:hover,.activecall.hold .hold a,.trying .flash a, .trying .phone a, .trying .mobile a,.trying .flash a:hover, .trying .phone a:hover, .trying .mobile a:hover,
+.phone.activecall .phone a,.mobile.activecall .mobile a,.flash.activecall .flash a,.phone.activecall .phone a:hover,.mobile.activecall .mobile a:hover,.flash.activecall .flash a:hover
+{
+  text-decoration: none;
+  color: #ccc;
+  cursor: default;
+}
+
+.ringing .hold a,.activecall.hold .hold a,.activecall.hold .hold a:hover{
+  background-image:url('../images/active_calls/ac_hold_disabled.png') !important;
+}
+
+.activecall .mobile a,.activecall .flash a,.activecall .phone a, #activecalls.noflash .flash a,#activecalls.nophone .phone a, #activecalls.nomobile .mobile a, .activecall .mobile a:hover,.activecall .flash a:hover,.activecall .phone a:hover, #activecalls.noflash .flash a:hover,#activecalls.nophone .phone a:hover, #activecalls.nomobile .mobile a:hover{
+ 	text-decoration: none;
+ 	color: #ccc;
+ 	cursor: default;
+ }
+ .activecall.hold .callswitch .mobile a,.activecall.hold .phone a,.activecall.hold .callswitch .flash a{
+ 	color: #09F;
+ 	cursor: pointer;
+ }
+.activecall.hold .callswitch .mobile a:hover,.activecall.hold .phone a:hover,.activecall.hold .callswitch .flash a:hover{
+ 	text-decoration: underline;
+ 	color: #005580;
+ }
+.ringing .callactions .mobile a:hover,.ringing .callactions .flash a:hover,  .activecall.mobile .mobile a:hover,.activecall.flash .flash a:hover,.activecall.phone .phone a:hover,.ringing .callswitch .drop a:hover,.ringing .callswitch .transfer a:hover{
+ 	text-decoration: underline;
+ 	color: #005580;
+ 	cursor: pointer;
+ }
+.activecall.mobile .mobile a,.activecall.flash .flash a,.activecall.phone .phone a,.ringing .callswitch .drop a,.ringing .callswitch .transfer a,,.ringing .callswitch .conference a{
+ 	color: #09F;
+ 	cursor: pointer;
+ }
+.callswitch a, .callactions a{
+  padding-top:50px;/*leaving some space for image to appear*/
+  display:block;
+}
+
+.phone.conference  .callswitch .phone a{
+background-image:url('../images/active_calls/ac_phone_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+
+.flash.conference .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+
+.mobile.conference .callswitch .mobile a{
+background-image:url('../images/active_calls/ac_mobile_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+
+.busy .callswitch .mobile a:hover,
+.busy  .callswitch .phone a:hover,
+.busy .callswitch .flash a:hover,
+.ring .callswitch .mobile a:hover,
+.ring  .callswitch .phone a:hover,
+.ring .callswitch .flash a:hover{
+  text-decoration: underline;
+  color: #005580;
+}
+.ring .callswitch .mobile a,.ring  .callswitch .phone a,.ring .callswitch .flash a,.busy .callswitch .mobile a,.busy  .callswitch .phone a,.busy .callswitch .flash a{
+  background-repeat:no-repeat;
+  background-position:center top; 
+  color: #09F;
+ 	cursor: pointer;
+}
+
+.busy .callswitch .mobile a,.ring .callswitch .mobile a{
+  background-image:url('../images/active_calls/ac_mobile_inactive.png');
+}
+
+.busy  .callswitch .phone a,.ring  .callswitch .phone a{
+  background-image:url('../images/active_calls/ac_phone_inactive.png');
+  width:66px;
+}
+
+.busy .callswitch .flash a,.ring .callswitch .flash a{
+  background-image:url('../images/active_calls/ac_flash_inactive.png');
+}
+
+
+.mobile.busy .callswitch .mobile a{
+  background-image:url('../images/active_calls/ac_mobile_active.gif');
+}
+
+.phone.busy  .callswitch .phone a{
+  background-image:url('../images/active_calls/ac_phone_active.gif');
+}
+
+.flash.busy .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_active.gif');
+}
+
+.mobile.ring .callswitch .mobile a{
+  background-image:url('../images/active_calls/ac_mobile_ring.png');
+}
+
+.phone.ring  .callswitch .phone a{
+  background-image:url('../images/active_calls/ac_phone_ring.png');
+}
+
+.flash.ring .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_ring.png');
+}
+
+
+.ringing .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_ringing.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+color: #09F;
+ 	cursor: pointer;
+}
+
+.ringing .callswitch .mobile a{
+background-image:url('../images/active_calls/ac_mobile_ringing.gif');
+background-repeat:no-repeat;
+background-position:center top;
+color: #09F;
+cursor: pointer;
+width:66px; 
+}
+.phone.dialing  .callswitch .phone a,.phone.dialing  .callswitch .phone a:hover,
+.flash.dialing .callswitch .flash a, .flash.dialing .callswitch .flash a:hover,
+.mobile.dialing .callswitch .mobile a, .mobile.dialing .callswitch .mobile a:hover,
+.phone.busy .callswitch .phone a,.phone.busy .callswitch .phone a:hover,
+.mobile.busy .callswitch .mobile a,.mobile.busy .callswitch .mobile a:hover,
+.flash.busy .callswitch .flash a,.flash.busy .callswitch .flash a:hover,
+.Mobile.trying .mobile a,.Mobile.trying .mobile a:hover,
+.Phone.trying .phone a,.Phone.trying .phone a:hover,
+.WebPhone.trying .flash a,.WebPhone.trying .flash a:hover,
+.phone.ring  .callswitch .phone a,.phone.ring  .callswitch .phone a:hover,
+.mobile.ring  .callswitch .mobile a,.mobile.ring  .callswitch .mobile a:hover,
+.flash.ring  .callswitch .flash a,.flash.ring  .callswitch .flash a:hover
+{
+background-repeat:no-repeat;
+background-position:center top; 
+text-decoration: none;
+color: #ccc;
+cursor: default;
+}
+
+.phone.dialing  .callswitch .phone a{
+background-image:url('../images/active_calls/ac_phone_trying.png');
+
+}
+
+.flash.dialing .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_trying.png'); 
+}
+
+.mobile.dialing .callswitch .mobile a{
+background-image:url('../images/active_calls/ac_mobile_trying.png');
+}
+
+.hold .callswitch .phone a{
+background-image:url('../images/active_calls/ac_phone_hold.png');
+}
+
+.hold .callswitch .flash a{
+background-image:url('../images/active_calls/ac_flash_hold.png');
+}
+
+.hold .callswitch .mobile a{
+background-image:url('../images/active_calls/ac_mobile_hold.png');
+}
+/**
+ * Call Actions classes
+ * */
+ .callactions .highrise,.callactions .gcontacts, .callactions .personal,.callactions .internal{
+  display:none;
+}
+
+.callactions .hold a:hover
+{
+background-image:url('../images/active_calls/ac_hold_hover.png');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+.dialing .callactions .hold a{
+  background-image:url('../images/active_calls/ac_hold_disabled.png');
+  background-repeat:no-repeat;
+  background-position:center top; 
+  cursor: default;
+  color: #ccc;
+}
+.dialing .callactions .hold a:hover{
+  background-image:url('../images/active_calls/ac_hold_disabled.png');
+  text-decoration: none;
+  color: #ccc;
+  background-repeat:no-repeat;
+  background-position:center top; 
+}
+.callactions .transfer a
+{
+background-image:url('../images/active_calls/ac_transfer_inactive.png');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+.callactions .transfer a:hover
+{
+background-image:url('../images/active_calls/ac_transfer_hover.png');	
+  }
+.transfer .callactions .transfer a
+{
+background-image:url('../images/active_calls/ac_transfer_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+
+.transfer.trying .callactions .transfer a{
+  background-image:url('../images/active_calls/ac_transfer_hover.png');
+}
+.transfer.trying{
+  opacity: 0.5;
+}
+
+.callactions .conference a
+{
+background-image:url('../images/active_calls/ac_conference_inactive.png');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+#conferenceLines .callactions .conference a
+{
+background-image:url('../images/active_calls/ac_conference_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+.callactions .conference a:hover
+{
+background-image:url('../images/active_calls/ac_conference_hover.png');	
+  }
+.conference .callactions .conference a
+{
+background-image:url('../images/active_calls/ac_conference_active.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+
+.callactions .drop a
+{
+background-image:url('../images/active_calls/ac_drop_inactive.png');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+.callactions .drop a:hover
+{
+background-image:url('../images/active_calls/ac_drop_hover.png');	
+}
+.callactions .hold a
+{
+background-image:url('../images/active_calls/ac_hold_inactive.gif');
+background-repeat:no-repeat;
+background-position:center top; 
+}
+.callactions .acmute a{
+  background-image:url('../images/active_calls/ac_mute_active.png');
+  background-repeat:no-repeat;
+  background-position:center top; 
+}
+.callactions .acunmute a{
+  background-image:url('../images/active_calls/ac_mute_inactive.png');
+  background-repeat:no-repeat;
+  background-position:center top; 
+}
+#activecalls.noflash  .flash a{
+background-image:url('../images/active_calls/ac_flash_disabled.png');
+background-repeat:no-repeat;
+background-position:center top;
+cursor: default;
+}
+
+#activecalls.nomobile .mobile a{
+background-image:url('../images/active_calls/ac_mobile_disabled.png');
+background-repeat:no-repeat;
+background-position:center top;
+cursor: default;
+}
+
+#activecalls.nophone .phone a{
+background-image:url('../images/active_calls/ac_phone_disabled.png');
+background-repeat:no-repeat;
+background-position:center top;
+cursor: default;
+}
+/**
+* Contact Type icons here
+*/
+.highrise .callactions .highrise{
+  background-image:url('../images/high-risepng.png');
+  background-repeat:no-repeat;
+  background-position:center top;
+  display:block;
+  padding-top:50px;
+}
+
+.gcontacts .callactions .gcontacts{
+  background-image:url('../images/google-contact.png');
+  background-repeat:no-repeat;
+  background-position:center top;
+  display:block;
+  padding-top:50px;
+}
+
+.internal .callactions .internal{
+  background-image:url('../images/internal-contacts.png');
+  background-repeat:no-repeat;
+  background-position:center top;
+  display:none;
+  padding-top:50px;
+}
+
+.mycontacts .callactions .mycontacts{
+  background-image:url('../images/personal-contacts.png');
+  background-repeat:no-repeat;
+  background-position:center top;
+  display:block;
+  padding-top:50px;
+}
+
+/**
+ * Old css
+ */
+#activecallbox 
+{
+background-color:#F7F7F7;
+height:37px;
+width:716px;
+position:relative;
+top:0;
+left:0;
+margin-top:8px;
+border:1px;
+border-style:solid;
+border-color:#D3D3D3;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+}
+
+#activecallbox h1
+{
+position:absolute;
+top:7px;
+left:23px;
+font-size:14px;
+font-weight:bold;
+color:#656565;
+}
+
+
+
+
+#activecalls .outbound .direction {
+padding-left:30px;
+background-image:url('../images/Outbound_Call.png');
+background-repeat:no-repeat;
+background-position:left 28%; 
+}
+
+#activecalls .inbound .direction {
+padding-left:30px;
+background-image:url('../images/Inbound_Call.png');
+background-repeat:no-repeat;
+background-position:left 28%; 
+}
+
+#activecalls .outbound .direction span.outbound {
+display:inline;
+}
+
+#activecalls .inbound .direction span.inbound {
+display:inline;
+}
+
+
+
+#activecalls .outbound .callswitch span ,#activecalls .inbound .callswitch span  {
+vertical-align: middle;
+text-decoration: none;
+width: 45px;
+height: 45px; 
+margin-left:2px;
+display: block;
+float: left;
+white-space: nowrap;
+}
+
+.activecall .hold,.activecall .conference,.activecall .transfer,.activecall .drop,.activecall .acmute,.activecall .acunmute  {float:left;width:70px;font-size:12px;}
+.callswitch a {color:#666;text-decoration:none;}
+.callswitch a:hover {color:#09F;}
+#line0 {height:80px;}
+.activephone {width:62px !important; }
+.activepaneltop {padding-left:10px;}
+
+.Mobile.trying .mobile a{
+  background-image:url('../images/active_calls/ac_mobile_trying.png');
+}
+.WebPhone.trying .flash a{ 
+  background-image:url('../images/active_calls/ac_flash_trying.png');
+}
+.Phone.trying .phone a{
+  background-image:url('../images/active_calls/ac_phone_trying.png');
+}

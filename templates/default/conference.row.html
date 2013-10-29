@@ -1,0 +1,63 @@
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+<div class="row-fluid activecall conference callactions" data-id="{{ID}}" id="line{{ID}}">
+	<div class="span4" style="padding-left:20px;padding-top:14px;">
+		<span class="direction">
+			<span class="outbound">
+				<h3>{{t "Outbound"}}</h3>
+			</span>
+			<span class="inbound">
+				<h3>{{t "Inbound"}}</h3>
+			</span>
+		</span>
+		<span style="vertical-align:middle;" class="duration muted"></span>
+		<br>
+		<span class="clidnum"></span>&nbsp;<span class="clidname"></span>
+	</div>
+
+	<div class="span1  hidden-mobile">
+		<div class="vertical-separator"></div>
+	</div>
+	<div class="span1 drop align-center">
+		<a href="javascript:;" onclick="callaction('Drop', '{{ID}}');">{{t "Drop"}}</a>
+	</div>
+	<!-- Hide this for now! we will release this later -->
+	<!-- <div class="span1 acmute align-center">
+		<a href="javascript:;" id="mute{{ID}}" onclick="callaction('Mute', '{{ID}}');">{{t "Mute"}}</a>
+	</div> -->
+	<div class="span2 conference align-center">
+		<a href="javascript:;" onclick="callaction('Conference', '{{ID}}');">{{t "Conference"}}</a>
+	</div>
+	<div class="span1 align-center transfer">
+		<a href="javascript:;" onclick="callaction('Transfer', '{{ID}}');">{{t "Transfer"}}</a>
+	</div>
+	<div class="span1  hidden-mobile">
+		<div class="vertical-separator"></div>
+	</div>
+</div>

@@ -1,0 +1,253 @@
+@charset "utf-8";
+/* CSS Document */
+.topHeader {
+	width: 100%;
+	background: url(../images/top-header-bg.gif) repeat-x;
+	background-size: contain;
+	height:115px;
+}
+.logo {
+	width: 100%;
+	clear: both;
+	text-align: center;
+	padding: 10px 0px;
+}
+.threeBtnNav {
+	width: 140px;
+	clear: both;
+	margin: 0 auto;
+	float: none;
+	min-height: 27px;
+	display:none;
+}
+.accountName {
+	width: 100%;
+	clear: both;
+	float: none;
+	display:none;
+}
+.mute {
+	width: 100%;
+	float: none;
+	clear: both;
+	padding-top:7px;
+}
+.logout {
+	width: 53px;
+	float: none;
+	clear: both;
+	margin: 0 auto;
+	padding: 0 0 10px 0px;
+	display:none;
+}
+.seprator {
+	color: #FC0;
+	display: none;
+}
+.boxWide {
+	width: 100%;
+	margin: 0 auto;
+}
+.boxWideBlueNav {
+	margin: 0px auto;
+	width: 100%;
+	background-color: #2D396C;
+	color: #fff;
+}
+.quickdialWidth {
+	width: 96%;
+	margin-left: 5px;
+	float: none;
+	clear: both;
+}
+.quickdialNav {
+	width: 100%;
+	margin-left: 1%;
+	margin-top: 3px;
+	clear: both;
+}
+.quickdialNav a:hover {color:#CCC;}
+.boxWideBlueNav input, textarea, .uneditable-input {
+	width: 70%;
+}
+.quickdialWidthInput {
+	width: 100%;
+}
+.media {
+	background-color: #C00;
+	color: #fff;
+	height: 20px;
+	width: 100%;
+	display:none;
+}
+.boxWide select {display:block;float:none;margin:0 auto;}
+.qdicons {width:25%;float:left;}
+.dialPadLine {width:75%;float:left;}
+.move-down-more {margin-top:0px;}
+.SearchByDialedNumber {width:100%;float:none;}
+.PageTitle {width:160px;float:left;padding-top:8px;}
+.BlueButton {width:170px;float:left;padding-bottom:10px;} 
+.headerBg {background:url(../images/header-bg.gif) repeat-x;background-size:contain;}
+.threeicons {width:66px !important;}
+.ACseprator {
+	color: #F90;
+	display: block;
+	width: 32px;
+	float: left;
+	font-weight: bold;
+}
+ @media only screen and (min-width: 481px) {
+	 .topHeader {
+		 height: 48px;
+		 }
+.media {
+	background-color: #0C0;
+}
+.boxWide select {display:block;float:none;margin:5px 0px;margin:0 auto;}
+.quickdialWidth {width:60%;}
+.logo {
+	clear: none;
+	float: left;
+	padding-left: 0;
+	text-align: left;
+	width: 165px;
+}
+.threeBtnNav {
+	clear: none;
+	float: left;
+	padding: 12px 0 0 10px;
+}
+.accountName {
+	width: 160px;
+	clear: none;
+	float: left;
+	padding-top: 15px;
+}
+.mute {
+	width: 10%;
+	float: left;
+	clear: none;
+	padding-top: 7px;
+}
+.logout {
+	float: left;
+	clear: none;
+	padding-top: 18px;
+}
+.quickdialNav {
+	width: 100%;
+	margin-left: 9%;
+	margin-top: 3px;
+	clear: both;
+}
+.quickdialWidth {
+	width: 96%;
+	margin-left: 5px;
+	float: none;
+	clear: both;
+}
+.quickdialWidthInput {
+	width: 100%;
+}
+.SearchByDialedNumber {width:277px;float:left;padding-top:6px;}
+.BigTitle {float:left;}
+.BlueButton {float:left;padding-bottom:10px;} 
+.dialPadLine {width:356px;}
+}
+@media only screen and (min-width: 660px) {
+.media {
+	background-color: #00C;
+}
+.quickdialWidth {
+	width: 36%;
+	margin-left: 5px;
+	float: left;
+	clear: none;
+}
+.quickdialNav {
+	width: 570px;
+	float: left;
+	clear: none;
+}
+.boxWideBlueNav input, textarea, .uneditable-input {
+	width: 100%;
+}
+.DialPadInfo {
+	padding-top: 2px;
+	border-top: 1px solid #7f7c71;
+	width: 100%;
+	clear: both;
+}
+.qdicons {
+	width: 100px;
+	float: left;
+}
+}
+ @media only screen and (min-width: 769px) {
+	 .media {background-color:#FF0;}
+.accountName {
+	width: 20%;
+	clear: none;
+	float: left;
+	padding-top: 12px;
+}
+.mute {
+	width: 10%;
+	float: left;
+	clear: none;
+	padding-top: 12px;
+}
+.logout {
+	float: left;
+	clear: none;
+	padding-top: 18px;
+}
+.quickdialWidthInput {
+	width: 100%;
+}
+.threeBtnNav {display:none;}
+.accountName {display:none;}
+.mute {display:none;}
+.logout {display:none;}
+.acheight {margin-bottom:0px !important;}
+}
+@media only screen and (min-width: 901px) {
+	.threeBtnNav {display:block;}
+.accountName {display:block;}
+.mute {display:block;}
+.logout {display:block;}
+.boxWide select {display:none;}
+	.media {background-color:#F0F;}
+.boxWide {
+	width: 904px;
+}
+.logout {
+	padding: 18px 0 0 0px
+}
+.logo {
+	margin: 7px 25px 1px 0;
+}
+.seprator {
+	color: #F90;
+	display: block;
+	width: 10px;
+	float: left;
+	font-weight: bold;
+}
+.qdicons {
+	width: 23%;
+	float: left;
+}
+.threeBtnNav {width:130px;padding:12px 0 0 0px;}
+.accountName {width:19%;}
+}
+@media only screen and (min-width: 1100px) {
+	.media {background-color:#63C;}
+	.boxWide {width:1050px;}
+	.accountName {width:29%;}
+}
+@media only screen and (min-width: 1370px) {
+	.media {background-color:#630;}
+	.boxWide {width:1050px;}
+	.PageWide {width:100%;}
+}

@@ -1,0 +1,15 @@
+<AastraIPPhoneTextMenu destroyOnExit="no" style="none" defaultIndex="1">
+	<Title>Contacts</Title>
+	{{^Contacts}}
+	<MenuItem>
+		<Prompt>No Contacts Found</Prompt>
+		<URI></URI>
+	</MenuItem>
+	{{/Contacts}}
+	{{#Contacts}}
+	<MenuItem>
+		<Prompt>{{FirstName}} {{LastName}}</Prompt>
+		<URI>http://{{Host}}/xml/en/Aastra/phonebook_number_lookup.xml?Num={{PhoneNumber}}</URI>
+	</MenuItem>
+	{{/Contacts}}
+</AastraIPPhoneTextMenu>

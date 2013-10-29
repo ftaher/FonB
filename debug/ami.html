@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<title>Testing both the ami and the websocket Interface</title>
+<script src="/js/jquery.min.js"></script>
+<script src="prettyprint.js"></script>
+<style>
+.heading{
+	padding: 1px;
+	background-color: rgb(0, 0, 0); color: rgb(9, 209, 65); 
+	font-size: 14px; text-align: left; vertical-align: top; font-family: Consolas, 'Lucida Console', Courier, mono; 
+}
+h1.heading{font-size:14px; font-weight: bold;}
+.ami{background-color: rgb(255, 127, 0);color:black;}
+.fonb{background-color: rgb(0, 0, 0);}
+.summary{background-color: rgb(0, 135, 255);color:black;}
+.error{background-color: red;color:black;}
+pre{
+	margin: 0px;
+}
+</style>
+</head>
+<body>
+<h1 class="heading">Testing both the ami and the websocket Interface</h1>
+<div id="asterisklog"></div>
+<script>
+var url = window.location.host;
+var socket = new WebSocket("ws://"+ url +"/socket");
+//var socket = new WebSocket("ws://10.0.8.6/socket");
+// websocket = new WebSocket("ws://{{.}}/socket");
+socket.onmessage = onMessage;
+// websocket.onclose = onClose;
+
+function onMessage( e ) {
+    var packet = $.parseJSON(e.data);
+	var currentTime = new Date();
+	var hours = currentTime.getHours();
+	var minutes = currentTime.getMinutes();
+	var seconds = currentTime.getSeconds();
+	//$('#asterisklog').append('<p>' + hours + ':' + minutes +'.' + seconds + ' : ' + ' : ' +  JSON.stringify(packet, null, 2) + '</p>');
+	if ( packet.MessageType == "AMI" ){
+		$("#asterisklog").append('<div class="heading ami">' + hours + ':' + minutes +':' + seconds  +' / Event: ' + packet.AMI["Event"]  +' /   ' + packet.AMI["Channel"] +' /   ' + packet.AMI["Uniqueid"] + "</div>").append(JSON.stringify(packet.AMI, null, 2));
+	}
+	else if ( packet.MessageType == "ChannelsSummary" )
+		{
+		$container = $("#asterisklog").append('<div class="heading fonb summary">' + hours + ':' + minutes +':' + seconds  +"</div>");
+		for(i=0;i<packet.Calls.length;i++){
+			$container.append("<div style='float:left;width:100%;'>============== ID: " + packet.Calls[i].ID + " ==============Answer Time: " + packet.Calls[i].AnswerTime + " ==================</div>");
+			$container.append("<div style='float:left;width:40%'><pre>" + JSON.stringify(packet.Calls[i].CallingParty, null, 2).replace(/(^{\n)|(\n}$)/mg,"")+"</pre></div>");
+			$container.append("<div style='float:left;width:40%;margin-left:5%;'><pre>" + JSON.stringify(packet.Calls[i].CalledParty, null, 2).replace(/(^{\n)|(\n}$)/mg,"")+"</pre></div>");
+			$container.append("<br style='clear:both;' />");
+		}
+			console.log(packet.Calls);
+		} 
+	else if ( packet.MessageType == "FonbError" )
+		{
+		$("#asterisklog").append('<div class="heading fonb error">' + hours + ':' + minutes +':' + seconds   +' /  ' + packet.MessageType  + "</div>").append(JSON.stringify(packet));
+		} 
+	else
+		$("#asterisklog").append('<div class="heading fonb">' + hours + ':' + minutes +':' + seconds   +' /  ' + packet.MessageType  + "</div>").append(JSON.stringify(packet));
+  };
+
+</script>
+</body>
+
+</html>

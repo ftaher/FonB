@@ -1,0 +1,210 @@
+/*
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+ */
+body{
+	background-color:#efefef;
+}
+.body-container .row-fluid{
+	padding:5px 0px;
+}
+.blue-background, .nav-active{
+	background-color:#2d396c;
+	color:#fff;
+}
+.nav-pipe{
+	color:#e79539;
+	font-size:20px;
+}
+.nav-text{
+	line-height:27px;
+	text-align:center;
+	font-size:14px;
+}
+.nav-text a, .label a{
+	color:inherit;
+}
+.nav-text a:hover, .label a:hover{
+	color:inherit;
+	text-decoration:none;
+}
+.nav-active{
+	border-top-left-radius:5px;
+	border-top-right-radius:5px;
+	height:36px;
+}
+.nav-active .nav-pipe, .nav-after-active .nav-pipe{
+	display:none !important;
+}
+.quickdial-search .add-on{
+	background-color:#fff;
+}
+.quickdial-search input[type=text]{
+	box-shadow: none; 
+	border-left: medium none;
+	border-right: medium none;
+	border-color:#ccc;
+}
+.round-corners{
+	border:3px solid #c7c7c7;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+}
+.no-top-round-corners{
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+}
+.no-bottom-round-corners{
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+}
+.inner-shadow{
+	-moz-box-shadow: inset 0 0 5px #c7c7c7;
+	-webkit-box-shadow: inset 0 0 5px #c7c7c7;
+	box-shadow: inner 0 0 5px #c7c7c7;
+}
+.call-history-grid-row{
+	border-bottom: 1px solid #ccc;
+	width:100%;
+	padding-bottom:0px !important;
+}
+.call-history-grid-row.Summary{
+	height: 20px;
+	overflow: hidden;
+	line-height: 11px;
+}
+.move-down{
+	margin-top:6px;
+	float: right;
+	width: 352px;
+}
+.no-margin{
+	margin:0px !important!;
+}
+.align-right{
+	text-align:right;
+}
+.align-center{
+	text-align:center;
+}
+.vertical-separator{
+	border-left:1px solid #ccc;
+	height:60px;
+	margin-left:17px;
+	margin-top:5px;
+}
+.pagination-meta{
+	line-height:30px;
+}
+#pagebox{
+	margin-bottom:100px;
+}
+.nav-tabs{
+	margin-bottom: 0px;
+}
+.tab-content .active{
+	border: 1px solid #ddd;
+	border-top: none;
+	padding: 20px 5px 20px 5px;
+}
+.form-horizontal label{
+	font-weight: bold;
+}
+.ui-multiselect-filter input{
+	width:75%;
+}
+h1,h2,h3,h4{
+	font-weight: normal;
+	margin:2px 0px;
+}
+.btn-group.open .btn-group .btn.dropdown-toggle{
+	background-color: #f5f5f5;
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+	background-image: linear-gradient(top, #ffffff, #e6e6e6);
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.ui-autocomplete {
+    max-height: 300px;
+    overflow-y: auto;   /* prevent horizontal scrollbar */
+    overflow-x: hidden; /* add padding to account for vertical scrollbar */
+    z-index:1000 !important;
+}
+.ui-state-focus{
+	color: #ffffff !important;
+	text-decoration: none;
+	outline: 0;
+	background-color: #0081c2 !important;
+	background-image: -moz-linear-gradient(top, #0088cc, #0077b3) !important;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3)) !important;
+	background-image: -webkit-linear-gradient(top, #0088cc, #0077b3) !important;
+	background-image: -o-linear-gradient(top, #0088cc, #0077b3) !important;
+	background-image: linear-gradient(to bottom, #0088cc, #0077b3) !important;
+	background-repeat: repeat-x !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)  !important;
+}
+.border-bottom{
+	border-bottom: 1px solid #ccc;
+}
+/*==================
+* Notifications
+*/
+.notifications{position:fixed;width:300px;z-index:6000;}
+.notifications.top-right{right:10px;top:25px;}
+.notifications>div{position:relative;z-index:9999;margin:5px 0px;}
+/*==================
+ * Adding custom icons here
+ */
+h1 i[class^="icon-"]{
+	margin-top:13px;
+}
+h2 i[class^="icon-"]{
+	margin-top:12px;
+}
+.icon-unchecked,.icon-checked{
+	width : 20px;
+	height: 20px;
+	background-position: 0px 0px;
+}
+.icon-unchecked{
+	background-image:url(../images/icons/glyphicons_153_unchecked.png) !important;
+}
+.icon-checked{
+	background-image:url(../images/icons/glyphicons_152_check.png) !important;	
+}
+.icon-dial-pad{
+	background-position:0px 0px;
+	background-image:url(../images/icons/small/dial-pad.png);
+}
+h2 {font-size:20px !important;padding-left:15px;}
+
+video{
+	display: none;
+}

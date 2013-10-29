@@ -1,0 +1,90 @@
+<canvas debug="false">
+	<include href="phoneLib.lzx"/>    
+
+	<script><![CDATA[
+
+		flash.external.ExternalInterface.addCallback("hangup", null, 
+
+			function () {			
+				phone.hangup();
+			}		
+		);
+
+		flash.external.ExternalInterface.addCallback("accept", null, 
+
+			function () {			
+				phone.accept();
+			}		
+		);
+
+		flash.external.ExternalInterface.addCallback("dtmf", null, 
+
+			function (chr) {			
+				phone.dtmf(chr);
+			}		
+		);		
+
+		flash.external.ExternalInterface.addCallback("call", null, 
+
+			function (destination) {			
+				phone.call(destination);
+			}		
+		);
+
+		flash.external.ExternalInterface.addCallback("register", null, 
+
+			function () {			
+				phone.register();
+			}		
+		);		
+
+		flash.external.ExternalInterface.addCallback("login", null, 
+
+			function (telephone, username, password, realm, server, red5URL) {			
+				phone.login(telephone, username, password, realm, server, red5URL);
+			}		
+		);		
+
+		flash.external.ExternalInterface.addCallback("config", null, 
+
+			function () {			
+				phone.config();
+			}		
+		);
+
+	]]>		
+	</script>
+	
+	<phoneConnection id="phone" debug="true" autoconnect="false">			
+
+		<handler name="registrationSucess"  args="msg">	
+			flash.external.ExternalInterface.call("registrationSucess", msg);
+		</handler> 
+
+		<handler name="registrationFailure"  args="msg">	
+			flash.external.ExternalInterface.call("registrationFailure", msg);
+		</handler> 
+
+		<handler name="phoneReady">	
+			flash.external.ExternalInterface.call("phoneReady", null);
+		</handler> 
+		
+		<handler name="phoneError"  args="system, msg">	
+			flash.external.ExternalInterface.call("phoneError", system + ":" + msg);
+		</handler> 
+
+		<handler name="callIncoming"  args="source, sourceName, destination, destinationName">	
+			flash.external.ExternalInterface.call("callIncoming", source);
+		</handler> 	
+
+		<handler name="callConnected"  args="publish, play">	
+			flash.external.ExternalInterface.call("callConnected", publish);
+		</handler> 	
+
+		<handler name="callState" args="msg">	
+			flash.external.ExternalInterface.call("callState", msg);
+		</handler> 
+
+	</phoneConnection>	
+	
+</canvas>

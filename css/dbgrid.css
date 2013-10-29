@@ -1,0 +1,386 @@
+.stable {
+line-height: 1.5;
+}
+
+.errorBox,.successBox {
+background:#F3FFDF;
+border:2px solid #AAAA20;
+font-size:.8em;
+margin:10px 0;
+padding-bottom:10px;
+width: auto;
+margin: auto;
+margin-bottom: 1em;
+}
+
+.errorIcon {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -75px;
+height:16px;
+float:left;
+width:16px;
+}
+
+.successIcon {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -91px;
+height:16px;
+float:left;
+width:16px;
+}
+
+.msgBoxContent {
+padding:10px 10px 10px 30px;
+}
+
+.msgBoxContent p {
+margin:10px 0;
+}
+
+.msgBoxContent p:first-child {
+font-size:1.2em;
+font-weight:strong;
+margin:0;
+}
+
+.msgBoxContent p:last-child {
+margin-bottom:0;
+}
+
+.stable div.pagination {
+background-color:#3e3e3e;
+color:#fff;
+font-family:Tahoma, Arial, Helvetica, Sans-serif;
+font-size:1em;
+height:2.4em;
+text-align: center;
+}
+
+.stable div.pagination a {
+background-color:#3e3e3e;
+border-bottom: none;
+color:#fff;
+margin:2px;
+padding:2px 5px;
+text-decoration:none;
+}
+
+.stable div.pagination a:hover,.stable div.pagination a:active {
+background-color:#ec5210;
+color:#fff;
+}
+
+.stable div.pagination span.current {
+background-color:#313131;
+color:#fff;
+font-weight:700;
+margin:2px;
+padding:2px 5px;
+border: 1px solid #777;
+}
+
+.stable div.pagination span.disabled {
+background-color:#3e3e3e;
+color:#868686;
+margin:2px;
+padding:2px 5px;
+}
+
+.tbImgLink {
+cursor:pointer;
+padding:2px;
+}
+
+.toolbarTable .tb {
+background:#F0F0F0 url(../images/bck_toolbar.gif) repeat-x top;
+border:1px solid #ccc;
+font-weight:400;
+line-height:26px;
+}
+
+.toolbarTable .tb a:hover {
+color:#000;
+}
+
+.toolbarTable .tb div.btnseparator {
+border-left:1px solid #ccc;
+border-right:1px solid #fff;
+float:left;
+height:26px;
+margin-left:5px;
+margin-right:2px;
+width:4px;
+}
+
+.toolbarTable .tb div.fbutton {
+cursor:pointer;
+display:block;
+float:left;
+line-height:22px;
+padding:1px;
+}
+
+.toolbarTable .tb div.fbutton div {
+padding:0 1px;
+}
+
+.toolbarTable .tb div.fbutton img {
+padding-top:3px;
+}
+
+.toolbarTable .tb div.fbutton span {
+display:block;
+float:left;
+padding-left:3px;
+}
+
+.toolbarTable .tb div.fbutton span.btnText {
+line-height:100%;
+padding-top:6px;
+}
+
+.toolbarTable .tb div.fbutton:hover {
+border:1px solid #ccc;
+height:22px;
+padding:0;
+}
+
+.toolbarTable .tb div.fbutton:hover div {
+border-bottom:1px solid #eee;
+border-left:1px solid #fff;
+border-right:1px solid #eee;
+border-top:1px solid #fff;
+padding:0;
+}
+
+fieldset {
+margin-left:10px;
+line-height: 1.5;
+padding:10px;
+width:100%;
+border: 1px solid #000;
+}
+
+fieldset input,fieldset select,fieldset textarea {
+float:left;
+width:400px;
+margin: 0.2em;
+}
+
+fieldset label {
+float:left;
+font-size:14px;
+font-weight: bold;
+width:140px;
+}
+
+fieldset legend {
+font-size:18px;
+margin:1px;
+padding:0;
+font-weight: 700;
+}
+
+fieldset li {
+clear:both;
+list-style:none;
+margin-bottom:2px;
+margin-top:2px;
+padding:10px;
+}
+
+fieldset textarea {
+height:5em;
+}
+
+fieldset ul,fieldset li {
+border:0;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+/*
+ * DBGRID Imagenes 
+ * */
+
+.sort_asc {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -107px; 
+float:right;
+width:11px;
+height:11px;
+margin-top: 5px;
+}
+
+.sort_des {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -118px; 
+float:right;
+width:11px;
+height:11px;
+margin-top: 5px;
+}
+
+.icon_search {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -129px;
+width:15px;
+height:12px;
+float:left;
+margin-left:5px;
+margin-top:3px;
+}
+
+.icon_edit {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -28px;
+width:15px;
+height:16px;
+float:left;
+margin-left:5px;
+}
+
+.icon_delete {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -16px;
+width:15px;
+height:12px;
+float:left;
+margin-left:5px;
+margin-top:3px;
+}
+
+.icon_deleteall {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -16px;
+width:15px;
+height:8px;
+float:left;
+margin-left:5px;
+margin-top:5px;
+}
+
+
+.icon_show {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -60px;
+width:15px;
+height:15px;
+float:left;
+margin-left:5px;
+margin-top:2px;
+}
+
+.icon_export {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -145px;
+width:15px;
+height:14px;
+float:left;
+margin-left:5px;
+margin-top:3px;
+}
+
+.icon_import {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px -43px;
+width:15px;
+height:14px;
+float:left;
+margin-left:5px;
+margin-top:3px;
+}
+
+
+.icon_add {
+background:url(../images/sprites_dbgrid.gif) no-repeat 0px 0px;
+width:15px;
+height:12px;
+float:left;
+margin-left:5px;
+margin-top:3px;
+}
+
+
+/*
+--------------------------------------------------------------------------------
+What:	"Oranges in the sky" Styles(Table data design)
+Who:	Krasimir Makaveev(krasi [at] makaveev [dot] com)
+When:	15.09.2005(created)
+--------------------------------------------------------------------------------
+*/
+
+.stable table {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc; 
+	color: #333;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.stable table caption {
+	font-size: 1.1em;
+	font-weight: bold;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+	padding: 5px;
+	background: #efefef;
+	border: 1px solid #ccc;
+	color: #666;
+}
+
+.stable table a {
+	text-decoration: none;
+	_border-bottom: 1px dotted #f60;
+	color: #f60;
+	font-weight: bold;
+}
+
+.stable table a:hover {
+	text-decoration: none;
+	color: #fff;
+	background: #f60;
+}
+
+.stable table tr th.tcheck {
+    width: 20px;
+}
+.stable table tr th.tcontrol {
+    width: 80px;
+}
+
+.stable table tr th a {
+	color: #369;
+	border-bottom: 1px dotted #369;
+    _width: auto;
+}
+
+.stable table tr th a:hover {
+	color: #fff;
+	background: #369;
+}
+
+.stable table thead tr th {
+	text-transform: uppercase;
+	background: #e2e2e2;
+}
+
+.stable table tfoot tr th, .stable table tfoot tr td {
+	text-transform: uppercase;
+	color: #000;
+	font-weight: bold;
+}
+
+.stable table tfoot tr th {
+	width: 20%;
+}
+
+.stable table tfoot tr td {
+	width: 80%;
+}
+
+.stable table td, .stable table th {
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 5px;
+	line-height: 1.8em;
+	font-size: 0.8em;
+	vertical-align: top;
+	_width: 20%;
+}
+
+.stable table tr.odd th, .stable table tr.odd td {
+	background: #efefef;
+}

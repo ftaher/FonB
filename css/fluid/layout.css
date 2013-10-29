@@ -1,0 +1,50 @@
+
+/* boxes
+----------------------------------------------- */
+.box {
+	background:#ddd;
+	margin-bottom:20px;
+	padding:3px 3px 3px 3px;
+    display:inline-block;
+}
+.box h2 {
+	font-size:1em;
+	font-weight:normal;
+	text-transform:uppercase;
+	color:#fff;
+	background:#333;
+	margin:-3px -3px 0 -3px;
+	padding:6px 12px;
+}
+.box h2 a,
+.box h2 a.visible {
+	color:#fff;
+	display:block;
+	padding:6px 12px;
+	margin:-6px -12px;
+	border:none;
+	text-decoration: none;
+	font-weight:bold;
+}
+.grid_4 .box h2 a {
+	background-position: 97% 50%;
+}
+.grid_5 .box h2 a {
+	background-position: 98% 50%;
+}
+.grid_12 .box h2 a {
+	background-position: 99% 50%;
+}
+
+
+.box h2 a.hidden,
+.box h2 a.hidden:hover {
+	background-image: url("../../images/switch_plus.gif");
+}
+.box h2 a:hover {
+	background-color:#111;
+}
+.block {
+	padding-top:10px;
+}
+

@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>FonB Contacts</title>
+	</head>
+	<body>
+		{{^Contacts}}
+			<p>No Contacts Found</p>
+		{{/Contacts}}
+		<table>
+			<tbody>
+				{{#Contacts}}
+					<tr>
+						<td><a href="http://{{Host}}/xml/en/Polycom/Big_Screen/phonebook_number_lookup.html?Num={{PhoneNumber}}"><img src="img/ch_{{Source}}.bmp"/>{{FirstName}} {{#LastName}}{{LastName}}{{/LastName}}</a></td>
+						<td><a href="tel://{{PhoneNumber}}">{{PhoneNumber}}</a></td>
+					</tr>
+				{{/Contacts}}
+			</tbody>
+		</table>
+	</body>
+</html>

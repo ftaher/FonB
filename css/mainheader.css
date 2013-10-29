@@ -1,0 +1,129 @@
+.quickdial-text{
+	line-height: 22px;
+	text-align: center;
+	width:135px;
+}
+.quickdial-text a{
+	color: #fff;
+}
+#quickdialbox.noflash .flash a {
+	cursor:default;
+	color:#ccc;
+}
+#quickdialbox.noflash .flash a:hover {
+	text-decoration: none;
+	color:#ccc;
+}
+#quickdialbox.nomobile .mobile a{
+	cursor:default;
+	color:#ccc;
+}
+#quickdialbox.nomobile .mobile a:hover {
+	text-decoration: none;
+	color:#ccc;
+}
+
+#quickdialbox.nophone .phone a {
+	cursor:default;
+	color:#ccc;
+}
+#quickdialbox.nophone .phone a:hover {
+	text-decoration: none;
+	color:#ccc;
+}
+#quickdialbox .transfer{
+	display: none;
+}
+
+#quickdialbox.transfer .transfer{
+display:block;
+}
+#quickdialbox .conference{
+	display: none;
+}
+
+#quickdialbox.conference .conference{
+display:block;
+}
+#quickdialbox.conference .conference.active, #quickdialbox.transfer .transfer.active, #quickdialbox .phone.active, #quickdialbox .flash.active, #quickdialbox .mobile.active{
+	color: #CCC;/*green*/
+}
+#quickdial-dialpad{
+	color: #fff;
+}
+#quickdialbox a:hover, #quickdial-dialpad:hover{
+	color: #CCC;/*green*/
+	text-decoration: none;
+}
+br { clear: both;}
+
+#settingsmenu {
+float: right;
+padding: 10px 20px 10px 20px;
+}
+
+#settingsmenu a {
+cursor: pointer;
+text-decoration: none;
+color: black;
+font-family: tahoma, arial, serif;
+}
+#settingsmenu a:active { 
+text-decoration: none;
+color: black;
+cursor: pointer;
+font-family: tahoma, arial, serif;
+}
+#settingsmenu a:visited {
+text-decoration: none;
+cursor: pointer;
+color: black;
+font-family: tahoma, arial, serif;
+}
+#settingsmenu a:link {
+text-decoration: none;
+cursor: pointer;
+color: black;
+font-family: tahoma, arial, serif;
+}
+
+
+strong {
+font-weight: bolder;
+}
+
+.remarks-up {
+height: 20px;
+left: 0;
+position: absolute;
+top: 0;
+visibility: hidden;
+width: 1035px;
+z-index: 5;
+}
+
+.remarks-down {
+height: 20px;
+left: 0;
+position: absolute;
+bottom: 0;
+visibility: hidden;
+width: 1035px;
+z-index: 5;
+}
+
+
+.notes {
+font-size: 80%;
+font-weight: bolder;
+visibility: visible;
+background-color: #FFF1A8;
+color: #000000;
+padding: 3px 3px 0;
+text-align: center;
+}
+
+.web-icon {background-image:url(../images/web-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+.phone-icon {background-image:url(../images/phone-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+.mobile-icon {background-image:url(../images/mobile-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+.transfer-icon {background-image:url(../images/transfer-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}

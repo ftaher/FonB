@@ -1,0 +1,23 @@
+<div id="contact-area">
+<div style='margin:5px; float: right;'>
+<img src="images/telephone_128.png" width=128 height=128 />
+</div>
+<div style='margin:15px; '>
+<label for='regcode' id='regcodelabel'>Registration Code:</label>
+<input type='text' name='regcode' id='regcode' tabindex='1' value='' onKeyPress="if(event.keyCode==13) { sendreg()}">
+<br/>
+<br/>
+<label for='regname' id='regnamelabel'>Registration Name:</label>
+<input type='text' name='regname' id='regname' tabindex='2' value='' onKeyPress="if(event.keyCode==13) { sendreg()}">
+</div>
+<div id='regstatus' style='height:3em; width:250px; color:#f00;'>
+</div>
+<br/>
+<div style='margin: auto; text-align: center; width:90%; clear:both; overflow: auto;'>
+<input type='submit' class='submit-button-half' tabindex='3' id='sendregb' value='Submit' onclick='sendreg()'>
+<div style='width: 30px; float: left;'>&nbsp;</div>
+<input type='submit' class='submit-button-half' tabindex='3' value='Exit' onclick='Modalbox.hide()'>
+&nbsp;
+</div>
+</center>
+</div>
