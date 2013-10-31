@@ -79,15 +79,20 @@ function SettingsPostData() {
 	form_data['highrise_sitename'] = $("#highrise_sitename").val();
 	form_data['highrise_token'] = $("#highrise_token").val();
 	form_data['save_settings'] = "save";
+	var old_language = Settings.general_language;
 	$.post("php/settings.php", form_data , function(response) {
 		Settings = response;
 		ourmobile = Settings.general_mobile_phone;
 		$(".tab-pane.active").append('<div id="settings-message" class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Settings saved successfully.</div>');
 		setHighriseSyncStatus();
-		window.setTimeout(function(){
-			$("#settings-message").alert('close');
-		},5000);
-
+		if(Settings.general_language !== old_language){
+			window.location.reload();
+		}
+		else{
+			window.setTimeout(function(){
+				$("#settings-message").alert('close');
+			},5000);
+		}
 	},"json");
 	return false;
 }

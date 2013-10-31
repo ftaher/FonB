@@ -51,9 +51,8 @@
 						<span class="label">{{this}}</span>
 						{{/each}}
 					</td>
-				</tr>
-				<tr class="CONTACT_detail hide" id="CONTACT_edit_{{Id}}">
-					<td colspan="6" class="CONTACT_edit_wrapper">
+					<td>
+						<span class="dial" style="margin-left:20px;"><a href="javascript:;" onclick="Quickdial('WebPhone', '{{PhoneNumber}}', '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', '{{PhoneNumber}}' , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', '{{PhoneNumber}}'  , '');"><i class="icon mobile-icon"></i></a></span>
 					</td>
 				</tr>
 			<!-- BEGIN: END # {{Id}} -->
