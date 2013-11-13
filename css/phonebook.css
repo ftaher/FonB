@@ -542,3 +542,8 @@ padding: 0 2px 0 4px;
 	margin-left: 4px;
 	display: none;
 }
+.table .CONTACT_row td{
+	white-space:nowrap;
+	overflow: hidden;
+	padding-left: 5px;
+}

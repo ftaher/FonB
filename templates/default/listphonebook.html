@@ -27,31 +27,31 @@
 // ###############################################################################
 -->
 <form id="listphonebook-form" action="javascript:;" method="get">
-	<table class="table">
+	<table class="table" style="table-layout:fixed;">
 		<tbody>
 			{{#if Contacts}}
 			{{#each Contacts}}
 			<!-- BEGIN: Contact # {{Id}} -->
 				<tr class="CONTACT_row" data-index="{{@index}}">
-					<td>
+					<td style="width:3%;">
 						<input class="contact_check {{Source}}" value="{{Id}}" name="contacts[]" aria-labelledby="" type="checkbox">
 					</td>
-					<td>
+					<td style="width:4%;">
 						<img class="phonetype" src="images/ch_{{Source}}.png"/>
 					</td>
-					<td>
+					<td style="width:26%;overflow:hidden;">
 						<span class="contactName"><a class="edit-contact {{Source}}" href="javascript:;"  data-index="{{@index}}">{{#if ../last_name}}{{#if LastName}}{{LastName}}{{#if FirstName}}, {{/if}}{{/if}}{{FirstName}}{{else}}{{FirstName}} {{LastName}}{{/if}}</a><span style="font-weight:normal;font-size:10px;">&nbsp;{{Label}}</span></span>
 					</td>
-					<td class="contactNumber">{{PhoneNumber}}</td>
-					<td>
+					<td style="width:26%;" class="contactNumber">{{PhoneNumber}}</td>
+					<td style="width:15%;">
 						<span>{{Company}}</span>
 					</td>
-					<td>
+					<td style="width:21%;">
 						{{#each Groups}}
 						<span class="label">{{this}}</span>
 						{{/each}}
 					</td>
-					<td>
+					<td style="width:15%;text-align:right;">
 						<span class="dial" style="margin-left:20px;"><a href="javascript:;" onclick="Quickdial('WebPhone', '{{PhoneNumber}}', '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', '{{PhoneNumber}}' , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', '{{PhoneNumber}}'  , '');"><i class="icon mobile-icon"></i></a></span>
 					</td>
 				</tr>
