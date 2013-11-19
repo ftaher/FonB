@@ -32,7 +32,61 @@
 /**
  * @namespace common
  */
-$("document").ready(function() {
+
+fonb_main = {
+
+	init : function(){
+		/**
+		 * Responsive select box navigation
+		 */
+		// Create the dropdown base
+		  $("<select />").attr("id", "navSelectBox").appendTo(".boxWide:eq(0)");
+
+		  // Create default option "Go to..."
+		  $("<option />", {
+		     "selected": "selected",
+		     "value"   : "",
+		     "text"    : "Go to..."
+		  }).appendTo("#navSelectBox");
+
+		  // Populate dropdown with menu items
+		  $(".nav-text a[href^=#]").each(function() {
+		   var el = $(this);
+		   $("<option />", {
+		       "value"   : el.attr("onclick"),
+		       "text"    : el.text()
+		   }).appendTo("#navSelectBox");
+		  });
+		  $("#navSelectBox").on("change",function() {
+		    eval($(this).find("option:selected").val());
+		  });
+		/**
+		 * @see {@link ../header.html} for ourcontext and ourmobile definitions
+		 */
+		if ( ourcontext !== "" ){
+			jQuery("#activecalls").removeClass("nophone");
+			jQuery('#quickdialbox').removeClass("nophone");
+		}
+		if ( ourmobile !== "" ){
+			jQuery("#activecalls").removeClass("nomobile");
+			jQuery('#quickdialbox').removeClass("nomobile");
+		}
+		/**
+		 * triggered on successful flash phone setup
+		 * @event flashphoneready
+		 * @memberOf common
+		 */
+		jQuery("body").bind("flashphoneready", function() {
+			console.log("Event triggered: flashphoneready");
+			jQuery("#activecalls").removeClass("noflash");
+			if ( jQuery("#quickdialbox").hasClass("noflash") ){
+				$('.top-right').notify({
+					message: "<strong>" + I18n.t("Your Flashphone is now Ready") +"</strong><br/>" + I18n.t("You are now able to make & receive calls from your web browser. Though you are strongly adviced to always test your mic before dialing or answering calls. Go to your <strong>Settings</strong> tab & configure your <span style='color:fb8a31;''>Flash Mic Settings</span>")
+				}).show();
+			}
+			jQuery("#quickdialbox").removeClass("noflash");
+		});
+	},
 	/**
 	 * helps navigation according to hash tag in url
 	 * @name navigation
@@ -41,110 +95,66 @@ $("document").ready(function() {
 	 * @param {string} settings if found in url after hash, shows settings page
 	 * @author haisum
 	 * @memberOf common#
-	 */
-	if (location.href.indexOf("#") != -1) {
-		var hash = location.href.substr(location.href.indexOf("#")+1);
-		switch(hash){
-			case "contacts":
-				show_phonebook();
-				break;
-			case "callhistory":
-				show_callhistory();
-				break;
-			case "settings":
-				show_settings();
-				break;
+	 */	
+	fetchHashPage : function(){
+		if (location.href.indexOf("#") != -1) {
+			var hash = location.href.substr(location.href.indexOf("#")+1);
+			switch(hash){
+				case "contacts":
+					show_phonebook();
+					break;
+				case "callhistory":
+					show_callhistory();
+					break;
+				case "settings":
+					show_settings();
+					break;
+			}
 		}
-	}
-
+	},
 	/**
-	 * Responsive select box navigation
+	 * 
 	 */
-	// Create the dropdown base
-	  $("<select />").attr("id", "navSelectBox").appendTo(".boxWide:eq(0)");
-
-	  // Create default option "Go to..."
-	  $("<option />", {
-	     "selected": "selected",
-	     "value"   : "",
-	     "text"    : "Go to..."
-	  }).appendTo("#navSelectBox");
-
-	  // Populate dropdown with menu items
-	  $(".nav-text a[href^=#]").each(function() {
-	   var el = $(this);
-	   $("<option />", {
-	       "value"   : el.attr("onclick"),
-	       "text"    : el.text()
-	   }).appendTo("#navSelectBox");
-	  });
-	  $("#navSelectBox").on("change",function() {
-	    eval($(this).find("option:selected").val());
-	  });
-	/**
-	 * Quick dial and other auto completes
-	 */
-	setupContactsAutoComplete("#quickdial");
-	$("#quickdial").autocomplete("option", "select", function(e, ui){updateQuickDialMeta(ui.item.value);});
-	$("#quickdial").keyup(function(e){
-			updateQuickDialMeta($(this).val());
-	}).change(function(){
-			updateQuickDialMeta($(this).val());
-	});
-	$("#quickdial-info").on("click", "a", function(){
-		$("#quickdial").autocomplete("search", $(this).attr("rel")).focus();
-	});
-	$("#quickdial").keypad({keypadOnly : false, useThemeRoller : true, showOn : false,
-		layout : [
-			"123",
-			"456",
-			"789",
-			"*0#"
-		],
-		beforeShow : function(){
-			$(".keypad-special").addClass("btn btn-mini").removeClass("ui-corner-all ui-state-default ui-state-highlight");
-	}});
-	function showKeypad(){
-		$("#quickdial").keypad("show");
-		$(".keypad-popup").css({
-			left : $("#quickdial-dialpad").offset().left,
-			top : $("#quickdial-dialpad").offset().top + 20
+	setupQuickDial : function(){
+		/**
+		 * Quick dial and other auto completes
+		 */
+		setupContactsAutoComplete("#quickdial");
+		$("#quickdial").autocomplete("option", "select", function(e, ui){updateQuickDialMeta(ui.item.value);});
+		$("#quickdial").keyup(function(e){
+				updateQuickDialMeta($(this).val());
+		}).change(function(){
+				updateQuickDialMeta($(this).val());
 		});
-		$(this).off("click").on("click", function(){
-			$("#quickdial").keypad("hide");
-			$(this).off("click").on("click", showKeypad);
+		$("#quickdial-info").on("click", "a", function(){
+			$("#quickdial").autocomplete("search", $(this).attr("rel")).focus();
 		});
-	}
-	$("#quickdial-dialpad").click(showKeypad);
-	/**
-	 * @see {@link ../header.html} for ourcontext and ourmobile definitions
-	 */
-	if ( ourcontext !== "" ){
-		jQuery("#activecalls").removeClass("nophone");
-		jQuery('#quickdialbox').removeClass("nophone");
-	}
-	if ( ourmobile !== "" ){
-		jQuery("#activecalls").removeClass("nomobile");
-		jQuery('#quickdialbox').removeClass("nomobile");
-	}
-	/**
-	 * triggered on successful flash phone setup
-	 * @event flashphoneready
-	 * @memberOf common
-	 */
-	jQuery("body").bind("flashphoneready", function() {
-		console.log("Event triggered: flashphoneready");
-		jQuery("#activecalls").removeClass("noflash");
-		if ( jQuery("#quickdialbox").hasClass("noflash") ){
-			$('.top-right').notify({
-				message: "<strong>" + I18n.t("Your Flashphone is now Ready") +"</strong><br/>" + I18n.t("You are now able to make & receive calls from your web browser. Though you are strongly adviced to always test your mic before dialing or answering calls. Go to your <strong>Settings</strong> tab & configure your <span style='color:fb8a31;''>Flash Mic Settings</span>")
-			}).show();
+	
+	},
+}
+/**
+ * Load base template
+ */
+$(function(){
+	$.ajax({
+		url : "templates/" + I18n.template + "/base.html",
+		success : function(data){
+			var baseTemplate = Handlebars.compile(data);
+			$("body").html(baseTemplate({
+				"Extension" : ourextension,
+				"Name" : ourname
+			}));
+			fonb_main.init();
+			fonb_callhistory.init();
+			fonb_phonebook.init();
+			fonb_settings.init();
+			fonb_main.fetchHashPage();
+			fonb_main.setupQuickDial();
+
 		}
-		jQuery("#quickdialbox").removeClass("noflash");
 	});
-	//checkDemo();
+});
 
-}); //end of document ready
 /**
  * hides other sections and makes switch board feature visible
  * We have hid switchboard for now, will release it with future versions

@@ -469,20 +469,3 @@ Handlebars.registerHelper('t',
     return (I18n.t(str));
   }
 );
-
-/**
- * Load base template
- */
-$(function(){
-	$.ajax({
-		url : "templates/" + I18n.template + "/base.html",
-		async: false,
-		success : function(data){
-			var baseTemplate = Handlebars.compile(data);
-			$("body").html(baseTemplate({
-				"Extension" : ourextension,
-				"Name" : ourname
-			}));
-		}
-	});
-});

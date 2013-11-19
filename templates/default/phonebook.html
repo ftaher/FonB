@@ -65,10 +65,13 @@
 							<ul class="phonebookpagenumber">
 							</ul>
 						</div>
-						<div class="select-links">&nbsp;{{t "Select"}}&nbsp;<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.mycontacts").prop("checked", true)'>{{t "All"}}</a> 
-							&nbsp;{{t "Select"}}&nbsp;<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.mycontacts").prop("checked", false)'>{{t "None"}}</a>
+						<div class="select-links">
+							{{t "Select"}}
+							<a href="javascript:;" class="all">{{t "All"}}</a> 
+							{{t "Select"}}
+							<a href="javascript:;" class="none">{{t "None"}}</a>
 						</div>	
-						<div class="action-button">						
+						<div class="action-button">
 							<div class="btn-group">
 							  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">{{t "Action"}}<span class="caret"></span>
 							  </a>
@@ -145,9 +148,11 @@
 						</div>
 					</div>
 					<div class="span4" style="padding-right:5px;">
-						<div class="select-links">{{t "Select"}}<a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.personal").prop("checked", true)'>{{t "All"}}</a> 
-							&nbsp;{{t "Select"}} <a href="javascript:;" style="margin-right:10px;" onclick='$(".contact_check.internal, .contact_check.personal").prop("checked", false)'>{{t "None"}}</a>
-							&nbsp;
+						<div class="select-links">
+							{{t "Select"}}
+							<a class="all" href="javascript:;">{{t "All"}}</a> 
+							{{t "Select"}}
+							<a class="none" href="javascript:;">{{t "None"}}</a>
 						</div>
 						<div class="action-button">						
 							<div class="btn-group dropup">

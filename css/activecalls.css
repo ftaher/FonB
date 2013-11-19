@@ -124,7 +124,7 @@ cursor: default;
  	color: #005580;
  	cursor: pointer;
  }
-.activecall.mobile .mobile a,.activecall.flash .flash a,.activecall.phone .phone a,.ringing .callswitch .drop a,.ringing .callswitch .transfer a,,.ringing .callswitch .conference a{
+.activecall.mobile .mobile a,.activecall.flash .flash a,.activecall.phone .phone a,.ringing .callswitch .drop a,.ringing .callswitch .transfer a,.ringing .callswitch .conference a{
  	color: #09F;
  	cursor: pointer;
  }

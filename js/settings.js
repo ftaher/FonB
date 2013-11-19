@@ -27,18 +27,18 @@
 /**
  * @file all js for settings file
  */
-jQuery(document).ready(function(){
+fonb_settings = {
+	init : function(){
+		/* Build the Settings Page */
+		SettingsGetSettingsPage();
+		/* check for gContacts Token */
 
-	/* Build the Settings Page */
-	SettingsGetSettingsPage();
-	/* check for gContacts Token */
-
-	$("#settingspage").on('keydown','.numberOnly', function(e) {
-	    if ((e.which > 47 && e.which < 58) || (e.which > 95 && e.which < 106) || $.inArray(e.which, new Array(46,8,9,187,106,107))) return true;
-	    else return false;
-  	});
-
-}); // end document ready
+		$("#settingspage").on('keydown','.numberOnly', function(e) {
+		    if ((e.which > 47 && e.which < 58) || (e.which > 95 && e.which < 106) || $.inArray(e.which, new Array(46,8,9,187,106,107))) return true;
+		    else return false;
+	  	});
+	}
+}
 
 
 function SettingsGetSettingsPage(){

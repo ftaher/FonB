@@ -111,7 +111,7 @@ color:#656565;
 }
 
 #phonebookheader ul li {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -123,7 +123,7 @@ cursor: pointer;
 }
 
 #phonebookheader ul li.currentli {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -140,7 +140,7 @@ top:36px;
 left:22px;
 width:100px;
 height:20px;
-text-align:middle;
+vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
@@ -151,7 +151,7 @@ top:36px;
 left:600px;
 width:100px;
 height:20px;
-text-align:middle;
+vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
@@ -220,7 +220,7 @@ color:#656565;
 }
 
 #phonebookfooter ul li {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -232,7 +232,7 @@ cursor: pointer;
 }
 
 #phonebookfooter ul li.currentli {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -249,7 +249,7 @@ top:11px;
 left:22px;
 width:60px;
 height:20px;
-text-align:middle;
+vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
@@ -279,7 +279,7 @@ margin: 0px 5px 0px 0px;
 
 span.label a.search {
 font-size: 9px;
-font-weight: normal:
+font-weight: normal;
 white-space: nowrap;
 padding: 0px 3px;
 vertical-align: middle;
@@ -526,7 +526,6 @@ padding: 0 2px 0 4px;
 	margin: 0 auto;
 }
 #noContactsModal .modal-body{
-	max-height: auto;
 	height: 510px;
 }
 .contacts-progress{
@@ -546,4 +545,8 @@ padding: 0 2px 0 4px;
 	white-space:nowrap;
 	overflow: hidden;
 	padding-left: 5px;
+}
+.select-links a{
+	margin-right: 10px;
+	display: inline-block;
 }

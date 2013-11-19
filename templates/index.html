@@ -36,7 +36,7 @@
     <!-- Adding All CSS Files here -->
     <link rel="stylesheet" href="css/bonevojage.min.css" />
     <link href="css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
-    <link href="css/jquery.keypad.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="css/jquery.keypad.css" rel="stylesheet" type="text/css" /> -->
     <!-- FoneB css -->
     <link href="css/settings.css" rel="stylesheet" type="text/css" />
     <link href="css/responsive.css" rel="stylesheet" type="text/css" />
@@ -70,17 +70,15 @@
     <!-- using in import csv to submit file using ajax without page reload -->
     <script type="text/javascript" src="js/jquery.form.js"></script>
     <script type="text/javascript" src="js/ajaxfileupload.js"></script>
-    <!-- dialpad for quickdial -->
-    <script type='text/javascript' src='js/jquery.keypad.min.js'></script>
     <!--feature tour -->
     <script type="text/javascript" src="js/jquery.bonevojage.min.js"></script>
     <!-- Load the WebPhone -->
     <script type="text/javascript" src="js/jquery.phono.js"></script>
-    <!-- <script type="text/javascript" src="http://s.phono.com/releases/1.1/jquery.phono.min.js"></script> -->
     <!-- i18n module -->
     <script type="text/javascript" src="js/i18n.js"></script>
+    <!-- dialpad for quickdial -->
+    <!--<script type='text/javascript' src='js/jquery.keypad.js'></script>-->
     <!-- Custom javascript  -->
-    <!-- It is highly discouraged that you put js code in this file unless it needs something from server by Mustache rendered template -->
     <script type="text/javascript">
     /**
      * @var {string} ourcontext
@@ -124,8 +122,9 @@
     </style>
     {{/HighriseLicense}}
 
-    <!-- MUST BE FIRST CUSTOM JS FILE! 
-    	Functions and code that is common to all our files -->
+    <!-- It is highly discouraged that you put js code in this file unless it needs something from server by Mustache rendered template
+    MUST BE FIRST CUSTOM JS FILE! 
+    Functions and code that is common to all our files -->
     <script type="text/javascript" src="js/global.js"></script> 
     <!-- Get JSON for Global variables -->
     <script type="text/javascript" src="js/templates.js"></script>

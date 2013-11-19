@@ -28,29 +28,38 @@
  * @file all code regarding phonebook 
  */
 $("document").ready(function() {
-	//compile with translation
-	$("#phonebookpage, #importCSVModal").remove();
-	$.ajax({
-		url : "templates/" + I18n.template + "/phonebook.html",
-		async : false,
-		success : function(data){
-			var phonebookTemplate = Handlebars.compile(data);
-			$("#pagebox").append(phonebookTemplate());
-			$.ajax({
-				url : "templates/" + I18n.template + "/importphonebook.html",
-				success : function(data){
-					var importPhonebookTemplate = Handlebars.compile(data);
-					$("#importCSVModal .modal-body").html(importPhonebookTemplate());					
-				}
-			})
-		}
-	});
-
-	$("#phonebooksearch").on("keyup", function(){
-		PhonebookShowSource(contactssource,1,false);
-	});
-	$("#phonebookpage").on("click", ".CONTACT_row .edit-contact", contactEdit);
+	
 });
+fonb_phonebook = {
+	init : function(){
+		$("#phonebookpage, #importCSVModal").remove();
+		$.ajax({
+			url : "templates/" + I18n.template + "/phonebook.html",
+			async : false,
+			success : function(data){
+				var phonebookTemplate = Handlebars.compile(data);
+				$("#pagebox").append(phonebookTemplate());
+				$.ajax({
+					url : "templates/" + I18n.template + "/importphonebook.html",
+					success : function(data){
+						var importPhonebookTemplate = Handlebars.compile(data);
+						$("#importCSVModal .modal-body").html(importPhonebookTemplate());					
+					}
+				})
+			}
+		});
+		$("body").on("click", ".select-links .all", function(){
+			$(".contact_check.internal, .contact_check.mycontacts").prop("checked", true);
+		});
+		$("body").on("click", ".select-links .none", function(){
+			$(".contact_check.internal, .contact_check.mycontacts").prop("checked", false);
+		});
+		$("#phonebooksearch").on("keyup", function(){
+			PhonebookShowSource(contactssource,1,false);
+		});
+		$("#phonebookpage").on("click", ".CONTACT_row .edit-contact", contactEdit);
+	}
+}
 
 function PhonebookRefreshSource() {
 	//$.get('debug/json/listphonebooksource.json', function(data) 

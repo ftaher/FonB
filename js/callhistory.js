@@ -30,97 +30,99 @@
 /**
  * @namespace callhistory
  */
-$("document").ready(function() {
-	//compile with translation
-	$("#callhistorypage").remove();
-	$.ajax({
-		url : "templates/" + I18n.template + "/callhistory.html",
-		async : false,
-		success : function(data){
-			var chTemplate = Handlebars.compile(data);
-			$("#pagebox").append(chTemplate());
-		}
-	});
-	$.ajax({
-		url : "php/listdepartments.php",
-		dataType: 'json',
-		async : false,
-		success: function(data) 
-		{
-			console.log(data);
-			var html = CallHistoryShowUserTemplate(data);
-			$('#ShowByUser select').html(html);
-			$("#ShowByUser").fancyselect({showValue : true, filter: true}).find('.btn').addClass("btn-primary").prepend("<i class='icon icon-user icon-white'></i>&nbsp;").width(140);
-			$("#ShowByDirection,#ShowByDate").fancyselect().find(".dropdown-toggle").on("click",function(){
-				$(this).parent().toggleClass('open');
-				$("#search-dropdown").find(".open").not($(this).parent()).removeClass("open");
-			});
-			$("#search-dropdown").on("click", function(e){
-				if(!($(e.target).hasClass("dropdown-toggle"))){
-					$("#search-dropdown").find(".open").removeClass("open");
-				}
-			})
-		},
-		error : function(jqXHR, textStatus, thrownError){
-			if(thrownError === "Forbidden"){
-				window.location.href = "/logout";
+
+fonb_callhistory = {
+	init : function(){
+		$("#callhistorypage").remove();
+		$.ajax({
+			url : "templates/" + I18n.template + "/callhistory.html",
+			async : false,
+			success : function(data){
+				var chTemplate = Handlebars.compile(data);
+				$("#pagebox").append(chTemplate());
 			}
-		}
-	});
-	setupContactsAutoComplete("#callhistorysearch");
-	$( "#slider-range" ).slider({
-		min: 0,
-		max: 180,
-		value: $("#morethan").val(),
-		step: 1,
-		slide: function( event, ui ) {
-			$("#amount").text( ui.value + " " + I18n.t("minutes") );
-			$("#morethan").val( ui.value );
-		}
-	});
+		});
+		$.ajax({
+			url : "php/listdepartments.php",
+			dataType: 'json',
+			async : false,
+			success: function(data) 
+			{
+				console.log(data);
+				var html = CallHistoryShowUserTemplate(data);
+				$('#ShowByUser select').html(html);
+				$("#ShowByUser").fancyselect({showValue : true, filter: true}).find('.btn').addClass("btn-primary").prepend("<i class='icon icon-user icon-white'></i>&nbsp;").width(140);
+				$("#ShowByDirection,#ShowByDate").fancyselect().find(".dropdown-toggle").on("click",function(){
+					$(this).parent().toggleClass('open');
+					$("#search-dropdown").find(".open").not($(this).parent()).removeClass("open");
+				});
+				$("#search-dropdown").on("click", function(e){
+					if(!($(e.target).hasClass("dropdown-toggle"))){
+						$("#search-dropdown").find(".open").removeClass("open");
+					}
+				})
+			},
+			error : function(jqXHR, textStatus, thrownError){
+				if(thrownError === "Forbidden"){
+					window.location.href = "/logout";
+				}
+			}
+		});
+		setupContactsAutoComplete("#callhistorysearch");
+		$( "#slider-range" ).slider({
+			min: 0,
+			max: 180,
+			value: $("#morethan").val(),
+			step: 1,
+			slide: function( event, ui ) {
+				$("#amount").text( ui.value + " " + I18n.t("minutes") );
+				$("#morethan").val( ui.value );
+			}
+		});
 
-	$( "#amount" ).text( $("#slider-range").slider("value") + " " + I18n.t("minutes") );
-	$( "#morethan" ).val( $("#slider-range").slider("value") );
+		$( "#amount" ).text( $("#slider-range").slider("value") + " " + I18n.t("minutes") );
+		$( "#morethan" ).val( $("#slider-range").slider("value") );
 
-	$( "#datepicker" ).datepicker({onClose  : function(date, obj){
-		$("#search-dropdown").parent().addClass("open");
-	}});
-	/*Stop datepicker from closing dropdown menu*/
-  	$("#ui-datepicker-div").click( function(event) {
-		event.stopPropagation();
-	});
+		$( "#datepicker" ).datepicker({onClose  : function(date, obj){
+			$("#search-dropdown").parent().addClass("open");
+		}});
+		/*Stop datepicker from closing dropdown menu*/
+	  	$("#ui-datepicker-div").click( function(event) {
+			event.stopPropagation();
+		});
 
-	$( "#search-dropdown").click(function(e){
-		/**
-		 * this trick is required because clicking on span element inside a, stopped event propagation
-		 * and select box couldn't be opened. To fix this bug and enable click on span we add a trick class
-		 * and toggle it with clicks.
-		 * this is dirty, i know... but it's important 
-		 */
-		$me = $(e.target);
-		$parent = $me.parent();
-		$grandpa = $parent.parent();
-  		if($parent.is(".btn.dropdown-toggle") || $me.is(".btn.dropdown-toggle")){
-  			if($parent.hasClass("trick")){
-  				$parent.removeClass("trick open");
-  			}
-  			else if($grandpa.hasClass("trick")){
-  				$grandpa.removeClass("trick open");
-  			}
-  			else if(!$me.is(".btn.dropdown-toggle") && !$grandpa.is(".open,.trick")){
-  				$grandpa.addClass("open trick");
-  			}
-  		}
-  		/**
-  		 * Don't close dropdown if any click happens inside it
-  		 */
-		e.stopPropagation();
-	});
+		$( "#search-dropdown").click(function(e){
+			/**
+			 * this trick is required because clicking on span element inside a, stopped event propagation
+			 * and select box couldn't be opened. To fix this bug and enable click on span we add a trick class
+			 * and toggle it with clicks.
+			 * this is dirty, i know... but it's important 
+			 */
+			$me = $(e.target);
+			$parent = $me.parent();
+			$grandpa = $parent.parent();
+	  		if($parent.is(".btn.dropdown-toggle") || $me.is(".btn.dropdown-toggle")){
+	  			if($parent.hasClass("trick")){
+	  				$parent.removeClass("trick open");
+	  			}
+	  			else if($grandpa.hasClass("trick")){
+	  				$grandpa.removeClass("trick open");
+	  			}
+	  			else if(!$me.is(".btn.dropdown-toggle") && !$grandpa.is(".open,.trick")){
+	  				$grandpa.addClass("open trick");
+	  			}
+	  		}
+	  		/**
+	  		 * Don't close dropdown if any click happens inside it
+	  		 */
+			e.stopPropagation();
+		});
 
-	/* finaly load the call History page */
-	search_request( 1 );
+		/* finaly load the call History page */
+		search_request( 1 );
 
-});
+	}
+}
 
 function search_request( ch_pagenumber ) {
 	// set the ch_pagenubmer to 1 as default value

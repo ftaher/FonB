@@ -109,7 +109,7 @@ color:#656565;
 }
 
 #callhistoryheader ul.ch_pagenumber li {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -123,7 +123,7 @@ cursor: pointer;
 	display:none;
 }
 #callhistoryheader ul.ch_pagenumber li.currentli {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -141,7 +141,7 @@ top:36px;
 left:22px;
 width:60px;
 height:20px;
-text-align:middle;
+vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
@@ -206,7 +206,7 @@ color:#656565;
 }
 
 #callhistoryfooter ul.ch_pagenumber li {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -218,7 +218,7 @@ cursor: pointer;
 }
 
 #callhistoryfooter ul.ch_pagenumber li.currentli {
-position:normal;
+position:static;
 display: inline;
 list-style-type: none;
 text-align:right;
@@ -236,7 +236,7 @@ top:11px;
 left:22px;
 width:60px;
 height:20px;
-text-align:middle;
+vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
