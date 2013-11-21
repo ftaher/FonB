@@ -208,3 +208,26 @@ h2 {font-size:20px !important;padding-left:15px;}
 video{
 	display: none;
 }
+.dialpad{
+	position: absolute;
+	width: 140px;
+	background-color: #fff;border: 1px solid #CCC;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-border-radius: 0px 0px 6px 6px;
+	-moz-border-radius: 0px 0px 6px 6px;
+	border-radius: 0px 0px 6px 6px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	padding: 5px;
+	left: 33%;
+	top: 20px;
+	z-index: 100;
+	display: none;
+}
+.dialpad .btn{
+	width: 17px;
+	height: 20px;
+}
+.dialpad .span4{
+	margin-top: 2.564102564102564%;
+}

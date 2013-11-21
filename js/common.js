@@ -131,6 +131,24 @@ fonb_main = {
 		});
 	
 	},
+	makeDialPad : function(){
+		$("#quickdial-dialpad").on("click", function(){
+			$(".dialpad").toggle("fast");
+		});
+		$(".dialpad .btn").on("click", function(){
+			for(var i=0;i<OurChannels.length;i++){
+				var action = {Action: "DTMF", Dial: $(this).text(), ReqID: OurChannels[i].ID};
+				action = JSON.stringify(action);
+				socket.send(action);
+				console.log("sent dtmf: " + action);
+			}
+		});
+		$("body").on("click", function(event){
+			if(!$(event.target).is(".dialpad") && !$(event.target).is("#quickdial-dialpad") && $(event.target).parents(".dialpad").length < 1){
+				$(".dialpad").hide("fast");
+			}
+		});
+	}
 }
 /**
  * Load base template
@@ -150,7 +168,7 @@ $(function(){
 			fonb_settings.init();
 			fonb_main.fetchHashPage();
 			fonb_main.setupQuickDial();
-
+			fonb_main.makeDialPad();
 		}
 	});
 });
