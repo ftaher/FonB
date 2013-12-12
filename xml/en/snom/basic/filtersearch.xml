@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<SnomIPPhoneMenu>
+	<Title>Help</Title>
+	<MenuItem>
+		<Name>(1) > Google Contacts</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/gcontacts.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>(2) > Highrise Contacts</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/internal.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>(3) > My Contacts</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/personal.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>(4) > Internal Contacts</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/crm.xml</URL>
+	</MenuItem>
+</SnomIPPhoneMenu>

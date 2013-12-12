@@ -7,34 +7,43 @@
 		{{^CallHistoryList}}
 			<p>No Call History Found</p>
 		{{/CallHistoryList}}
-		<table>
+		<table border="0">
 			<tbody>
 				{{#CallHistoryList}}
 					{{#CallerClid}}
-					<tr>
-						{{#Internal}}
-							<td>{{Internal}}</td> <td>{{Direction}}</td>
-						{{/Internal}}
-						{{^Internal}}
+                    {{#Internal}}
+                    <tr>
+                    <td><a href="tel://{{Num}}">{{Internal}}</a></td>
+                                        </tr>{{/Internal}}
+                    {{^Internal}}
 							{{#MyContacts}}
-								<td>{{MyContacts}}</td> <td>{{Direction}}</td>
-							{{/MyContacts}}
-							{{^MyContacts}}
+                    <tr>
+                    <td><a href="tel://{{Num}}">{{MyContacts}}</a></td>
+							
+                    </tr>{{/MyContacts}}
+                    {{^MyContacts}}
 								{{#GContacts}}
-									<td>{{GContacts}}</td> <td>{{Direction}}</td>
-								{{/GContacts}}
+                    <tr>
+                    <td><a href="tel://{{Num}}">{{GContacts}}</a></td>
+                    </tr>
+                    {{/GContacts}}
 								{{^GContacts}}
-									{{#Highrise}}
-										<td>{{Highrise}}</td> <td>{{Direction}}</td>
-									{{/Highrise}}
+                                {{#Highrise}}
+                    <tr>
+                    <td><a href="tel://{{Num}}">{{Highrise}}</a></td>
+                    </tr>
+					
+                    {{/Highrise}}
+                    {{^Highrise}}
+                    <tr>
+                    <td>{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
+                    </tr>
+                    {{/Highrise}}
 								{{/GContacts}}
 							{{/MyContacts}}
 						{{/Internal}}
-					</tr>
-					<tr>
-						<td colspan="2">{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
-					</tr>
 					{{/CallerClid}}
+                    
 				{{/CallHistoryList}}
 			</tbody>
 		</table>

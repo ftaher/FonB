@@ -7,34 +7,49 @@
 		{{^CallHistoryList}}
 			<p>No Call History Found</p>
 		{{/CallHistoryList}}
-		<table>
+		<table border="0">
 			<tbody>
 				{{#CallHistoryList}}
 					{{#CallerClid}}
-					<tr>
-						{{#Internal}}
-							<td><img src="img/{{Direction}}_Call.bmp"/>{{Internal}}</td>
-						{{/Internal}}
-						{{^Internal}}
+                    {{#Internal}}
+                    <tr>
+                    <td><a href="tel://{{Num}}"><img src="img/{{Direction}}_Call.jpg"  height="20" width="20"/>{{Internal}}</a></td>
+                    
+                    <td>{{DateSummary}}</td>
+                    </tr>{{/Internal}}
+                    {{^Internal}}
 							{{#MyContacts}}
-								<td><img src="img/{{Direction}}_Call.bmp"/>{{MyContacts}}</td>
-							{{/MyContacts}}
-							{{^MyContacts}}
+                    <tr>
+                    <td><a href="tel://{{Num}}"><img src="img/{{Direction}}_Call.jpg"  height="20" width="20"/>{{MyContacts}}</a></td>
+							
+                    <td>{{DateSummary}}</td>
+                    </tr>{{/MyContacts}}
+                    {{^MyContacts}}
 								{{#GContacts}}
-									<td><img src="img/{{Direction}}_Call.bmp"/>{{GContacts}}</td>
-								{{/GContacts}}
+                    <tr>
+                    <td><a href="tel://{{Num}}"><img src="img/{{Direction}}_Call.jpg"  height="20" width="20"/>{{GContacts}}</a></td>
+                    <td>{{DateSummary}}</td>
+                    </tr>
+                    {{/GContacts}}
 								{{^GContacts}}
-									{{#Highrise}}
-										<td><img src="img/{{Direction}}_Call.bmp"/>{{Highrise}}</td>
-									{{/Highrise}}
+                                {{#Highrise}}
+                    <tr>
+                    <td><a href="tel://{{Num}}"><img src="img/{{Direction}}_Call.jpg"  height="20" width="20"/>{{Highrise}}</a></td>
+                    <td>{{DateSummary}}</td>
+                    </tr>
+					
+                    {{/Highrise}}
+                    {{^Highrise}}
+                    <tr>
+                    <td>{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
+                    <td>{{DateSummary}}</td>
+                    </tr>
+                    {{/Highrise}}
 								{{/GContacts}}
 							{{/MyContacts}}
 						{{/Internal}}
-					</tr>
-					<tr>
-						<td>{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
-					</tr>
 					{{/CallerClid}}
+                    
 				{{/CallHistoryList}}
 			</tbody>
 		</table>
