@@ -87,7 +87,7 @@
 .SearchByDialedNumber {width:100%;float:none;}
 .PageTitle {width:160px;float:left;padding-top:8px;}
 .BlueButton {width:170px;float:left;padding-bottom:10px;} 
-.headerBg {background:url(../images/header-bg.gif) repeat-x;background-size:contain;}
+.headerBg {background-color:#2d396c;}
 .threeicons {width:66px !important;}
 .ACseprator {
 	color: #F90;
