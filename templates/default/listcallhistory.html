@@ -38,7 +38,7 @@
       {{#if CallerClid.GContacts}} <img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/> {{/if}}
       {{#if CallerClid.Highrise}} <img class="crm" style="display:none;" src="images/ch_highrise.png"/> {{/if}}
       {{#if CallerClid.iPhone}} <img class="crm" style="display:none;" src="images/ch_iPhone.png"/> {{/if}}
-      {{#if CallerClid.AsteriskPhonebook}} <img class="crm" style="display:none;" src="images/ch_asterisk.png"/> {{/if}}
+      {{#if CallerClid.AsteriskPhonebook}} <img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/> {{/if}}
       <span class="dst" style="display:none;">{{CallerClid.Num}}</span> 
       {{#if CallerClid.MyContacts}} 
       <span class="personal contact-name" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.MyContactsLastName}}{{CallerClid.MyContactsLastName}}, {{/if}}{{CallerClid.MyContactsFirstName}}{{else}}{{CallerClid.MyContacts}}{{/if}}</span>       
@@ -48,7 +48,7 @@
       {{#if CallerClid.Highrise}} 
       <span class="crm" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.HighriseLastName}}{{CallerClid.HighriseLastName}}, {{/if}}{{CallerClid.HighriseFirstName}}{{else}}{{CallerClid.Highrise}}{{/if}}</span> <span class="crm phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.HighriseType}}</span> {{/if}}
       {{#if CallerClid.AsteriskPhonebook}} 
-      <span class="crm" style="display:none;">{{CallerClid.AsteriskPhonebookName}}</span> <span class="asterisk phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.AsteriskPhonebookSpeedDial}}</span> {{/if}}
+      <span class="asterisk" style="display:none;">{{CallerClid.AsteriskPhonebookName}}</span> <span class="asterisk phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.AsteriskPhonebookSpeedDial}}</span> {{/if}}
       {{#if CallerClid.iPhone}} 
       <span class="crm" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.iPhoneLastName}}{{CallerClid.iPhoneLastName}}, {{/if}}{{CallerClid.iPhoneFirstName}}{{else}}{{CallerClid.iPhone}}{{/if}}</span> <span class="crm phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.iPhoneType}}</span> {{/if}}
       {{#if CallerClid.Internal}} 

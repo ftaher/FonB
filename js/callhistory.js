@@ -164,6 +164,7 @@ function search_request( ch_pagenumber ) {
 				var iphone = $(this).find('span.iphone').text();
 				if ( crm != "" ) $(this).find('img.crm').show();
 				if ( personal != "" ) $(this).find('img.personal').show();
+				if ( asterisk != "" ) $(this).find('img.asterisk').show();
 				if ( gcontacts != "" ) $(this).find('img.gcontacts').show();
 				if ( internal != "" ) $(this).find('img.internal').show();
 				if ( iphone != "" ) $(this).find('img.iphone').show();
