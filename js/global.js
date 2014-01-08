@@ -330,6 +330,16 @@ function setupContactsAutoComplete(selector){
 				}
 				imgHtml = '<img src="images/qd_iphone.png"> ' + row.ContactName + "<BR>" + printtypenum;
 				break;
+			case "asterisk":
+				var printtypenum ="";
+				if ( row.ContactTelephoneType == "" ){
+					printtypenum = "<strong>" + row.ContactTelephoneNumber + "</strong>";
+				}
+				else{
+					printtypenum = row.ContactTelephoneType + ": <strong>" + row.ContactTelephoneNumber + "</strong>";
+				}
+				imgHtml = '<img src="images/ch_asterisk.png"> ' + row.ContactName + "<BR>" + printtypenum;
+				break;
 			case "crm":
 			case "highrise":
 				var printtypenum = "";
@@ -394,6 +404,13 @@ function getNumberLookupData(obj){
 		}
 		contact.source = "iphone";
 	}
+	else if(typeof obj.AsteriskPhonebook !== "undefined"){
+		contact.name = obj.AsteriskPhonebook;
+		if(typeof obj.AsteriskPhonebookSpeedDial !== "undefined"){
+			contact.type = obj.AsteriskPhonebookSpeedDial;
+		}
+		contact.source = "asterisk";
+	}
 	else if(typeof obj.Internal !== "undefined"){
 		contact.name = obj.Internal;
 		contact.source = "internal";
@@ -430,6 +447,10 @@ function updateQuickDialMeta(number){
 				$imageElem.append('<a style="margin-right:5px;" data-source="iphone" href="javascript:;" rel="' + data.iPhone + '"><img src="images/ch_iphone.png" alt="gcontacts"/></a>');
 				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.iPhone + '">' + data.iPhone + ' <span style="font-size:8px;">'  + data.iPhoneType + '</span></a>');
 			}
+			if(typeof data.AsteriskPhonebook != "undefined"){
+				$imageElem.append('<a style="margin-right:5px;" data-source="asterisk" href="javascript:;" rel="' + data.AsteriskPhonebook + '"><img src="images/ch_asterisk.png" alt="asterisk"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.AsteriskPhonebook + '">' + data.AsteriskPhonebook + ' <span style="font-size:8px;">'  + data.AsteriskPhonebookSpeedDial + '</span></a>');
+			}
 			if(typeof data.Highrise != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="highrise" href="javascript:;" rel="' + data.Highrise + '"><img src="images/ch_highrise.png" alt="highrise"/></a>');
 				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink highrise" href="javascript:;" rel="' + data.Highrise + '">' + data.Highrise + ' <span style="font-size:8px;">'  + data.HighriseType + '</span></a>');
@@ -453,6 +474,16 @@ function updateQuickDialMeta(number){
 		}
 	});
 }
+/**
+ * needed for checking for asterisk contacts in contacts listing.
+ * @param  {string} source
+ */
+Handlebars.registerHelper('ifAsterisk', function(source, options) {
+  if(source === "asterisk") {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
 //get the settings
 $.ajax({
 	url : "php/settings.php",

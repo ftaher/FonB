@@ -34,6 +34,7 @@
 		{{#if Src.Internal}}<img class="internal" style="display:none;" src="images/ch_internal.png"/>{{/if}}
 		{{#if Src.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Src.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
+		{{#if Src.AsteriskPhonebook}}<img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/>{{/if}}
 		{{#if Src.Highrise}}
 			<img class="crm" style="display:none;" src="images/ch_highrise.png"/>
 			<script>getcrmnote( {{recordid}} );</script>
@@ -41,6 +42,10 @@
 		{{#if Src.MyContacts}}
 		<span class="personal contact-name" style="display:none;">{{Src.MyContacts}}</span>
 		<span class="personal phonetype" style="display:none;font-weight:normal;font-size:11px;">{{Src.MyContactsType}}</span>
+		{{/if}}
+		{{#if Src.AsteriskPhonebook}}
+		<span class="asterisk contact-name" style="display:none;margin-left:3px;margin-left:5px;">{{Src.AsteriskPhonebookName}}</span>
+		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Src.AsteriskPhonebookSpeedDial}}</span>
 		{{/if}}
 		{{#if Src.GContacts}}
 		<span class="gcontacts" style="display:none;">{{Src.GContacts}}</span>
@@ -75,6 +80,7 @@
 		{{#if Dst.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Dst.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
 		{{#if Dst.iPhone}}<img class="iphone" style="display:none;" src="images/ch_iPhone.png"/>{{/if}}
+		{{#if Dst.AsteriskPhonebook}}<img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/>{{/if}}
 		{{#if Dst.Highrise}}
 			<img class="crm" style="display:none;" src="images/ch_highrise.png"/>
 			<script>getcrmnote( {{recordid}} );</script>
@@ -82,6 +88,10 @@
 		{{#if Dst.MyContacts}}
 		<span class="personal contact-name" style="display:none;">{{Dst.MyContacts}}</span>
 		<span class="personal phonetype" style="display:none;font-weight:normal;font-size:11px;">{{Dst.MyContactsType}}</span>
+		{{/if}}
+		{{#if Dst.AsteriskPhonebook}}
+		<span class="asterisk contact-name" style="display:none;margin-left:5px;">{{Dst.AsteriskPhonebookName}}</span>
+		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Dst.AsteriskPhonebookSpeedDial}}</span>
 		{{/if}}
 		{{#if Dst.iPhone}}
 		<span class="iphone contact-name" style="display:none;">{{Dst.iPhone}}</span>

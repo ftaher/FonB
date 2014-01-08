@@ -157,6 +157,7 @@ function search_request( ch_pagenumber ) {
 			$('.CallerClid').each(function (index) {
 				var dst = $(this).find('span.dst').text();
 				var crm = $(this).find('span.crm').text();
+				var asterisk = $(this).find('span.asterisk').text();
 				var personal = $(this).find('span.personal').text();
 				var gcontacts = $(this).find('span.gcontacts').text();
 				var internal = $(this).find('span.internal').text();
@@ -172,6 +173,7 @@ function search_request( ch_pagenumber ) {
 				else if ( gcontacts != "" ) $(this).find('span.gcontacts').show();
 				else if ( personal != "" ) $(this).find('span.personal').show();
 				else if ( crm != "" ) $(this).find('span.crm').show();
+				else if ( asterisk != "" ) $(this).find('span.asterisk').show();
 				else $(this).find('span.dst').show();
 			});
 			/* interna.prop("checked");l mouseover action */
@@ -205,6 +207,14 @@ function search_request( ch_pagenumber ) {
 				$dstobj.next().find('span').hide();
 				$dstobj.next().find('.crm').show();
 				$dstobj.find('span.crm').show();
+			});
+
+			$('.CallerClid img.asterisk').mouseover( function (event) {
+				var $dstobj = $(this).parent();
+				$dstobj.find('span').hide();
+				$dstobj.next().find('span').hide();
+				$dstobj.next().find('.asterisk').show();
+				$dstobj.find('span.asterisk').show();
 			});
 
 			/* iphone mouseover action */
@@ -270,6 +280,7 @@ function getSummary(event) {
 	//for destination hover events
 	var dst = $(detailedrecord).find('.dst span.dstnum').text();
 	var crm = $(detailedrecord).find('.dst span.crm').text();
+	var asterisk = $(detailedrecord).find('.dst span.asterisk').text();
 	var personal = $(detailedrecord).find('.dst span.personal').text();
 	var gcontacts = $(detailedrecord).find('.dst span.gcontacts').text();
 	var internal = $(detailedrecord).find('.dst span.internal').text();
@@ -278,6 +289,7 @@ function getSummary(event) {
 	if ( personal != "" ) $(detailedrecord).find('.dst img.personal').show();
 	if ( gcontacts != "" ) $(detailedrecord).find('.dst img.gcontacts').show();
 	if ( internal != "" ) $(detailedrecord).find('.dst img.internal').show();
+	if ( asterisk != "" ) $(detailedrecord).find('.dst img.asterisk').show();
 	if ( iphone != "" ) $(detailedrecord).find('.dst img.iphone').show();
 	if(dst != ourextension && dst != "hold"){
 	 	$(detailedrecord).find('.dst .dial').show();
@@ -291,6 +303,7 @@ function getSummary(event) {
 	else if ( gcontacts != "" ){ $(detailedrecord).find('.dst span.gcontacts').show(); console.log("showing");}
 	else if ( personal != "" ) $(detailedrecord).find('.dst span.personal').show();
 	else if ( crm != "" ) $(detailedrecord).find('.dst span.crm').show();
+	else if ( asterisk != "" ) $(detailedrecord).find('.dst span.asterisk').show();
 	else if ( iphone != "" ) $(detailedrecord).find('.dst span.iphone').show();
 	else $(detailedrecord).find('.dst span.dst').show();
 	//for source hover events
@@ -298,12 +311,14 @@ function getSummary(event) {
 	crm = $(detailedrecord).find('.src span.crm').text();
 	personal = $(detailedrecord).find('.src span.personal').text();
 	gcontacts = $(detailedrecord).find('.src span.gcontacts').text();
+	asterisk = $(detailedrecord).find('.src span.asterisk').text();
 	internal = $(detailedrecord).find('.src span.internal').text();
 	iphone = $(detailedrecord).find('.src span.iphone').text();
 	if ( crm != "" ) $(detailedrecord).find('.src img.crm').show();
 	if ( personal != "" ) $(detailedrecord).find('.src img.personal').show();
 	if ( gcontacts != "" ) $(detailedrecord).find('.src img.gcontacts').show();
 	if ( iphone != "" ) $(detailedrecord).find('.src img.iphone').show();
+	if ( asterisk != "" ) $(detailedrecord).find('.src img.asterisk').show();
 	if ( internal != "" ) $(detailedrecord).find('.src img.internal').show();
 	if ( internal != "" ) {$(detailedrecord).find('.src span.internal').show();console.log(internal);}
 	else if ( iphone != "" ) $(detailedrecord).find('.src span.iphone').show();
@@ -337,6 +352,13 @@ function getSummary(event) {
 		var $dstobj = $(this).parent();
 		$dstobj.find('span').not(".from,.dial,.dial span").hide();
 		$dstobj.find('span.crm').show();
+	});
+
+	/* asterisk mouseover action */
+	$(detailedrecord).find('img.asterisk').mouseover( function (event) {
+		var $dstobj = $(this).parent();
+		$dstobj.find('span').not(".from,.dial,.dial span").hide();
+		$dstobj.find('span.asterisk').show();
 	});
 	/* iphone mouseover action */
 	$(detailedrecord).find('img.iphone').mouseover( function (event) {

@@ -30,28 +30,6 @@
 .direction span{
   display:none;
 }
-#sourceselect li a {
-	color:#ff7800;
-	border-bottom:dashed thin;
-}
-#sourceselect .unstyled li:nth-child(2) a span {
-	padding-left: 17px;
-}
-#sourceselect .unstyled li:nth-child(2) {
-    background: url(../images/lock.png ) no-repeat 25px;
-}
-#sourceselect .unstyled li:nth-child(3) a span {
-	padding-left: 17px;
-}
-#sourceselect .unstyled li:nth-child(3) {
-    background: url(../images/lock.png ) no-repeat 25px 5px;
-}
-#sourceselect .unstyled li:nth-child(4) a span {
-	padding-left: 17px;
-}
-#sourceselect .unstyled li:nth-child(4) {
-    background: url(../images/lock.png ) no-repeat 25px 5px;
-}
 .direction h3{
   margin:0px;
   vertical-align:middle;
