@@ -37,7 +37,7 @@
       {{#if CallerClid.MyContacts}} <img class="personal" style="display:none;" src="images/ch_mycontacts.png"/> {{/if}}
       {{#if CallerClid.GContacts}} <img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/> {{/if}}
       {{#if CallerClid.Highrise}} <img class="crm" style="display:none;" src="images/ch_highrise.png"/> {{/if}}
-      {{#if CallerClid.iPhone}} <img class="crm" style="display:none;" src="images/ch_iPhone.png"/> {{/if}}
+      {{#if CallerClid.iPhone}} <img class="iphone" style="display:none;" src="images/ch_iPhone.png"/> {{/if}}
       {{#if CallerClid.AsteriskPhonebook}} <img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/> {{/if}}
       <span class="dst" style="display:none;">{{CallerClid.Num}}</span> 
       {{#if CallerClid.MyContacts}} 
@@ -50,7 +50,7 @@
       {{#if CallerClid.AsteriskPhonebook}} 
       <span class="asterisk" style="display:none;">{{CallerClid.AsteriskPhonebookName}}</span> <span class="asterisk phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.AsteriskPhonebookSpeedDial}}</span> {{/if}}
       {{#if CallerClid.iPhone}} 
-      <span class="crm" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.iPhoneLastName}}{{CallerClid.iPhoneLastName}}, {{/if}}{{CallerClid.iPhoneFirstName}}{{else}}{{CallerClid.iPhone}}{{/if}}</span> <span class="crm phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.iPhoneType}}</span> {{/if}}
+      <span class="iphone" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.iPhoneLastName}}{{CallerClid.iPhoneLastName}}, {{/if}}{{CallerClid.iPhoneFirstName}}{{else}}{{CallerClid.iPhone}}{{/if}}</span> <span class="iphone phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.iPhoneType}}</span> {{/if}}
       {{#if CallerClid.Internal}} 
       <span class="internal contact-name" style="display:none;">{{CallerClid.Internal}}</span> {{/if}} 
     </td>
@@ -62,7 +62,7 @@
     <span class="crm label label-info">{{this}}</span>
    {{/each}}
     </td>
-    <td width="5%">{{#recordingfile}}<img style="display:block;" src="images/Call_Attachment.png" alt="call recording"/>{{/recordingfile}}</td>
+    <td width="5%">{{#recordingfile}}<img style="display:block;" src="images/Call_Attachment.png" alt="call recording"/>{{/recordingfile}}{{#HighriseNoteId}}<img style="display:block;" src="images/icons/note.png" alt="note"/>{{/HighriseNoteId}}</td>
     <td class="Duration">{{Duration}}</td>
     <td class="DateSummary" width="130px" align="right">{{DateSummary}}</td>
   </tr>
