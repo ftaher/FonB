@@ -933,6 +933,8 @@ function bindActiveCallEvents(line){
 				$elem = $("<span></span>");
 				if(contact.url != ''){
 					$elem.prepend("<a href='" + contact.url + "'><img src='images/ch_" + contact.source + ".png'/>&nbsp;</a>");
+				}
+				if(contact.source != ""){
 					$this.addClass(contact.source);
 				}
 				if(contact.name != ""){
