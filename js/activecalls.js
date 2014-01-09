@@ -628,7 +628,7 @@ function Quickdial(via, dial, clidname) {
 			return;
 		}
 	}
-	if(dial == ourextension || dial.match(/^\+?\d+$/) == null){
+	if(dial == ourextension){
 		$("#quickdial").effect("highlight",{color: '#f6a6a6'});
 	}
 	else{
@@ -713,19 +713,17 @@ function callaction( Action , activenum ) {
  * @return {[type]}      [description]
  */
 function blindTransfer( dial ) {
-	if(dial.match(/\d+/)){
-		/**
-		 * highlight active call if it is already dialed, no need to dial it again
-		 */
-		for(i=0;i<OurChannels.length;i++){
-			if(OurChannels[i].CalledParty.Extension == dial || OurChannels[i].CallingParty.Extension == dial){
-				$("#line" + OurChannels[i].ID).stop(true, true).effect("highlight", {}, 2000);
-				Transfer(OurChannels[i].ID);
-				return;
-			}
+	/**
+	 * highlight active call if it is already dialed, no need to dial it again
+	 */
+	for(i=0;i<OurChannels.length;i++){
+		if(OurChannels[i].CalledParty.Extension == dial || OurChannels[i].CallingParty.Extension == dial){
+			$("#line" + OurChannels[i].ID).stop(true, true).effect("highlight", {}, 2000);
+			Transfer(OurChannels[i].ID);
+			return;
 		}
-		Transfer(dial , true);
 	}
+	Transfer(dial , true);
 }
 /**
  * [Transfer description]
