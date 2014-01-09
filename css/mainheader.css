@@ -123,6 +123,11 @@ padding: 3px 3px 0;
 text-align: center;
 }
 
+.dialPadLine{
+	z-index: 200;
+	position: relative;
+}
+
 .web-icon {background-image:url(../images/web-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
 .phone-icon {background-image:url(../images/phone-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
 .mobile-icon {background-image:url(../images/mobile-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}

@@ -441,23 +441,23 @@ function updateQuickDialMeta(number){
 			}
 			if(typeof data.GContacts != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="gcontacts" href="javascript:;" rel="' + data.GContacts + '"><img src="images/ch_gcontacts.png" alt="gcontacts"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink gcontacts" href="javascript:;" rel="' + data.GContacts + '">' + data.GContacts + ' <span style="font-size:8px;">'  + data.GContactsType + '</span></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink gcontacts" href="javascript:;" rel="' + data.GContacts + '">' + data.GContacts + ' <span style="font-size:8px;">&nbsp;'  + data.GContactsType + '</span></a>');
 			}
 			if(typeof data.iPhone != "undefined"){
-				$imageElem.append('<a style="margin-right:5px;" data-source="iphone" href="javascript:;" rel="' + data.iPhone + '"><img src="images/ch_iphone.png" alt="gcontacts"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.iPhone + '">' + data.iPhone + ' <span style="font-size:8px;">'  + data.iPhoneType + '</span></a>');
+				$imageElem.append('<a style="margin-right:5px;" data-source="iphone" href="javascript:;" rel="' + data.iPhone + '"><img src="images/ch_iphone.png" alt="iphone"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.iPhone + '">' + data.iPhone + ' <span style="font-size:8px;">&nbsp;'  + data.iPhoneType + '</span></a>');
 			}
 			if(typeof data.AsteriskPhonebook != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="asterisk" href="javascript:;" rel="' + data.AsteriskPhonebook + '"><img src="images/ch_asterisk.png" alt="asterisk"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.AsteriskPhonebook + '">' + data.AsteriskPhonebook + ' <span style="font-size:8px;">*0'  + data.AsteriskPhonebookSpeedDial + '</span></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink asterisk" href="javascript:;" rel="' + data.AsteriskPhonebook + '">' + data.AsteriskPhonebook + ' <span style="font-size:8px;">&nbsp;*0'  + data.AsteriskPhonebookSpeedDial + '</span></a>');
 			}
 			if(typeof data.Highrise != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="highrise" href="javascript:;" rel="' + data.Highrise + '"><img src="images/ch_highrise.png" alt="highrise"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink highrise" href="javascript:;" rel="' + data.Highrise + '">' + data.Highrise + ' <span style="font-size:8px;">'  + data.HighriseType + '</span></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink highrise" href="javascript:;" rel="' + data.Highrise + '">' + data.Highrise + ' <span style="font-size:8px;">&nbsp;'  + data.HighriseType + '</span></a>');
 			}
 			if(typeof data.MyContacts != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="mycontacts" href="javascript:;" rel="' + data.MyContacts + '"><img src="images/ch_mycontacts.png" alt="mycontacts"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink mycontacts" href="javascript:;" rel="' + data.MyContacts + '">' + data.MyContacts + ' <span style="font-size:8px;">'  + data.MyContactsType + '</span></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink mycontacts" href="javascript:;" rel="' + data.MyContacts + '">' + data.MyContacts + ' <span style="font-size:8px;">&nbsp;'  + data.MyContactsType + '</span></a>');
 			}
 			if($linkElem.children().length != 0){
 				$("#quickdial-info").html($imageElem).append($linkElem);
