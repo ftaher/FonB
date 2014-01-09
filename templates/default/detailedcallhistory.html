@@ -46,7 +46,7 @@
 		{{/if}}
 		{{#if Src.AsteriskPhonebook}}
 		<span class="asterisk contact-name" style="display:none;margin-left:3px;margin-left:5px;">{{Src.AsteriskPhonebookName}}</span>
-		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Src.AsteriskPhonebookSpeedDial}}</span>
+		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">*0{{Src.AsteriskPhonebookSpeedDial}}</span>
 		{{/if}}
 		{{#if Src.iPhone}}
 		<span class="iphone contact-name" style="display:none;">{{Src.iPhone}}</span>
@@ -95,7 +95,7 @@
 		{{/if}}
 		{{#if Dst.AsteriskPhonebook}}
 		<span class="asterisk contact-name" style="display:none;margin-left:5px;">{{Dst.AsteriskPhonebookName}}</span>
-		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Dst.AsteriskPhonebookSpeedDial}}</span>
+		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">*0{{Dst.AsteriskPhonebookSpeedDial}}</span>
 		{{/if}}
 		{{#if Dst.iPhone}}
 		<span class="iphone contact-name" style="display:none;">{{Dst.iPhone}}</span>

@@ -407,7 +407,7 @@ function getNumberLookupData(obj){
 	else if(typeof obj.AsteriskPhonebook !== "undefined"){
 		contact.name = obj.AsteriskPhonebook;
 		if(typeof obj.AsteriskPhonebookSpeedDial !== "undefined"){
-			contact.type = obj.AsteriskPhonebookSpeedDial;
+			contact.type = "*0" + obj.AsteriskPhonebookSpeedDial;
 		}
 		contact.source = "asterisk";
 	}
@@ -449,7 +449,7 @@ function updateQuickDialMeta(number){
 			}
 			if(typeof data.AsteriskPhonebook != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="asterisk" href="javascript:;" rel="' + data.AsteriskPhonebook + '"><img src="images/ch_asterisk.png" alt="asterisk"/></a>');
-				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.AsteriskPhonebook + '">' + data.AsteriskPhonebook + ' <span style="font-size:8px;">'  + data.AsteriskPhonebookSpeedDial + '</span></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink iphone" href="javascript:;" rel="' + data.AsteriskPhonebook + '">' + data.AsteriskPhonebook + ' <span style="font-size:8px;">*0'  + data.AsteriskPhonebookSpeedDial + '</span></a>');
 			}
 			if(typeof data.Highrise != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="highrise" href="javascript:;" rel="' + data.Highrise + '"><img src="images/ch_highrise.png" alt="highrise"/></a>');
