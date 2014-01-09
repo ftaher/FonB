@@ -628,7 +628,7 @@ function Quickdial(via, dial, clidname) {
 			return;
 		}
 	}
-	if(dial == ourextension){
+	if(dial == ourextension || dial.match(/^\+?\d+$/) == null){
 		$("#quickdial").effect("highlight",{color: '#f6a6a6'});
 	}
 	else{
@@ -713,17 +713,19 @@ function callaction( Action , activenum ) {
  * @return {[type]}      [description]
  */
 function blindTransfer( dial ) {
-	/**
-	 * highlight active call if it is already dialed, no need to dial it again
-	 */
-	for(i=0;i<OurChannels.length;i++){
-		if(OurChannels[i].CalledParty.Extension == dial || OurChannels[i].CallingParty.Extension == dial){
-			$("#line" + OurChannels[i].ID).stop(true, true).effect("highlight", {}, 2000);
-			Transfer(OurChannels[i].ID);
-			return;
+	if(dial.match(/\d+/)){
+		/**
+		 * highlight active call if it is already dialed, no need to dial it again
+		 */
+		for(i=0;i<OurChannels.length;i++){
+			if(OurChannels[i].CalledParty.Extension == dial || OurChannels[i].CallingParty.Extension == dial){
+				$("#line" + OurChannels[i].ID).stop(true, true).effect("highlight", {}, 2000);
+				Transfer(OurChannels[i].ID);
+				return;
+			}
 		}
+		Transfer(dial , true);
 	}
-	Transfer(dial , true);
 }
 /**
  * [Transfer description]
@@ -929,15 +931,9 @@ function bindActiveCallEvents(line){
 			success : function(data){
 				var contact = getNumberLookupData(data);
 				$elem = $("<span></span>");
-				if(contact.source != ""){
-					$elem.prepend("<img src='images/ch_" + contact.source + ".png'/>&nbsp;");
+				if(contact.url != ''){
+					$elem.prepend("<a href='" + contact.url + "'><img src='images/ch_" + contact.source + ".png'/>&nbsp;</a>");
 					$this.addClass(contact.source);
-					$source = $this.find('.' + contact.source).css("cursor", "auto").off("click");
-					if(contact.url != ''){
-						$source.css('cursor', 'pointer').on('click', function(){
-							window.open(contact.url);
-						});
-					}
 				}
 				if(contact.name != ""){
 					$elem.append(contact.name);	
