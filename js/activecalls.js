@@ -931,10 +931,14 @@ function bindActiveCallEvents(line){
 			success : function(data){
 				var contact = getNumberLookupData(data);
 				$elem = $("<span></span>");
-				if(contact.url != ''){
-					$elem.prepend("<a href='" + contact.url + "'><img src='images/ch_" + contact.source + ".png'/>&nbsp;</a>");
-				}
-				if(contact.source != ""){
+				if(contact.source != ''){
+					if(contact.url != ''){					
+						$elem.prepend("<a href='" + contact.url + "'><img src='images/ch_" + contact.source + ".png'/>&nbsp;</a>");
+						$this.find(".highrise").attr("href", contact.url);
+					}
+					else{
+						$elem.prepend("<img src='images/ch_" + contact.source + ".png'/>&nbsp;");
+					}
 					$this.addClass(contact.source);
 				}
 				if(contact.name != ""){
