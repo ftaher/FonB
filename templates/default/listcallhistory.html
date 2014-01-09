@@ -62,7 +62,7 @@
     <span class="crm label label-info">{{this}}</span>
    {{/each}}
     </td>
-    <td width="5%">{{#recordingfile}}<img style="display:block;" src="images/Call_Attachment.png" alt="call recording"/>{{/recordingfile}}{{#HighriseNoteId}}<img style="display:block;" src="images/icons/note.png" alt="note"/>{{/HighriseNoteId}}</td>
+    <td width="5%">{{#if recordingfile}}<img style="display:inline-block;" src="images/Call_Attachment.png" alt="call recording"/>{{/if}}{{#if FonBHighriseNoteID}}<img style="display:inline-block;" src="images/icons/note.png" alt="note"/>{{/if}}</td>
     <td class="Duration">{{Duration}}</td>
     <td class="DateSummary" width="130px" align="right">{{DateSummary}}</td>
   </tr>
