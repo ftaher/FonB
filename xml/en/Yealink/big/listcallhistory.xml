@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<FonbCallHistoryTextMenu defaultIndex="0" style="none" Beep="no">
+	<Title wrap="yes">FonB Call History</Title>
+	{{^CallHistoryList}}
+	<MenuItem>
+		<Prompt>No Call History Found</Prompt>
+	</MenuItem>
+	{{/CallHistoryList}}
+	{{#CallHistoryList}}
+	<MenuItem>
+		<Prompt>
+			{{#CallerClid}}
+				{{#Internal}}
+					{{Internal}} | {{Direction}}
+				{{/Internal}}
+				{{^Internal}}
+					{{#MyContacts}}
+						{{MyContacts}} | {{Direction}}
+					{{/MyContacts}}
+					{{^MyContacts}}
+						{{#GContacts}}
+							{{GContacts}} | {{Direction}}
+						{{/GContacts}}
+						{{^GContacts}}
+							{{#Highrise}}
+								{{Highrise}} | {{Direction}}
+							{{/Highrise}}
+							{{^Highrise}}
+								{{Num}}
+							{{/Highrise}}
+						{{/GContacts}}
+					{{/MyContacts}}
+				{{/Internal}}
+			{{/CallerClid}}
+		</Prompt>
+		<Dial>{{#CallerClid}}{{Num}}{{/CallerClid}}</Dial>
+	</MenuItem>
+	{{/CallHistoryList}}
+	<SoftKey index="1">
+		<Label></Label>
+		<URI></URI>
+	</SoftKey>
+	<SoftKey index="2">
+		<Label></Label>
+		<URI></URI>
+	</SoftKey>
+	<SoftKey index="3">
+		<Label>Exit</Label>
+		<URI>SoftKey:Exit</URI>
+	</SoftKey>
+	<SoftKey index="4">
+		<URI>http://{{Host}}/xml/en/Yealink/big/filtercallhistory.xml</URI>
+		<Label>Filter</Label>
+	</SoftKey>
+</FonbCallHistoryTextMenu>

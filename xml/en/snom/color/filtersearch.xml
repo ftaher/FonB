@@ -3,7 +3,7 @@
 	<Title>Help</Title>
 	<MenuItem>
 		<Name>All Contacts</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/listphonebook.xml?FilterSearch=</URL>
+		<URL>http://{{Host}}/xml/en/snom/color/listphonebook.xml?FilterSearch={{FilterSearch}}</URL>
 	</MenuItem>
 	<MenuItem>
 		<Name>Google Contacts</Name>

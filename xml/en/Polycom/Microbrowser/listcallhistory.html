@@ -14,29 +14,35 @@
                     {{#Internal}}
                     <tr>
                     <td><a href="tel://{{Num}}">{{Internal}}</a></td>
-                                        </tr>{{/Internal}}
+                    
+                    <td>{{Direction}}</td>
+                    </tr>{{/Internal}}
                     {{^Internal}}
 							{{#MyContacts}}
                     <tr>
                     <td><a href="tel://{{Num}}">{{MyContacts}}</a></td>
 							
+                    <td>{{Direction}}</td>
                     </tr>{{/MyContacts}}
                     {{^MyContacts}}
 								{{#GContacts}}
                     <tr>
                     <td><a href="tel://{{Num}}">{{GContacts}}</a></td>
+                    <td>{{Direction}}</td>
                     </tr>
                     {{/GContacts}}
 								{{^GContacts}}
                                 {{#Highrise}}
                     <tr>
                     <td><a href="tel://{{Num}}">{{Highrise}}</a></td>
+                    <td>{{Direction}}</td>
                     </tr>
 					
                     {{/Highrise}}
                     {{^Highrise}}
                     <tr>
                     <td>{{#CallerClid}}<a href="tel://{{Num}}">{{Num}}</a>{{/CallerClid}}</td>
+                    <td>{{Direction}}</td>
                     </tr>
                     {{/Highrise}}
 								{{/GContacts}}
@@ -48,4 +54,6 @@
 			</tbody>
 		</table>
 	</body>
+	<softkey index="1" label="Filter" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Microbrowser/filtercallhistory.html"/>
+	<softkey index="2" label="Home" action="SoftKey:Home"/>
 </html>

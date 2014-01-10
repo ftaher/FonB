@@ -5,7 +5,7 @@
 	</head>
 	<body>
 
-		<table>
+		<table border="0">
 			<tbody>
 					{{#Internal}}
 					<tr>
@@ -38,4 +38,6 @@
 			</tbody>
 		</table>
 	</body>
+		<softkey index="1" label="Filter" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Microbrowser/filtersearch.html?FilterSearch={{FilterSearch}}"/>
+
 </html>

@@ -2,7 +2,7 @@
 <SnomIPPhoneMenu>
 	<Title>Menu</Title>
 	<MenuItem>
-		<Name>Contact Search</Name>
+		<Name>Contacts</Name>
 		<URL>http://{{Host}}/xml/en/snom/basic/phonebook.xml</URL>
 	</MenuItem>
 	<MenuItem>

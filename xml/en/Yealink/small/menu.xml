@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<FonbMenuTextMenu defaultIndex="0" style="none" Beep="no">
+	<Title wrap="yes/no">FonB</Title>
+	<MenuItem>
+		<Prompt>List Phonebook</Prompt>
+		<URI>http://{{Host}}/xml/en/Yealink/small/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&FilterSearch=</URI>
+	</MenuItem>
+	<MenuItem>
+		<Prompt>Call History</Prompt>
+		<URI>http://{{Host}}/xml/en/Yealink/small/listcallhistory.xml</URI>
+	</MenuItem>
+	<MenuItem>
+		<Prompt>Logout</Prompt>
+		<URI>http://{{Host}}/xml/en/Yealink/small/menu.xml?logout=yes</URI>
+	</MenuItem>
+	<SoftKeyItem>
+	 <Prompt>CANCEL</Prompt>
+	 <Label>CANCEL</Label>
+	 <Softkey>F_ABORT</Softkey>
+	</SoftKeyItem>
+</FonbMenuTextMenu>
+
+

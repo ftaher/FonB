@@ -11,11 +11,14 @@
 			<tbody>
 				{{#Contacts}}
 					<tr>
-						<td><a href="http://{{Host}}/xml/en/Polycom/Big_Screen/phonebook_number_lookup.html?Num={{PhoneNumber}}"><img src="img/ch_{{Source}}.jpg"/>{{FirstName}} {{#LastName}}{{LastName}}{{/LastName}}</a></td>
+						<td><a href="http://{{Host}}/xml/en/Polycom/Big_Screen/phonebook_number_lookup.html?Num={{PhoneNumber}}">{{Name}}</a></td>
 						<td><a href="tel://{{PhoneNumber}}">{{PhoneNumber}}</a></td>
+						<td>{{Source}}</td>
 					</tr>
 				{{/Contacts}}
 			</tbody>
 		</table>
 	</body>
+	<softkey index="1" label="Filter" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Big_Screen/filtersearch.html?FilterSearch={{FilterSearch}}"/>
+	<softkey index="2" label="Search" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Big_Screen/phonebook.html"/>
 </html>

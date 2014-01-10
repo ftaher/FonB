@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<YealinkIPPhoneMenu Beep="no">
+	<Title>Soft Keys Shortcuts</Title>
+	<MenuItem>
+		<Name>> Google Contacts</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>> Highrise Contacts</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>> My Contacts</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>> Internal Contacts</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>> iPhone Contacts</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>* > Quick Search</Name>
+		<URL></URL>
+	</MenuItem>
+	<MenuItem>
+		<Name># > Filter Search</Name>
+		<URL></URL>
+	</MenuItem>
+</YealinkIPPhoneMenu>

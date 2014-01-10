@@ -1,13 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
-		<title>Phonebook Search</title>
+		<title>Highrise Contacts</title>
 	</head>
 	<body>
 		<form method="get" action="http://{{Host}}/xml/en/Polycom/Microbrowser/listphonebook.html">
 			<label for="FilterSearch">Contact Name:</label><br/>
 			<input name="FilterSearch" id="FilterSearch" type="text"/><br/>
+            <input type="hidden" name="Source" value="highrise" />
 			<input type="submit" value="Search"/> 
 		</form>
 	</body>
+		<softkey index="1" label="Filter" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Microbrowser/filtersearch.html?FilterSearch={{FilterSearch}}"/>
+		<softkey index="2" label="Search" action="SoftKey:Fetch;http://{{Host}}/xml/en/Polycom/Microbrowser/phonebook.xml"/>
 </html>
