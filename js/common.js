@@ -67,10 +67,6 @@ fonb_main = {
 			jQuery("#activecalls").removeClass("nophone");
 			jQuery('#quickdialbox').removeClass("nophone");
 		}
-		if ( ourmobile !== "" ){
-			jQuery("#activecalls").removeClass("nomobile");
-			jQuery('#quickdialbox').removeClass("nomobile");
-		}
 		/**
 		 * triggered on successful flash phone setup
 		 * @event flashphoneready

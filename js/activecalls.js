@@ -628,7 +628,7 @@ function Quickdial(via, dial, clidname) {
 			return;
 		}
 	}
-	if(dial == ourextension || dial.match(/^\+?\d+$/) == null){
+	if(dial == ourextension || dial == ""){
 		$("#quickdial").effect("highlight",{color: '#f6a6a6'});
 	}
 	else{

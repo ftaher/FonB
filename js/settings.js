@@ -45,6 +45,10 @@ function SettingsGetSettingsPage(){
 	$.ajax({url : 'php/settings.php', dataType : 'json', async : false,
 		success: function(data) {
 			ourmobile = data.general_mobile_phone;
+			if ( ourmobile !== "" ){
+				jQuery("#activecalls").removeClass("nomobile");
+				jQuery('#quickdialbox').removeClass("nomobile");
+			}
 			Settings = data;
 			var html = SettingsTemplate(data );
 			$('#settingspage').remove();
