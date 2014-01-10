@@ -628,7 +628,10 @@ function Quickdial(via, dial, clidname) {
 			return;
 		}
 	}
-	if(dial == ourextension || dial == ""){
+	if (via == "Mobile" && ourmobile == ""){
+		return;
+	}
+	else if(dial == ourextension || dial == ""){
 		$("#quickdial").effect("highlight",{color: '#f6a6a6'});
 	}
 	else{
