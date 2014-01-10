@@ -949,7 +949,7 @@ function bindActiveCallEvents(line){
 				}
 				if($elem.html() != ""){
 					$clidnum.html($elem.html());
-					if(contact.source != "internal"){
+					if(contact.source != "internal" && contact.number != ""){
 						$this.find('span.clidname').html(", " + contact.number);
 					}
 				}
