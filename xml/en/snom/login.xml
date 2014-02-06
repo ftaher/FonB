@@ -2,7 +2,7 @@
 <SnomIPPhoneInput>
 	<Title>Menu</Title>
 	<Prompt>Prompt</Prompt>
-	<URL>http://{{Host}}/xml/en/snom/basic/menu.xml</URL>
+	<URL>http://{{Host}}/xml/en/snom/menu.xml</URL>
 	{{^Extension}}
 	<InputItem>
 		<DisplayName>Extension:</DisplayName>

@@ -15,72 +15,72 @@
 	{{/Contacts}}
 	<SoftKeyItem>
 		<Name>CANCEL</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/menu.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/menu.xml</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>#</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
+		<URL>http://{{Host}}/xml/en/snom/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>*</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/phonebook.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/phonebook.xml</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>2</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=2</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=2</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>3</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=3</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=3</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>4</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=4</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=4</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>5</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=5</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=5</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>6</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=6</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=6</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>7</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=7</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=7</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>8</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=8</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=8</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>9</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=9</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=9</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>0</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query=0</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query=0</URL>
 	</SoftKeyItem>
 	{{#FilterSearch}}
 	<SoftKeyItem>
 		<Name>F1</Name>
 		<Label>{{FilterSearch}}</Label>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?query={{FilterSearch}}</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?query={{FilterSearch}}</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>F2</Name>
 		<Label>Back</Label>
-		<URL>http://{{Host}}/xml/en/snom/color/t9_listphonebook.xml?delete=&query=</URL>
+		<URL>http://{{Host}}/xml/en/snom/t9_listphonebook.xml?delete=&query=</URL>
 	</SoftKeyItem>
 	{{/FilterSearch}}
 	<SoftKeyItem>
 		<Name>F3</Name>
 		<Label>Filter</Label>
-		<URL>http://{{Host}}/xml/en/snom/color/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
+		<URL>http://{{Host}}/xml/en/snom/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>F4</Name>
 		<Label>Search</Label>
-		<URL>http://{{Host}}/xml/en/snom/color/phonebook.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/phonebook.xml</URL>
 	</SoftKeyItem>
 </SnomIPPhoneDirectory>

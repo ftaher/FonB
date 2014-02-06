@@ -4,19 +4,15 @@
 	<Title>Menu</Title>
 	<MenuItem>
 		<Name>List Phonebook</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/listphonebook.xml?FilterSearch=</URL>
+		<URL>http://{{Host}}/xml/en/snom/listphonebook.xml?FilterSearch=</URL>
 	</MenuItem>
 	<MenuItem>
 		<Name>Call History</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/listcallhistory.xml</URL>
-	</MenuItem>
-	<MenuItem>
-		<Name>Shortcuts</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/help.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/listcallhistory.xml</URL>
 	</MenuItem>
 	<MenuItem>
 		<Name>Logout</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/menu.xml?logout=yes</URL>
+		<URL>http://{{Host}}/xml/en/snom/menu.xml?logout=yes</URL>
 	</MenuItem>
 	<SoftKeyItem>
 	 <Name>CANCEL</Name>

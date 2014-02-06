@@ -2,7 +2,7 @@
 <SnomIPPhoneInput>
 	<Title>Menu</Title>
 	<Prompt>Prompt</Prompt>
-	<URL>http://{{Host}}/xml/en/snom/color/listphonebook.xml</URL>
+	<URL>http://{{Host}}/xml/en/snom/listphonebook.xml</URL>
 	<InputItem>
 		<DisplayName>Contact Name:</DisplayName>
 		<QueryStringParam>FilterSearch</QueryStringParam>

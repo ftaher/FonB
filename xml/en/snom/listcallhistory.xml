@@ -15,30 +15,10 @@
 	{{/CallHistoryList}}
 	<SoftKeyItem>
 		<Name>#</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/filtercallhistory.xml</URL>
-	</SoftKeyItem>
-	<SoftKeyItem>
-		<Name>1</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/gcontacts.xml</URL>
-	</SoftKeyItem>
-	<SoftKeyItem>
-		<Name>2</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/internal.xml</URL>
-	</SoftKeyItem>
-	<SoftKeyItem>
-		<Name>3</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/personal.xml</URL>
-	</SoftKeyItem>
-	<SoftKeyItem>
-		<Name>4</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/crm.xml</URL>
-	</SoftKeyItem>
-	<SoftKeyItem>
-		<Name>5</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/iphone.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/filtercallhistory.xml</URL>
 	</SoftKeyItem>
 	<SoftKeyItem>
 		<Name>CANCEL</Name>
-		<URL>http://{{Host}}/xml/en/snom/color/menu.xml</URL>
+		<URL>http://{{Host}}/xml/en/snom/menu.xml</URL>
 	</SoftKeyItem>
 </SnomIPPhoneDirectory>
