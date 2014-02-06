@@ -25,6 +25,10 @@
 		<Name>iPhone Contacts</Name>
 		<URL>http://{{Host}}/xml/en/snom/listphonebook.xml?Source=iphone&FilterSearch={{FilterSearch}}</URL>
 	</MenuItem>
+	<MenuItem>
+		<Name>Speed Dials</Name>
+		<URL>http://{{Host}}/xml/en/snom/listphonebook.xml?Source=asterisk&FilterSearch={{FilterSearch}}</URL>
+	</MenuItem>
 	{{#FilterSearch}}
 	<SoftKeyItem>
 		<Name>F1</Name>
