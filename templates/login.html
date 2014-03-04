@@ -58,11 +58,11 @@ function validate_login()
   	else{
 
       $.ajax({
-        url : "/login",
+        url : "login",
         data : $("form[name=login]").serialize(),
         type : 'post',
         success: function(data){
-          window.location.href = "/";
+          window.location.href = "/{{RedirectPath}}";
         } ,
         error : function(xhr,status,error){
           $('font[color="#FF0000"]').text(" - Wrong username/password");

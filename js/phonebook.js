@@ -143,7 +143,7 @@ function PhonebookShowSource(source,pageNumber,restFilterSearch, updatedTime) {
 		},
 		error : function(xhr, status, thrownError){			
 			if(thrownError === "Forbidden"){
-				window.location.href = "/logout";
+				window.location.href = "logout";
 			}
 		}
 	});

@@ -72,14 +72,13 @@ var NewChannels = [];
  * @class
  */
 var url = window.location.host;
-var socket = new WebSocket("ws://"+ url +"/socket");
+var socket = new WebSocket("ws://"+ url + ":" + ListenPort +"/socket");
 /**
  * on error, logout and force re-login
  * @memberOf activecalls.WebSocket
  */
 socket.onerror = function() {
 	console.log("socket connect failed");
-	//window.location.href = "/logout";
 };
 /**
  * @class MessageEvent is event object passed when socket.onmessage is triggered

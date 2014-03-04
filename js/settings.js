@@ -64,7 +64,7 @@ function SettingsGetSettingsPage(){
 		},
 		error : function(jqXHR, textStatus, thrownError){
 			if(thrownError === "Forbidden"){
-				window.location.href = "/logout";
+				window.location.href = "logout";
 			}
 		}
 	});
