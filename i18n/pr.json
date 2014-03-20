@@ -165,5 +165,6 @@
 	"Note:" :"Nota:",
 	"Goto Highrise page" :"Ir para a página Highrise",
 	"Update Highrise note" :"Atualizar nota Highrise",
-	"No Active Calls" : "Sem Chamadas Ativas"
+	"No Active Calls" : "Sem Chamadas Ativas",
+	"No matches found." : ""
 }

@@ -165,5 +165,6 @@
 	"Note:" :"Примечание",
 	"Goto Highrise page" :"Перейти на страницу Highrise ",
 	"Update Highrise note" :"Обновить заметку Highrise",
-	"No Active Calls" : "Нет активных звонков"
+	"No Active Calls" : "Нет активных звонков",
+	"No matches found." : ""
 }

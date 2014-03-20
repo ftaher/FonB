@@ -14,7 +14,7 @@ i18n = function(language){
 	//note: not using this.language because we want support for unknown languages without modifying the code
 	if(typeof language !== "undefined" && language !== "en"){
 		$.ajax({
-			url : "http://" + window.location.host + "/i18n/" + language+".json",
+			url : "i18n/" + language+".json",
 			async: false,
 			dataType : "json",
 			success: function(data){

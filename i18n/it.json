@@ -168,5 +168,6 @@
 	"Note:" :"Note", 
 	"Goto Highrise page" :"TBC", 
 	"Update Highrise note" :"TBC", 
-	"No Active Calls" : "Pas d’appels actifs" 
+	"No Active Calls" : "Pas d’appels actifs",
+	"No matches found." : ""
 }

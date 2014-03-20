@@ -58,6 +58,7 @@
 			<!-- BEGIN: END # {{Id}} -->
 			  {{/each}}
 			  {{else}}
+			  {{#unless FilterSearch}}
 				{{#if Source_mycontacts}}
 				<tr>
 					<td colspan="6">
@@ -92,7 +93,15 @@
 					</td>
 			   </tr>
 			   {{/if}}
+			  {{/unless}}
+			  {{#if FilterSearch}}
+			  <tr class="CONTACT_row" data-index="{{@index}}">
+					<td colspan="7">
+						{{t "No matches found."}}
+					</td>
+				</tr>
 			  {{/if}}
+			{{/if}}
 		</tbody>
 	</table>
 </form>

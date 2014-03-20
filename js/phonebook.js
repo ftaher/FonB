@@ -57,6 +57,10 @@ fonb_phonebook = {
 		$("#phonebooksearch").on("keyup", function(){
 			PhonebookShowSource(contactssource,1,false);
 		});
+		$("#phonebooksearch_cancel").on("click", function(){
+			$('#phonebooksearch').val('');
+			PhonebookShowSource(contactssource,1,false);
+		});
 		$("#phonebookpage").on("click", ".CONTACT_row .edit-contact", contactEdit);
 	}
 }
@@ -122,6 +126,9 @@ function PhonebookShowSource(source,pageNumber,restFilterSearch, updatedTime) {
 					data.last_name = true;
 				}
 				data["Source_"+data.ContactSource] = true;
+				if(filterSearch){
+					data["FilterSearch"] = filterSearch;
+				}
 				var html = PhonebookListTemplate(data);
 				$('#phonebook').html(html);
 				//hide menu untill extensions are configured properly by admin
