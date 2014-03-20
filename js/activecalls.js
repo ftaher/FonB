@@ -72,7 +72,12 @@ var NewChannels = [];
  * @class
  */
 var url = window.location.host;
-var socket = new WebSocket("ws://"+ url + ":" + ListenPort +"/socket");
+//we don't have port in url
+//so we use port provided in /etc/phoneb/phoneb.cfg which is passed via ListenPort parameter from server
+if(!url.match(/.*:\d+$/)){
+	url += ":" + ListenPort;
+}
+var socket = new WebSocket("ws://"+ url +"/socket");
 /**
  * on error, logout and force re-login
  * @memberOf activecalls.WebSocket
@@ -694,8 +699,8 @@ function callaction( Action , activenum ) {
 			socket.send( JSON.stringify(action) );
 			break;
 		case "Hold":
-			if($("#line"+activenum).is(".dialing")){
-				console.log("can't hold rejecting request, call on dialing");
+			if($("#line"+activenum).is(".dialing") || $("#line"+activenum).is(".ringing")){
+				console.log("can't hold rejecting request, call on dialing or ringing");
 				return;
 			}
 			// no break; is intentional! we want default to run
