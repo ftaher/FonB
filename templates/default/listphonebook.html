@@ -73,12 +73,32 @@
 					</td>
 			</tr>
 			   {{/if}}
+			   {{#if Source_android}}
+				<tr>
+					<td colspan="6">
+						<div class="hero-unit">
+							<h1>{{t "No Contacts "}}<small>{{t "Yet..."}}</small></h1>
+							<p>{{t "You can import Android contacts by using FonB Android App available on app store."}}</p>
+						</div>
+					</td>
+				</tr>
+			   {{/if}}
+			   {{#if Source_iphone}}
+				<tr>
+					<td colspan="6">
+						<div class="hero-unit">
+							<h1>{{t "No Contacts "}}<small>{{t "Yet..."}}</small></h1>
+							<p>{{t "You can import iPhone contacts by using FonB iPhone App available on app store."}}</p>
+						</div>
+					</td>
+				</tr>
+			   {{/if}}
 			   {{#if Source_all}}
 				<tr>
 					<td colspan="6">
 						<div class="hero-unit">
-							<h1>{{t "Just installed application?"}}</h1>
-							<p>{{t "Ask your system admin to setup extensions in users.cfg. Once they set them up, you will see contacts here."}}</p>
+							<h1>{{t "No contacts found."}}</h1>
+							<p>{{t "Ask your system admin to setup extensions in users.cfg or import contacts using CSV, FonB Android App, FonB iPhone app, Highrise or Google. Once everything is setup, you will see contacts here."}}</p>
 						</div>
 					</td>
 			</tr>

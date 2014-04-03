@@ -320,6 +320,16 @@ function setupContactsAutoComplete(selector){
 				}
 				imgHtml = '<img src="images/qd_gcontacts.png"> ' + row.ContactName + "<BR>" + printtypenum;
 				break;
+			case "android":
+				var printtypenum = "";
+				if ( row.ContactTelephoneType == "" ){
+					printtypenum = "<strong>" + row.ContactTelephoneNumber + "</strong>";
+				}
+				else{
+					printtypenum = row.ContactTelephoneType + ": <strong>" + row.ContactTelephoneNumber + "</strong>"
+				};
+				imgHtml = '<img src="images/qd_android.png"> ' + row.ContactName + "<BR>" + printtypenum;
+				break;
 			case "iphone":
 				var printtypenum ="";
 				if ( row.ContactTelephoneType == "" ){
@@ -390,12 +400,12 @@ function getNumberLookupData(obj){
 		}
 		contact.source = "gcontacts";
 	}
-	else if(typeof obj.MyContacts !== "undefined"){
-		contact.name = obj.MyContacts;
-		if(typeof obj.MyContactsType !== "undefined"){
-			contact.type = obj.MyContactsType.toLowerCase();
+	else if(typeof obj.Android !== "undefined"){
+		contact.name = obj.Android;
+		if(typeof obj.AndroidType !== "undefined"){
+			contact.type = obj.AndroidType.toLowerCase();
 		}
-		contact.source = "mycontacts";
+		contact.source = "android";
 	}
 	else if(typeof obj.iPhone !== "undefined"){
 		contact.name = obj.iPhone;
@@ -442,6 +452,10 @@ function updateQuickDialMeta(number){
 			if(typeof data.GContacts != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="gcontacts" href="javascript:;" rel="' + data.GContacts + '"><img src="images/ch_gcontacts.png" alt="gcontacts"/></a>');
 				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink gcontacts" href="javascript:;" rel="' + data.GContacts + '">' + data.GContacts + ' <span style="font-size:8px;">&nbsp;'  + data.GContactsType + '</span></a>');
+			}
+			if(typeof data.Android != "undefined"){
+				$imageElem.append('<a style="margin-right:5px;" data-source="android" href="javascript:;" rel="' + data.Android + '"><img src="images/ch_android.png" alt="android"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink android" href="javascript:;" rel="' + data.Android + '">' + data.Android + ' <span style="font-size:8px;">&nbsp;'  + data.AndroidType + '</span></a>');
 			}
 			if(typeof data.iPhone != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="iphone" href="javascript:;" rel="' + data.iPhone + '"><img src="images/ch_iphone.png" alt="iphone"/></a>');

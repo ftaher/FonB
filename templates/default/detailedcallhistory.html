@@ -34,6 +34,7 @@
 		{{#if Src.Internal}}<img class="internal" style="display:none;" src="images/ch_internal.png"/>{{/if}}
 		{{#if Src.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Src.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
+		{{#if Src.Android}}<img class="android" style="display:none;" src="images/ch_android.png"/>{{/if}}
 		{{#if Src.iPhone}}<img class="iphone" style="display:none;" src="images/ch_iPhone.png"/>{{/if}}
 		{{#if Src.AsteriskPhonebook}}<img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/>{{/if}}
 		{{#if Src.Highrise}}
@@ -48,6 +49,9 @@
 		<span class="asterisk contact-name" style="display:none;margin-left:3px;margin-left:5px;">{{Src.AsteriskPhonebookName}}</span>
 		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Src.AsteriskPhonebookSpeedDial}}</span>
 		{{/if}}
+		{{#if Src.Android}}
+		<span class="android contact-name" style="display:none;">{{Src.Android}}</span>
+		{{/if}
 		{{#if Src.iPhone}}
 		<span class="iphone contact-name" style="display:none;">{{Src.iPhone}}</span>
 		{{/if}}
@@ -83,6 +87,7 @@
 		{{#if Dst.Internal}}<img class="internal" style="display:none;" src="images/ch_internal.png"/>{{/if}}
 		{{#if Dst.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Dst.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
+		{{#if Dst.Android}}<img class="android" style="display:none;" src="images/ch_android.png"/>{{/if}}
 		{{#if Dst.iPhone}}<img class="iphone" style="display:none;" src="images/ch_iPhone.png"/>{{/if}}
 		{{#if Dst.AsteriskPhonebook}}<img class="asterisk" style="display:none;" src="images/ch_asterisk.png"/>{{/if}}
 		{{#if Dst.Highrise}}
@@ -96,6 +101,9 @@
 		{{#if Dst.AsteriskPhonebook}}
 		<span class="asterisk contact-name" style="display:none;margin-left:5px;">{{Dst.AsteriskPhonebookName}}</span>
 		<span class="asterisk label label-info" style="display:none;background-color:#749c49;margin-left:5px;">{{Dst.AsteriskPhonebookSpeedDial}}</span>
+		{{/if}}
+		{{#if Dst.Android}}
+		<span class="android contact-name" style="display:none;">{{Dst.Android}}</span>
 		{{/if}}
 		{{#if Dst.iPhone}}
 		<span class="iphone contact-name" style="display:none;">{{Dst.iPhone}}</span>
