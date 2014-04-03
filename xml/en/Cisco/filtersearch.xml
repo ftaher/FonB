@@ -1,0 +1,32 @@
+<CiscoIPPhoneMenu>
+<Title>Help</Title>
+<MenuItem>
+<Name>All Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>Google Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=gcontacts&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>Highrise Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=highrise&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>My Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=mycontacts&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>Internal Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=internal&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>iPhone Contacts</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=iphone&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+<MenuItem>
+<Name>Speed Dials</Name>
+<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=asterisk&FilterSearch={{FilterSearch}}</URL>
+</MenuItem>
+
+</CiscoIPPhoneMenu>

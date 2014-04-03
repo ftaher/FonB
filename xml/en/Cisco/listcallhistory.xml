@@ -1,0 +1,24 @@
+<CiscoIPPhoneMenu>
+<Title>FonB Call History</Title>
+{{^CallHistoryList}}
+<MenuItem>
+<Name>No Call History Found</Name>
+</MenuItem>
+{{/CallHistoryList}}
+{{#CallHistoryList}}
+<MenuItem>
+<Name>{{#CallerClid}}{{#Internal}}{{Internal}}|{{Direction}}{{/Internal}}{{^Internal}}{{#MyContacts}}{{MyContacts}}|{{Direction}}{{/MyContacts}}{{^MyContacts}}{{#GContacts}}{{GContacts}}|{{Direction}}{{/GContacts}}{{^GContacts}}{{#Highrise}}{{Highrise}}|{{Direction}}{{/Highrise}}{{^Highrise}}{{Num}}{{/Highrise}}{{/GContacts}}{{/MyContacts}}{{/Internal}}{{/CallerClid}}</Name>
+<URL>Dial:{{#CallerClid}}{{Num}}{{/CallerClid}}</URL>
+</MenuItem>
+{{/CallHistoryList}}
+<SoftKeyItem>
+<Name>Back</Name>
+<URL>SoftKey:Exit</URL>
+<Position>1</Position>
+</SoftKeyItem>
+<SoftKeyItem>
+<Name>Filter</Name>
+<URL>http://{{Host}}/xml/en/Cisco/filtercallhistory.xml</URL>
+<Position>2</Position>
+</SoftKeyItem>
+</CiscoIPPhoneMenu>

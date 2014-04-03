@@ -1,0 +1,45 @@
+<CiscoIPPhoneMenu>
+	<Title>FonB Contacts</Title>
+		{{^Contacts}}
+		<MenuItem>
+		<Name>No Contacts Found</Name>
+		</MenuItem>
+		
+		{{/Contacts}}
+		{{#Contacts}}
+		<MenuItem>
+		<Name>{{Name}}|{{PhoneNumberPrint}}|{{Source}}</Name>
+		<URL>Dial:{{PhoneNumber}}</URL>
+		</MenuItem>
+		{{/Contacts}}
+
+	{{#FilterSearch}}
+		<SoftKeyItem>
+		<Name>Back</Name>
+	 	<URL>SoftKey:Exit</URL>
+		<Position>1</Position>
+		</SoftKeyItem> 
+
+	{{/FilterSearch}}
+		<SoftKeyItem>
+                <Name>Filter</Name>
+                <URL>http://{{Host}}/xml/en/Cisco/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
+                <Position>3</Position>
+                </SoftKeyItem>
+                 
+		<SoftKeyItem>
+                <Name>Search</Name>
+                <URL>http://{{Host}}/xml/en/Cisco/phonebook.xml</URL>
+                <Position>2</Position>
+                </SoftKeyItem>
+		
+<!--
+		<SoftKeyItem>
+		<Name>Home</Name>
+                <URL>http://{{Host}}/xml/en/Cisco/menu.xml</URL>
+                <Position>4</Position>
+                </SoftKeyItem>
+-->
+	
+                              
+</CiscoIPPhoneMenu>

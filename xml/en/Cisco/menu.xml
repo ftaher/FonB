@@ -1,0 +1,36 @@
+<CiscoIPPhoneMenu>
+	<Title>FonB</Title>
+
+	<MenuItem>
+		<IconIndex>0</IconIndex>
+		<Name>List Phonebook</Name>
+		<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&FilterSearch=</URL>
+	</MenuItem>
+	<MenuItem>
+	 	<IconIndex>1</IconIndex>
+		<Name>Call History</Name>
+		<URL>http://{{Host}}/xml/en/Cisco/listcallhistory.xml?PageSize=20&NameSize=9&PhoneNumberSize=8&SourceSize=5&FilterSearch=</URL>
+	</MenuItem>
+	<MenuItem>
+		<IconIndex>2</IconIndex>
+		<Name>Logout</Name>
+		<URL>http://{{Host}}/xml/en/Cisco/menu.xml?logout=yes</URL>
+
+	</MenuItem>
+
+
+
+         <SoftKeyItem>
+                <Name>Select</Name>
+                <URL>SoftKey:Select</URL>
+                <Position>1</Position>
+                </SoftKeyItem>
+
+	 <SoftKeyItem>
+	        <Name>Exit</Name>
+	        <URL>SoftKey:Exit</URL>
+	        <Position>2</Position>
+	 </SoftKeyItem>
+
+	
+</CiscoIPPhoneMenu>
