@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SnomIPPhoneDirectory clearlight="true">
+	<Title>List of contacts</Title>
+	{{#Contacts}}
+	<DirectoryEntry>
+		<Name>{{FirstName}} {{#LastName}}{{LastName}}{{/LastName}} {{PhoneNumber}}</Name>
+		<Telephone>{{PhoneNumber}}</Telephone>
+	</DirectoryEntry>
+	{{/Contacts}}
+	{{^Contacts}}
+	<DirectoryEntry>
+		<Name>None * - search # - menu</Name>
+		<Telephone></Telephone>
+	</DirectoryEntry>
+	{{/Contacts}}
+	<SoftKeyItem>
+		<Name>#</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/filtersearch.xml</URL>
+	</SoftKeyItem>
+	<SoftKeyItem>
+		<Name>*</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/phonebook.xml</URL>
+	</SoftKeyItem>
+</SnomIPPhoneDirectory>

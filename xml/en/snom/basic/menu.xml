@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<SnomIPPhoneMenu>
+	<Title>Menu</Title>
+	<MenuItem>
+		<Name>Contacts</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/phonebook.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>Call History</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/listcallhistory.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>Help</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/help.xml</URL>
+	</MenuItem>
+	<MenuItem>
+		<Name>Logout</Name>
+		<URL>http://{{Host}}/xml/en/snom/basic/menu.xml?logout=yes</URL>
+	</MenuItem>
+</SnomIPPhoneMenu>
