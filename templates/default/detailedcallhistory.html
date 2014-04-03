@@ -164,6 +164,7 @@
 </div>
 {{/if}}
 {{#if recordingfile}}
+{{#unless VoiceMail}}
 <div class="row-fluid flashplayer">
 	<div class="span1 offset1">
 		{{t "Recording:"}}
@@ -173,8 +174,27 @@
 </div>
 <div class="row-fluid note">
 	<div class="span10 offset2">
-		<a href="/php/playfile.php?src={{src}}&dst={{dst}}&calldate={{calldate}}&amaflags={{amaflags}}&duration={{duration}}&billsec={{billsec}}&lastapp={{lastapp}}" class="btn btn-mini">{{t "Download audio"}}</a>
+		<a href="php/playfile.php?src={{src}}&dst={{dst}}&calldate={{calldate}}&amaflags={{amaflags}}&duration={{duration}}&billsec={{billsec}}&lastapp={{lastapp}}" class="btn btn-mini">{{t "Download audio"}}</a>
 		<img style="padding:7px;display:none;" src="images/loading.gif">
 	</div>
 </div>
+{{/unless}}
+{{/if}}
+{{#if VoiceMail}}
+{{#VoiceMail}}
+<div class="row-fluid flashplayer voicemail_{{../Id}}">
+	<div class="span1 offset1">
+		{{t "VoiceMail:"}}
+	</div>
+	<div data-url="php/voicemail.php?action=play&{{UrlParams}}" class="span10 mp3player">
+	</div>
+</div>
+<div class="row-fluid note voicemail_{{../Id}}">
+	<div class="span10 offset2">
+		<a href="php/voicemail.php?action=download&{{UrlParams}}" class="btn btn-mini">{{t "Download audio"}}</a>
+		<a href="javascript:;" onclick="fonb_callhistory.deleteVoicemail('{{../Id}}', 'php/voicemail.php?action=delete&{{UrlParams}}')" class="btn btn-mini btn-danger voicemail_{{../Id}}">{{t "Delete Voicemail"}}</a>
+		<img style="padding:7px;display:none;" src="images/loading.gif">
+	</div>
+</div>
+{{/VoiceMail}}
 {{/if}}

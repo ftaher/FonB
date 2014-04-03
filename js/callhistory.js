@@ -121,6 +121,28 @@ fonb_callhistory = {
 		/* finaly load the call History page */
 		search_request( 1 );
 
+	},
+	deleteVoicemail : function(id, url){
+		$(".btn.voicemail_" +id).prop("disabled", true);
+		if(confirm("Are you sure you want to delete voicemail?")){
+			$(".btn.voicemail_" +id).siblings("img").show();
+			$.ajax({
+				url : url,
+				success : function(data){
+					CallHistoryList[15]["VoiceMail"] = "";
+					$(".btn.voicemail_" +id).prop("disabled", false);
+					$(".btn.voicemail_" +id).siblings("img").hide();
+					$(".note.voicemail_" +id).after('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Voicemail deleted successfully.</div>');
+					$(".voicemail_" +id).fadeOut("slow", function(){
+						$(".voicemail_" +id).remove();
+					});
+				},
+				error : function(){
+					$(".btn.voicemail_" +id).prop("disabled", false);
+					$(".btn.voicemail_" +id).after('<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert">&times;</a>Error occured in deleting voicemail.</div>');
+				}
+			});
+		}
 	}
 }
 
