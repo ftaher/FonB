@@ -1,0 +1,18 @@
+<CiscoIPPhoneInput>
+	<Title>Login</Title>
+		<Prompt>Login Details:</Prompt>
+			<URL>http://{{Host}}/xml/en/Cisco/menu.xml</URL>
+				<InputItem>
+					<DisplayName>Extension</DisplayName>
+						<QueryStringParam>user</QueryStringParam>
+							<DefaultValue/>
+								<InputFlags>N</InputFlags>
+									</InputItem>
+
+	<InputItem>
+		<DisplayName>Pin</DisplayName>
+			<QueryStringParam>pass</QueryStringParam>
+				<DefaultValue/>
+					<InputFlags>P&N</InputFlags>
+						</InputItem>
+						</CiscoIPPhoneInput>

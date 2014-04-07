@@ -1,0 +1,36 @@
+<CiscoIPPhoneInput>
+	<Title>Phonebook Search</Title>
+	<Prompt>Contact Name:</Prompt>
+	<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5</URL>
+	<InputItem InputItemeditable="yes" type="string">
+	<Prompt>Contact Name:</Prompt>
+	<URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5</URL>
+	<QueryStringParam>FilterSearch</QueryStringParam>
+	</InputItem>
+
+
+         <SoftKeyItem>
+         <Name>Submit</Name>
+         <URL>SoftKey:Submit</URL>
+         <Position>1</Position>
+         </SoftKeyItem>
+
+         <SoftKeyItem>
+         <Name>Backspace</Name>
+         <URL>SoftKey:&lt;&lt;</URL>
+         <Position>2</Position>
+         </SoftKeyItem>
+         <SoftKeyItem>
+         <Name>Cancel</Name>
+         <URL>SoftKey:Cancel</URL>
+         <Position>3</Position>
+         </SoftKeyItem>
+         <SoftKeyItem>
+         <Name>Home</Name>
+         <URL>http://{{Host}}/xml/en/Cisco/menu.xml</URL>
+         <Position>4</Position>
+         </SoftKeyItem>
+
+
+
+</CiscoIPPhoneInput>>

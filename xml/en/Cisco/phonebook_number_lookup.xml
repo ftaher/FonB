@@ -1,0 +1,29 @@
+<CiscoIPPhoneInput>
+	<Title>{{Num}}</Title>
+	{{#Internal}}
+	<MenuItem>
+		<Prompt>Internal Extension</Prompt>
+		<URL>Dial:{{Num}}</URL>
+	</MenuITem>
+	{{/Internal}}
+	{{#MyContacts}}
+	<MenuItem>
+		<Prompt>MyContacts: {{MyContacts}} ({{MyContactsType}})</Prompt>
+		<URL>Dial:{{Num}}</URL>
+	</MenuItem>
+	{{/MyContacts}}
+
+	{{#GContacts}}
+	<MenuItem>
+		<Prompt>GContacts: {{GContacts}} ({{GContactsType}})</Prompt>
+		<URL>Dial:{{Num}}</URL>
+	</MenuItem>
+	{{/GContacts}}
+
+	{{#Highrise}}
+	<MenuItem>
+		<Prompt>Highrise: {{Highrise}} ({{HighriseType}})</Prompt>
+		<URL>Dial:{{Num}}</URL>
+	</MenuItem>
+	{{/Highrise}}
+</CiscoIPPhoneInput>
