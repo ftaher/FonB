@@ -30,7 +30,12 @@
 	{{#CallHistoryList}}
 <table width="100%" border="0" cellspacing="2" cellpadding="3" class="call-history-grid-row Summary {{Direction}}" id="CONTACT_{{Id}}">
   <tr class="OneRow">
-    <td width="20%" class="CallOwner"><img src="images/ch_internal.png" alt="user"/><span class="contact-name">{{CallOwner.Internal}}</span></td>
+    <td width="20%" class="CallOwner">
+      {{#if CallOwner.Internal}}<img src="images/ch_internal.png" alt="user"/><span class="contact-name">{{CallOwner.Internal}}</span>{{/if}}
+      {{#if CallOwner.Deleted}}<img src="images/ch_deleted.png" alt="user"/><span class="contact-name">{{CallOwner.Deleted}}</span>{{/if}}
+      {{#if CallOwner.Queue}}<img src="images/ch_queue.png" alt="user"/><span class="contact-name">{{CallOwner.Queue}}</span>{{/if}}
+      {{#if CallOwner.RingGroup}}<img src="images/ch_ringgroup.png" alt="user"/><span class="contact-name">{{CallOwner.RingGroup}}</span>{{/if}}
+    </td>
     <td class="CallDirection" width="15%"><img src="images/{{Direction}}_Call.png" alt="{{Direction}}"/>&nbsp;<span>{{Direction}}</span></td>
     <td class="CallerClid" width="20%"> 
       {{#if CallerClid.Internal}} <img class="internal" style="display:none;" src="images/ch_internal.png"/> {{/if}}
