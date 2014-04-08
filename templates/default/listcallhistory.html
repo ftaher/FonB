@@ -30,10 +30,13 @@
 	{{#CallHistoryList}}
 <table width="100%" border="0" cellspacing="2" cellpadding="3" class="call-history-grid-row Summary {{Direction}}" id="CONTACT_{{Id}}">
   <tr class="OneRow">
-    <td width="20%" class="CallOwner"><img src="images/ch_internal.png" alt="user"/><span class="contact-name">{{CallOwner.Internal}}</a></td>
+    <td width="20%" class="CallOwner"><img src="images/ch_internal.png" alt="user"/><span class="contact-name">{{CallOwner.Internal}}</span></td>
     <td class="CallDirection" width="15%"><img src="images/{{Direction}}_Call.png" alt="{{Direction}}"/>&nbsp;<span>{{Direction}}</span></td>
     <td class="CallerClid" width="20%"> 
       {{#if CallerClid.Internal}} <img class="internal" style="display:none;" src="images/ch_internal.png"/> {{/if}}
+      {{#if CallerClid.Deleted}} <img class="deleted" style="display:none;" src="images/ch_deleted.png"/> {{/if}}
+      {{#if CallerClid.RingGroup}} <img class="ringgroup" style="display:none;" src="images/ch_ringgroup.png"/> {{/if}}
+      {{#if CallerClid.Queue}} <img class="queue" style="display:none;" src="images/ch_queue.png"/> {{/if}}
       {{#if CallerClid.MyContacts}} <img class="personal" style="display:none;" src="images/ch_mycontacts.png"/> {{/if}}
       {{#if CallerClid.Android}} <img class="android" style="display:none;" src="images/ch_android.png"/> {{/if}}
       {{#if CallerClid.GContacts}} <img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/> {{/if}}
@@ -56,7 +59,18 @@
       {{#if CallerClid.iPhone}} 
       <span class="iphone" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.iPhoneLastName}}{{CallerClid.iPhoneLastName}}, {{/if}}{{CallerClid.iPhoneFirstName}}{{else}}{{CallerClid.iPhone}}{{/if}}</span> <span class="iphone phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.iPhoneType}}</span> {{/if}}
       {{#if CallerClid.Internal}} 
-      <span class="internal contact-name" style="display:none;">{{CallerClid.Internal}}</span> {{/if}} 
+      <span class="internal contact-name" style="display:none;">{{CallerClid.Internal}}</span> 
+      {{/if}} 
+      {{#if CallerClid.Deleted}} 
+      <span class="deleted contact-name" style="display:none;">{{CallerClid.Deleted}}</span> 
+      {{/if}} 
+      {{#if CallerClid.RingGroup}} 
+      <span class="ringgroup contact-name" style="display:none;">{{CallerClid.RingGroup}}</span> 
+      {{/if}} 
+      {{#if CallerClid.Queue}} 
+      <span class="queue contact-name" style="display:none;">{{CallerClid.Queue}}</span> 
+      {{/if}} 
+      {{#if QueueSource}}<img src="images/ch_queue.png" alt="queue"/>{{/if}}
     </td>
     <td style="width:140px;float:left;overflow:hidden;border:0px;">
     {{#each CallerClid.GContactsGroups}}
@@ -64,6 +78,24 @@
 	 {{/each}}
     {{#each CallerClid.HighriseGroups}}
     <span class="crm label label-info">{{this}}</span>
+   {{/each}}
+   {{#each Queue}}
+      <span class="queue label label-info">{{Number}}</span>
+   {{/each}}
+   {{#if CallerClid.Deleted}}
+   {{#each QueueSource}}
+        <span class="deleted label label-info">{{Number}}</span>
+   {{/each}}
+   {{/if}}
+   {{#unless CallerClid.Deleted}}
+     {{#if CallerClid.Internal}}
+     {{#each QueueSource}}
+          <span class="internal label label-info">{{Number}}</span>
+     {{/each}}
+     {{/if}}
+   {{/unless}}
+   {{#each RingGroup}}
+      <span class="ringgroup label label-info">{{Number}}</span>
    {{/each}}
     </td>
     <td width="5%">{{#if recordingfile}}{{#unless VoiceMail}}<img style="display:inline-block;" src="images/Call_Attachment.png" alt="call recording"/>{{/unless}}{{/if}}{{#if FonBHighriseNoteID}}<img style="display:inline-block;" src="images/icons/note.png" alt="note"/>{{/if}}{{#if VoiceMail}}<img class="voicemail_{{../Id}}" style="display:inline-block;" src="images/voicemail.png" alt="voicemail"/>{{/if}}{{#if FonBHighriseNoteID}}<img style="display:inline-block;" src="images/icons/note.png" alt="note"/>{{/if}}</td>

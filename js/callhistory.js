@@ -183,15 +183,24 @@ function search_request( ch_pagenumber ) {
 				var personal = $(this).find('span.personal').text();
 				var gcontacts = $(this).find('span.gcontacts').text();
 				var internal = $(this).find('span.internal').text();
+				var deleted = $(this).find('span.deleted').text();
+				var queue = $(this).find('span.queue').text();
+				var ringgroup = $(this).find('span.ringgroup').text();
 				var iphone = $(this).find('span.iphone').text();
 				if ( crm != "" ) $(this).find('img.crm').show();
 				if ( personal != "" ) $(this).find('img.personal').show();
 				if ( asterisk != "" ) $(this).find('img.asterisk').show();
 				if ( gcontacts != "" ) $(this).find('img.gcontacts').show();
 				if ( internal != "" ) $(this).find('img.internal').show();
+				if ( deleted != "" ) $(this).find('img.deleted').show();
+				if ( queue != "" ) $(this).find('img.queue').show();
+				if ( ringgroup != "" ) $(this).find('img.ringgroup').show();
 				if ( iphone != "" ) $(this).find('img.iphone').show();
 				
 				if ( internal != "" ) $(this).find('span.internal').show();
+				else if ( deleted != "" ) $(this).find('span.deleted').show();
+				else if ( queue != "" ) $(this).find('span.queue').show();
+				else if ( ringgroup != "" ) $(this).find('span.ringgroup').show();
 				else if ( iphone != "" ) $(this).find('span.iphone').show();
 				else if ( gcontacts != "" ) $(this).find('span.gcontacts').show();
 				else if ( personal != "" ) $(this).find('span.personal').show();
@@ -202,9 +211,31 @@ function search_request( ch_pagenumber ) {
 			/* interna.prop("checked");l mouseover action */
 			$('.CallerClid img.internal').mouseover( function (event) {
 				var $dstobj = $(this).parent();
+				$dstobj.find('span').not('.queue').hide();
+				$dstobj.next().find('span').hide();
+				$dstobj.next().find('.internal').show();
+				$dstobj.find('span.internal').show();
+			});
+			$('.CallerClid img.deleted').mouseover( function (event) {
+				var $dstobj = $(this).parent();
 				$dstobj.find('span').hide();
 				$dstobj.next().find('span').hide();
-				$dstobj.find('span.internal').show();
+				$dstobj.next().find('.deleted').show();
+				$dstobj.find('span.deleted').show();
+			});
+			$('.CallerClid img.queue').mouseover( function (event) {
+				var $dstobj = $(this).parent();
+				$dstobj.find('span').hide();
+				$dstobj.next().find('span').hide();
+				$dstobj.next().find('.queue').show();
+				$dstobj.find('span.queue').show();
+			});
+			$('.CallerClid img.ringgroup').mouseover( function (event) {
+				var $dstobj = $(this).parent();
+				$dstobj.find('span').hide();
+				$dstobj.next().find('span').hide();
+				$dstobj.next().find('.ringgroup').show();
+				$dstobj.find('span.ringgroup').show();
 			});
 		
 			/* gcontacts mouseover action */
@@ -307,11 +338,17 @@ function getSummary(event) {
 	var personal = $(detailedrecord).find('.dst span.personal').text();
 	var gcontacts = $(detailedrecord).find('.dst span.gcontacts').text();
 	var internal = $(detailedrecord).find('.dst span.internal').text();
+	var deleted = $(detailedrecord).find('.dst span.deleted').text();
+	var queue = $(detailedrecord).find('.dst span.queue').text();
+	var ringgroup = $(detailedrecord).find('.dst span.ringgroup').text();
 	var iphone = $(detailedrecord).find('.dst span.iphone').text();
 	if ( crm != "" ) $(detailedrecord).find('.dst img.crm').show();
 	if ( personal != "" ) $(detailedrecord).find('.dst img.personal').show();
 	if ( gcontacts != "" ) $(detailedrecord).find('.dst img.gcontacts').show();
 	if ( internal != "" ) $(detailedrecord).find('.dst img.internal').show();
+	if ( deleted != "" ) $(detailedrecord).find('.dst img.deleted').show();
+	if ( queue != "" ) $(detailedrecord).find('.dst img.queue').show();
+	if ( ringgroup != "" ) $(detailedrecord).find('.dst img.ringgroup').show();
 	if ( asterisk != "" ) $(detailedrecord).find('.dst img.asterisk').show();
 	if ( iphone != "" ) $(detailedrecord).find('.dst img.iphone').show();
 	if(dst != ourextension && dst != "hold"){
@@ -323,6 +360,9 @@ function getSummary(event) {
 	
 
 	if ( internal != "" ) {$(detailedrecord).find('.dst span.internal').show();console.log(internal);}
+	else if ( deleted != "" ) {$(detailedrecord).find('.dst span.deleted').show();console.log(deleted);}
+	else if ( queue != "" ) {$(detailedrecord).find('.dst span.queue').show();console.log(queue);}
+	else if ( ringgroup != "" ) {$(detailedrecord).find('.dst span.ringgroup').show();console.log(ringgroup);}
 	else if ( gcontacts != "" ){ $(detailedrecord).find('.dst span.gcontacts').show(); console.log("showing");}
 	else if ( personal != "" ) $(detailedrecord).find('.dst span.personal').show();
 	else if ( crm != "" ) $(detailedrecord).find('.dst span.crm').show();
@@ -336,6 +376,9 @@ function getSummary(event) {
 	gcontacts = $(detailedrecord).find('.src span.gcontacts').text();
 	asterisk = $(detailedrecord).find('.src span.asterisk').text();
 	internal = $(detailedrecord).find('.src span.internal').text();
+	deleted = $(detailedrecord).find('.src span.deleted').text();
+	queue = $(detailedrecord).find('.src span.queue').text();
+	ringgroup = $(detailedrecord).find('.src span.ringgroup').text();
 	iphone = $(detailedrecord).find('.src span.iphone').text();
 	if ( crm != "" ) $(detailedrecord).find('.src img.crm').show();
 	if ( personal != "" ) $(detailedrecord).find('.src img.personal').show();
@@ -344,6 +387,12 @@ function getSummary(event) {
 	if ( asterisk != "" ) $(detailedrecord).find('.src img.asterisk').show();
 	if ( internal != "" ) $(detailedrecord).find('.src img.internal').show();
 	if ( internal != "" ) {$(detailedrecord).find('.src span.internal').show();console.log(internal);}
+	if ( deleted != "" ) $(detailedrecord).find('.src img.deleted').show();
+	if ( deleted != "" ) {$(detailedrecord).find('.src span.deleted').show();console.log(deleted);}
+	if ( queue != "" ) $(detailedrecord).find('.src img.queue').show();
+	if ( queue != "" ) {$(detailedrecord).find('.src span.queue').show();console.log(queue);}
+	if ( ringgroup != "" ) $(detailedrecord).find('.src img.ringgroup').show();
+	if ( ringgroup != "" ) {$(detailedrecord).find('.src span.ringgroup').show();console.log(ringgroup);}
 	else if ( iphone != "" ) $(detailedrecord).find('.src span.iphone').show();
 	else if ( gcontacts != "" ){ $(detailedrecord).find('.src span.gcontacts').show(); console.log("showing");}
 	else if ( personal != "" ) $(detailedrecord).find('.src span.personal').show();
@@ -394,6 +443,21 @@ function getSummary(event) {
 		var $dstobj = $(this).parent();
 		$dstobj.find('span').not(".from,.dial,.dial span").hide();
 		$dstobj.find('span.internal').show();
+	});	
+	$(detailedrecord).find('img.deleted').mouseover( function (event) {
+		var $dstobj = $(this).parent();
+		$dstobj.find('span').not(".from,.dial,.dial span").hide();
+		$dstobj.find('span.deleted').show();
+	});	
+	$(detailedrecord).find('img.queue').mouseover( function (event) {
+		var $dstobj = $(this).parent();
+		$dstobj.find('span').not(".from,.dial,.dial span").hide();
+		$dstobj.find('span.queue').show();
+	});	
+	$(detailedrecord).find('img.ringgroup').mouseover( function (event) {
+		var $dstobj = $(this).parent();
+		$dstobj.find('span').not(".from,.dial,.dial span").hide();
+		$dstobj.find('span.ringgroup').show();
 	});			
 	$(detailedrecord).find('.Duration:empty').html("XXXX").css("color","#ff9999");
 	$mp3player = $(detailedrecord).find('.mp3player');

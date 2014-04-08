@@ -57,6 +57,7 @@ function SettingsGetSettingsPage(){
 			$('#current_rewrite_rules').html(html);
 			$( "#current_rewrite_rules" ).sortable( {update: SettingsReOrderReWriteRule} );
 			SettingsSelectOrderBy(data);
+			SettingsSelectQueuesAndRingGroups(data);
 			SettingsSelectPagesize(data);
 			SettingsSelectLanguage(data);
 			setGcontactsSyncStatus();
@@ -80,6 +81,8 @@ function SettingsPostData() {
 	form_data['general_pagesize'] = $("#general_pagesize").val();
 	form_data['general_mobile_phone'] = $("#general_mobile_phone").val();
 	form_data['general_orderby'] = $('input[name=general_orderby]:checked').val();
+	form_data['enable_queues'] = $('input[name=enable_queues]:checked').val();
+	form_data['enable_ringgroups'] = $('input[name=enable_ringgroups]:checked').val();
 	form_data['highrise_sitename'] = $("#highrise_sitename").val();
 	form_data['highrise_token'] = $("#highrise_token").val();
 	form_data['save_settings'] = "save";
@@ -113,6 +116,21 @@ function SettingsSelectOrderBy( data ) {
 			break;
 	}
 }
+
+function SettingsSelectQueuesAndRingGroups(data) {
+	var enable_ringgroups = data['enable_ringgroups'];
+	var enable_queues = data['enable_queues'];
+	if(enable_ringgroups)
+		$('#general_enable_ringgroups').prop('checked', true);
+	else
+		$('#general_disable_ringgroups').prop('checked', true);
+	if(enable_queues)
+		$('#general_enable_queues').prop('checked', true);
+	else
+		$('#general_disable_queues').prop('checked', true);
+
+}
+
 var TIME_OUT_SECONDS = 15;
 var highrisePending = 0;
 var highriseSamePercentageCount = 0;
