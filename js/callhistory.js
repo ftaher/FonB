@@ -68,7 +68,6 @@ fonb_callhistory = {
 				}
 			}
 		});
-		setupContactsAutoComplete("#callhistorysearch");
 		$( "#slider-range" ).slider({
 			min: 0,
 			max: 180,
