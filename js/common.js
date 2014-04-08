@@ -132,6 +132,9 @@ fonb_main = {
 			$(".dialpad").toggle("fast");
 		});
 		$(".dialpad .btn").on("click", function(){
+			if(OurChannels.length == 0){
+				$("#quickdial").val($("#quickdial").val() + "" + $(this).text()).focus();//+"" for forcing string addition
+			}
 			for(var i=0;i<OurChannels.length;i++){
 				var action = {Action: "DTMF", Dial: $(this).text(), ReqID: OurChannels[i].ID};
 				action = JSON.stringify(action);

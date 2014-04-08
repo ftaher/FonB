@@ -820,7 +820,7 @@ function Conference( activenum ) {
 }
 
 /* WebPhone */
-$.phono({
+var phono = $.phono({
 
 apiKey: "3feb7ec665d9e5b34c47d6087fadf589",
 
@@ -829,6 +829,7 @@ onReady: function() {
 	console.log("Phono Session ID: " + this.sessionId);
 	WebPhoneSipId = this.sessionId;
 	$('body').trigger('flashphoneready');
+	phono.config.logLevel = "OFF";
 	},
 
 onUnready: function() {

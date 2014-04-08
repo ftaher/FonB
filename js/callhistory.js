@@ -488,34 +488,6 @@ function setCallHistoryFilter(){
 	$.expr[':'].containsi = function(a,i,m){
 			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase())>=0;
 	};
-	typeaheadInput = $("INPUT#callhistorysearch");
-	callhistoryRows = $(".call-history-grid-row");
-	typeaheadInput.typeahead({
-		source : typeaheadSource,
-		updater : function(item){
-			if($.trim(item) == ""){
-				callhistoryRows.removeClass("hide");
-			}
-			else{
-				item = item.replace(/(\(|\)).*/g,"");
-				filtered = callhistoryRows.not(":containsi(" + item +")");
-				filtered.addClass("hide");
-				callhistoryRows.not(filtered).removeClass("hide");
-			}
-			return item;
-		}
-	}).keyup(function(){
-		item = $(this).val();
-		if($.trim(item) == ""){
-			callhistoryRows.removeClass("hide");
-		}
-		else{
-			item = item.replace(/(\(|\)).*/g,"");
-			filtered = callhistoryRows.not(":containsi(" + item +")");
-			filtered.addClass("hide");
-			callhistoryRows.not(filtered).removeClass("hide");
-		}
-	});
 }
 
 function clearCommas(){
