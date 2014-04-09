@@ -1,6 +1,6 @@
 
 /*!
- * Copyright 2013 Voxeo Labs, Inc.
+ * Copyright 2013, 2014 Tropo, Inc.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you
  * may not use this file except in compliance with the License.
@@ -667,17 +667,30 @@ ASProxy.prototype =
 };
 
 
-// FIXME: Needed by flXHR
 var flensed;
-
-if (typeof phonoFlensedOverride != 'undefined') {
-    flensed = phonoFlensedOverride;
-} else {
-    flensed = {base_path:"//s.phono.com/deps/flensed/1.0/"};
-}
 
 (function($) {
 
+/* Global config */
+
+Phono.connectionUrl = "app.v1-1.phono.com";
+Phono.gateway = "gw-v6.d.phono.com";
+Phono.cdnUrl = "s.phono.com";
+Phono.dynamicCdnUrl = "u.phono.com";
+Phono.cirrusUrl = "phono-fms1-ext.voxeolabs.net"
+Phono.flashBridged = false;
+Phono.webUrl = "http://phono.com";
+Phono.version = "master";
+   
+
+
+
+    if (typeof phonoFlensedOverride != 'undefined') {
+        flensed = phonoFlensedOverride;
+    } else {
+        flensed = {base_path:"//" + Phono.cdnUrl + "/deps/flensed/1.0/"};
+    }
+    
 
 var Strophe = null;
 
@@ -686,11 +699,11 @@ function Phono(config) {
     Strophe = PhonoStrophe;
     // Define defualt config and merge from constructor
     this.config = Phono.util.extend({
-        gateway: "gw-v6.d.phono.com",
-        connectionUrl: window.location.protocol+"//app.v1-1.phono.com/http-bind"
+        gateway: Phono.gateway,
+        connectionUrl: window.location.protocol + "//" + Phono.connectionUrl + "/http-bind"
     }, config);
     if (this.config.connectionUrl.indexOf("file:")==0){
-        this.config.connectionUrl = "https://app.v1-1.phono.com/http-bind";
+        this.config.connectionUrl = "https://" + Phono.connectionUrl + "/http-bind";
     }
 
     // Bind 'on' handlers
@@ -698,11 +711,11 @@ function Phono(config) {
 
     // Wrap ourselves with logging
     Phono.util.loggify("Phono", this);
-   
+
     if(!config.apiKey) {
-        this.config.apiKey = prompt("Please enter your Phono API Key.\n\nTo get a new one sign up for a free account at: http://www.phono.com");
+        this.config.apiKey = prompt("Please enter your Phono API Key.\n\nTo get a new one sign up for a free account at: " + Phono.webUrl);
         if(!this.config.apiKey) {
-            var message = "A Phono API Key is required. Please get one at http://www.phono.com";
+            var message = "A Phono API Key is required. Please get one at " + Phono.webUrl;
             Phono.events.trigger(this, "error", {
                 reason: message
             });
@@ -713,7 +726,7 @@ function Phono(config) {
     // Initialize Fields
     this.sessionId = null;
     this.connTimers = [];
-    //Phono.log.debug("[CONFIG] ConnectionUrl: " + this.config.connectionUrl);
+    Phono.log.debug("[CONFIG] ConnectionUrl: " + this.config.connectionUrl);
 
     if(navigator.appName.indexOf('Internet Explorer')>0){
         xmlSerializer = {};
@@ -737,27 +750,27 @@ function Phono(config) {
         var phono = this;
         var cfunc = function(curl) {
             if (!phono.connected()) { 
-                //Phono.log.debug("trying connection URL "+curl);
+                Phono.log.debug("trying connection URL "+curl);
                 if (phono.connection != null){
                     phono.connection.disconnect();
                 }
                 phono.connection = new Strophe.Connection(curl);
                 
                 phono.connection.xmlInput = function (body) {
-                    //Phono.log.debug("[WIRE] (i) " + xmlSerializer.serializeToString(body));
+                    Phono.log.debug("[WIRE] (i) " + xmlSerializer.serializeToString(body));
                 };
                 
                 phono.connection.xmlOutput = function (body) {
-                //Phono.log.debug("[WIRE] (o) " + xmlSerializer.serializeToString(body));
+                Phono.log.debug("[WIRE] (o) " + xmlSerializer.serializeToString(body));
                 };
                 
                 phono.connect();
             } else {
-            //Phono.log.debug("[LB] already connected... not trying URL "+curl);
+            Phono.log.debug("[LB] already connected... not trying URL "+curl);
             }
         }  
         
-        //Phono.log.debug("[LB] Invoke loadbalancer");
+        Phono.log.debug("[LB] Invoke loadbalancer");
         // Create a dummy object so that the Strophe plugins get loaded
         var dummy = connection = new PhonoStrophe.Connection(this.config.connectionUrl);
         var a="",b= function (){} ,c="";
@@ -766,13 +779,20 @@ function Phono(config) {
         var curls = [];
         var uri = document.createElement('a');
         var srv = "_phono";
+        var abort = false;
         uri.href = this.config.connectionUrl
-        //Phono.log.debug("[LB] OrigT ="+uri.hostname+" path ="+uri.pathname);
+        Phono.log.debug("[LB] OrigT ="+uri.hostname+" path ="+uri.pathname);
         if(uri.protocol == "https:"){
            srv = srv+"s";
         }
         var dnsUrl = uri.protocol+"//"+uri.host+"/Phono/srvlookup/"+srv+"._tcp."+uri.hostname;
-        srvreq.open("GET", dnsUrl, false);     // this blocks because there is really nothing else we can do untill we have a server to talk to.
+        srvreq.open("GET", dnsUrl, true); 
+        srvreq.timeout = 4000;
+        srvreq.ontimeout = function () { 
+            Phono.log.debug("[LB] Timeout");
+            Phono.log.debug("[LB] Using default connection URL "+phono.config.connectionUrl);
+            cfunc(phono.config.connectionUrl);
+        }
 
         if (srvreq.overrideMimeType) {
             srvreq.overrideMimeType("application/json");
@@ -781,9 +801,9 @@ function Phono(config) {
             // Set the ready state handler
             srvreq.onreadystatechange = function() {
                 if (srvreq.readyState == 4) {
-                    //Phono.log.debug("[LB] Got reply :" + srvreq.status)
+                    Phono.log.debug("[LB] Got reply :" + srvreq.status)
                     if (srvreq.status == 200) {
-                        //Phono.log.debug("[LB] Reply was "+srvreq.responseText);
+                        Phono.log.debug("[LB] Reply was "+srvreq.responseText);
                         var srv = eval('(' +srvreq.responseText+ ')');
                         for (var s in srv.servers) {
                             var nexts = srv.servers[s];
@@ -798,13 +818,13 @@ function Phono(config) {
                             }
                             curl = uri.protocol+"//"+nexts.target +":"+nexts.port+path;
                             if (typeof nexts.target != 'undefined') {
-                                //Phono.log.debug("[LB] Adding connection URL "+curl);
+                                Phono.log.debug("[LB] Adding connection URL "+curl);
                                 curls.push(curl);
                             }
                         }
-                        //Phono.log.debug("[LB] Adding default connection URL "+phono.config.connectionUrl);
+                        Phono.log.debug("[LB] Adding default connection URL "+phono.config.connectionUrl);
                         curls.push(phono.config.connectionUrl);
-                        //Phono.log.debug("[LB] Initial connection URL "+curls[0]);        
+                        Phono.log.debug("[LB] Initial connection URL "+curls[0]);        
                         
                         // add timers for all possible srv entries (and default)
                         // if any work, we will skip the rest
@@ -815,8 +835,9 @@ function Phono(config) {
                             }
                         }
                     } else {
-                        //Phono.log.debug("[LB] loadbalancer status was "+srvreq.status);
-                        //Phono.log.debug("[LB] Using default connection URL "+phono.config.connectionUrl);
+                        Phono.log.debug("[LB] Load balancer status was "+srvreq.status);
+                        Phono.log.debug("[LB] Using default connection URL "+phono.config.connectionUrl);
+                        abort = true;
                         cfunc(phono.config.connectionUrl);
                     }
                 }
@@ -824,9 +845,14 @@ function Phono(config) {
             // Send the request
             srvreq.send(null);
         } catch (e) {
-            //Phono.log.debug("[LB] error - ignoring a loadbalance error "+e);
-            //Phono.log.debug("[LB] Using default connection URL "+phono.config.connectionUrl);
-            cfunc(phono.config.connectionUrl);
+            Phono.log.debug("[LB] Error - ignoring a loadbalance error "+e);
+            if (abort != true) {
+                Phono.log.debug("[LB] Using default connection URL "+phono.config.connectionUrl);
+                abort = true;
+                cfunc(phono.config.connectionUrl); 
+            } else {
+                Phono.log.debug("[LB] Not issuing another connection as abort already in progress")
+            }       
         }
     } 
 };
@@ -834,7 +860,7 @@ function Phono(config) {
 (function() {
    
     // ======================================================================
-   
+
 ;Phono.util = {
    guid: function() {
      return MD5.hexdigest(new String((new Date()).getTime())) 
@@ -1082,9 +1108,11 @@ function Phono(config) {
                     args+= (sep + arguments[i]);
                     sep = ",";
                 }
-                //Phono.log.debug("[INVOKE] " + objName + "." + funcName + "(" + args  + ")");
+                if (!Phono.log.mute(objName + "." + funcName)){
+                    Phono.log.debug("[INVOKE] " + objName + "." + funcName + "(" + args  + ")");
+                }
             } catch (e) {
-                //Phono.log.debug("[INVOKE] " + objName + "." + funcName + "(...)");
+                Phono.log.debug("[INVOKE] " + objName + "." + funcName + "(...)");
             }
             return original.apply(obj, arguments);
         }
@@ -1148,6 +1176,7 @@ function Phono(config) {
     var logger = this;
     logger.eventQueue = [];
     logger.initialized = false;
+    logger.level = "WARN"; //Default log level is WARN
     $(document).ready(function() {
         if (typeof console === "undefined" || typeof console.log === "undefined") {
          console = {};
@@ -1218,6 +1247,20 @@ function Phono(config) {
     // ====================================================================================
 
     PhonoLogger.prototype.log = function(level, params) {
+// some functions are so chatty we mute the 'INVOKE' log even in 
+// debug mode - here is a list.
+        this.silentfunctions = [ "Call.energy"];
+
+        var levels = {
+            "ALL":PhonoLogLevel.ALL,
+            "TRACE":PhonoLogLevel.TRACE,
+            "DEBUG":PhonoLogLevel.DEBUG,
+            "INFO":PhonoLogLevel.INFO,
+            "WARN":PhonoLogLevel.WARN,
+            "ERROR":PhonoLogLevel.ERROR,
+            "FATAL":PhonoLogLevel.FATAL,
+            "OFF":PhonoLogLevel.OFF
+        };
 
         var exception;
         var finalParamIndex = params.length - 1;
@@ -1232,12 +1275,37 @@ function Phono(config) {
             messages[i] = params[i];
         }
 
-        var loggingEvent = new PhonoLogEvent(new Date(), level , messages, exception);
-        this.eventQueue.push(loggingEvent);
+        if(level.isGreaterOrEqual(levels[this.level])){
 
-        this.flushEventQueue();
+            var loggingEvent = new PhonoLogEvent(new Date(), level , messages, exception);
+            this.eventQueue.push(loggingEvent);
+
+            this.flushEventQueue();
+        }
         
     };
+
+    PhonoLogger.prototype.setLogLevel = function(level){
+        this.flushEventQueue();
+
+        level = level.toUpperCase();
+        if(["ALL", "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "OFF"].indexOf(level) < 0) return false;
+        this.level = level;
+    }
+
+    PhonoLogger.prototype.getLogLevel = function(){
+        return this.level;
+    }
+    
+    PhonoLogger.prototype.mute = function(fname){
+         var found = false;
+         for (i = 0; i < this.silentfunctions.length && !found; i++) {
+             if (this.silentfunctions[i] === fname) {
+                 found = true;
+             }
+         }
+         return found;
+    }
     
     PhonoLogger.prototype.flushEventQueue = function() {
         if(this.initialized) {
@@ -1250,11 +1318,11 @@ function Phono(config) {
     };
 
     PhonoLogger.prototype.debug = function() {
-        //this.log(PhonoLogLevel.DEBUG, arguments);
+        this.log(PhonoLogLevel.DEBUG, arguments);
     };
 
     PhonoLogger.prototype.info = function() {
-        //this.log(PhonoLogLevel.INFO, arguments);
+        this.log(PhonoLogLevel.INFO, arguments);
     };
 
     PhonoLogger.prototype.warn = function() {
@@ -1321,9 +1389,15 @@ function Phono(config) {
 
    
     // Global
-    Phono.version = "1.0";
-   
     Phono.log = new PhonoLogger();
+   
+    Phono.prototype.setLogLevel = function(a){
+        Phono.log.setLogLevel(a);
+    }
+
+    Phono.prototype.getLogLevel = function(){
+        return Phono.log.getLogLevel();
+    }
    
     Phono.registerPlugin = function(name, config) {
         if(!Phono.plugins) {
@@ -1340,7 +1414,7 @@ function Phono(config) {
         // If this is our own internal connection
         if(!this.config.connection) {
             if(!this.connection.connected) {
-                //Phono.log.debug("Connecting....");
+                Phono.log.debug("Connecting....");
                 phono.connection.connect(
                     phono.config.gateway, 
                     null, 
@@ -1367,7 +1441,7 @@ function Phono(config) {
     Phono.prototype.handleStropheStatusChange = function(status) {
         if (status === Strophe.Status.CONNECTED) {
             if (this.connTimer != null){ 
-                //Phono.log.debug("Clear timeout");
+                Phono.log.debug("Clear timeout");
                 clearTimeout(this.connTimer);
             }
             new PluginManager(this, this.config, function(plugins) {
@@ -1412,7 +1486,7 @@ function Phono(config) {
             apiKeyIQ = apiKeyIQ.c('browser',{
                 version:navigator.appVersion, 
                 agent:navigator.userAgent
-                }).up();
+            }).up();
            
             phono.connection.sendIQ(apiKeyIQ, 
                 phono.handleKeySuccess,
@@ -1443,7 +1517,7 @@ function Phono(config) {
     // Fires when the underlying Strophe Connection errors out
     Phono.prototype.handleError = function() {
         // add load balance retry code here ?
-        //Phono.log.debug("connection failed - logging in handleError");
+        Phono.log.debug("connection failed - logging in handleError");
 
         Phono.events.trigger(this, "error", {
             reason: "Error connecting to XMPP server"
@@ -1453,6 +1527,16 @@ function Phono(config) {
     // Fires when the underlying Strophe Connection disconnects
     Phono.prototype.handleDisconnect = function() {
         Phono.events.trigger(this, "unready");
+    };
+
+    Phono.prototype.on = function(event, listener) {
+        Phono.events.add(this, event, listener);
+        return this;
+    };
+
+    Phono.prototype.removeListener = function(event, listener) {
+        Phono.events.remove(this, event, listener);
+        return this;
     };
 
     // ======================================================================
@@ -5130,7 +5214,7 @@ PhonoStrophe.addConnectionPlugin('cors', {
       if(handler) {
          // Don't log log events ;-)
          if("log" != type.toLowerCase()) {
-             //Phono.log.info("[EVENT] " + type + "[" + data + "]");
+             Phono.log.info("[EVENT] " + type + "[" + data + "]");
          }
          handler.call(target, event, data); 
       }
@@ -5183,9 +5267,9 @@ function FlashAudio(phono, config, callback) {
     // Define defualt config and merge from constructor
     this.config = Phono.util.extend({
         protocol: "rtmfp",
-        swf: "//" + MD5.hexdigest(window.location.host+phono.config.apiKey) + ".u.phono.com/releases/" + Phono.version + "/plugins/audio/phono.audio.swf",
-        cirrus: "rtmfp://phono-fms1-ext.voxeolabs.net/phono",
-        bridged: false,
+        swf: "//" + MD5.hexdigest(window.location.host+phono.config.apiKey) + "." + Phono.dynamicCdnUrl + "/releases/" + Phono.version + "/plugins/audio/phono.audio.swf",
+        cirrus: "rtmfp://" + Phono.cirrusUrl + "/phono",
+        bridged: Phono.flashBridged,
         reliable: false,
         media: {audio:true,video:true},
         watchdog: 25000
@@ -5215,7 +5299,7 @@ function FlashAudio(phono, config, callback) {
     // Flash movie is embedded asynchronously so we need a listener 
     // to fire when the SWF is loaded and ready for action
     FABridge.addInitializationCallback(containerId, function(){
-        //Phono.log.info("FlashAudio Ready");
+        Phono.log.info("FlashAudio Ready");
         plugin.$flash = this.create("Wrapper").getAudio();
         plugin.$flash.addEventListener(null, function(event) {
             var eventName = (event.getType()+"");
@@ -5234,7 +5318,7 @@ function FlashAudio(phono, config, callback) {
 
     wmodeSetting = "opaque";
     
-    if ((navigator.appVersion.indexOf("X11")!=-1) || (navigator.appVersion.indexOf("Linux")!=-1) || ($.browser.opera)) {
+    if ((navigator.appVersion.indexOf("X11")!=-1) || (navigator.appVersion.indexOf("Linux")!=-1)) {
         wmodeSetting = "window";
     }
 
@@ -5243,7 +5327,7 @@ function FlashAudio(phono, config, callback) {
             Phono.events.trigger(phono, "error", {
                 reason: "Timeout waiting for flash to load."
             });
-            //Phono.log.error("Timeout waiting for flash to load.");
+            Phono.log.error("Timeout waiting for flash to load.");
         }
     }, plugin.config.watchdog);
     
@@ -5300,7 +5384,7 @@ FlashAudio.prototype.play = function(transport, autoPlay) {
     
     var player;
     if (this.config.bridged == false && transport.peerID != undefined && this.config.cirrus != undefined) {
-        //Phono.log.info("Direct media play with peer " + transport.peerID);
+        Phono.log.info("Direct media play with peer " + transport.peerID);
         player = this.$flash.play(luri, autoPlay, transport.peerID, this.config.video);
     }
     else player = this.$flash.play(luri, autoPlay);
@@ -5333,7 +5417,7 @@ FlashAudio.prototype.share = function(transport, autoPlay, codec) {
     var peerID = "";
     if (this.config.bridged == false && transport.peerID != undefined && this.config.cirrus != undefined) { 
         peerID = transport.peerID;
-        //Phono.log.info("Direct media share with peer " + transport.peerID);
+        Phono.log.info("Direct media share with peer " + transport.peerID);
     }
     var isSecure = false;
     var share = this.$flash.share(url, autoPlay, codec.id, codec.name, codec.rate, true, peerID, this.config.video, this.config.reliable);
@@ -5430,7 +5514,7 @@ FlashAudio.prototype.transport = function() {
                     if (nearID == "") {
                         // First call
                         nearID = $flash.nearID(cirrus);
-                        //Phono.log.info("Got nearID = " + nearID);
+                        Phono.log.info("Got nearID = " + nearID);
                         if (nearID != "") {
                             j.c('transport',{xmlns:name, peerID:nearID});
                         } else {
@@ -5442,10 +5526,10 @@ FlashAudio.prototype.transport = function() {
                 
                 // Connect to cirrus, and once we get the good event, grab the nearID and continue
                 var connected = $flash.doCirrusConnect(cirrus);
-                //Phono.log.info("doCirrusConnect");
+                Phono.log.info("doCirrusConnect");
                 if (connected) {
                     // Will not get an additional callabck
-                    //Phono.log.info("doCirrusConnect - already connected");
+                    Phono.log.info("doCirrusConnect - already connected");
                     onConnected();
                 } else {
                     Phono.events.add(plugin, "flashConnected", onConnected);
@@ -5477,7 +5561,7 @@ FlashAudio.prototype.transport = function() {
         destroyTransport: function() {
             // Disconnect from cirrus server, reference counting is done in phono-as-audio
             if (!config.bridged) {
-                //Phono.log.info("Disconnecting from cirrus server");
+                Phono.log.info("Disconnecting from cirrus server");
                 $flash.doCirrusDisconnect(cirrus);
             }
         }
@@ -5546,7 +5630,7 @@ function JavaAudio(phono, config, callback) {
     if (JavaAudio.exists()){
       // Define defualt config and merge from constructor
       this.config = Phono.util.extend({
-          jar: "//s.phono.com/releases/" + Phono.version + "/plugins/audio/phono.audio.jar"
+          jar: "//" + Phono.cdnUrl + "/releases/" + Phono.version + "/plugins/audio/phono.audio.jar"
       }  , config);
     
       // Bind Event Listeners
@@ -5585,20 +5669,20 @@ function JavaAudio(phono, config, callback) {
                 str +=" sent " +eps[0].sent ;
                 str +=" rcvd " +eps[0].rcvd ;
                 str +=" error " +eps[0].error ;
-                //Phono.log.debug("[JAVA RTP] "+str);
+                Phono.log.debug("[JAVA RTP] "+str);
              }
            } 
          } else {
           Phono.events.trigger(phono, "error", {
             reason: "Java applet did not load."
           });
-          //Phono.log.debug("[JAVA Load errror] no status returned.");
+          Phono.log.debug("[JAVA Load errror] no status returned.");
          }
         } catch (e) {
           Phono.events.trigger(phono, "error", {
             reason: "Can not communicate with Java Applet - perhaps it did not load."
           });
-          //Phono.log.debug("[JAVA Load error] "+e);
+          Phono.log.debug("[JAVA Load error] "+e);
         }
       },25000); 
     } else {
@@ -5664,7 +5748,7 @@ JavaAudio.prototype.share = function(transport, autoPlay, codec, srtpPropsl, srt
     var url = transport.uri;
     var applet = this.$applet[0];
 
-    //Phono.log.debug("[JAVA share codec ] "+codec.p.pt +" id = "+codec.id);
+    Phono.log.debug("[JAVA share codec ] "+codec.p.pt +" id = "+codec.id);
     var acodec = applet.mkCodec(codec.p, codec.id);
     var share;
     var isSecure = false;
@@ -6521,18 +6605,18 @@ PhonegapAndroidAudio.prototype.codecs = function() {
 function JSEPAudio(phono, config, callback) {
     this.type = "jsep";
 
-    //Phono.log.info("Initialize JSEP");
+    Phono.log.info("Initialize JSEP");
     if (typeof(webkitAudioContext) !== 'undefined'){
-        //Phono.log.info("Have webkitAudio def");
+        Phono.log.info("Have webkitAudio def");
         JSEPAudio.webAudioContext = new webkitAudioContext();
     }  else if (typeof(AudioContext) !== 'undefined'){
-        //Phono.log.info("Have AudioContext def");
+        Phono.log.info("Have AudioContext def");
         JSEPAudio.webAudioContext = new AudioContext();
     }  else if (typeof(mozAudioContext) !== 'undefined'){
-        //Phono.log.info("Have mozAudio def");
+        Phono.log.info("Have mozAudio def");
         JSEPAudio.webAudioContext = new mozAudioContext();
     } else {
-	//Phono.log.info("No webAudio available - so no freep");
+	Phono.log.info("No webAudio available - so no freep");
     }
 
     if (typeof webkitRTCPeerConnection== "function") {
@@ -6556,7 +6640,7 @@ function JSEPAudio(phono, config, callback) {
 	    return sdpObj;
         };
 	JSEPAudio.AudioUrl = function(url){
-		return url;
+		return url.replace(".mp3",".ogg");
 	};
 	JSEPAudio.addCreateConstraint = function(constraint){
 		return constraint;
@@ -6613,7 +6697,7 @@ function JSEPAudio(phono, config, callback) {
 
     // Create audio continer if user did not specify one
     if(!localContainerId) {
-        this.config.localContainerId = this.createContainer();
+        this.config.localContainerId = this.createContainer(this.config.media['video']);
     }
 
     JSEPAudio.localVideo = document.getElementById(this.config.localContainerId);
@@ -6664,8 +6748,51 @@ JSEPAudio.prototype.play = function(transport, autoPlay) {
     if (transport.uri) {
         url = JSEPAudio.AudioUrl(transport.uri);
     }
-    
-    return {
+    var player = null; 
+    var context = JSEPAudio.webAudioContext;
+    if (context){
+      player = {
+	stopped: false,
+        url: function() {
+            return url;
+        },
+        start: function() {
+            if (!audioPlayer && url) {
+	      var request = new XMLHttpRequest();
+	      request.open('GET', url, true);
+	      request.responseType = 'arraybuffer';
+	// Decode asynchronously
+	      request.onload = function() {
+	          context.decodeAudioData(request.response, function(buffer) {
+		      Phono.log.info("Loaded audio from "+ url);
+		      if (!this.stopped) {
+		        audioPlayer = context.createBufferSource(); // creates a sound source
+		        audioPlayer.buffer = buffer;                    // tell the source which sound to play
+		        audioPlayer.connect(context.destination);       // connect the source to the context's destination (the speakers)
+			audioPlayer.loop = true;
+		        audioPlayer.start(0);
+                      }			
+	          }, function(){Phono.log.info("failed to load audio from "+ url)});
+	      };
+	      request.send();
+            }
+        },
+        stop: function() {
+            if (audioPlayer) audioPlayer.stop(0);
+            this.stopped = true;
+            audioPlayer = null;
+        },
+        volume: function(value) {
+            if(arguments.length === 0) {
+                return transport.volume * 100;
+            }
+            else {
+                transport.volume = (value / 100);
+            }
+        }
+     };
+    } else {
+      player = {
         url: function() {
             return url;
         },
@@ -6692,14 +6819,14 @@ JSEPAudio.prototype.play = function(transport, autoPlay) {
                 transport.volume = (value / 100);
             }
         }
+     };
     }
+    return player;
 };
 
 // Creates a new audio Share and will optionally begin playing
 JSEPAudio.prototype.share = function(transport, autoPlay, codec) {
-    var share;
-
-    return {
+    var share = {
         // Readonly
         url: function() {
             // No Share URL
@@ -6754,8 +6881,14 @@ JSEPAudio.prototype.share = function(transport, autoPlay, codec) {
                 JSEPAudio.pc.getStats(function(stats){
                     var sr = stats.result();
                     for (var i=0;i< sr.length; i++){
-                        var obj = sr[i].remote;
-                        if (obj){
+                        var obj;
+                        if (typeof sr[i].stat == 'function') {
+                            obj = sr[i];
+                        }
+                        else {
+                            obj = sr[i].remote;
+                        }
+                        if (obj) {
                             var nspk = 0.0;
 			    var nmic = 0.0;
                             if (obj.stat('audioInputLevel')){
@@ -6798,21 +6931,31 @@ JSEPAudio.prototype.share = function(transport, autoPlay, codec) {
                     var twoTone = JSEPAudio.toneMap[value];
                     note1.frequency.value = twoTone[0];
                     note2.frequency.value = twoTone[1];
-                    note1.noteOn(0.0);
-                    note2.noteOn(0.0);
+                    note1.start(0.0);
+                    note2.start(0.0);
                     window.setTimeout(
                     function(){
-                        note1.noteOff(0.0);
-                        note2.noteOff(0.0);
+                        note1.stop(0.0);
+                        note2.stop(0.0);
                     }, duration);
                 }
             }
         }
     };
+    //if (JSEPAudio.pc.createDTMFSender){
+    //   share.digit = function(values, duration, audible) {
+    //     if (JSEPAudio.dtmfSender){
+    //        JSEPAudio.dtmfSender.insertDTMF(values);
+    //        this.freep(values, duration, audible);
+    //     }
+    //   };
+    //}
+
+    return share;
 };   
 
 JSEPAudio.prototype.showPermissionBox = function(callback) {
-    //Phono.log.info("Requesting access to local media");
+    Phono.log.info("Requesting access to local media");
 
     JSEPAudio.GUM({
         'audio':this.config.media['audio'],
@@ -6826,18 +6969,7 @@ JSEPAudio.prototype.showPermissionBox = function(callback) {
         if (typeof callback == 'function') callback(true);
     },
     function(error) {
-        //phonoCall.hangup();
-        //Phono.log.info("Failed to get access to local media. Error code was " + error.code);
-        for(index=0;index<OurChannels.length;index++){
-            if((OurChannels[index].CallingParty.Trying != "" && OurChannels[index].CallingParty.Extension == ourextension) || (OurChannels[index].CalledParty.Trying != "" && OurChannels[index].CalledParty.Extension == ourextension)){
-                action = {Action: 'CancelCallSwitch', Call : OurChannels[index].ID};
-                $("#line" + OurChannels[index].ID).removeClass("hold WebPhone");
-                console.log("sending action:");
-                console.log(action);
-                socket.send(JSON.stringify(action));
-            }
-        }
-        
+        Phono.log.info("Failed to get access to local media. Error code was " + error.code);
         alert("Failed to get access to local media. Error code was " + error.code + ".");
         if (typeof callback == 'function') callback(false);
     });
@@ -6853,11 +6985,7 @@ JSEPAudio.prototype.permission = function() {
 JSEPAudio.prototype.transport = function(config) {
     var pc;
     var inboundOffer;
-    var configuration = {
-        iceServers:[ {
-                url:JSEPAudio.stun
-            } ]
-    };
+    var configuration;
     var offerconstraints;
     var peerconstraints;
     var remoteContainerId;
@@ -6877,12 +7005,17 @@ JSEPAudio.prototype.transport = function(config) {
     peerconstraints = {
         'optional': [{'DtlsSrtpKeyAgreement': 'true'}]
     };
+    if(!this.config || !this.config.iceServers) {
+	    configuration ={'iceServers':[ { url:JSEPAudio.stun } ] };
+    } else {
+	    configuration = {'iceServers':this.config.iceServers};
+    }
 
     if(!config || !config.remoteContainerId) {
         if (this.config.remoteContainerId) {
             remoteContainerId = this.config.remoteContainerId;
         } else {
-            remoteContainerId = this.createContainer();
+            remoteContainerId = this.createContainer(this.config.media['video']);
         }
     } else {
         remoteContainerId = config.remoteContainerId;
@@ -6900,12 +7033,12 @@ JSEPAudio.prototype.transport = function(config) {
                 if (!complete) {
                     if ((evt.candidate == null) || 
                         (candidateCount >= 1 && !audio.config.media['video'] && direction == "answer")) {
-                        //Phono.log.info("All Ice candidates in ");
+                        Phono.log.info("All Ice candidates in ");
                         complete = true;
 			var sdp = pc.localDescription.sdp;
-			//Phono.log.info('SDP ' + JSON.stringify(sdp));
+			Phono.log.info('SDP ' + JSON.stringify(sdp));
                         var sdpObj = Phono.sdp.parseSDP(sdp);
-                        //Phono.log.info('SdpObj ' + JSON.stringify(sdpObj));
+                        Phono.log.info('SdpObj ' + JSON.stringify(sdpObj));
                         Phono.sdp.buildJingle(j, sdpObj);
                         var codecId = 0;
                         if (sdpObj.contents[0].codecs[0].name == "telephone-event") codecId = 1;
@@ -6917,60 +7050,70 @@ JSEPAudio.prototype.transport = function(config) {
                         };
                         callback(codec);
                     } else {
-                        //Phono.log.info("An Ice candidate ");
+                        Phono.log.info("An Ice candidate ");
                         candidateCount += 1;
                     }
                 }
             };
 	    pc.onicecandidate = oic;
-            //pc.onconnecting = function(message) {//Phono.log.info("onSessionConnecting.");};
-            //pc.onopen = function(message) {//Phono.log.info("onSessionOpened.");};
+            //pc.onconnecting = function(message) {Phono.log.info("onSessionConnecting.");};
+            //pc.onopen = function(message) {Phono.log.info("onSessionOpened.");};
             pc.onaddstream = function (event) {
-                //Phono.log.info("onAddStream. Attaching");
+                Phono.log.info("onAddStream. Attaching");
 		JSEPAudio.attachMediaStream(remoteVideo,event.stream);
                 remoteVideo.style.opacity = 1;
+		if ((JSEPAudio.localStream != null) && (JSEPAudio.pc.createDTMFSender) ) {
+		  var local_audio_track = JSEPAudio.localStream.getAudioTracks()[0];
+		  JSEPAudio.dtmfSender = JSEPAudio.pc.createDTMFSender(local_audio_track);
+		  Phono.log.debug("Created DTMF Sender");
+		  JSEPAudio.dtmfSender.ontonechange = function(tone){
+		     if(tone){
+			Phono.log.debug("sent Dtmf tone: \t" + tone.tone);
+		     }
+		  };
+		}
             };
-            //pc.onremovestream = function (event) {//Phono.log.info("onRemoveStream."); };
-            //pc.onicechange= function (event) {//Phono.log.info("onIceChange: "+pc.iceState); };
-            //pc.onnegotiationneeded = function (event) {//Phono.log.info("onNegotiationNeeded."); };
-            //pc.onstatechange = function (event) {//Phono.log.info("onStateChange: "+pc.readyState); };
+            //pc.onremovestream = function (event) {Phono.log.info("onRemoveStream."); };
+            //pc.onicechange= function (event) {Phono.log.info("onIceChange: "+pc.iceState); };
+            //pc.onnegotiationneeded = function (event) {Phono.log.info("onNegotiationNeeded."); };
+            //pc.onstatechange = function (event) {Phono.log.info("onStateChange: "+pc.readyState); };
 
-            //Phono.log.debug("Adding localStream");
+            Phono.log.debug("Adding localStream");
 
             var cb2 = function() {
                 pc.addStream(JSEPAudio.localStream);
 		var setlfail = function(er){
-                    //Phono.log.error('failed to setlocal '+er);
+                    Phono.log.error('failed to setlocal '+er);
                 };
 		var setlok = function(){
-                    //Phono.log.info('setlocal ok');
+                    Phono.log.info('setlocal ok');
                 };
                 
                 var cb = function(localDesc) {
                     var sd = JSEPAudio.mkSessionDescription(localDesc);
                     pc.setLocalDescription(sd,setlok,setlfail);
 		    window.setTimeout(function() {oic({})},1000);
-                    //Phono.log.info('Set local description ' + JSON.stringify(localDesc));
+                    Phono.log.info('Set local description ' + JSON.stringify(localDesc));
                 };
 		var offerfail = function(){
-                    //Phono.log.error('failed to create offer');
+                    Phono.log.error('failed to create offer');
                 };
 		var ansfail = function(){
-                    //Phono.log.error('failed to create answer');
+                    Phono.log.error('failed to create answer');
                 };
                 
                 if (direction == "answer") {
-                    //Phono.log.info('Set remote description ' + JSON.stringify(inboundOffer));
+                    Phono.log.info('Set remote description ' + JSON.stringify(inboundOffer));
                     pc.setRemoteDescription(inboundOffer,
                     function(){
-                        //Phono.log.debug("remoteDescription happy");
+                        Phono.log.debug("remoteDescription happy");
                         pc.createAnswer(cb ,ansfail);
                     },
                     function(){
-                        //Phono.log.error("remoteDescription error")
+                        Phono.log.error("remoteDescription error")
                     });
                 } else {
-                    //Phono.log.info('create offer with  '+ JSON.stringify(offerconstraints) );
+                    Phono.log.info('create offer with  '+ JSON.stringify(offerconstraints) );
                     pc.createOffer(cb , offerfail, offerconstraints);
                 }
             }
@@ -6983,10 +7126,10 @@ JSEPAudio.prototype.transport = function(config) {
         },
         processTransport: function(t, update, iq) {
             var sdpObj = Phono.sdp.parseJingle(iq);
-	    //Phono.log.info('Made remote sdp Obj' + JSON.stringify(sdpObj));
+	    Phono.log.info('Made remote sdp Obj' + JSON.stringify(sdpObj));
             sdpObj = JSEPAudio.stripCrypto(sdpObj);
             var sdp = Phono.sdp.buildSDP(sdpObj);
-            //Phono.log.info('constructed remote sdp ' + JSON.stringify(sdp));
+            Phono.log.info('constructed remote sdp ' + JSON.stringify(sdp));
             var codecId = 0;
             if (sdpObj.contents[0].codecs[0].name == "telephone-event") codecId = 1;
             var codec = 
@@ -6998,23 +7141,23 @@ JSEPAudio.prototype.transport = function(config) {
 
             if (pc) {
                 // We are an answer to an outbound call
-                //Phono.log.info('Got remote sdp ' + JSON.stringify(sdp));
+                Phono.log.info('Got remote sdp ' + JSON.stringify(sdp));
                 var sd = JSEPAudio.mkSessionDescription({
                     'sdp':sdp,
                     'type':"answer"
                 } );
-                //Phono.log.info('Set remote description ' + JSON.stringify(sd));
+                Phono.log.info('Set remote description ' + JSON.stringify(sd));
                 pc.setRemoteDescription(sd,
                 function(){
-                    //Phono.log.debug("remoteDescription happy");
+                    Phono.log.debug("remoteDescription happy");
                 },
                 function(){
-                    //Phono.log.error("remoteDescription sad")
+                    Phono.log.error("remoteDescription sad")
                 });
                 
             } else {
                 // We are an offer for an inbound call
-	        //Phono.log.info('Got remote description ' + JSON.stringify(sdp));
+	        Phono.log.info('Got remote description ' + JSON.stringify(sdp));
                 var sd = JSEPAudio.mkSessionDescription({
                     'sdp':sdp,
                     'type':"offer"
@@ -7055,10 +7198,21 @@ JSEPAudio.prototype.audioInDevices = function(){
 }
 
 // Creates a DIV to hold the video element if not specified by the user
-JSEPAudio.prototype.createContainer = function() {
+JSEPAudio.prototype.createContainer = function(haveVideo) {
+    var w ="1";
+    var h ="1";
+    if (haveVideo){
+	w="640";
+	h="480";
+    }
+    Phono.log.info('Appending a <video> because we were not passed one '+w+"x"+h);
+
+
     var webRTC = $("<video>")
     .attr("id","_phono-audio-webrtc" + (JSEPAudio.count++))
     .attr("autoplay","autoplay")
+    .attr("width",w)
+    .attr("height",h)
     .appendTo("body");
 
     var containerId = $(webRTC).attr("id");       
@@ -7095,19 +7249,19 @@ JSEPAudio.prototype.createContainer = function() {
                 
             } else if (config.type === "auto") {
                 
-                //Phono.log.info("Detecting Audio Plugin");
+                Phono.log.info("Detecting Audio Plugin");
 
                 if (JSEPAudio.exists()) {
-                    //Phono.log.info("Detected JSEP browser"); 
+                    Phono.log.info("Detected JSEP browser"); 
                     return Phono.util.loggify("JSEPAudio", new JSEPAudio(phono, config, callback));
                 } else if (PhonegapIOSAudio.exists())  { 
-                    //Phono.log.info("Detected iOS"); 
+                    Phono.log.info("Detected iOS"); 
                     return Phono.util.loggify("PhonegapIOSAudio", new PhonegapIOSAudio(phono, config, callback));
                 } else if (PhonegapAndroidAudio.exists()) { 
-                    //Phono.log.info("Detected Android"); 
+                    Phono.log.info("Detected Android"); 
                     return Phono.util.loggify("PhonegapAndroidAudio", new PhonegapAndroidAudio(phono, config, callback));
                 } else { 
-                    //Phono.log.info("Using Flash default"); 
+                    Phono.log.info("Using Flash default"); 
                     return Phono.util.loggify("FlashAudio", new FlashAudio(phono, config, callback));
                     
                 }
@@ -7156,6 +7310,16 @@ JSEPAudio.prototype.createContainer = function() {
       return true;
    };
    
+   StropheMessaging.prototype.on = function(event, listener) {
+      Phono.events.add(this, event, listener);
+      return this;
+   };
+
+   StropheMessaging.prototype.removeListener = function(event, listener) {
+      Phono.events.remove(this, event, listener);
+      return this;
+   };
+
    Phono.registerPlugin("messaging", {
       create: function(phono, config, callback) {
          return new StropheMessaging(phono, config, callback);
@@ -7278,6 +7442,23 @@ JSEPAudio.prototype.createContainer = function() {
         return rtcp;
     }
 
+    /*
+      a=rtcp-fb:100 ccm fir
+      a=rtcp-fb:100 nack
+      a=rtcp-fb:100 goog-remb
+    */
+    _parseRtcpFb = function (params) {
+        // We should already have a codec with the right payload type
+        var rtcpfb = {
+            id:params[0],
+            type:params[1]
+        };
+        if (params.length > 2) {
+            rtcpfb['subtype'] = params[2];
+        }
+        return rtcpfb;
+    }
+
     //a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:zvrxmXFpomTqz7CJYhN5G7JM3dVVxG/fZ0Il6DDo
     _parseCrypto = function(params) {
         var crypto = {
@@ -7347,7 +7528,11 @@ JSEPAudio.prototype.createContainer = function() {
             c.priority + " " +
             c.ip + " " +
             c.port;
-        if (c.type) sdp = sdp + " typ host"; //+ c.type;
+	if (c.type == "srflx") {
+           sdp = sdp + " typ host"; //+ c.type;
+	} else {
+           if (c.type) sdp = sdp +" typ "+  c.type;
+	}
         if (c.component == 1) sdp = sdp + " name rtp";
         if (c.component == 2) sdp = sdp + " name rtcp";
         sdp = sdp + " network_name en0";
@@ -7373,15 +7558,22 @@ JSEPAudio.prototype.createContainer = function() {
             sdp+="/"+codecObj.channels;
         }
         sdp += "\r\n";
-	if (codecObj.ptime){
+	if (codecObj.ptime) {
 	    sdp+="a=ptime:"+codecObj.ptime;
 	    sdp += "\r\n";
-        } else if (codecObj.name.toLowerCase().indexOf("opus")==0){
+        } else if (codecObj.name.toLowerCase().indexOf("opus")==0) {
 	    sdp+="a=ptime:20\r\n";
 	}
-	if (codecObj.name.toLowerCase().indexOf("telephone-event")==0){
+	if (codecObj.name.toLowerCase().indexOf("telephone-event")==0) {
 	    sdp+="a=fmtp:"+codecObj.id+" 0-15\r\n";
 	}
+        return sdp;
+    }
+
+    _buildRtcpFb = function(rtcpFbObj) {
+        var sdp ="a=rtcp-fb:"+rtcpFbObj.id+" "+rtcpFbObj.type;
+        if (rtcpFbObj.suybtype) sdp += " "+rtcpFbObj.subtype;
+        sdp += "\r\n";
         return sdp;
     }
 
@@ -7406,6 +7598,11 @@ JSEPAudio.prototype.createContainer = function() {
             if (ice.options) {
                 sdp = sdp + "a=ice-options:" + ice.options + "\r\n";
 	    }
+            if (ice.lite) {
+                sdp = sdp + "a=ice-lite" + "\r\n";
+                sdp = sdp + "a=setup:active" + "\r\n";
+                sdp = sdp + "a=acfg:1 t=1" + "\r\n";
+            }
 	}
 	return sdp;
     }
@@ -7470,8 +7667,6 @@ JSEPAudio.prototype.createContainer = function() {
             sdp = sdp + "a=sendrecv\r\n";
 	}
 
-
-
         if (sdpObj['rtcp-mux']) {
             sdp = sdp + "a=rtcp-mux" + "\r\n";
         } 
@@ -7489,6 +7684,10 @@ JSEPAudio.prototype.createContainer = function() {
             cdi = cdi + 1;
         }
 
+        Phono.util.each(sdpObj.rtcpFbs, function () { 
+            sdp = sdp + _buildRtcpFb(this);
+        });
+
         if (sdpObj.ssrc) {
             var ssrc = sdpObj.ssrc;
             if (ssrc.cname) sdp = sdp + "a=ssrc:" + ssrc.ssrc + " " + "cname:" + ssrc.cname + "\r\n";
@@ -7503,10 +7702,12 @@ JSEPAudio.prototype.createContainer = function() {
 
     // Fake Phono for node.js
     if (typeof Phono == 'undefined') {
+        var util = require("util");
         Phono = {
-        log:{debug:function(mess){print(mess);}}
+            log:{debug:function(mess){util.print(mess);}}
         };
-	load("phono.util.js");
+        $ = {isFunction:function(){}};
+	require("./phono.util.js");
     }
 
     Phono.sdp = {
@@ -7547,7 +7748,12 @@ JSEPAudio.prototype.createContainer = function() {
                 .c('description', desc);
                 
                 Phono.util.each(sdpObj.codecs, function() {
-                    c = c.c('payload-type', this).up();           
+                    c = c.c('payload-type', this);
+                    Phono.util.each(sdpObj.rtcpFbs, function() {
+                        this.xmlns='urn:xmpp:jingle:apps:rtp:rtcp-fb:0';
+                        c = c.c('rtcp-fb', this).up(); 
+                    });
+                    c = c.up();
                 });
                 
                 if (sdpObj.crypto) {
@@ -7631,6 +7837,7 @@ JSEPAudio.prototype.createContainer = function() {
                 blobObj.contents.push(sdpObj);
                 sdpObj.candidates = [];
                 sdpObj.codecs = [];
+                sdpObj.rtcpFbs = [];
 
                 $(this).find('description').each(function () {
                   if($(this).attr('xmlns') == "urn:xmpp:jingle:apps:rtp:1"){
@@ -7655,24 +7862,32 @@ JSEPAudio.prototype.createContainer = function() {
                     sdpObj.media = mediaObj;
 		    $(this).find('payload-type').each(function () {
                         var codec = Phono.util.getAttributes(this);
-                        //Phono.log.debug("codec: "+JSON.stringify(codec,null," "));
+                        Phono.log.debug("codec: "+JSON.stringify(codec,null," "));
                         sdpObj.codecs.push(codec);
                         mediaObj.pts.push(codec.id);
+                        var pt = codec.id;
+                        // Find all the rtcp-fb and create it
+                        $(this).find('rtcp-fb').each(function () {
+                            var rtcpFb = Phono.util.getAttributes(this);
+                            Phono.log.debug("rtcp-fb: "+JSON.stringify(rtcpFb,null," "));
+                            rtcpFb.id = pt;
+                            sdpObj.rtcpFbs.push(rtcpFb);
+                        });
                     });
 		  } else {
-	            //Phono.log.debug("skip description with wrong xmlns: "+$(this).attr('xmlns'));
+	            Phono.log.debug("skip description with wrong xmlns: "+$(this).attr('xmlns'));
 		  }
                 });
 
                 $(this).find('crypto').each(function () {
                     var crypto = Phono.util.getAttributes(this);
-                    ////Phono.log.debug("crypto: "+JSON.stringify(crypto,null," "));
+                    //Phono.log.debug("crypto: "+JSON.stringify(crypto,null," "));
                     sdpObj.crypto = crypto;
                 });
                 $(this).find('fingerprint').each(function () {
                     var fingerprint = Phono.util.getAttributes(this);
                     fingerprint.print = Strophe.getText(this);
-                    //Phono.log.debug("fingerprint: "+JSON.stringify(fingerprint,null," "));
+                    Phono.log.debug("fingerprint: "+JSON.stringify(fingerprint,null," "));
                     sdpObj.fingerprint = fingerprint;
                 });
                 sdpObj.ice = {};
@@ -7680,7 +7895,7 @@ JSEPAudio.prototype.createContainer = function() {
                     if ($(this).attr('xmlns') == "urn:xmpp:jingle:transports:raw-udp:1") {
                         $(this).find('candidate').each(function () {
                             var candidate = Phono.util.getAttributes(this);
-                            ////Phono.log.debug("candidate: "+JSON.stringify(candidate,null," "));
+                            //Phono.log.debug("candidate: "+JSON.stringify(candidate,null," "));
                             if (candidate.component == "1") {
                                 sdpObj.media.port = candidate.port;
                                 sdpObj.connection = {};
@@ -7700,12 +7915,15 @@ JSEPAudio.prototype.createContainer = function() {
                     if ($(this).attr('xmlns') == "urn:xmpp:jingle:transports:ice-udp:1") {
                         sdpObj.ice.pwd = $(this).attr('pwd');
                         sdpObj.ice.ufrag = $(this).attr('ufrag');
+                        if ($(this).attr('ice-lite')) {
+                            sdpObj.ice.lite = true;
+                        }
                         if ($(this).attr('options')) {
                             sdpObj.ice.options = $(this).attr('options');
                         }
                         $(this).find('candidate').each(function () {
                             var candidate = Phono.util.getAttributes(this);
-                            ////Phono.log.debug("candidate: "+JSON.stringify(candidate,null," "));
+                            //Phono.log.debug("candidate: "+JSON.stringify(candidate,null," "));
                             sdpObj.candidates.push(candidate);
                         });
                     }
@@ -7717,7 +7935,7 @@ JSEPAudio.prototype.createContainer = function() {
         dumpSDP: function(sdpString) {
             var sdpLines = sdpString.split("\r\n");
             for (var sdpLine in sdpLines) {
-                ////Phono.log.debug(sdpLines[sdpLine]);
+                //Phono.log.debug(sdpLines[sdpLine]);
             }
         },
 
@@ -7731,7 +7949,7 @@ JSEPAudio.prototype.createContainer = function() {
             // Iterate the lines
             var sdpLines = sdpString.split("\r\n");
             for (var sdpLine in sdpLines) {
-                //Phono.log.debug(sdpLines[sdpLine]);
+                Phono.log.debug(sdpLines[sdpLine]);
                 var line = _parseLine(sdpLines[sdpLine]);
 
                 if (line.type == "o") {
@@ -7745,6 +7963,7 @@ JSEPAudio.prototype.createContainer = function() {
                     var media = _parseM(line.contents);
                     sdpObj = {};
                     sdpObj.candidates = [];
+                    sdpObj.rtcpFbs = [];
                     sdpObj.codecs = [];
                     sdpObj.ice = {};
                     if (contentsObj.session.fingerprint != null){
@@ -7778,6 +7997,10 @@ JSEPAudio.prototype.createContainer = function() {
                     case "rtcp":
                         var rtcp = _parseRtcp(a.params);
                         sdpObj.rtcp = rtcp;
+                        break;
+                    case "rtcp-fb":
+                        var rtcpFb = _parseRtcpFb(a.params, sdpObj.codecs);
+                        sdpObj.rtcpFbs.push(rtcpFb);
                         break;
                     case "rtcp-mux":
                         sdpObj['rtcp-mux'] = true;
@@ -7815,6 +8038,8 @@ JSEPAudio.prototype.createContainer = function() {
                     case "ice-options":
                         sdpObj.ice.options = a.params[0];
                         break;
+                    case "ice-lite":
+                        sdpObj.ice.lite = true;
                     }
                 }
 
@@ -7898,18 +8123,20 @@ JSEPAudio.prototype.createContainer = function() {
 
 	firefoxAudio:"v=0\r\no=Mozilla-SIPUA-24.0a1 20557 0 IN IP4 0.0.0.0\r\ns=SIP Call\r\nt=0 0\r\na=ice-ufrag:66600851\r\na=ice-pwd:aab7c3c8d881f6406eff1f1ff2e3bc5e\r\na=fingerprint:sha-256 C3:C4:98:95:D0:58:B1:D2:F9:72:A0:44:EB:C7:C4:49:95:8F:EE:00:05:10:82:A8:6E:F6:4A:DF:43:A3:2A:16\r\nm=audio 56026 RTP/SAVPF 109 0 8 101\r\nc=IN IP4 192.67.4.11\r\na=rtpmap:109 opus/48000/2\r\na=ptime:20\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:101 telephone-event/8000\r\na=fmtp:101 0-15\r\na=sendrecv\r\na=candidate:0 1 UDP 2113601791 192.67.4.11 56026 typ host\r\na=candidate:0 2 UDP 2113601790 192.67.4.11 56833 typ host\r\n",
 
+            chromeRtcpFb:"v=0\r\no=- 6227611786937931562 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE audio video\r\na=msid-semantic: WMS 0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRv\r\nm=audio 50388 RTP/SAVPF 111 103 104 0 8 106 105 13 126\r\nc=IN IP4 78.150.48.131\r\na=rtcp:50388 IN IP4 78.150.48.131\r\na=candidate:3100903175 1 udp 2113937151 192.168.0.22 50388 typ host generation 0\r\na=candidate:3100903175 2 udp 2113937151 192.168.0.22 50388 typ host generation 0\r\na=candidate:1321500371 1 udp 1845501695 78.150.48.131 50388 typ srflx raddr 192.168.0.22 rport 50388 generation 0\r\na=candidate:1321500371 2 udp 1845501695 78.150.48.131 50388 typ srflx raddr 192.168.0.22 rport 50388 generation 0\r\na=candidate:4132961271 1 tcp 1509957375 192.168.0.22 0 typ host generation 0\r\na=candidate:4132961271 2 tcp 1509957375 192.168.0.22 0 typ host generation 0\r\na=ice-ufrag:+cegK9S9iT7r2aHD\r\na=ice-pwd:DGWCo4/RklpitTmYz4AsXpV4\r\na=ice-options:google-ice\r\na=fingerprint:sha-256 D2:C8:80:23:F3:86:45:B3:C0:43:71:4E:DB:F4:BE:86:9B:B5:F3:D9:60:38:0F:B3:25:3F:68:A1:4F:A2:29:EA\r\na=setup:actpass\r\na=mid:audio\r\na=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:VH63QXLG3CblsU2mP538gpep+yRmfhfCEvTK815O\r\na=rtpmap:111 opus/48000/2\r\na=fmtp:111 minptime=10\r\na=rtpmap:103 ISAC/16000\r\na=rtpmap:104 ISAC/32000\r\na=rtpmap:0 PCMU/8000\r\na=rtpmap:8 PCMA/8000\r\na=rtpmap:106 CN/32000\r\na=rtpmap:105 CN/16000\r\na=rtpmap:13 CN/8000\r\na=rtpmap:126 telephone-event/8000\r\na=maxptime:60\r\na=ssrc:3547047282 cname:SS1NySdXoBxXcPcN\r\na=ssrc:3547047282 msid:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRv 0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRva0\r\na=ssrc:3547047282 mslabel:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRv\r\na=ssrc:3547047282 label:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRva0\r\nm=video 50388 RTP/SAVPF 100 116 117\r\nc=IN IP4 78.150.48.131\r\na=rtcp:50388 IN IP4 78.150.48.131\r\na=candidate:3100903175 1 udp 2113937151 192.168.0.22 50388 typ host generation 0\r\na=candidate:3100903175 2 udp 2113937151 192.168.0.22 50388 typ host generation 0\r\na=candidate:1321500371 1 udp 1845501695 78.150.48.131 50388 typ srflx raddr 192.168.0.22 rport 50388 generation 0\r\na=candidate:1321500371 2 udp 1845501695 78.150.48.131 50388 typ srflx raddr 192.168.0.22 rport 50388 generation 0\r\na=candidate:4132961271 1 tcp 1509957375 192.168.0.22 0 typ host generation 0\r\na=candidate:4132961271 2 tcp 1509957375 192.168.0.22 0 typ host generation 0\r\na=ice-ufrag:+cegK9S9iT7r2aHD\r\na=ice-pwd:DGWCo4/RklpitTmYz4AsXpV4\r\na=ice-options:google-ice\r\na=fingerprint:sha-256 D2:C8:80:23:F3:86:45:B3:C0:43:71:4E:DB:F4:BE:86:9B:B5:F3:D9:60:38:0F:B3:25:3F:68:A1:4F:A2:29:EA\r\na=setup:actpass\r\na=mid:video\r\na=extmap:2 urn:ietf:params:rtp-hdrext:toffset\r\na=extmap:3 http://www.webrtc.org/experiments/rtp-hdrext/abs-send-time\r\na=sendrecv\r\na=rtcp-mux\r\na=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:VH63QXLG3CblsU2mP538gpep+yRmfhfCEvTK815O\r\na=rtpmap:100 VP8/90000\r\na=rtcp-fb:100 ccm fir\r\na=rtcp-fb:100 nack\r\na=rtcp-fb:100 goog-remb\r\na=rtpmap:116 red/90000\r\na=rtpmap:117 ulpfec/90000\r\na=ssrc:1617029726 cname:SS1NySdXoBxXcPcN\r\na=ssrc:1617029726 msid:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRv 0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRvv0\r\na=ssrc:1617029726 mslabel:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRv\r\na=ssrc:1617029726 label:0ZT6IhacZdslMZvZ93R5lwxHP9kMSzGbrdRvv0\r\n" 
+
 };
 
         for (s in SDP){
 		var bro = s;
                 var bs = SDP[s];	
-		//Phono.log.debug("testing "+ s);
+		Phono.log.debug("testing "+ s);
 		var sdpObj = Phono.sdp.parseSDP(bs);
-		//Phono.log.debug(JSON.stringify(sdpObj,null," "));
+		Phono.log.debug(JSON.stringify(sdpObj,null," "));
 
 		var resultSDP = Phono.sdp.buildSDP(sdpObj);
-		//Phono.log.debug(s+ " Resulting SDP:");
-		//Phono.log.debug(resultSDP);
+		Phono.log.debug(s+ " Resulting SDP:");
+		Phono.log.debug(resultSDP);
         }
 
     }
@@ -7928,7 +8155,8 @@ JSEPAudio.prototype.createContainer = function() {
        RINGING: 1,
        DISCONNECTED: 2,
        PROGRESS: 3,
-       INITIAL: 4
+       INITIAL: 4,
+       ANSWERING: 5
    };
 
    var Direction = {
@@ -8141,6 +8369,8 @@ JSEPAudio.prototype.createContainer = function() {
       if (call.state != CallState.RINGING 
       && call.state != CallState.PROGRESS) return;
 
+       call.state = CallState.ANSWERING;
+
        var acceptIq = Strophe.iq({type:"set", to:call.remoteJid});
       
        var accept = acceptIq.c('jingle', {
@@ -8149,9 +8379,7 @@ JSEPAudio.prototype.createContainer = function() {
            initiator: call.initiator,
            sid: call.id
        });
-       
-       
-       
+              
        var updateIq = Strophe.iq({type:"set", to:call.remoteJid});
       
        var update = updateIq.c('jingle', {
@@ -8210,7 +8438,7 @@ JSEPAudio.prototype.createContainer = function() {
                                              // Check security
                                              if (call._security == "mandatory" && call.output.secure() == false) {
                                                  // We must fail the call, remote end did not agree on crypto
-                                                 //Phono.log.error("Security error, call not secure when mandatory specified");
+                                                 Phono.log.error("Security error, call not secure when mandatory specified");
                                                  call.hangup();
                                              } else {
                                                  Phono.events.trigger(call, "answer");
@@ -8246,13 +8474,15 @@ JSEPAudio.prototype.createContainer = function() {
       var call = this;
 
       if (call.state == CallState.INITIAL) {
-          call.state = CallState.DISCONNECTED;
           return;
       }
       
       if (call.state != CallState.CONNECTED 
        && call.state != CallState.RINGING 
-       && call.state != CallState.PROGRESS) return;
+       && call.state != CallState.PROGRESS
+       && call.state != CallState.ANSWERING) return;
+
+      call.state = CallState.DISCONNECTED;
       
       var jingleIq = Strophe.iq({
          type:"set", 
@@ -8268,7 +8498,6 @@ JSEPAudio.prototype.createContainer = function() {
       if (call.transport.destroyTransport) call.transport.destroyTransport();
              
       this.connection.sendIQ(jingleIq, function (iq) {
-          call.state = CallState.DISCONNECTED;
           Phono.events.trigger(call, "hangup");
           if (call.ringer != null) call.ringer.stop();
           if (call.ringback != null) call.ringback.stop();          
@@ -8300,10 +8529,10 @@ JSEPAudio.prototype.createContainer = function() {
           
           this.connection.sendIQ(jingleIq);
           if (this.output.freep){
-             //Phono.log.debug("freep "+value);
+             Phono.log.debug("freep "+value);
              this.output.freep(value, duration, this._tones);
           } else {
-             //Phono.log.debug("no freep "+value);
+             Phono.log.debug("no freep "+value);
           }
       }
    };
@@ -8448,7 +8677,7 @@ JSEPAudio.prototype.createContainer = function() {
           
           if (call._security == "mandatory" && call.srtpPropsr == undefined) {
               // We must fail the call, remote end did not agree on crypto
-              //Phono.log.error("No security when mandatory specified");
+              Phono.log.error("No security when mandatory specified");
               return null;
           }
       }
@@ -8472,19 +8701,19 @@ JSEPAudio.prototype.createContainer = function() {
                       codec = transport.codec;
                   };      
               } else {
-                  //Phono.log.error("No valid candidate in transport");
+                  Phono.log.error("No valid candidate in transport");
               }
           }
       });
 
       if (foundTransport == false) {
-          //Phono.log.error("No matching valid transport");
+          Phono.log.error("No matching valid transport");
           return null;
       }
 
       // No matching codec
       if (!codec) {
-          //Phono.log.error("No matching jingle codec (not a problem if using ROAP WebRTC)");
+          Phono.log.error("No matching jingle codec (not a problem if using ROAP WebRTC)");
           // Voodoo up a temporary codec as a placeholder
           codec = {
               id: 1,
@@ -8496,7 +8725,19 @@ JSEPAudio.prototype.createContainer = function() {
 
       return codec;
        
-   };
+    };
+
+    Call.prototype.on = function(event, listener) {
+        Phono.events.add(this, event, listener);
+        return this;
+
+    };
+
+    Call.prototype.removeListener = function(event, listener) {
+        Phono.events.remove(this, event, listener);
+        return this;
+    };
+
 
    // Phone
    //
@@ -8519,8 +8760,8 @@ JSEPAudio.prototype.createContainer = function() {
       // Define defualt config and merge from constructor
       this.config = Phono.util.extend({
          audioInput: "System Default",
-         ringTone: "//s.phono.com/ringtones/Diggztone_Marimba.mp3",
-         ringbackTone: "//s.phono.com/ringtones/ringback-us.mp3",
+         ringTone: "//" + Phono.cdnUrl + "/ringtones/Diggztone_Marimba.mp3",
+         ringbackTone: "//" + Phono.cdnUrl + "/ringtones/ringback-us.mp3",
          wideband: true,
          headset: false,
          codecs: function(offer) {return offer;},
@@ -8556,6 +8797,20 @@ JSEPAudio.prototype.createContainer = function() {
       var action = jingle.attr('action') || "";
       var id = jingle.attr('sid') || "";
       var call = this.calls[id] || null;
+
+      // Check if this is addressed to a new call or a known call
+      if (action != "session-initiate" && call == null) {
+          Phono.log.error("Received jingle addressed to unknown call id: " + id);
+          // Send error reply
+          this.connection.send(
+              Strophe.iq({
+                  type: "result", 
+                  id: $(iq).attr('id'),
+                  to:call.remoteJid
+              })
+          );
+          return true;
+      }
       
       switch(action) {
          
@@ -8575,7 +8830,7 @@ JSEPAudio.prototype.createContainer = function() {
             // Negotiate SDP
             call.codec = call.negotiate(iq);
             if(call.codec == null) {
-                //Phono.log.warn("Failed to negotiate incoming call", iq);
+                Phono.log.warn("Failed to negotiate incoming call", iq);
                 call.hangup();
                 break;
             }
@@ -8613,7 +8868,7 @@ JSEPAudio.prototype.createContainer = function() {
             // Negotiate SDP
             call.codec = call.negotiate(iq);
             if(call.codec == null) {
-                //Phono.log.warn("Failed to negotiate outbound call", iq);
+                Phono.log.warn("Failed to negotiate outbound call", iq);
                 call.hangup();
                 break;
             }
@@ -8627,7 +8882,7 @@ JSEPAudio.prototype.createContainer = function() {
             // Belt and braces
             if (call._security == "mandatory" && call.output.secure() == false) {
                 // We must fail the call, remote end did not agree on crypto
-                //Phono.log.error("Security error, call not secure when mandatory specified");
+                Phono.log.error("Security error, call not secure when mandatory specified");
                 call.hangup();
                 break;
             }
@@ -8649,16 +8904,17 @@ JSEPAudio.prototype.createContainer = function() {
          // Hangup
          case "session-terminate":
             
-            call.state = CallState.DISCONNECTED;
-            
-            call.stopAudio();
-            if (call.ringer != null) call.ringer.stop();
-            if (call.ringback != null) call.ringback.stop();
-            if (call.transport.destroyTransport) call.transport.destroyTransport();
-
-            // Fire hangup event
-            Phono.events.trigger(call, "hangup")
-            
+            if (call.state != CallState.DISCONNECTED) {
+                call.state = CallState.DISCONNECTED;
+                
+                call.stopAudio();
+                if (call.ringer != null) call.ringer.stop();
+                if (call.ringback != null) call.ringback.stop();
+                if (call.transport.destroyTransport) call.transport.destroyTransport();
+                
+                // Fire hangup event
+                Phono.events.trigger(call, "hangup")
+            }
             break;
             
          // Ringing
@@ -8805,6 +9061,16 @@ JSEPAudio.prototype.createContainer = function() {
        this._security = value;
    }
 
+   Phone.prototype.on = function(event, listener) {
+      Phono.events.add(this, event, listener);
+      return this;
+   };
+
+   Phone.prototype.removeListener = function(event, listener) {
+      Phono.events.remove(this, event, listener);
+      return this;
+   };   
+
    Phono.registerPlugin("phone", {
       create: function(phono, config, callback) {
          return Phono.util.loggify("Phone", new Phone(phono, config, callback));
@@ -8817,7 +9083,7 @@ JSEPAudio.prototype.createContainer = function() {
     // ======================================================================
 
     PhonoStrophe.log = function(level, msg) {
-        //Phono.log.debug("[PSTROPHE] " + msg);
+        Phono.log.debug("[PSTROPHE] " + msg);
     };
 
     // Register Loggign Callback
