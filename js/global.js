@@ -300,6 +300,36 @@ function setupContactsAutoComplete(selector){
 				}
 				imgHtml = '<img src="images/qd_internal.png"> ' + printdepartment + "<BR>" + "<strong>" + row.ContactTelephoneNumber + "</strong>";
 				break;
+			case "deleted":
+				var printdepartment = "";
+				if ( row.ContactDepartment == null ){
+					printdepartment = row.ContactName;
+				}
+				else{
+					printdepartment = row.ContactDepartment + ": " + row.ContactName;
+				}
+				imgHtml = '<img src="images/ch_deleted.png"> ' + printdepartment + "<BR>" + "<strong>" + row.ContactTelephoneNumber + "</strong>";
+				break;
+			case "queue":
+				var printdepartment = "";
+				if ( row.ContactDepartment == null ){
+					printdepartment = row.ContactName;
+				}
+				else{
+					printdepartment = row.ContactDepartment + ": " + row.ContactName;
+				}
+				imgHtml = '<img src="images/ch_queue.png"> ' + printdepartment + "<BR>" + "<strong>" + row.ContactTelephoneNumber + "</strong>";
+				break;
+			case "ringgroup":
+				var printdepartment = "";
+				if ( row.ContactDepartment == null ){
+					printdepartment = row.ContactName;
+				}
+				else{
+					printdepartment = row.ContactDepartment + ": " + row.ContactName;
+				}
+				imgHtml = '<img src="images/ch_ringgroup.png"> ' + printdepartment + "<BR>" + "<strong>" + row.ContactTelephoneNumber + "</strong>";
+				break;
 			case "mycontacts":
 				var printtypenum = "";
 				if ( row.ContactTelephoneType == "" ){
@@ -425,6 +455,18 @@ function getNumberLookupData(obj){
 		contact.name = obj.Internal;
 		contact.source = "internal";
 	}
+	else if(typeof obj.Deleted !== "undefined"){
+		contact.name = obj.Deleted;
+		contact.source = "deleted";
+	}
+	else if(typeof obj.RingGroup !== "undefined"){
+		contact.name = obj.RingGroup;
+		contact.source = "ringgroup";
+	}
+	else if(typeof obj.Queue !== "undefined"){
+		contact.name = obj.Queue;
+		contact.source = "queue";
+	}
 	return contact;
 }
 function updateQuickDialMeta(number){
@@ -448,6 +490,34 @@ function updateQuickDialMeta(number){
 				}
 				$imageElem.append('<a style="margin-right:5px;" data-source="internal" href="javascript:;" rel="' + rel + '"><img src="images/ch_internal.png" alt="internal"/></a>');
 				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink internal" href="javascript:;" rel="' + rel + '">' + data.Internal + '</a>');
+			}
+			if(typeof data.Deleted != "undefined"){
+				var rel = data.Deleted;
+				if(rel.match(/,/)){
+					temp = rel.split(",");
+					rel = $.trim(temp[1]);
+				}
+				$imageElem.append('<a style="margin-right:5px;" data-source="deleted" href="javascript:;" rel="' + rel + '"><img src="images/ch_deleted.png" alt="deleted"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink deleted" href="javascript:;" rel="' + rel + '">' + data.Deleted + '</a>');
+			}
+			if(typeof data.Queue != "undefined"){
+				var rel = data.Queue;
+				if(rel.match(/,/)){
+					temp = rel.split(",");
+					rel = $.trim(temp[1]);
+				}
+				$imageElem.append('<a style="margin-right:5px;" data-source="queue" href="javascript:;" rel="' + rel + '"><img src="images/ch_queue.png" alt="queue"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink queue" href="javascript:;" rel="' + rel + '">' + data.Queue + '</a>');
+			}
+
+			if(typeof data.RingGroup != "undefined"){
+				var rel = data.RingGroup;
+				if(rel.match(/,/)){
+					temp = rel.split(",");
+					rel = $.trim(temp[1]);
+				}
+				$imageElem.append('<a style="margin-right:5px;" data-source="ringgroup" href="javascript:;" rel="' + rel + '"><img src="images/ch_ringgroup.png" alt="ringgroup"/></a>');
+				$linkElem.append('<a style="color:white;display:none;" class="quickdialmetalink ringgroup" href="javascript:;" rel="' + rel + '">' + data.RingGroup + '</a>');
 			}
 			if(typeof data.GContacts != "undefined"){
 				$imageElem.append('<a style="margin-right:5px;" data-source="gcontacts" href="javascript:;" rel="' + data.GContacts + '"><img src="images/ch_gcontacts.png" alt="gcontacts"/></a>');

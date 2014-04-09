@@ -172,9 +172,9 @@ function disableChecksForSynchedContacts(){
 	$("a.contact_check.iphone").popover({html : true, content: iphoneContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 	$("a.contact_check.asterisk").popover({html : true, content: asteriskContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 
-	$(".contact_check.internal,.contact_check.deleted").replaceWith('<a class="contact_check internal" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
+	$(".contact_check.internal,.contact_check.deleted,.contact_check.ringgroup,.contact_check.queue").replaceWith('<a class="contact_check internal" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
 	internalContent = 'To delete/edit this contact, ask your admin to edit users.cfg file.';
-	$("a.contact_check.internal,.contact_check.deleted").popover({html : true, content: internalContent, trigger : 'hover', placement : "top", title : "This contact can't be deleted on web interface"});
+	$("a.contact_check.internal,.contact_check.deleted,.contact_check.ringgroup,.contact_check.queue").popover({html : true, content: internalContent, trigger : 'hover', placement : "top", title : "This contact can't be deleted on web interface"});
 
 	$(".edit-contact").not(".mycontacts").contents().unwrap();
 }

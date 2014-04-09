@@ -32,6 +32,9 @@
 	</div>
 	<div class="span10 src">
 		{{#if Src.Internal}}<img class="internal" style="display:none;" src="images/ch_internal.png"/>{{/if}}
+		{{#if Src.Deleted}}<img class="deleted" style="display:none;" src="images/ch_deleted.png"/>{{/if}}
+		{{#if Src.RingGroup}}<img class="ringgroup" style="display:none;" src="images/ch_ringgroup.png"/>{{/if}}
+		{{#if Src.Queue}}<img class="queue" style="display:none;" src="images/ch_queue.png"/>{{/if}}
 		{{#if Src.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Src.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
 		{{#if Src.Android}}<img class="android" style="display:none;" src="images/ch_android.png"/>{{/if}}
@@ -72,8 +75,23 @@
 		{{#if Src.Internal}}
 		<span class="internal contact-name" style="display:none;">{{Src.Internal}}</span>
 		{{/if}}
+		{{#if Src.Deleted}}
+		<span class="deleted contact-name" style="display:none;">{{Src.Deleted}}</span>
+		{{/if}}
+		{{#if Src.Queue}}
+		<span class="queue contact-name" style="display:none;">{{Src.Queue}}</span>
+		{{/if}}
+		{{#if Src.RingGroup}}
+		<span class="ringgroup contact-name" style="display:none;">{{Src.RingGroup}}</span>
+		{{/if}}
 		{{#unless Src.Internal}}
+		{{#unless Src.Deleted}}
+		{{#unless Src.Queue}}
+		{{#unless Src.RingGroup}}
 		<span class="from dstnum" style="color:#656565;font-weight:normal;">{{Src.Num}}</span>
+		{{/unless}}
+		{{/unless}}
+		{{/unless}}
 		{{/unless}}
 		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', $(this).parent().prev().text()  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', $(this).parent().prev().text()  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', $(this).parent().prev().text()  , '');"><i class="icon mobile-icon"></i></a></span>
 		<a class="addcontact" style="display:none;" href="javascript:;" onclick="addClidContact({{recordid}});">{{t "Add Contact"}}</a>
@@ -85,6 +103,9 @@
 	</div>
 	<div class="span10 dst">
 		{{#if Dst.Internal}}<img class="internal" style="display:none;" src="images/ch_internal.png"/>{{/if}}
+		{{#if Dst.Deleted}}<img class="deleted" style="display:none;" src="images/ch_deleted.png"/>{{/if}}
+		{{#if Dst.Queue}}<img class="queue" style="display:none;" src="images/ch_queue.png"/>{{/if}}
+		{{#if Dst.RingGroup}}<img class="ringgroup" style="display:none;" src="images/ch_ringgroup.png"/>{{/if}}
 		{{#if Dst.MyContacts}}<img class="personal" style="display:none;" src="images/ch_personal.png"/>{{/if}}
 		{{#if Dst.GContacts}}<img class="gcontacts" style="display:none;" src="images/ch_gcontacts.png"/>{{/if}}
 		{{#if Dst.Android}}<img class="android" style="display:none;" src="images/ch_android.png"/>{{/if}}
@@ -125,9 +146,41 @@
 		{{#if Dst.Internal}}
 		<span class="internal contact-name" style="display:none;">{{Dst.Internal}}</span>
 		{{/if}}
+		{{#if Dst.Deleted}}
+		<span class="deleted contact-name" style="display:none;">{{Dst.Deleted}}</span>
+		{{/if}}
+		{{#if Dst.Queue}}
+		<span class="queue contact-name" style="display:none;">{{Dst.Queue}}</span>
+		{{/if}}
+		{{#if Dst.RingGroup}}
+		<span class="ringgroup contact-name" style="display:none;">{{Dst.RingGroup}}</span>
+		{{/if}}
 		{{#unless Dst.Internal}}
+		{{#unless Dst.Deleted}}
+		{{#unless Dst.Queue}}
+		{{#unless Dst.RingGroup}}
 		<span class="from dstnum" style="color:#656565;font-weight:normal;">{{Dst.Num}}</span>
 		{{/unless}}
+		{{/unless}}
+		{{/unless}}
+		{{/unless}}
+		{{#if QueueSource}}<img src="images/ch_queue.png" alt="queue"/>{{/if}}
+	    {{#if Dst.Deleted}}
+			 {{#each QueueSource}}
+			   <span class="deleted label label-info">{{Number}}{{#if Name}}, {{Name}}{{/if}}</span>
+			 {{/each}}
+		{{/if}}
+		{{#if Dst.Internal}}
+		 {{#each QueueSource}}
+		   <span class="internal label label-info">{{Number}}{{#if Name}}, {{Name}}{{/if}}</span>
+		 {{/each}}
+		{{/if}}
+		{{#each Queue}}
+		  <span class="queue label label-info">{{Number}}{{#if Name}}, {{Name}}{{/if}}</span>
+		{{/each}}
+		{{#each RingGroup}}
+		  <span class="ringgroup label label-info">{{Number}}{{#if Name}}, {{Name}}{{/if}}</span>
+		{{/each}}
 		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', $(this).parent().prev().text()  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', $(this).parent().prev().text()  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', $(this).parent().prev().text()  , '');"><i class="icon mobile-icon"></i></a></span>
 		<a class="addcontact" style="display:none;" href="javascript:;" onclick="addClidContact({{recordid}});">{{t "Add Contact"}}</a>
 	</div>
