@@ -65,7 +65,14 @@ function validate_login()
           window.location.href = "/{{RedirectPath}}";
         } ,
         error : function(xhr,status,error){
-          $('font[color="#FF0000"]').text(" - Wrong username/password");
+          var message = "";
+          if(xhr.responseText.length < 200){
+            message = xhr.responseText;
+          }
+          else{
+            message = "Response status: "+ xhr.status + "<br/> Error: " +error;
+          }
+          $('font[color="#FF0000"]').html(message);
         }
       });
     }
