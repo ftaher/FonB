@@ -294,6 +294,7 @@ function search_request( ch_pagenumber ) {
 			print_pagenavigation(  data.CurrentPageNumber, data.CurrentPageNumber, data.TotalCount, data.PageSize, "callhistory", ".ch_pagenumber", ".pagination-meta");
 			//setCallHistoryFilter();
 			clearCommas();
+			$(".export-csv").attr("href", "php/exportcallhistory.php?"+data.Params);
 		},
 		error : function(xhr, status, thrownError){
 			if(thrownError === "Forbidden"){
@@ -463,9 +464,9 @@ function getSummary(event) {
 	if($mp3player.length > 0){
 		var flashHtml = '<object type="application/x-shockwave-flash" data="flash/player.swf" height="20" width="290">\
     <param name="movie" value="flash/player.swf">\
-    <param name="FlashVars" value="playerID=audioplayer' + recordid + '&amp;soundFile=' + encodeURIComponent($mp3player.data("url")) + '&amp;noinfo=yes">\
+    <param name="FlashVars" value="duration=false&amp;playerID=audioplayer' + recordid + '&amp;soundFile=' + encodeURIComponent($mp3player.data("url")) + '&amp;noinfo=yes">\
     <param name="quality" value="high">\
-    <param name="menu" value="false">\
+    <param name="menu" value="true">\
     <param name="wmode" value="transparent">\
   </object>';
 	    $mp3player.html(flashHtml);
