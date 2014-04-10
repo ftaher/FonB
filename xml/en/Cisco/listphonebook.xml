@@ -24,13 +24,13 @@
 		<SoftKeyItem>
                 <Name>Filter</Name>
                 <URL>http://{{Host}}/xml/en/Cisco/filtersearch.xml?FilterSearch={{FilterSearch}}</URL>
-                <Position>3</Position>
+                <Position>2</Position>
                 </SoftKeyItem>
                  
 		<SoftKeyItem>
                 <Name>Search</Name>
                 <URL>http://{{Host}}/xml/en/Cisco/phonebook.xml</URL>
-                <Position>2</Position>
+                <Position>3</Position>
                 </SoftKeyItem>
 		
 <!--

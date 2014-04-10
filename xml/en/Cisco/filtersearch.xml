@@ -1,5 +1,5 @@
 <CiscoIPPhoneMenu>
-<Title>Help</Title>
+<Title>Select Contacts Type</Title>
 <MenuItem>
 <Name>All Contacts</Name>
 <URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&FilterSearch={{FilterSearch}}</URL>
@@ -28,5 +28,20 @@
 <Name>Speed Dials</Name>
 <URL>http://{{Host}}/xml/en/Cisco/listphonebook.xml?PageSize=30&NameSize=9&PhoneNumberSize=8&SourceSize=5&Source=asterisk&FilterSearch={{FilterSearch}}</URL>
 </MenuItem>
+
+ <SoftKeyItem>
+ <Name>Select</Name>
+ <URL>SoftKey:Select</URL>
+ <Position>1</Position>
+ </SoftKeyItem>
+
+ <SoftKeyItem>
+ <Name>Back</Name>
+ <URL>SoftKey:Exit</URL>
+ <Position>2</Position>
+ </SoftKeyItem>
+
+
+
 
 </CiscoIPPhoneMenu>
