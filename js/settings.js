@@ -682,11 +682,13 @@ function getRewriteRulesHTML(data){
 				replace : obj[i].prefix
 			});
 		}else{
+			console.log(obj);
+			console.log(i);
 			temp.push({
 				Id : obj[i].Id,
 				matchrule  : obj[i].matchrule,
 				typeMatch : "match",
-				match : obj[i].print_start.substr(0, obj[i].print_start.length - 2),//eliminate X* in the end
+				match : obj[i].print_start ? obj[i].print_start.substr(0, obj[i].print_start.length - 2) : "",//eliminate X* in the end
 				replace : obj[i].prefix
 			});
 		}
