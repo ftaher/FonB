@@ -160,16 +160,19 @@ function disableChecksForSynchedContacts(){
 	$(".contact_check.highrise").replaceWith('<a class="contact_check highrise" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
 	$(".contact_check.gcontacts").replaceWith('<a class="contact_check gcontacts" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
 	$(".contact_check.iphone").replaceWith('<a class="contact_check iphone" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
+	$(".contact_check.android").replaceWith('<a class="contact_check android" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
 	$(".contact_check.asterisk").replaceWith('<a class="contact_check asterisk" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');
 
 	var gcontactsContent = 'To edit this contact, first <strong>edit it from your google contacts</strong> and <strong>re-synchronize<strong>.';
 	var highriseContent = 'To edit this contact, first <strong>edit it from your highrise contacts</strong> and <strong>re-synchronize</strong>.';
-	var iphoneContent = 'To edit this contact, first <strong>edit it from your iphone contacts</strong> and <strong>re-synchronize</strong>.';
+	var iphoneContent = 'To edit this contact, first <strong>edit it from your iPhone contacts</strong> and <strong>re-synchronize</strong>.';
+	var androidContent = 'To edit this contact, first <strong>edit it from your Android contacts</strong> and <strong>re-synchronize</strong>.';
 	var asteriskContent = 'To edit this contact, first <strong>edit it from Freepbx</strong> and then import from Freepbx FonB GUI module.';
 
 	$("a.contact_check.highrise").popover({html : true, content: highriseContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 	$("a.contact_check.gcontacts").popover({html : true, content: gcontactsContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 	$("a.contact_check.iphone").popover({html : true, content: iphoneContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
+	$("a.contact_check.android").popover({html : true, content: androidContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 	$("a.contact_check.asterisk").popover({html : true, content: asteriskContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 
 	$(".contact_check.internal,.contact_check.deleted,.contact_check.ringgroup,.contact_check.queue").replaceWith('<a class="contact_check internal" href="javascript:;"><i class="icon  icon-exclamation-sign"></i></a>');

@@ -69,24 +69,7 @@
 							</div>
 						</div>
 						{{#if Add}}
-						<div id="contact_checkboxes" class="control-group">
-							<label class="control-label">{{t "Where to save this contact?"}}</label>
-							<div class="controls">
-								<label class="checkbox">
-									<input type="checkbox" name="savein[mycontacts]" id="savein_personal"/> {{t "My Contacts"}}
-								</label>
-								{{#if GContacts}}
-								<label class="checkbox">
-									<input type="checkbox" name="savein[gcontacts]" id="savein_gcontacts"/> {{t "Google Contacts"}}
-								</label>
-								{{/if}}
-								{{#if Highrise}}
-								<label class="checkbox">
-									<input type="checkbox" name="savein[highrise]" id="savein_highrise"/> {{t "Highrise Contacts"}}
-								</label>
-								{{/if}}
-							</div>
-						</div>
+						<input type="hidden" name="savein[mycontacts]" value="on"/>
 						{{/if}}
 						{{#if Edit}}
 							<input type="hidden" name="Id" value="{{Id}}"/>
