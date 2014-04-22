@@ -298,7 +298,7 @@ function search_request( ch_pagenumber ) {
 		},
 		error : function(xhr, status, thrownError){
 			if(thrownError === "Forbidden"){
-				window.location.href = "/logout";
+				window.location.href = "logout";
 			}
 		}
 	});

@@ -167,7 +167,7 @@ function disableChecksForSynchedContacts(){
 	var highriseContent = 'To edit this contact, first <strong>edit it from your highrise contacts</strong> and <strong>re-synchronize</strong>.';
 	var iphoneContent = 'To edit this contact, first <strong>edit it from your iPhone contacts</strong> and <strong>re-synchronize</strong>.';
 	var androidContent = 'To edit this contact, first <strong>edit it from your Android contacts</strong> and <strong>re-synchronize</strong>.';
-	var asteriskContent = 'To edit this contact, first <strong>edit it from Freepbx</strong> and then import from Freepbx FonB GUI module.';
+	var asteriskContent = 'To edit this contact, first <strong>edit it from Freepbx/Elastix</strong> FonB module.';
 
 	$("a.contact_check.highrise").popover({html : true, content: highriseContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
 	$("a.contact_check.gcontacts").popover({html : true, content: gcontactsContent, trigger : 'hover', placement : "top", title : "This contact can't be edited locally"});
