@@ -93,7 +93,7 @@
 		{{/unless}}
 		{{/unless}}
 		{{/unless}}
-		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', $(this).parent().prev().text()  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', $(this).parent().prev().text()  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', $(this).parent().prev().text()  , '');"><i class="icon mobile-icon"></i></a></span>
+		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', {{Src.Num}}  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', {{Src.Num}}  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', {{Src.Num}}  , '');"><i class="icon mobile-icon"></i></a></span>
 		<a class="addcontact" style="display:none;" href="javascript:;" onclick="addClidContact({{recordid}});">{{t "Add Contact"}}</a>
 	</div>
 </div>
@@ -181,7 +181,7 @@
 		{{#each RingGroup}}
 		  <span class="ringgroup label label-info">{{Number}}{{#if Name}}, {{Name}}{{/if}}</span>
 		{{/each}}
-		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', $(this).parent().prev().text()  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', $(this).parent().prev().text()  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', $(this).parent().prev().text()  , '');"><i class="icon mobile-icon"></i></a></span>
+		<span class="dial" style="margin-left:20px;display:none;"><a href="javascript:;" onclick="Quickdial('WebPhone', {{Dst.Num}}  , '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', {{Dst.Num}}  , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', {{Dst.Num}}  , '');"><i class="icon mobile-icon"></i></a></span>
 		<a class="addcontact" style="display:none;" href="javascript:;" onclick="addClidContact({{recordid}});">{{t "Add Contact"}}</a>
 	</div>
 </div>
