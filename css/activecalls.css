@@ -26,7 +26,6 @@
 // #
 // ###############################################################################
  */
-
 .direction span{
   display:none;
 }
@@ -58,14 +57,12 @@ background-position:center top;
 cursor: default;
 width: 66px;
 }
-
 .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_disabled.png');
 background-repeat:no-repeat;
 background-position:center top; 
 cursor: default;
 }
-
 .callswitch .mobile a{
 background-image:url('../images/active_calls/ac_mobile_disabled.png');
 background-repeat:no-repeat;
@@ -79,11 +76,9 @@ cursor: default;
   color: #ccc;
   cursor: default;
 }
-
 .ringing .hold a,.activecall.hold .hold a,.activecall.hold .hold a:hover{
   background-image:url('../images/active_calls/ac_hold_disabled.png') !important;
 }
-
 .activecall .mobile a,.activecall .flash a,.activecall .phone a, #activecalls.noflash .flash a,#activecalls.nophone .phone a, #activecalls.nomobile .mobile a, .activecall .mobile a:hover,.activecall .flash a:hover,.activecall .phone a:hover, #activecalls.noflash .flash a:hover,#activecalls.nophone .phone a:hover, #activecalls.nomobile .mobile a:hover{
  	text-decoration: none;
  	color: #ccc;
@@ -110,25 +105,21 @@ cursor: default;
   padding-top:50px;/*leaving some space for image to appear*/
   display:block;
 }
-
 .phone.conference  .callswitch .phone a{
 background-image:url('../images/active_calls/ac_phone_active.gif');
 background-repeat:no-repeat;
 background-position:center top; 
 }
-
 .flash.conference .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_active.gif');
 background-repeat:no-repeat;
 background-position:center top; 
 }
-
 .mobile.conference .callswitch .mobile a{
 background-image:url('../images/active_calls/ac_mobile_active.gif');
 background-repeat:no-repeat;
 background-position:center top; 
 }
-
 .busy .callswitch .mobile a:hover,
 .busy  .callswitch .phone a:hover,
 .busy .callswitch .flash a:hover,
@@ -144,46 +135,34 @@ background-position:center top;
   color: #09F;
  	cursor: pointer;
 }
-
 .busy .callswitch .mobile a,.ring .callswitch .mobile a{
   background-image:url('../images/active_calls/ac_mobile_inactive.png');
 }
-
 .busy  .callswitch .phone a,.ring  .callswitch .phone a{
   background-image:url('../images/active_calls/ac_phone_inactive.png');
   width:66px;
 }
-
 .busy .callswitch .flash a,.ring .callswitch .flash a{
   background-image:url('../images/active_calls/ac_flash_inactive.png');
 }
-
-
 .mobile.busy .callswitch .mobile a{
   background-image:url('../images/active_calls/ac_mobile_active.gif');
 }
-
 .phone.busy  .callswitch .phone a{
   background-image:url('../images/active_calls/ac_phone_active.gif');
 }
-
 .flash.busy .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_active.gif');
 }
-
 .mobile.ring .callswitch .mobile a{
   background-image:url('../images/active_calls/ac_mobile_ring.png');
 }
-
 .phone.ring  .callswitch .phone a{
   background-image:url('../images/active_calls/ac_phone_ring.png');
 }
-
 .flash.ring .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_ring.png');
 }
-
-
 .ringing .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_ringing.gif');
 background-repeat:no-repeat;
@@ -191,7 +170,6 @@ background-position:center top;
 color: #09F;
  	cursor: pointer;
 }
-
 .ringing .callswitch .mobile a{
 background-image:url('../images/active_calls/ac_mobile_ringing.gif');
 background-repeat:no-repeat;
@@ -219,28 +197,21 @@ text-decoration: none;
 color: #ccc;
 cursor: default;
 }
-
 .phone.dialing  .callswitch .phone a{
 background-image:url('../images/active_calls/ac_phone_trying.png');
-
 }
-
 .flash.dialing .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_trying.png'); 
 }
-
 .mobile.dialing .callswitch .mobile a{
 background-image:url('../images/active_calls/ac_mobile_trying.png');
 }
-
 .hold .callswitch .phone a{
 background-image:url('../images/active_calls/ac_phone_hold.png');
 }
-
 .hold .callswitch .flash a{
 background-image:url('../images/active_calls/ac_flash_hold.png');
 }
-
 .hold .callswitch .mobile a{
 background-image:url('../images/active_calls/ac_mobile_hold.png');
 }
@@ -250,7 +221,6 @@ background-image:url('../images/active_calls/ac_mobile_hold.png');
  .callactions .highrise,.callactions .gcontacts, .callactions .personal,.callactions .internal{
   display:none;
 }
-
 .callactions .hold a:hover
 {
 background-image:url('../images/active_calls/ac_hold_hover.png');
@@ -287,14 +257,12 @@ background-image:url('../images/active_calls/ac_transfer_active.gif');
 background-repeat:no-repeat;
 background-position:center top; 
 }
-
 .transfer.trying .callactions .transfer a{
   background-image:url('../images/active_calls/ac_transfer_hover.png');
 }
 .transfer.trying{
   opacity: 0.5;
 }
-
 .callactions .conference a
 {
 background-image:url('../images/active_calls/ac_conference_inactive.png');
@@ -317,7 +285,6 @@ background-image:url('../images/active_calls/ac_conference_active.gif');
 background-repeat:no-repeat;
 background-position:center top; 
 }
-
 .callactions .drop a
 {
 background-image:url('../images/active_calls/ac_drop_inactive.png');
@@ -350,14 +317,12 @@ background-repeat:no-repeat;
 background-position:center top;
 cursor: default;
 }
-
 #activecalls.nomobile .mobile a{
 background-image:url('../images/active_calls/ac_mobile_disabled.png');
 background-repeat:no-repeat;
 background-position:center top;
 cursor: default;
 }
-
 #activecalls.nophone .phone a{
 background-image:url('../images/active_calls/ac_phone_disabled.png');
 background-repeat:no-repeat;
@@ -374,7 +339,6 @@ cursor: default;
   display:block;
   padding-top:50px;
 }
-
 .gcontacts .callactions .gcontacts{
   background-image:url('../images/google-contact.png');
   background-repeat:no-repeat;
@@ -382,7 +346,6 @@ cursor: default;
   display:block;
   padding-top:50px;
 }
-
 .internal .callactions .internal{
   background-image:url('../images/internal-contacts.png');
   background-repeat:no-repeat;
@@ -390,7 +353,6 @@ cursor: default;
   display:none;
   padding-top:50px;
 }
-
 .mycontacts .callactions .mycontacts{
   background-image:url('../images/personal-contacts.png');
   background-repeat:no-repeat;
@@ -398,7 +360,6 @@ cursor: default;
   display:block;
   padding-top:50px;
 }
-
 /**
  * Old css
  */
@@ -417,7 +378,6 @@ border-color:#D3D3D3;
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 }
-
 #activecallbox h1
 {
 position:absolute;
@@ -427,34 +387,24 @@ font-size:14px;
 font-weight:bold;
 color:#656565;
 }
-
-
-
-
 #activecalls .outbound .direction {
 padding-left:30px;
 background-image:url('../images/Outbound_Call.png');
 background-repeat:no-repeat;
 background-position:left 28%; 
 }
-
 #activecalls .inbound .direction {
 padding-left:30px;
 background-image:url('../images/Inbound_Call.png');
 background-repeat:no-repeat;
 background-position:left 28%; 
 }
-
 #activecalls .outbound .direction span.outbound {
 display:inline;
 }
-
 #activecalls .inbound .direction span.inbound {
 display:inline;
 }
-
-
-
 #activecalls .outbound .callswitch span ,#activecalls .inbound .callswitch span  {
 vertical-align: middle;
 text-decoration: none;
@@ -465,14 +415,12 @@ display: block;
 float: left;
 white-space: nowrap;
 }
-
 .activecall .hold,.activecall .conference,.activecall .transfer,.activecall .drop,.activecall .acmute,.activecall .acunmute  {float:left;width:70px;font-size:12px;}
 .callswitch a {color:#666;text-decoration:none;}
 .callswitch a:hover {color:#09F;}
 #line0 {height:80px;}
 .activephone {width:62px !important; }
 .activepaneltop {padding-left:10px;}
-
 .Mobile.trying .mobile a{
   background-image:url('../images/active_calls/ac_mobile_trying.png');
 }

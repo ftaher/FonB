@@ -27,7 +27,6 @@
 // ###############################################################################
 -->
 <!-- BEGIN: main -->
-
 <div id="addContactModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addContactLabel" aria-hidden="true">
 	<form action="javascript:;" class="form-horizontal" id="new_person" method="post">
 		<div class="modal-header">
@@ -107,7 +106,6 @@ $(document).ready(function(){
 			}
 		}
 		if(error) return false;
-
 		$.ajax({
 			type : "post",
 			data : $(this).serialize(),

@@ -27,13 +27,8 @@
 // ###############################################################################
 -->
 <!-- BEGIN: main -->
-
-
 <div id="addcontactpage" style="width:500px;">
 <form action="index.php?module=addcontact" autocomplete="off" class="new subject" id="new_person" method="post">
-
-
-
 <div class="contactplace" style="width:100%;">
         <table cellpadding="0" cellspacing="0" class="contact_types" style="width:100%;">
          <tr>
@@ -42,12 +37,6 @@
          </tr>
         </table cellpadding="0" cellspacing="0" class="contact_types">
 </div class="contactplace" style="width:100%;">
-
-
-
-
-
-
 <!-- BEGIN: personcontacts -->
 <div class="{vcfsource}contacts" style="">
 <div class="page_divider" style="background-color:#f0fff8">
@@ -63,7 +52,6 @@
           </tr>
           <tr class="name last_name">
             <th><h2>{{t "Last name "}}</h2></th>
-
             <td><input class="name autofocus" id="person_last_name" name="person[last_name]" size="30" type="text" value="{personlastname}"/></td>
           </tr>
 <!-- BEGIN: title -->
@@ -73,18 +61,14 @@
               <div class="contact_forms" id="title_person">
                 <div class="blank_slate">{{t "Add a title"}}</div>
                 <div class="contact_methods" style='display:none;'>
-
                   <div class="contact_method">
                     <input class="autofocus" id="person_title" name="person[title]" size="30" type="text"  value="{persontitle}"/>
                   </div>
-
                 </div>
               </div>
              </td>
           </tr>
 <!-- END: title -->
-
-
           <tr class="company last">
             <th><h2>{{t "Company"}}</h2></th>
             <td>
@@ -98,7 +82,6 @@
                 </div>
               </div>
             </td>
-
           </tr>
         </table cellpadding="0" cellspacing="0" class="contact_types">
       </div class="primary_fields">
@@ -109,15 +92,11 @@
 <!-- BEGIN: telephone -->
           <tr>
   <th><h2>{{t "Phone"}}</h2></th>
-
   <td><div class="contact_forms phone_numbers" id="phone_number_list_person"><div id="blank_slate_person_phone_number" class='blank_slate'>{{t "Add a phone number"}}</div>
-
 <div class="contact_methods" style="display:none;">
-
 <!-- BEGIN: telephones -->
   <div class="contact_method new_contact_method edit_phone">
     <input class="autofocus" id="person_contact_data_phone_numbers__number" name="person[contact_data][phone_numbers][][number]" size="30" type="text" value="{personphonenum}" />
-
 	<span class="overlay_wrapper">
     <label for="person_contact_data_phone_numbers__location" class="overlabel">{{t "Mobile"}}</label>
     <input id="person_contact_data_phone_numbers__location" class="person_contact_input_type" name="person[contact_data][phone_numbers][][location]" type="text" value="{personphonetype}" style="padding-left:2px;margin-left:4px;" />
@@ -125,22 +104,17 @@
     <span class="addremove"><a href="#" class="remove">{{t "Remove"}}</a></span>
   </div class="contact_method new_contact_method edit_phone">
 <!-- END: telephones -->
-
 <div id="add_person_phone_number" class="add_contact_method" style="display:none;">
   <div class="add"><a href="#" onclick="addanotherphone();">{{t "Add another"}}</a></div>
 </div class="contact_methods" style="display:none;">
-
 </div></div>
-
 </td>
 </tr>
 <!-- END: telephone -->
-
 <!-- BEGIN: email -->
 <tr>
   <th><h2>{{t "Email"}}</h2></th>
   <td><div class="contact_forms email_addresses" id="email_address_list_person"><div id="blank_slate_person_email_address" class='blank_slate'>{{t "Add an email address"}}</div><div class="contact_methods" style="display:none;">
-
 <!-- BEGIN: emails -->
   <div class="contact_method new_contact_method">
     <input class="autofocus" id="person_contact_data_email_addresses__address" name="person[contact_data][email_addresses][][address]" size="30" type="text" value="{personemailaddress}"/>
@@ -152,7 +126,6 @@
     <span class="addremove"><a href="#" class="remove">{{t "Remove"}}</a></span>
   </div>
 <!-- END: emails -->
-
 <div id="add_person_email_address" class="add_contact_method" style="display:none;">
   <div class="add"><a href="#">{{t "Add another"}}</a></div>
 </div>
@@ -161,12 +134,10 @@
 </td>
 </tr>
 <!-- END: email -->
-
 <!-- BEGIN: website -->
 <tr>
   <th><h2>{{t "Websites"}}</h2></th>
   <td><div class="contact_forms web_addresses" id="web_address_list_person"><div id="blank_slate_person_web_address" class='blank_slate'>{{t "Add a website address"}}</div><div class="contact_methods" style="display:none;">
-
 <!-- BEGIN: websites -->
   <div class="contact_method new_contact_method">
     <input class="autofocus" id="person_contact_data_web_addresses__url" name="person[contact_data][web_addresses][][url]" size="30" type="text" value="{personurladdress}" />
@@ -178,7 +149,6 @@
     <span class="addremove"><a href="#" class="remove">{{t "Remove"}}</a></span>
   </div>
 <!-- END: websites -->
-
 <div id="add_person_web_address" class="add_contact_method" style="display:none;">
   <div class="add"><a href="#">{{t "Add another"}}</a></div>
 </div>
@@ -187,18 +157,15 @@
 </td>
 </tr>
 <!-- END: website -->
-
 <!-- BEGIN: address -->
 <tr class="addresses">
   <th><h2>{{t "Address"}}</h2></th>
   <td><div class="contact_forms addresses" id="address_list_person"><div id="blank_slate_person_address" class='blank_slate'>{{t "Add an address"}}</div><div class="contact_methods" style="display:none;">
-
 <!-- BEGIN: addresses -->
 <div class="contact_method new_contact_method street">
   <div class="fields">
     <div style="position: relative;">
       <p class="address"><textarea class="autofocus overlayable" id="person_contact_data_addresses_address_x8b40542a0029584e95a78b_street" name="person[contact_data][addresses][][street]" title="Address" value="{personaddressstreet}"></textarea></p>
-
       <p><input class="city overlayable" id="person_contact_data_addresses_address_x8b40542a0029584e95a78b_city" name="person[contact_data][addresses][][city]" title="City" type="text" value="{personaddresscity}" />
       <input class="state overlayable" id="person_contact_data_addresses_address_x8b40542a0029584e95a78b_state" name="person[contact_data][addresses][][state]" title="State" type="text" value="{personaddressstate}" />
       <input class="zip overlayable" id="person_contact_data_addresses_address_x8b40542a0029584e95a78b_zip" name="person[contact_data][addresses][][zip]" title="Zip" type="text" value="{personaddresszip}" /></p>
@@ -214,7 +181,6 @@
 		<input id="person_contact_data_addresses__location" name="person[contact_data][addresses][][location]" value="{personaddresstype}"/>
 	</span class="overlay_wrapper">
         <span class="addremove"><a href="#" class="remove">{{t "Remove"}}</a></span>
-
       </div>
     </div>
   </div>
@@ -222,72 +188,49 @@
 <script type="text/javascript">
 </script>
 <!-- END: addresses -->
-
 <div id="add_person_address" class="add_contact_method" style="display:none;">
   <div class="add"><a href="#">{{t "Add another"}}</a></div>
 </div>
 </div></div>
 <script type="text/javascript"></script>
 </td>
-
 </tr>
 <!-- END: address -->
-
         
       </table class="contact_types" cellpadding="0" cellspacing="0" id="contact_section">
 </div class="secondary_fields">
-
   
-
 <!-- BEGIN: note -->
 <div class="contact_forms background" style="padding:10px;padding-left:30px;">
           <p class="background_label"><strong>{{t "Background info"}}</strong> ({{t "bio, how you met, etc"}})</p>
           <textarea rows="5" name="person[background]" id="person_background" cols="40" value="{personnote}"></textarea>
 </div class="contact_forms background">
 <!-- END: note -->
-
 <div class="wheretosave" style="padding:10px;padding-left:30px;">
         <h2>{{t "Where to save this contact?"}}</h2>
         <div id="new_person_permissions" class="form_section">
           <div class="select_permissions" behavior="select_permissions" data-permissions-initialized="data-permissions-initialized">
-
   <div class="scope activated">
     <label><input type="checkbox" value="Everyone" name="person[visible_to]" id="person_visible_to_everyone" checked="checked">{{t " Personal contacts"}}</label>
   </div class="scope ">
-
   <div class="scope ">
     <label><input type="checkbox" value="Owner" name="person[visible_to]" id="person_visible_to_owner">{{t " Highrise CRM contacts"}}</label>
   </div class="scope ">
-
   
-
   
           </div class="select_permissions" behavior="select_permissions" data-permissions-initialized="data-permissions-initialized">
         </div id="new_person_permissions" class="form_section">
 </div class="permissions edit_section">
-
  
-
-
-
-
-
-
     <p class="submit" style="padding:10px;padding-left:30px;">
       <input name="commit" type="submit" value="Add this contact" style="padding:3px;" /><span>{{t "or"}}</span>
-
       <a onclick="$.fancybox.close();" class="admin" style="color:red;">{{t "Cancel"}}</a>
     </p>
 </div class="{vcfsource}contacts">
 <!-- END: personcontacts -->
-
-
-
 </form action="index.php?module=addcontact" autocomplete="off" class="new subject" id="new_person" method="post">
 </div id="addcontactpage" style="width:500px;">
-
 <script type="text/javascript">
-
 $('.addremove a.remove').click(function () {
 // get the parent DOM .new_contact_method 
 var $iamat = $(this).parents('.new_contact_method');
@@ -305,7 +248,6 @@ else
 	$iamat.remove();
 	}
 })
-
 $('.contact_forms').each( function() 
 	{
 	if ( $(this).find('input:first').val() != "" ) 
@@ -314,9 +256,6 @@ $('.contact_forms').each( function()
 		$(this).find('.add_contact_method').show();
 		}
 	});
-
-
-
 $('.contact_forms').click(function(){
 var $us = $(this);
 //no close all the other .contact_forms
@@ -325,7 +264,6 @@ $('.contact_forms').not(this).each( function()
 	if ( $(this).find('input:first').val() != "" ) return true;
 	$(this).find('.blank_slate').show().next().hide();
 	});
-
 if ( $(this).find('.blank_slate').is(':visible') ) 
 	{// if it's visible
 	$(this).find('.blank_slate').hide().next().show().find('input:first').focus();
@@ -333,7 +271,6 @@ if ( $(this).find('.blank_slate').is(':visible') )
 	}
 });
 </script>
-
 <script type="text/javascript">
 // add the autocomplete and hide the label
 var phonetypes = "Work Mobile Home Car Fax Skype Other Pager".split(" ");
@@ -341,7 +278,6 @@ $('input.person_contact_input_type').focus(function() {$(this).prev().hide();}).
 	{
 	if ( $(this).val() == "" ) $(this).prev().show();
 	}).autocomplete(phonetypes, { multiple: true, selectFirst: false});
-
 function addanotherphone() {
 //$copy = $('.contact_method')[0].clone();
 $('.edit_phone:last').clone().insertAfter('.edit_phone:last');
@@ -371,9 +307,7 @@ $('.edit_phone:last .addremove a.remove').click(function ()
 		}
 	})
 };
-
 </script>
-
 <script>
 // jQuery Form Plugin options
 var myFormOptions = {

@@ -7,7 +7,6 @@ form {
 p {
 	margin: 0 0 10px 0;
 }
-
 .pgtitle {
 	font-size: 18px;
 	color: #777777;
@@ -31,7 +30,6 @@ p {
         border-bottom: 1px solid #999999;
 }
 .formfld {
-
 }
 .formfldalias {
 	background-color: #e7edf9;
@@ -72,7 +70,6 @@ textarea.notes {
 .red a {
         color: #CC0000;
 }
-
 .yellow {
         color: #FF9900;
 }
@@ -82,7 +79,6 @@ textarea.notes {
 .green a {
         color: #006600;
 }
-
 .gray {
 	color: #A0A0A0;
 }
@@ -132,15 +128,12 @@ a {
 .vtable {
 	border-bottom: 1px solid #999999;
 }
-
 table.feature1 {
 	border:0px solid #FFFFFF;
 }
-
 td.feature2 {
         border:1px solid #000000;
 }
-
 .vnsepcell {
 	background-color: #BBBBBB;
 	padding-right: 20px;
@@ -186,7 +179,6 @@ td.feature2 {
         padding-top: 4px;
         padding-bottom: 4px;
 }
-
 .listrpad {
 	border-right: 1px solid #999999;
 	border-bottom: 1px solid #999999;
@@ -314,7 +306,6 @@ td.feature2 {
         padding-top: 5px;
         padding-bottom: 5px;
 }
-
 .optsect_t {
 	border-right: 1px solid #999999;
 	background-color: #00006B;
@@ -448,4 +439,3 @@ ul#tabnav2 li.tabact a {
         padding: 5px 8px 5px 8px;
         color: #FFFFFF;
 }
-

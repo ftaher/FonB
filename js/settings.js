@@ -32,15 +32,12 @@ fonb_settings = {
 		/* Build the Settings Page */
 		SettingsGetSettingsPage();
 		/* check for gContacts Token */
-
 		$("#settingspage").on('keydown','.numberOnly', function(e) {
 		    if ((e.which > 47 && e.which < 58) || (e.which > 95 && e.which < 106) || $.inArray(e.which, new Array(46,8,9,187,106,107))) return true;
 		    else return false;
 	  	});
 	}
 }
-
-
 function SettingsGetSettingsPage(){
 	$.ajax({url : 'php/settings.php', dataType : 'json', async : false,
 		success: function(data) {
@@ -70,11 +67,9 @@ function SettingsGetSettingsPage(){
 		}
 	});
 }
-
 function SettingsCancelChanges(){
 	SettingsGetSettingsPage();
 }
-
 function SettingsPostData() {
 	var form_data = {}
 	form_data['general_language'] = $("#general_language").val();
@@ -103,8 +98,6 @@ function SettingsPostData() {
 	},"json");
 	return false;
 }
-
-
 function SettingsSelectOrderBy( data ) {
 	var orderby = data['general_orderby']
 	switch ( orderby ) {
@@ -116,7 +109,6 @@ function SettingsSelectOrderBy( data ) {
 			break;
 	}
 }
-
 function SettingsSelectQueuesAndRingGroups(data) {
 	var enable_ringgroups = data['enable_ringgroups'];
 	var enable_queues = data['enable_queues'];
@@ -128,9 +120,7 @@ function SettingsSelectQueuesAndRingGroups(data) {
 		$('#general_enable_queues').prop('checked', true);
 	else
 		$('#general_disable_queues').prop('checked', true);
-
 }
-
 var TIME_OUT_SECONDS = 15;
 var highrisePending = 0;
 var highriseSamePercentageCount = 0;
@@ -299,7 +289,6 @@ function setHighriseSyncStatus(){
 		CompletedSyncPercentage: 0
 	}
  */	
-
 var gcontactsPending = 0;
 var gcontactsSamePercentageCount = 0;
 var gcontactsLastPercentage = 0;
@@ -368,7 +357,6 @@ function setGcontactsSyncStatus(){
 					return;
 				}
 				gcontactsPending++;
-
 				console.log("on sync but waiting..");
 				$('.grant-google').hide();
 				$('#gcontactsrevoke').show();
@@ -417,7 +405,6 @@ function setGcontactsSyncStatus(){
 		}
 	});
 }
-
 function SettingsDisplayGcontactsButton( data ) {
 	if ( data['cal_token'] == undefined ) {
 		$('#gcontactsgrant').show();
@@ -427,19 +414,14 @@ function SettingsDisplayGcontactsButton( data ) {
 		$('#gcontactsrevoke').show();
 	}
 }
-
-
 function SettingsSelectLanguage( data ) {
 	var language = data['general_language'];
 	$('#general_language').val(language);
 }
-
 function SettingsSelectPagesize( data ) {
 	var pagesize = data['general_pagesize'];
 	$('#general_pagesize').val(pagesize);
 }
-
-
 function SettingsHighriseConfigure() {
     $highriseBtn = $('#highrise_verify');
     $highriseBtn.data("originalText" , $highriseBtn.html());
@@ -462,7 +444,6 @@ function SettingsHighriseConfigure() {
 		}
 	});
 };
-
 function SettingsGrantGoogleContacts() {
 	var url = "https://www.google.com/accounts/AuthSubRequest?next="+ encodeURI(window.location.origin)+"&scope=" + encodeURI("https://www.google.com/m8/feeds/&secure=0&session=1"); 
 	var win = window.open(url, "windowname1", 'width=800, height=600');
@@ -480,7 +461,6 @@ function SettingsGrantGoogleContacts() {
         }
     }, 100);
 }
-
 function SettingsSaveGoogleToken( token ) {
 	$.post('php/gcontacts_authorization.php', {action: "save", token: token} ,function(data) {
 		if(data){
@@ -495,9 +475,7 @@ function SettingsSaveGoogleToken( token ) {
 			}	
 		}
 	},'json');
-
 }
-
 function SettingsRevokeGoogleContacts() {
 	$.post('php/gcontacts_authorization.php', {action: "revoke"} ,function(data) {
 		if ( data.Revoke === "OK" ) {
@@ -511,7 +489,6 @@ function SettingsRevokeGoogleContacts() {
 		}	
 	},'json');
 };
-
 function SettingsDeleteAllContacts() {
 	$("#deleteAll").prop("disabled", true);
 	$.post('php/uploadphonebook.php', {deletephonebook: "YES"} ,function(data) {
@@ -522,7 +499,6 @@ function SettingsDeleteAllContacts() {
 		}, 3000);
 	});
 };
-
 function SettingsDeleteReWriteRule( Id , matchrule ) {
 	$.post("php/settings_rewriterule.php", { action:"delete", Id:Id, matchrule:matchrule },
 		function(data) {
@@ -535,7 +511,6 @@ function SettingsDeleteReWriteRule( Id , matchrule ) {
 			if ( data.Delete === "ERROR" ) console.log("Failed to Delete Re-Write Rule # " + data.Id );
 		},'json');
 };
-
 function SettingsAddReWriteRule() {
 	if(!SettingsCheckRule()){
 		return;
@@ -554,7 +529,6 @@ function SettingsAddReWriteRule() {
 			if ( data.Add === "ERROR" ) alert(data.Why);
 		},'json');
 };
-
 function SettingsReOrderReWriteRule() {
 	serial = $('#current_rewrite_rules').sortable('serialize') + '&action=reorder';
 	$.post("php/settings_rewriterule.php", serial ,
@@ -568,8 +542,6 @@ function SettingsReOrderReWriteRule() {
 			if ( data.ReOrder === "ERROR" ) console.log("Failed to ReOrder Re-Write Rules as per # " + data.Order );
 		},'json');
 }
-
-
 function SettingsCheckRule() {
 	$(".new_rules.alert").hide();
 	var selectedOption = $("#rewrite-rule-select>option:selected").val();
@@ -595,7 +567,6 @@ function SettingsCheckRule() {
 		return true;
 	}
 }
-
 function ruleChange(select){
 	/**
 	 * Possible values: 
@@ -622,9 +593,7 @@ function ruleChange(select){
 			break;
 	}
 }
-
 function getRuleForAdd(){
-
 	/**
 	 * Possible values: 
 	 *  0 => match   .beginning, .with, .and, .prefix
@@ -656,7 +625,6 @@ function getRuleForAdd(){
 		replacement : replacement
 	};
 }
-
 function getRewriteRulesHTML(data){
 	obj = data.rewrite;
 	temp = new Array();
@@ -701,5 +669,4 @@ function getRewriteRulesHTML(data){
 	data.rewrite =temp;
 	return ReWriteRulesListTemplate(data);
 }
-
 function isEmpty( inputStr ) { if ( null == inputStr || "" == inputStr ) { return true; } return false; }

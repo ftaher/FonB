@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-
 <SnomIPPhoneMenu>
 	<Title>Menu</Title>
 	<MenuItem>
@@ -24,5 +23,3 @@
 	 <Softkey>F_ABORT</Softkey>
 	</SoftKeyItem>
 </SnomIPPhoneMenu>
-
-

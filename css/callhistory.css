@@ -43,9 +43,6 @@ left:360px;
 height:22px;
 width:160px;
 }
-
-
-
 #slider-range {
 width:90%;
 height:5px;
@@ -86,7 +83,6 @@ border-color:#D3D3D3;
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 }
-
 #callhistoryheader h1 {
 position:absolute;
 top:7px;
@@ -96,7 +92,6 @@ font-size:14px;
 font-weight:bold;
 color:#656565;
 }
-
 #callhistoryheader ul.ch_pagenumber {
 position:absolute;
 top:11px;
@@ -107,7 +102,6 @@ text-align:right;
 /*font-weight:bold;*/
 color:#656565;
 }
-
 #callhistoryheader ul.ch_pagenumber li {
 position:static;
 display: inline;
@@ -133,7 +127,6 @@ color:#5D5D5D;
 margin-left:20px;
 cursor: default;
 }
-
 #callhistoryheader #delete {
 display:none;
 position:absolute;
@@ -145,8 +138,6 @@ vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
-
-
 #callhistoryheader #ShowByUser {
 position:absolute;
 top:32px;
@@ -154,8 +145,6 @@ left:20px;
 font-size:10px;
 font-weight:bold;
 }
-
-
 #callhistoryheader #ShowByDirection {
 position:absolute;
 top:32px;
@@ -164,8 +153,6 @@ width:150px;
 font-size:10px;
 font-weight:bold;
 }
-
-
 #callhistoryheader #ShowByDate {
 position:absolute;
 top:32px;
@@ -174,9 +161,6 @@ width:150px;
 font-size:10px;
 font-weight:bold;
 }
-
-
-
 #callhistoryfooter {
 width: 716px;
 height: 64px;
@@ -192,8 +176,6 @@ border-color:#D3D3D3;
 -moz-border-radius:5px;
 -webkit-border-radius:5px;
 }
-
-
 #callhistoryfooter ul.ch_pagenumber {
 position:absolute;
 top:36px;
@@ -204,7 +186,6 @@ text-align:right;
 /*font-weight:bold;*/
 color:#656565;
 }
-
 #callhistoryfooter ul.ch_pagenumber li {
 position:static;
 display: inline;
@@ -216,7 +197,6 @@ color:#656565;
 margin-left:20px;
 cursor: pointer;
 }
-
 #callhistoryfooter ul.ch_pagenumber li.currentli {
 position:static;
 display: inline;
@@ -228,7 +208,6 @@ color:#5D5D5D;
 margin-left:20px;
 cursor: default;
 }
-
 #callhistoryfooter #delete {
 display:none;
 position:absolute;
@@ -240,8 +219,6 @@ vertical-align:middle;
 font-size:10px;
 color:#656565;
 }
-
-
 #callhistoryfooter #pageinfo {
 position:absolute;
 top:11px;
@@ -249,11 +226,7 @@ left:550px;
 font-size:11px;
 /* font-weight:bold; */
 color:#656565;
-
 }
-
-
-
 #callhistorybg {
 	position: absolute;
 	top: 50px;
@@ -266,9 +239,6 @@ color:#656565;
 	background-repeat: no-repeat;
 	display: block;
 }
-
-
-
 #callhistory table {
 	font-family:arial,sans-serif;
 	width: 100%;
@@ -277,28 +247,22 @@ color:#656565;
 	border-style: none;
 	table-layout:fixed;
 }
-
-
 .callhistoryheader {
         /* background-color: #00006b; */
 	empty-cells: show;
 	font-size: 12px;
 }
-
 .callhistoryheader td {
 	empty-cells: show;
 	font-size: 12px;
 	padding: 10px;
 }
-
 .callhistorytools {
         background-color: #EFEFEF;
 	empty-cells: show;
 	font-size: 12px;
 	height: 3em;
 }
-
-
 .callhistorytools td {
         background-color: #EFEFEF;
 	empty-cells:show;
@@ -306,8 +270,6 @@ color:#656565;
 	border-style: inset none outset none;
         border-width: 0px;
 }
-
-
 .selectall {
 	padding-left: 10px;
         background-color: #EFEFEF;
@@ -315,52 +277,39 @@ color:#656565;
 	width: 120px;
 	float: left;
 }
-
 .selectall strong {
 	padding-left: 5px;
 	font-weight:bold;
 	font-size: 11px;
 	vertical-align: middle;
 }
-
-
 .selectall input {
 	vertical-align: middle;
 }
-
 .callhistorytools div.labels {
         background-color: #EFEFEF;
 	empty-cells:show;
 	width: 120px;
 	float: left;
 }
-
-
 .callhistorytools div.moreactions {
         background-color: #EFEFEF;
 	empty-cells:show;
 	width: 120px;
 	float: left;
 }
-
-
 .callhistorytools div.nextnav {
         background-color: #EFEFEF;
 	empty-cells:show;
 	width: 200px;
 	float: right;
 }
-
-
-
 .Summary {
         background-color: #FFFFFF;
         cursor: pointer;
 	width: 100%;
 	/* height: 24px; */
 }
-
-
 .Summary td {
         cursor: pointer;
         empty-cells:show;
@@ -372,46 +321,32 @@ color:#656565;
 	padding: 7px 4px 3px 4px;
 	white-space: nowrap;
 }
-
 .Summary td span {
 	white-space: nowrap;
 }
-
-
 .Summary.Outbound .CallDirection { color: #1f81be;}
 .Summary.Inbound  .CallDirection { color: #249335;}
 .Summary.Missed   .CallDirection { color: #e2534b;}
 .Summary.transfer .CallDirection { color: #FF7F00;}
-
-
 .Summary.Outbound { color: rgb(51,51,51);}
 .Summary.Inbound  { color: rgb(51,51,51);}
 .Summary.Missed   { color: rgb(51,51,51);}
 .Summary.transfer { color: rgb(51,51,51);}
-
 .InternalImg {
 	width: 20px;
         font-size: 12px;
         color: #333;
 }
-
-
-
-
 .CallDirection {
 }
-
-
 .CallDirection img {
 	padding: 0px 0px 0px 0px;
 	vertical-align: middle;
 }
-
 .CallDirection span {
 	padding: 0px 0px 0px 5px;
 	vertical-align: middle;
 }
-
 .CallDirection {
         padding: 0 0px 0 0px;
         font-size: 12px;
@@ -420,61 +355,47 @@ color:#656565;
 	height: 13px;
 	white-space: nowrap;
 }
-
 .CallOwner img {
 	padding:0px 4px 0px 0px;
 }
-
 .CallerClid {
-
 }
-
 .Attachment {
 	width: 20px;
         font-size: 12px;
 }
-
 .Duration {
 	width: 65px;
         font-size: 11px;
 	font-weight: bold;
         color: #777;
 }
-
 .Date {
 	width: 120px;
         font-size: 12px;
 	font-weight: bold;
 	text-align:center;
 }
-
 .Summary .clearrow {
 	width: 5px;
         font-size: 11px;
 }
-
-
 .Detailed {
 	width: 100%;
 }
-
 .Detailed td {
 	width: 100%;
 }
-
 .Detailed div.detailedrecord {
 	white-space: nowrap;
 	/* Do rounding (native in Firefox and Safari) */
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 }
-
-
 .Detailed.Outbound div.detailedrecord {background-color: #ecfaff; color: #000;  }
 .Detailed.Inbound  div.detailedrecord {background-color: #deffde; color: #000;  }
 .Detailed.Missed   div.detailedrecord {background-color: #fff2f2; color: #000;  }
 .Detailed.transfer div.detailedrecord {background-color: #fff39b; color: #000;  }
-
 .Detailed.Outbound div.detailedrecord div.to {color: #1f81be;font-weight:bold; }
 .Detailed.Outbound div.detailedrecord div.to h4 {color: #1f81be;font-weight:bold; }
 .Detailed.Inbound  div.detailedrecord div.from {color: #249335;font-weight:bold;  }
@@ -483,13 +404,10 @@ color:#656565;
 .Detailed.Missed   div.detailedrecord div.from h4 {color: #e2534b;font-weight:bold;  }
 .Detailed.transfer div.detailedrecord div.from {color: #FF7F00;font-weight:bold;  }
 .Detailed.transfer div.detailedrecord div.to {color: #FF7F00;font-weight:bold;  }
-
 .Detailed.Outbound div.header {background-color: #ecfaff; color: #1f81be;  }
 .Detailed.Inbound  div.header {background-color: #deffde; color: #249335;  }
 .Detailed.Missed   div.header {background-color: #fff2f2; color: #e2534b;  }
 .Detailed.transfer div.header {background-color: #fff39b; color: #FF7F00;  }
-
-
 span.error {
 	background-color: #AC0000;
 	color: #fff;
@@ -500,23 +418,16 @@ span.error {
 	margin: 0px 5px 0px 0px;
 	
 }
-
-
 span.dontshow {
 	display: none;
 }
-
-
 /* Call Transfer detailed Table */
-
 .calltransfertr {
         background-color: #FFFFFF;
         cursor: pointer;
 	width: 100%;
 	/* height: 24px; */
 }
-
-
 .calltransfertr td {
         cursor: pointer;
         empty-cells:show;
@@ -528,35 +439,25 @@ span.dontshow {
 	padding: 3px 4px 4px 4px;
 	white-space: nowrap;
 }
-
 .calltransfertr td span {
 	white-space: nowrap;
 }
-
-
 .calltransfertr.Outbound { color: #1f81be;}
 .calltransfertr.Inbound  { color: #249335;}
 .calltransfertr.Missed   { color: #e2534b;}
 .calltransfertr.transfer { color: #FF7F00;}
-
-
-
 .calltransferaction {
 	width: 16%;
 	font-size: 12px;
 }
-
-
 .calltransferaction img {
 	padding: 0px 0px 0px 0px;
 	vertical-align: middle;
 }
-
 .calltransferaction span {
 	padding: 0px 0px 0px 5px;
 	vertical-align: middle;
 }
-
 .calltransferaction {
         padding: 0 0px 0 0px;
         font-size: 12px;
@@ -565,34 +466,29 @@ span.dontshow {
 	height: 18px;
 	white-space: nowrap;
 }
-
 .calltransfersrc {
 	width: 16%;
         font-size: 12px;
 	font-weight: bold;
 	color: #000;
 }
-
 .calltransferdst {
 	width: 25%;
         font-size: 12px;
 	font-weight: bold;
 }
-
 .calltransferduration {
 	width: 12%;
         font-size: 11px;
 	font-weight: bold;
         color: #777;
 }
-
 .calltransferdate {
 	width: 22%;
         font-size: 12px;
 	font-weight: bold;
 	text-align:center;
 }
-
 .calltransfertr .clearrow {
 	width: 1%;
         font-size: 11px;

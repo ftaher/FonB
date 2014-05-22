@@ -27,13 +27,8 @@
 // ###############################################################################
 -->
 <!-- BEGIN: main -->
-
-
 <div id="importphonebook" style="width:500px;">
-
-
 <p class="lead">{{t "Please upload your personal phonebook in Microsoft Outlook CSV file format:"}}</p>
-
 <form class="form" id="csvphonebookupload" action="php/uploadphonebook.php" method="post" enctype="multipart/form-data">
 	<div style="position:relative;">
 		<a class='btn' href='javascript:;'>{{t "Choose File..."}}<input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
@@ -43,17 +38,12 @@
 	</div>
 	<br>
 	<br>
-
 	<br>
 		<input type="submit" name="Go" value="{{t "Upload"}}" class="btn btn-primary">
 	<br>
 </form>
-
-
 </div>
-
 <script>
-
 // jQuery Form Plugin options
 var uploadfileOptions = {
   beforeSubmit:  formBeforeSubmit,
@@ -78,6 +68,5 @@ function formAfterSubmit(responseText, statusText)  {
 	return false;
 }
 $('#csvphonebookupload').ajaxForm(uploadfileOptions);
-
 </script>
 <!-- END: main -->
