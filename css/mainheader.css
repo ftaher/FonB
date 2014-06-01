@@ -106,9 +106,13 @@ z-index: 5;
 	margin: 0 auto;
 	padding: 0em;
 	text-align: center;
-	background: url(../images/header-bg.gif);
+	background: #FA952B url(../images/activate-bg.jpg) no-repeat;
 	color: #fff;
 	background-size: contain;
+}
+.topheader {
+	background: #283360 url(../images/header-bg.png) repeat-x;
+	height: 74px;
 }
 .activate .activateHeader {
 	line-height: 1em;
@@ -132,7 +136,6 @@ z-index: 5;
 	display: block;
 	font-size: 60%;
 	margin-top: 16px;
-	opacity: 0.7;
 	padding: 0 0 0.6em 0.1em;
 }
 .activate table {
@@ -185,7 +188,7 @@ z-index: 5;
 	padding-top: 1em;
 	font-size: 0.8em;
 }
-.activate-btn .error { font-size: 15px; padding-top: 8px; color: #FF6767;}
+.activate-btn .error { font-size: 15px; padding-top: 8px; color: #E40000; font-weight: bold; width: 630px; margin: 0 auto;}
 .activate-btn form {margin:0;}
 .activate-btn a {
 	display: inline-block;
@@ -201,8 +204,8 @@ z-index: 5;
 .activate-btn a:hover,
 .activate-btn a.current-btn,
 .activate-btn a.current-btn:hover {
-	border-color: #7c8d87;
-	color: #7c8d87;
+	border-color: #B35308;
+	color: #B35308;
 }
 .activateContainer .component h1 {
     font-size: 27px;
@@ -216,7 +219,7 @@ z-index: 5;
 	overflow: hidden;
 }
 .activate-btn a{
-	color: #E49B00;
+	color: #fff;
 	text-decoration: none;
 	border: 3px solid;
 	padding: 8px;
@@ -268,7 +271,8 @@ z-index: 5;
 #activate .component tbody tr:hover {
     background-color: rgba(312,208,177,.3);
 }
-.centerText th,tr {text-align:center;}
+.centerText th,tr {text-align:left;}
+#activate td {text-align: center;}
 .notes {
 font-size: 80%;
 font-weight: bolder;

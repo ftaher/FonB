@@ -8,24 +8,62 @@
 <link href="css/mainheader.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<style type="text/css">
+.is-loading {
+    position:   relative;
+    z-index:    999999;
+    height:     90px;
+    width:      100%;
+    background: url('images/fonb-loading.gif') 
+                50% 50% 
+                no-repeat;
+}
+</style>
+<script>
+$(document).ready(function(){
+  $("nav a").click(function(event){
+    event.preventDefault();
+    var key = $('#key').val();
+ // XXX TODO start animation
+
+ $('.loadinggif').addClass('is-loading');
+    $.getJSON( "activate?key=" + key ,function(result) {
+        var licenseError = result['Error'];
+      if ( licenseError !== "" ) {
+  // XXX TODO stop animation    
+     $(".error").html(licenseError); // XXX TODO change append
+	 $('.loadinggif').removeClass('is-loading');
+      } else{ 
+         window.location.href = "login";
+      }
+ });
+});    
+});    
+</script>
 </head>
 <style>
 ul, ol {
-	list-style:none;margin:0;}
+	list-style: none;
+	margin: 0;
+}
 </style>
 <body>
 <!-- Activate Product -->
 <div class="activateContainer" id="activate">
+  <div class="topheader">
   <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="images/logo-slogan.png" alt=""/></a> </div>
+</div>
   <div class="activateHeader">
     <div class="component">
-      <h1>Active your license <span>Please enter your license key and press "Activate License" to activate corresponding FonB licenses</span></h1>
+      <h1>Activate your license <span>Please enter your license key and press "Activate License" to activate corresponding FonB licenses</span></h1>
       <nav class="activate-btn">
         <form>
-          <input type="text" placeholder="Enter your activation key" style="padding:9px;width: 390px;">
-          <a href="index.html">Activate License</a>
+          <input type="text" placeholder="Enter your activation key" id="key" style="padding:9px;width: 390px;">
+          <a href="#">Activate License</a>
+          <div class="loadinggif"></div>
         </form>
-        <p class="error">LICENSE ERROR</p>
+        <p class="error"></p>
       </nav>
     </div>
   </div>
@@ -48,6 +86,7 @@ ul, ol {
       </ul>
     </div>
     {{/ErrorZeroUser}}
+      {{#Licenses}}
     <table border="1" class="centerText">
       <thead>
         <tr>
@@ -61,7 +100,7 @@ ul, ol {
         </tr>
       </thead>
       <tbody>
-      {{#Licenses}}
+      
       {{#Valid}} 
       <!-- if key is Valid -->
       <tr>
@@ -86,7 +125,6 @@ ul, ol {
         <td class="invalid">Invalid</td>
       </tr>
       {{/Valid}}
-      {{/Licenses}}
       <tr class="total">
         <th>Total</th>
         <th>{{WebMaxUsers}}</th>
@@ -97,11 +135,11 @@ ul, ol {
         <th>&nbsp;</th>
       </tr>
         </tbody>
+      
     </table>
-    
+      {{/Licenses}}
   </div>
-  <div class="component">
-        {{^Licenses}}
+  <div class="component"> {{^Licenses}}
     <table border="1" class="centerText">
       <thead>
         <tr>
@@ -120,7 +158,9 @@ ul, ol {
       </tr>
       {{/Licenses}}
         </tbody>
-    </table></div>
+      
+    </table>
+  </div>
   <div class="component">
     <div style="clear:both">
       <h1>License Inventory</h1>
@@ -144,8 +184,8 @@ ul, ol {
           </tr>
         {{#ErrorWebMaxUserLimit}}
         <tr>
-          <th>Required User Licenses</th>
-          <td>{{ExtraWebUsers}}</td>
+          <th class="invalid">Licenses to be purchased (min)</th>
+          <td class="invalid">{{ExtraWebUsers}}</td>
         </tr>
         {{/ErrorWebMaxUserLimit}}
         {{^ErrorWebMaxUserLimit}}
@@ -155,6 +195,7 @@ ul, ol {
         </tr>
         {{/ErrorWebMaxUserLimit}}
           </tbody>
+        
       </table>
     </div>
     <div style="width:45%;float:right;">
@@ -176,8 +217,8 @@ ul, ol {
           </tr>
         {{#ErrorMobileMaxUserLimit}}
         <tr>
-          <th>Required User Licenses</th>
-          <td>{{ExtraWebUsers}}</td>
+          <th class="invalid">Licenses to be purchased (min)</th>
+          <td class="invalid">{{ExtraWebUsers}}</td>
         </tr>
         {{/ErrorMobileMaxUserLimit}}
         {{^ErrorMobileMaxUserLimit}}
@@ -187,6 +228,7 @@ ul, ol {
         </tr>
         {{/ErrorMobileMaxUserLimit}}
           </tbody>
+        
       </table>
     </div>
   </div>
@@ -194,32 +236,35 @@ ul, ol {
 </div>
 <!-- Activate Product Ends -->
 <div class="component" style="border-top: #ccc solid thin;padding-top: 60px;">
-    <div style="clear:both">
-      <h1 style="font-size:27px;">License FAQs</h1>
-    </div>
-<div style="width:45%;float:left;">
-<ol>
-<li><h3>1. Why am I seeing this page?</h3>
-You’re here because FonB couldn’t find any license associated with this release. You are either using fresh installation or your license is invalid/expired.
-</li><li><h3>
-2. Why is the licensing data not available?</h3>
-If there is no record of activation key, you are running an unlicensed version of FonB. In order to get the licenses you need to register on Aptus Website. Once you have registered, you will receive the activation key that you will be able to use here to start using FonB.
-</li><li><h3>
-3. How to activate the license?</h3>
-Copy the activation key you have received in your email and past it in “Activate License” field. Press the “Activate License” button to start using FonB.
-</li><li>
-<h3>4. I am trying to activate license but having ___________ error. Why is that?</h3>
-It seems that you are entering wrong activation key. Please re-confirm if the key is correct. In case the problem persists, contact your system administrator or our designated partner in your region.</li>
-</ol>
+  <div style="clear:both">
+    <h1 style="font-size:27px;">License FAQs</h1>
+  </div>
+  <div style="width:45%;float:left;">
+    <ol>
+      <li>
+        <h3>1. Why am I seeing this page?</h3>
+        You’re here because FonB couldn’t find any license associated with this release. You are either using fresh installation or your license is invalid/expired. </li>
+      <li>
+        <h3> 2. Why is the licensing data not available?</h3>
+        If there is no record of activation key, you are running an unlicensed version of FonB. In order to get the licenses you need to register on Aptus Website. Once you have registered, you will receive the activation key that you will be able to use here to start using FonB. </li>
+      <li>
+        <h3> 3. How to activate the license?</h3>
+        Copy the activation key you have received in your email and past it in “Activate License” field. Press the “Activate License” button to start using FonB. </li>
+      <li>
+        <h3>4. I am trying to activate license but having ___________ error. Why is that?</h3>
+        It seems that you are entering wrong activation key. Please re-confirm if the key is correct. In case the problem persists, contact your system administrator or our designated partner in your region.</li>
+    </ol>
+  </div>
+  <div style="width:45%;float:right;">
+    <ol>
+      <li value="5">
+        <h3>5. I have spare n number of Mobility and m number of User Portal Licenses, but I am unable to use it. How can I use them?</h3>
+        Go to users.cfg file and under corresponding user to whom you want to assign this license, add Product = “Mobility”. Repeat the same for all n users you want to assign spare Mobility Licenses. Similarly, repeat the same procedure with Product = “User Portal” for the users you want to assign the m number of User Portal Licenses. </li>
+      <li value="6">
+        <h3>6. My current user count has exceeded the allowed users as per my license. How to let FonB work with maximum allowed users?</h3>
+        Go to users.cfg and comment out (put semicolon ; in the beginning of) the password fields under the user definition you want to exclude from licensed users. Users with active (non commented) passwords field are counted as licensed users. Please note that users with password uncommented and no product defined will be considered consuming two licenses (1 Mobility & 1 User Portal).</li>
+    </ol>
+  </div>
 </div>
-<div style="width:45%;float:right;">
-<ol>
-<li value="5"><h3>5. I have spare n number of Mobility and m number of User Portal Licenses, but I am unable to use it. How can I use them?</h3>
-Go to users.cfg file and under corresponding user to whom you want to assign this license, add Product = “Mobility”. Repeat the same for all n users you want to assign spare Mobility Licenses. Similarly, repeat the same procedure with Product = “User Portal” for the users you want to assign the m number of User Portal Licenses. </li>
-<li value="6"><h3>6. My current user count has exceeded the allowed users as per my license. How to let FonB work with maximum allowed users?</h3>
-Go to users.cfg and comment out (put semicolon ; in the beginning of) the password fields under the user definition you want to exclude from licensed users. Users with active (non commented) passwords field are counted as licensed users. Please note that users with password uncommented and no product defined will be considered consuming two licenses (1 Mobility & 1 User Portal).</li>
-</ol>
-</div>
-    </div>
 </body>
 </html>

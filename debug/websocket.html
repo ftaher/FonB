@@ -26,7 +26,7 @@ pre{
 <div id="asterisklog"></div>
 <script>
 var url = window.location.host;
-var socket = new WebSocket("ws://"+ url +"/socketdebug");
+var socket = new WebSocket("ws://"+ url +"/socket");
 //var socket = new WebSocket("ws://10.0.8.6/socket");
 // websocket = new WebSocket("ws://{{.}}/socket");
 socket.onmessage = onMessage;
