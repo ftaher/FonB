@@ -110,8 +110,7 @@ $(document).ready(function(){
 			type : "post",
 			data : $(this).serialize(),
 			url : "php/phonebook_edit.php",
-			success : function(data){
-				console.log($.parseJSON(data));				
+			success : function(data){			
 				$(".top-right").notify({
 					message : I18n.t("Contact updated successfully")
 				}).show();
