@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<YealinkIPPhoneInputScreen 
+
+		type="string" 
+
+		Beep="yes" 
+
+		Password="no" 
+
+		Timeout="0"
+
+		LockIn="no" 
+
+		inputLanguage="German"
+
+		cancelAction="http://10.0.8.6:8080/xmlBrowser/Testmenu.xml" 
+
+		displayMode = "condensed"  
+
+		defaultIndex="3" >
+
+		
+
+	<!--<Title wrap="yes">In this interface, we will set your infermation on the phone!</Title>-->
+
+	<Title wrap="yes">FonB Login</Title>
+
+	
+
+	<URL>http://{{Host}}/xml/en/Yealink/fw72/menu.xml</URL>
+
+
+	<InputField type="number" password="no" editable="yes">
+		<Prompt>Extension:</Prompt>
+		<Parameter>user</Parameter>
+	</InputField>
+
+	
+
+	<InputField type="string" password="yes" editable="yes">
+		<Prompt>Password:</Prompt>
+		<Parameter>pass</Parameter>
+	</InputField>
+
+
+
+	
+
+</YealinkIPPhoneInputScreen>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<YealinkIPPhoneTextMenu defaultIndex="0" style="numbered" Beep="no">
+	<Title wrap="yes">FonB Call History</Title>
+	{{^CallHistoryList}}
+	<MenuItem>
+		<Prompt>No Call History Found</Prompt>
+	</MenuItem>
+	{{/CallHistoryList}}
+	{{#CallHistoryList}}
+	<MenuItem>
+		<Prompt>{{#CallerClid}}{{#Internal}}{{Internal}}|{{Direction}}{{/Internal}}{{^Internal}}{{#MyContacts}}{{MyContacts}}|{{Direction}}{{/MyContacts}}{{^MyContacts}}{{#GContacts}}{{GContacts}}|{{Direction}}{{/GContacts}}{{^GContacts}}{{#Highrise}}{{Highrise}}|{{Direction}}{{/Highrise}}{{^Highrise}}{{Num}}{{/Highrise}}{{/GContacts}}{{/MyContacts}}{{/Internal}}{{/CallerClid}}</Prompt>
+		<Dial>{{#CallerClid}}{{Num}}{{/CallerClid}}</Dial>
+	</MenuItem>
+	{{/CallHistoryList}}
+
+
+
+
+	<SoftKey index="2">
+		<Label>Back</Label>
+		<URI>SoftKey:Exit</URI>
+	</SoftKey>
+	<SoftKey index="1">
+		<URI>http://{{Host}}/xml/en/Yealink/fw72/filtercallhistory.xml</URI>
+		<Label>Filter</Label>
+	</SoftKey>
+</YealinkIPPhoneTextMenu>

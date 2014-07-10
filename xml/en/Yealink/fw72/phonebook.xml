@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<YealinkIPPhoneInputScreen 
+
+		type="string" 
+
+		Beep="yes" 
+
+		Password="no" 
+
+		Timeout="0"
+
+		LockIn="no" 
+
+		inputLanguage="German"
+
+		cancelAction="http://10.0.8.6:8080/xmlBrowser/Testmenu.xml" 
+
+		displayMode = "condensed"  
+
+		defaultIndex="3" >
+
+		
+
+
+
+	<Title wrap="yes">Search</Title>
+
+	
+
+	<URL>http://{{Host}}/xml/en/Yealink/fw72/listphonebook.xml</URL>
+
+
+	<InputField type="string" password="no" editable="yes">
+		<Prompt>Contact</Prompt>
+        	<Parameter>FilterSearch</Parameter>
+		<Selection>0&amp;PageSize=30&amp;NameSize=9&amp;PhoneNumberSize=8&amp;SourceSize=5</Selection>
+	</InputField>
+
+ <SoftKey index="3">
+ <Label>Exit</Label>
+ <URI>SoftKey: Exit</URI>
+ </SoftKey>
+ <SoftKey index="2">
+ <Label>Submit</Label>
+ <URI>SoftKey: Submit</URI>
+ </SoftKey>
+ <SoftKey index="1">
+ <Label>2aB</Label>
+ <URI>SoftKey: ChangeMode</URI>
+ </SoftKey>
+ <Softkey index="4">
+ <Label>Backspace</Label>
+ <URI>Softkey: BackSpace</URI>
+ </SoftKey>
+
+</YealinkIPPhoneInputScreen>
