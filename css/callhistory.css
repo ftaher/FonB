@@ -453,7 +453,7 @@ span.dontshow {
 .calltransferaction img {
 	padding: 0px 0px 0px 0px;
 	vertical-align: middle;
-}
+}l X
 .calltransferaction span {
 	padding: 0px 0px 0px 5px;
 	vertical-align: middle;
@@ -503,4 +503,12 @@ span.dontshow {
 }
 .columnMissed{
 	border: 3px solid #FFF2F2;
+}
+.contactsLabel span {
+	font-size: 11px;
+	font-weight: normal;
+}
+.phonetype.label {
+	font-size: 11px;
+	font-weight: normal;
 }

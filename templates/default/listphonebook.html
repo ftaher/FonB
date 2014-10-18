@@ -43,16 +43,16 @@
 						<span class="contactName"><a class="edit-contact {{Source}}" href="javascript:;"  data-index="{{@index}}">{{#if ../last_name}}{{#if LastName}}{{LastName}}{{#if FirstName}}, {{/if}}{{/if}}{{FirstName}}{{else}}{{FirstName}} {{LastName}}{{/if}}</a><span style="font-weight:normal;font-size:10px;">&nbsp;{{Label}}</span></span>
 					</td>
 					<td style="width:26%;" class="contactNumber">{{PhoneNumber}}</td>
-					<td style="width:15%;">
+					<td style="width:20%;">
 						<span>{{Company}}</span>
 					</td>
-					<td style="width:21%;">
+					<td style="width:20%;" class="breakLine">
 						{{#each Groups}}
 						<span class="label" {{#ifAsterisk ../Source}}style="background-color:#749c49;"{{/ifAsterisk}}>{{this}}</span>
 						{{/each}}
 					</td>
 					<td style="width:15%;text-align:right;">
-						<span class="dial" style="margin-left:20px;"><a href="javascript:;" onclick="Quickdial('WebPhone', '{{PhoneNumber}}', '');"><i class="icon web-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', '{{PhoneNumber}}' , '');"><i class="icon phone-icon"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', '{{PhoneNumber}}'  , '');"><i class="icon mobile-icon"></i></a></span>
+						<span class="dial" style="margin-left:0px;"><a href="javascript:;" onclick="Quickdial('WebPhone', '{{PhoneNumber}}', '');"><i class="icon web-icon-2"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Phone', '{{PhoneNumber}}' , '');"><i class="icon phone-icon-2"></i></a>&nbsp;<a href="javascript:;" onclick="Quickdial('Mobile', '{{PhoneNumber}}'  , '');"><i class="icon mobile-icon-2"></i></a></span>
 					</td>
 				</tr>
 			<!-- BEGIN: END # {{Id}} -->

@@ -293,7 +293,29 @@ text-align: center;
     text-align: center;
     font-size: 30px;
 }
-.web-icon {background-image:url(../images/web-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
-.phone-icon {background-image:url(../images/phone-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
-.mobile-icon {background-image:url(../images/mobile-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
-.transfer-icon {background-image:url(../images/transfer-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+.dial {margin-left: 20px;padding: 6px;}
+.Detailed .dial {display:none !important;}
+.Detailed:hover .dial {display: inline !important;}
+.dial .icon {display: inline-block;height: 24px;color: #868686;background-color: #fff;padding-left: 25px;text-indent: 9000000px;line-height: 22px;padding-right: 0px;font-style: normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+	.dial .icon:hover {color: #468847;text-indent: inherit;white-space: nowrap;}
+	.web-icon {background-image:url(../images/web-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+	.phone-icon {background-image:url(../images/phone-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+	.mobile-icon {background-image:url(../images/mobile-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+	.transfer-icon {background-image:url(../images/transfer-icon.png);display: inline-block;width: 22px;height: 24px;line-height:normal;vertical-align:baseline;background-position:0 0;background-repeat: no-repeat;margin-top:0px;vertical-align: middle;}
+	.web-icon-2 {background-image:url(../images/web-icon-2.png);}
+	.web-icon-2:hover {background-image:url(../images/web-icon-2-hover.png);}
+	.phone-icon-2 {background-image:url(../images/phone-icon-2.png);}
+	.phone-icon-2:hover {background-image:url(../images/phone-icon-2-hover.png);}
+	.mobile-icon-2 {background-image:url(../images/mobile-icon-2.png);}
+	.mobile-icon-2:hover {background-image:url(../images/mobile-icon-2-hover.png);}
+.CONTACT_row .dial {display: none;}
+.CONTACT_row:hover .dial {display: inline;}
+.CONTACT_row .contact_check {display: none;}
+.CONTACT_row:hover .contact_check {display: inline;} 
+.breakLine .label {
+    display: inline-block;
+}
+.breakLine:hover .label {
+	display: block;
+	margin-bottom: 4px;	
+}

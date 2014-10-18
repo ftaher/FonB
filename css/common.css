@@ -98,6 +98,9 @@ body{
 	overflow: hidden;
 	line-height: 11px;
 }
+.call-history-grid-row.Summary:hover {
+	background-color: #F8F8F8;
+}
 .move-down{
 	margin-top:6px;
 	float: right;

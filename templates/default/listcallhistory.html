@@ -27,7 +27,7 @@
 // ###############################################################################
 -->
 {{#if CallHistoryList}}
-	{{#CallHistoryList}}
+  {{#CallHistoryList}}
 <table width="100%" border="0" cellspacing="2" cellpadding="3" class="call-history-grid-row Summary {{Direction}}" id="CONTACT_{{Id}}">
   <tr class="OneRow">
     <td width="20%" class="CallOwner">
@@ -52,7 +52,7 @@
       <span class="dst" style="display:none;">{{CallerClid.Num}}</span> 
       {{#if CallerClid.MyContacts}} 
       <span class="personal contact-name" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.MyContactsLastName}}{{CallerClid.MyContactsLastName}}, {{/if}}{{CallerClid.MyContactsFirstName}}{{else}}{{CallerClid.MyContacts}}{{/if}}</span>       
-      <span class="personal phonetype" style="display:none;font-weight:normal;font-size:8px;">{{CallerClid.MyContactsType}}</span> {{/if}}
+      <span class="personal phonetype" style="display:none;font-weight:normal;font-size:10px;">{{CallerClid.MyContactsType}}</span> {{/if}}
       {{#if CallerClid.GContacts}} 
       <span class="gcontacts" style="display:none;">{{#if ../../../last_name}}{{#if CallerClid.GContactsLastName}}{{CallerClid.GContactsLastName}}, {{/if}}{{CallerClid.GContactsFirstName}}{{else}}{{CallerClid.GContacts}}{{/if}}</span> <span class="gcontacts phonetype" style="display:none;font-weight:normal;font-size:10px;color:#09F;">{{CallerClid.GContactsType}}</span> {{/if}}
       {{#if CallerClid.Highrise}} 
@@ -77,10 +77,10 @@
       <span class="queue contact-name" style="display:none;">{{CallerClid.Queue}}</span> 
       {{/if}} 
     </td>
-    <td style="width:140px;float:left;overflow:hidden;border:0px;">
+    <td class="contactsLabel" style="width:140px;float:left;overflow:hidden;border:0px;">
     {{#each CallerClid.GContactsGroups}}
-		<span class="gcontacts label label-important">{{this}}</span>
-	 {{/each}}
+    <span class="gcontacts label label-info">{{this}}</span>
+   {{/each}}
     {{#each CallerClid.HighriseGroups}}
     <span class="crm label label-info">{{this}}</span>
    {{/each}}
@@ -109,19 +109,19 @@
   </tr>
 </table>
 <div class="row-fluid call-history-grid-row Detailed {{Direction}}" id="detailed_{{Id}}" style="background-color:#fff;padding:0px;">
-		<div class="span12 column{{Direction}}">
-			<div class="row-fluid main">
-				
-			</div>
-		</div>
-	</div>
+    <div class="span12 column{{Direction}}">
+      <div class="row-fluid main">
+        
+      </div>
+    </div>
+  </div>
 {{/CallHistoryList}}
 {{else}}
-	<div class="row-fluid call-history-grid-row">
-		<div class="span12">
-			<div class="alert alert-success">
-				{{t "No logs for call history could be found. Start calling now to get stats here."}}
-			</div>
-		</div>
-	</div>
+  <div class="row-fluid call-history-grid-row">
+    <div class="span12">
+      <div class="alert alert-success">
+        {{t "No logs for call history could be found. Start calling now to get stats here."}}
+      </div>
+    </div>
+  </div>
 {{/if}}
