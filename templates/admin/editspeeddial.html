@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ListenPort = "{{ListenPort}}";
+    </script>
+
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+<body>
+
+<form id="update_form" method="post">
+    <table  style="
+    margin-bottom: 30px;
+">
+    <tr><td colspan="2"><h5>Edit User Details<hr></h5></td></tr>
+
+    <tr>
+        <td>First Name:</td>
+        <td><strong><input type="text" value="{{SpeedDial.fname}}" name="data[fname]"/></td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td><strong><input type="text" value="{{SpeedDial.lname}}" name="data[lname]"/></td>
+    </tr>
+    <tr>
+        <td>Company:</td>
+        <td><strong><input type="text"value="{{SpeedDial.company}}" name="data[company]"/></td>
+    </tr>
+    <tr>
+        <td>Speed Dial:</td>
+        <td><strong><input type="text" value="{{SpeedDial.tags}}" name="data[tags]"/></td>
+    </tr>
+    <tr>
+        <td>Phone Number:</td>
+        <td><strong><input type="text" value="{{SpeedDial.value}}" name="data[value]"/></td>
+    </tr>
+<input type="hidden" value="{{SpeedDial.id}}" name="data[id]"/>
+
+    </table>
+    <button class="btn btn-success" type="submit" name="action" value="SAVE">Save</button>
+    <button class="btn btn-danger" type="submit" name="action" value="CANCEL"> Cancel</button>
+    </form>
+
+
+
+</body>
+</html>
+

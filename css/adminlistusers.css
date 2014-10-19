@@ -1,0 +1,135 @@
+code {
+    display: block;
+    padding: 10px;
+    
+    width: 50%;
+    margin: 20px 20px;
+    border-radius: 10px;
+    font-family: consolas, courier, monospace;
+    background-color: rgb(32, 31, 31);
+    color: rgb(82, 255, 0);
+}
+.choseExtGray {
+    background: #F1F1F1;
+    padding: 9px;
+    color: #2E2E2E;
+    text-align: left;
+}
+.hideLink {}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover, .nav-tabs > .active > a:focus {background-color: #FA952B;color: #fff;}
+.table.userlist {width: 90%; margin: 0 auto;}
+.table.userlist thead th {border-bottom: 2px solid #ddd;}
+.table.userlist th, .table td {padding: 8px;}
+.table.userlist select {width: 130px;}
+.table.userlist th, .table.userlist td {line-height: 30px};
+.table.userlist td:nth-child(-n+2) {font-weight: bold;}
+.table.userlist td:nth-child(3) {width: 100px !important;max-width: 98px;}
+.table.userlist th {font-weight: bold;}
+.whiteBg {background-color: #fff;padding-top: 30px;}
+.content.userlist {width: 88%;margin: 0 auto;}
+.content.userlist table p {margin-bottom: 0;}
+.paddingTop {padding-top: 40px;}
+.addnew {background-color: #ECECEC;position: fixed;bottom: 0;margin: 0;padding-bottom: 0;-moz-box-shadow: -8px 4px 40px #444;   -webkit-box-shadow: -8px 4px 40px #444;   box-shadow: -8px 4px 40px #444;   -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#444444')";   filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#444444');}
+.addnew .table {background: none;margin-bottom:0;}
+.addnew tr:nth-child(1) {display:none;}
+.addnew tr:nth-child(2) td {padding-top: 15px;}
+.field_row{
+    height: 25px;
+    line-height: 15px;
+    display: table-row;
+}
+.expand {white-space: normal;
+    overflow: hidden;/* max-width:100px; *//* height: 23px; */word-wrap: break-word;
+    max-height: 23px;
+    /* Set our transitions up. */
+    -webkit-transition: max-height 0.8s;
+    -moz-transition: max-height 0.8s;
+    transition: max-height 0.8s;}
+.expand br {
+    display: inline-block;
+}
+br { content: "";
+    }
+.expand br:after {
+    display:block;
+    content: ","
+}
+.expand:hover br {
+    display: block;
+    content: initial;
+}
+.expand:hover {height: auto;max-height: 200px;}
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {margin-bottom: 0;}
+.field_tbody{
+    
+    display: table-row-group;
+}
+.detail_row{
+    border-top: 
+}
+.field_column{
+   empty-cells: show;
+   display: table-cell;
+   padding: 3px;
+   overflow: hidden;
+}
+.summary_row{
+    cursor: pointer;
+}
+.table{
+    width: 100%;
+    padding: 5px;
+    background-color: #FFF;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    display: table;
+    text-align: left;
+}
+.table .mid {    
+    width: 90%;
+    margin: 0 auto;
+}
+.table input[type=text]{
+    background-color: #FFF;
+    padding-left: 6px;
+}
+.table input{
+    width: 95%;
+}
+.field_tbody .field_row td:nth-child(1), .field_tbody .field_row td:nth-child(2), .field_tbody .field_row td:nth-child(8) {
+/*font-style: italic;
+color: #FF8400;*/
+font-weight: bold;
+}
+.detail_row{
+   /* display: none;*/
+}
+.topheader {
+    background: #283360 url(../images/header-bg.png) repeat-x;
+    height: 74px;
+}
+.component {
+    line-height: 1em;
+    margin: 0 auto;
+    padding: 1.3em 0 1.3em;
+    width: 90%;
+    max-width: 1100px;
+    overflow: hidden;
+}
+.choseExt {
+    background: #FA952B;
+    padding: 9px;
+    color: #fff;
+    text-align: left;
+}
+.neo-module-content {
+background-color:#fff !important;
+}
+.gray {}
+.gray a {display:none;}
+.deletedextensiondata {background-color:#FEE;}
+.queuedata {background-color:#E6E6E6}
+.ringgroupdata {background-color:#F1F1F1;}
+.field_tbody .field_row td:nth-child(1), .field_tbody .field_row td:nth-child(2), .field_tbody .field_row td:nth-child(8) {font-weight:normal;}
+form {padding:20px;padding-top: 0;}
+#VmPassword {display:none;}

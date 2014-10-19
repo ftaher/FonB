@@ -5,6 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FonB License Registration</title>
+<link rel="shortcut icon" href="../images/CommManager_1.png">
 <link href="css/mainheader.css" rel="stylesheet" type="text/css" />
 <link href="css/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link href="css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
@@ -18,6 +19,17 @@
     background: url('images/fonb-loading.gif') 
                 50% 50% 
                 no-repeat;
+}
+.activateContainer .component .bs-callout-danger {
+    position: relative;
+}
+.activateContainer .component .bs-callout-danger .getBtn{
+    position: absolute;
+    right: 39px;
+    top: 44px;
+    width: 140px;
+    font-size: 18px;
+    height: 40px;
 }
 </style>
 <script>
@@ -54,6 +66,19 @@ ul, ol {
   <div class="topheader">
   <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="images/logo-slogan.png" alt=""/></a> </div>
 </div>
+<div class="whiteBg">
+<div class="content userlist">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a href="/admin/users.php" data-toggle="tab">Users</a></li>
+        <li class="active"><a href="/license">License</a></li>
+        <li><a href="/admin/speeddials.php">Contacts</a></li>
+        <li><a href="/admin/config.php">Settings</a></li>
+        <a href=""><button class="btn btn-info" name="action" style="float: right;">Buy Fonb</button></a>
+    </ul>
+
+</div>
+</div>
+<div class="content userlist">
   <div class="activateHeader">
     <div class="component">
       <h1>Activate your license <span>Please enter your license key and press "Activate License" to activate corresponding FonB licenses</span></h1>
@@ -67,13 +92,18 @@ ul, ol {
       </nav>
     </div>
   </div>
-  <div class="component"> {{#ErrorMaxUserLimit}}
+</div>
+  <div class="component">
+    <div class="row"></div>
+
+   {{#ErrorMaxUserLimit}}
     <div class="bs-callout bs-callout-danger">
       <h4>The number of defined users in users.cfg exceeds the maximum allowed users.</h4>
       <ul>
         <li>Please buy additional licenses to use FonB for the add additional users. </li>
         <li>Alternatively you can comment out the password fields of exceeding users in users.cfg.</li>
       </ul>
+      <a href=""><button class="btn btn-danger getBtn" name="action">Buy FonB</button></a>
     </div>
     {{/ErrorMaxUserLimit}}
     {{#ErrorZeroUser}}
@@ -84,9 +114,9 @@ ul, ol {
         <li>If you have already purchased the license, please activate them in the Activate Product field at the top of this page.</li>
         <li>Click <a href="http://aptus.com/download.html" target="_blank">here</a> if you wish to receive demo license valid for 30 days.</li>
       </ul>
+      <a href=""><button class="btn btn-danger getBtn" name="action">Get License</button></a>
     </div>
     {{/ErrorZeroUser}}
-      {{#Licenses}}
     <table border="1" class="centerText">
       <thead>
         <tr>
@@ -101,6 +131,7 @@ ul, ol {
       </thead>
       <tbody>
       
+      {{#Licenses}}
       {{#Valid}} 
       <!-- if key is Valid -->
       <tr>
@@ -125,6 +156,12 @@ ul, ol {
         <td class="invalid">Invalid</td>
       </tr>
       {{/Valid}}
+      {{/Licenses}}
+      {{^Licenses}}
+      <tr>
+        <th colspan="7"><div class="noKey">You are currently using unlicensed release of FonB. Please click <a href="http://aptus.com/download.html" target="_blank">here</a> to register and receive the demo activation key on your email that will work for 30 days. Once you receive the activation key, enter it in the "Activate License" field to start using FonB. </div></th>
+      </tr>
+      {{/Licenses}}
       <tr class="total">
         <th>Total</th>
         <th>{{WebMaxUsers}}</th>
@@ -134,29 +171,6 @@ ul, ol {
         <th>&nbsp;</th>
         <th>&nbsp;</th>
       </tr>
-        </tbody>
-      
-    </table>
-      {{/Licenses}}
-  </div>
-  <div class="component"> {{^Licenses}}
-    <table border="1" class="centerText">
-      <thead>
-        <tr>
-          <th>Activation Keys</th>
-          <th>Web Users</th>
-          <th>Mobile Users</th>
-          <th>Issued </th>
-          <th>Expired </th>
-          <th>Remaining Days</th>
-          <th>Check Validation</th>
-        </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th colspan="7"><div class="noKey">You are currently using unlicensed release of FonB. Please click <a href="http://aptus.com/download.html" target="_blank">here</a> to register and receive the demo activation key on your email that will work for 30 days. Once you receive the activation key, enter it in the "Activate License" field to start using FonB. </div></th>
-      </tr>
-      {{/Licenses}}
         </tbody>
       
     </table>

@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- We are using handlebars for templating support -->
+    <script type="text/javascript" src="../js/handlebars.js"></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ListenPort = "{{ListenPort}}";
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ourcontext = "{{Context}}";
+    /**
+     * @var {string} ourterminal
+     * @memberOf global
+     */
+    var ourterminal = "{{Terminal}}";
+    /**
+     * @var {string} ourextension
+     * @memberOf global
+     */
+    var ourextension = "{{Extension}}";
+    var ourname = "{{Name}}";
+    /**
+     * @var {string} ourpassword
+     * @memberOf global
+     */
+    var ourpassword = "{{Password}}";
+    /**
+     * @var {string} ourmobile
+     * @memberOf global
+     */
+    var ourmobile = "{{Mobile}}";
+    /**
+     * @var {string} TemplateLanguage
+     * @memberOf global
+     */
+    var TemplateLanguage = "{{Language}}";
+
+
+
+/* templates */
+var ListUsersRowTemplate;
+$.ajax({
+	url : "../templates/admin/listusers.row.html",
+	async:false,  
+	success: function( data ) { 
+		ListUsersRowTemplate = Handlebars.compile(data); 
+	}
+});
+$.ajax({
+	url : "listusers.php",
+	dataType : 'json',
+	success: function( data ) { 
+		var renderoutput = ListUsersRowTemplate(data);
+		$('#ListUsers').html(renderoutput);
+	}
+});
+
+
+
+
+    </script>
+
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+  <body>
+
+<div id="ListUsers">
+</div id="ListUsers">
+
+
+
+<script type="text/javascript">
+
+    var phoneb = {};
+
+    phoneb.delete = function(extension){
+        if(confirm("Do you really want to delete?")){
+            $("#fieldset_"+extension +", #detail_"+extension).remove();
+            $('#update_form').submit();
+        }
+        return false;
+    }
+
+    phoneb.init = function(){
+        $("#addNewExtension").on("click", phoneb.addExtension);
+        $("input[type=text]").on("keypress", function(event){
+            if ( event.which == 13 ) {
+                $(this).parents("form").submit();
+            }
+        });
+    }
+    $(function(){
+        phoneb.init();
+    });
+
+	$( document ).ready(function() {
+		// Your code here.
+		$(".ColType").each(function(){
+			switch ( $(this).text() ) {
+				case "internal":
+					$(this).text("Extension");
+					break;
+				case "ringgroup":
+					$(this).text("Ring Group");
+					break;
+				case "queue":
+					$(this).text("Queue");
+					break;
+				case "deleted":
+					$(this).text("Deleted");
+					break;
+				default:
+					console.log($(this).text());
+					break;
+			}
+		}); // end of jQuery.each
+
+		$("tr.extensiondata select.product").click(function(){ 
+			CheckPasswordDisplay();
+		}); // end of click
+
+
+		CheckPasswordDisplay();
+	 
+	}); // end of JQuery.ready
+
+
+function CheckPasswordDisplay() {
+	var UserMobileCount = 0;
+	var UserWebCount = 0;
+	$("tr.extensiondata").each(function(){
+		var product = $(this).find("select.product").val();
+		if ( product == "none" ) {
+			$(this).addClass("gray").find("input.password").prop('disabled', true).css("background-color", "#CACACA").val("");
+		} else {
+			$(this).removeClass("gray").find("input.password").prop('disabled', false).css("background-color", "#FFF");
+		}	
+		
+		switch (product) {
+			case "combo":
+				UserMobileCount++;
+				UserWebCount++;
+				break
+			case "web":
+				UserWebCount++;
+				break
+			case "mobile":
+				UserMobileCount++;
+				break
+		}
+	}); // end of jQuery.each
+
+	// Set the User count
+	$("#usedWeb").text(UserWebCount);
+	$("#usedMobile").text(UserMobileCount);
+}
+
+</script>
+
+
+
+  </body>
+</html>

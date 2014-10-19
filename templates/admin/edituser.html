@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ListenPort = "{{ListenPort}}";
+    </script>
+
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+<body>
+<div class="topheader">
+  <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="http://aptus.com/images/logo-slogan.png" alt=""></a> </div>
+</div>
+<div class="whiteBg">
+<div class="content userlist">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="/admin/users.php">User Admin Panel</a></li>
+        <li><a href="/license">FonB License</a></li>
+        <li><a href="/admin" data-toggle="tab">FonB Corporate Contacts</a></li>
+        <li><a href="/admin/config.php">FonB Settings</a></li>
+    </ul>
+</div>
+</div>
+<div class="content userlist">
+<form id="update_form" method="post">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="">
+      <tr>
+        <td width="7%"><p>&nbsp;</p>
+        </td>
+        <td width="93%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td>Extension:</td>
+        <td><strong>{{EditExtension.Extension}}</td>
+      </tr>
+      <tr>
+        <td>Name:</td>
+        <td><strong>{{EditExtension.Name}}</strong></td>
+      </tr>
+      <tr>
+        <td>Department:</td>
+        <td>{{EditExtension.Department}}</td>
+      </tr>
+      <tr>
+        <td>Company:</td>
+        <td>{{EditExtension.Company}}</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <table width="100%" cellspacing="0" cellpadding="10" style="border-radius:20px;">
+      <tr>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>Spy Settings</strong></p>
+        <p>&nbsp;</p></td>
+        <td><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>Ring Group Settings</strong></p>
+        <p>&nbsp;</p></td>
+        <td><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>Queue Settings</strong></p>
+        <p>&nbsp;</p></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="8%" valign="top" bgcolor="#F7F7F7">Spy:</td>
+        <td width="14%" valign="top" bgcolor="#F7F7F7"><textarea id="Spy" cols="10" rows="10" style="width:200px;" name="data[Spy]">{{EditExtension.Spy}}</textarea></td>
+        <td width="2%" valign="top">&nbsp;</td>
+        <td width="13%" valign="top" bgcolor="#F7F7F7">Ring Group</td>
+        <td width="14%" valign="top" bgcolor="#F7F7F7"><textarea id="RingGroups" cols="15" rows="10" style="width:200px;"  name="data[RingGroups]">{{EditExtension.RingGroups}}</textarea></td>
+        <td width="2%" valign="top">&nbsp;</td>
+        <td width="10%" valign="top" bgcolor="#F7F7F7">Queue:</td>
+        <td width="14%" valign="top" bgcolor="#F7F7F7"><textarea id="Queues" cols="15" rows="10" style="width:200px;" name="data[Queues]">{{EditExtension.Queues}}</textarea></td>
+        <td width="23%" valign="top"><input type="hidden" value="{{EditExtension.Extension}}" name="data[Extension]"/>
+<input type="hidden" value="{{EditExtension.Name}}" name="data[Name]"/>
+<input type="hidden" value="{{EditExtension.Product}}" name="data[Product]"/>
+<input type="hidden" value="{{EditExtension.Password}}" name="data[Password]"/>
+<input type="hidden" value="{{EditExtension.Company}}" name="data[Company]"/>
+<input type="hidden" value="{{EditExtension.Department}}" name="data[Department]"/>
+<!--
+<input type="hidden" value="{$extensiondata.BaseDir}" name="data[BaseDir]"/>
+<input type="hidden" value="{$extensiondata.Language}" name="data[Language]"/>
+-->
+<input type="hidden" value="{{EditExtension.Type}}" name="data[Type]"/>
+<input id="ElastixRingGroupsData" type="hidden" value="{{ElastixRingGroups}}" name="ElastixRingGroupsData"/>
+<input id="ElastixQueuesData" type="hidden" value="{{ElastixQueues}}" name="ElastixQueuesData"/></td>
+      </tr>
+      <tr>
+        <td bgcolor="#F7F7F7"><p>&nbsp;</p>
+        <p>Spy Quick Pick</p></td>
+        <td bgcolor="#F7F7F7"><p>&nbsp;
+          </p>
+          <p>
+            <select onChange="QuickInsert('insSpy','Spy');" id="insSpy">
+              <option value="">(pick)</option>
+              <option value="all">all</option>
+              
+          
+{{#each Departments}}
+                 
+          
+              <option value="{{this}}">{{this}} Department</option>
+              
+          
+{{/each}}
+{{#each Extensions}}
+                 
+          
+              <option value="{{Extension}}">{{Name}} <{{Extension}}></option>
+              
+          
+{{/each}}
+            
+        
+            </select>
+        </p></td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F7F7"><p>&nbsp;</p>
+        <p>Ring Group Quick Pick</p></td>
+        <td valign="top" bgcolor="#F7F7F7"><p>&nbsp;
+          </p>
+          <p>
+            <select name="insRG" id="insRG" onChange="QuickInsert('insRG','RingGroups');">
+              <option value="">(pick)</option>
+              
+          
+          
+{{#each RingGroups}}
+                 
+          
+          
+              <option value="{{Extension}}">{{Name}} <{{Extension}}></option>
+              
+          
+          
+{{/each}}
+            
+        
+        
+            </select>
+        </p></td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F7F7"><p>&nbsp;</p>
+        <p>Queue Quick Pick</p></td>
+        <td valign="top" bgcolor="#F7F7F7"><p>&nbsp;
+          </p>
+          <p>
+            <select name="insQueues" id="insQueues" onChange="QuickInsert('insQueues','Queues');">
+              <option value="">(pick)</option>
+              
+          
+              
+          
+          
+{{#each Queues}}
+                 
+          
+          
+              
+          
+              <option value="{{Extension}}">{{Name}} <{{Extension}}></option>
+              
+          
+              
+          
+          
+{{/each}}
+            
+        
+        
+            
+        
+            </select>
+        </p></td>
+        <td valign="top"><p>&nbsp;
+          </p>
+          <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#F7F7F7">&nbsp;</td>
+        <td bgcolor="#F7F7F7">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><p>Apply Elastix RingGroups</p></td>
+        <td bgcolor="#F7F7F7"><p>
+          <input id="ElastixRingGroups" type=checkbox name='data[ElastixRingGroups]' value="{{EditExtension.ElastixRingGroups}}">
+        </p></td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><p>Apply Elastix Queues</p></td>
+        <td bgcolor="#F7F7F7"><p>
+          <input id="ElastixQueues" type=checkbox name='data[ElastixQueues]' value="{{EditExtension.ElastixQueues}}">
+        </p></td>
+        <td><p>&nbsp;
+          </p>
+          <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF">
+          <p>
+            <button class="btn btn-success" type="submit" name="action" value="SAVE">Save</button>
+        </p></td>
+        <td bgcolor="#FFFFFF"><p><button class="btn btn-danger" type="submit" name="action" value="CANCEL"> Cancel</button></p></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    
+  </form>
+</div>
+
+<script language="javascript">
+<!--
+
+var theForm = document.edit;
+//theForm.userid.focus();
+
+function QuickInsert(selectID,inputID) {
+    perm = document.getElementById(selectID).value;
+
+    grpList=document.getElementById(inputID);
+    if (grpList.value[ grpList.value.length - 1 ] == "\n") {
+        grpList.value = grpList.value + perm;
+    } else {
+        grpList.value = grpList.value + '\n' + perm;
+    }
+
+    var myout = '';
+    var mytxt = grpList.value;
+    var arrmytxt=mytxt.split('\n');
+
+    arrmytxt.sort();
+
+    arrmytxt = unique(arrmytxt);
+
+    for (var x=0;x<arrmytxt.length;x++) {
+       if (not_empty(arrmytxt[x])) {
+           myout = myout + arrmytxt[x] + '\n';
+       }
+    }
+    grpList.value = myout;
+
+    document.getElementById(selectID).value = '';
+}
+
+function contains(a, e) {
+    for(j=0;j<a.length;j++)if(a[j]==e)return true;
+    return false;
+}
+
+function unique(a) {
+    tmp = new Array(0);
+    for(i=0;i<a.length;i++){
+        if(!contains(tmp, a[i])){
+            tmp.length+=1;
+            tmp[tmp.length-1]=a[i];
+        }
+    }
+    return tmp;
+}
+
+function not_empty(value)
+{ //Strips leading and trailing whitespace and tests if anything remains.
+  var re = (value.replace(/^\s+|\s+$/g,'').length > 0)?true:false;
+  return re;
+}
+
+
+var OldRingGroupsText
+var OldQueuesText
+var ElastixRingGroupsData
+var ElastixQueuesData
+
+$( document ).ready(function() {
+	ElastixRingGroupsData = $('#ElastixRingGroupsData').val();
+	ElastixRingGroupsData = ElastixRingGroupsData.split(",").join("\t\n");
+
+	ElastixQueuesData = $('#ElastixQueuesData').val();
+	ElastixQueuesData = ElastixQueuesData.split(",").join("\t\n");
+
+	var SpyText = $('#Spy').text();
+	SpyText = SpyText.split(",").join("\t\n");
+	$('#Spy').text(SpyText);
+
+	var RingGroupsText = $('#RingGroups').text();
+	RingGroupsText = RingGroupsText.split(",").join("\t\n");
+	$('#RingGroups').text(RingGroupsText);
+
+	var QueuesText = $('#Queues').text();
+	QueuesText = QueuesText.split(",").join("\t\n");
+	$('#Queues').text(QueuesText);
+
+	if ( $('#ElastixRingGroups').val() != "no" ) {
+		$('#ElastixRingGroups').val("yes").prop('checked', true);
+		$('#RingGroups').prop('disabled', true).css("background-color", "#CACACA");
+		$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+	}
+
+	$('#ElastixRingGroups').click(function(){
+		if ( $('#ElastixRingGroups').val() != "yes" ) {
+			$('#ElastixRingGroups').val("yes").prop('checked', true);
+			OldRingGroupsText = $('#RingGroups').val();
+			$('#RingGroups').prop('disabled', true).css("background-color", "#CACACA").val(ElastixRingGroupsData);
+			$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+		} else {
+			$('#ElastixRingGroups').val("no").prop('checked', false);
+			$('#RingGroups').prop('disabled', false).css("background-color", "#FAFAFA").val(OldRingGroupsText);
+			$('#insRG').prop('disabled', false).css("background-color", "#FAFAFA");
+		}
+	});
+
+
+	if ( $('#ElastixQueues').val() != "no" ) {
+		$('#ElastixQueues').val("yes").prop('checked', true);
+		$('#Queues').prop('disabled', true).css("background-color", "#CACACA");
+		$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+	}
+
+	$('#ElastixQueues').click(function(){
+		if ( $('#ElastixQueues').val() != "yes" ) {
+			$('#ElastixQueues').val("yes").prop('checked', true);
+			OldQueuesText = $('#Queues').val();
+			$('#Queues').prop('disabled', true).css("background-color", "#CACACA").val(ElastixQueuesData);
+			$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+		} else {
+			$('#ElastixQueues').val("no").prop('checked', false);
+			$('#Queues').prop('disabled', false).css("background-color", "#FAFAFA").val(OldQueuesText);
+			$('#insRG').prop('disabled', false).css("background-color", "#FAFAFA");
+		}
+	});
+ 
+}); // end of JQuery.ready
+
+//-->
+</script>
+
+</body>
+</html>

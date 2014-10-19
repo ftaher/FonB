@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+
+
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ListenPort = "{{ListenPort}}";
+    </script>
+
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+<body>
+<div class="topheader">
+  <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="http://aptus.com/images/logo-slogan.png" alt=""></a> </div>
+</div>
+<div class="whiteBg">
+<div class="content userlist">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a href="/admin/users.php">User</a></li>
+        <li><a href="/license">License</a></li>
+        <li><a href="/admin/speeddials.php">Contacts</a></li>
+        <li class="active"><a href="/admin/config.php">Settings</a></li>
+        <li style="float:right;"> 
+</li>
+    </ul>
+</div>
+</div>
+<div class="content userlist paddingTop">
+<form id="update_form" method="post">
+    <table width="100%" border="0" cellspacing="10" cellpadding="5" style="">
+      <tr>
+        <td width="30%"><h1>FonB Settings</h1>
+          <p>&nbsp;</p>
+        </td>
+        <td width="12%">&nbsp;</td>
+        <td width="2%">&nbsp;</td>
+        <td width="17%">&nbsp;</td>
+        <td width="51%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td><b>FonB Listen Port:</b></td>
+        <td><input type="text" name="PhoneB[ListenPort]" value="{{PhoneB.ListenPort}}"/></td>
+        <td>&nbsp;</td>
+        <td><b>FreePBX/Elastix RedirectPath:</b></td>
+        <td><input type="text" name="PhoneB[RedirectPath]" value="{{PhoneB.RedirectPath}}"/></td>
+      </tr>
+      <tr>
+        <td><b>Asterisk VoiceMail Directory:</b></td>
+        <td><input type="text" name="PhoneB[AsteriskVoiceMailPath]" value="{{PhoneB.AsteriskVoiceMailPath}}"/></td>
+        <td>&nbsp;</td>
+        <td><b>Lame Path:</b></td>
+        <td><input type="text" name="PhoneB[LameExec]" value="{{PhoneB.LameExec}}"/></td>
+      </tr>
+      <tr>
+        <td><b>FonB Base Directory:</b></td>
+        <td><input type="text" name="PhoneB[BaseDir]" value="{{PhoneB.BaseDir}}"/></td>
+        <td>&nbsp;</td>
+        <td><b>users.cfg Config File Path:</b></td>
+        <td><input type="text" name="PhoneB[UsersConfFile]" value="{{PhoneB.UsersConfFile}}"/></td>
+      </tr>
+      <tr>
+        <td><b>Php CGI Path:</b></td>
+        <td><input type="text" name="PhoneB[PhpCgiPath]" value="{{PhoneB.PhpCgiPath}}"/></td>
+        <td>&nbsp;</td>
+        <td><b>Asterisk Monitor Directory Path:</b></td>
+        <td><input type="text" name="PhoneB[AsteriskMonitorPath]" value="{{PhoneB.AsteriskMonitorPath}}"/></td>
+      </tr>
+      <tr>
+        <td><b>CallHistoryIgnore.cfg Config File Path:</b></td>
+        <td><input type="text" name="PhoneB[CallHistoryIgnoreFile]" value="{{PhoneB.CallHistoryIgnoreFile}}"/></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    <table width="100%" cellspacing="0" cellpadding="10" style="border-radius:20px;">
+      <tr>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>Asterisk Manager Interface (AMI)</strong></p>
+        <p>Active Calls and Call Switching are all done with AMI</p></td>
+        <td><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>Asterisk CDR MySQL Database Configuration</strong></p>
+        <p>To access and display Call History records for extensions</p></td>
+        <td><p>&nbsp;</p>
+        <p>&nbsp;</p></td>
+        <td colspan="2" bgcolor="#E0E0E0" style="border-top-left-radius:10px;border-top-right-radius:10px;"><p><strong>FonB MySQL Database Configuration</strong></p>
+        <p>Phonebook and Contacts are all saved here</p></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="10%" valign="top" bgcolor="#F7F7F7"><b>AMI Port:</b></td>
+        <td width="12%" valign="top" bgcolor="#F7F7F7"><input type="text" name="AMI[ManagerPort]" value="{{AMI.ManagerPort}}"/></td>
+        <td width="2%" valign="top">&nbsp;</td>
+        <td width="13%" valign="top" bgcolor="#F7F7F7"><b>Mysql Username:</b></td>
+        <td width="14%" valign="top" bgcolor="#F7F7F7"><input type="text" name="MysqlFonB[Username]" value="{{MysqlFonB.Username}}"/></td>
+        <td width="2%" valign="top">&nbsp;</td>
+        <td width="14%" valign="top" bgcolor="#F7F7F7"><b>Mysql Username:</b></td>
+        <td width="10%" valign="top" bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Username]" value="{{MysqlCdr.Username}}"/></td>
+        <td width="23%" valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td bgcolor="#F7F7F7"><p><b>AMI Password:</b></p></td>
+        <td bgcolor="#F7F7F7"><p>
+          <input type="text" name="AMI[ManagerPassword]" value="{{AMI.ManagerPassword}}"/>
+          </p></td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F7F7"><b>Mysql Password:</b></td>
+        <td valign="top" bgcolor="#F7F7F7">
+          <p>
+            <input type="text" name="MysqlFonB[Password]" value="{{MysqlFonB.Password}}"/>
+          </p></td>
+        <td valign="top">&nbsp;</td>
+        <td valign="top" bgcolor="#F7F7F7"><p><b>Mysql Password:</b></p></td>
+        <td valign="top" bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Password]" value="{{MysqlCdr.Password}}"/></td>
+        <td valign="top">&nbsp;</td>
+      </tr>
+      <tr>
+        <td bgcolor="#F7F7F7"><b>AMI Username:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="AMI[ManagerUsername]" value="{{AMI.ManagerUsername}}"/></td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><b>Mysql Server Hostname:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlFonB[Host]" value="{{MysqlFonB.Host}}"/></td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><b>Mysql Server Hostname:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Host]" value="{{MysqlCdr.Host}}"/></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td bgcolor="#F7F7F7">
+          <p><b>AMI Host:</b>
+            
+        </p></td>
+        <td bgcolor="#F7F7F7"><p>
+          <input type="text" name="AMI[ManagerHost]" value="{{AMI.ManagerHost}}"/>
+        </p></td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><b>FonB Database:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlFonB[Database]" value="{{MysqlFonB.Database}}"/></td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><b>Asterisk CDR Database:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Database]" value="{{MysqlCdr.Database}}"/></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+{{#if AMI.Debug}}
+        <td bgcolor="#F7F7F7">
+		<button class="btn btn-warning" type="submit" name="action" value="DisableDebug">Disable Debug</button>
+        </td>
+        <td bgcolor="#F7F7F7"><a href="/debug/ami.html" target="_blank" class="hideLink">To See Debug</a></td>
+{{else}}
+        <td bgcolor="#F7F7F7">
+		<button class="btn btn-warning" type="submit" name="action" value="EnableDebug">Enable Debug</button>
+        </td>
+        <td bgcolor="#F7F7F7">&nbsp;</td>
+{{/if}}
+
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7">&nbsp;</td>
+        <td bgcolor="#F7F7F7">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td bgcolor="#F7F7F7"><b>Asterisk CDR Table:</b></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Table]" value="{{MysqlCdr.Table}}"/></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td bgcolor="#FFFFFF">&nbsp;</td>
+        <td bgcolor="#FFFFFF">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-success" type="submit" name="action" value="SAVE">Save Settings</button></td>
+        <td><button class="btn btn-danger" type="submit" name="action" value="CANCEL">Cancel my changes</button></td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    <p>&nbsp;</p>
+    
+  </form>
+</div>

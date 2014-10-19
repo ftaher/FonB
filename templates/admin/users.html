@@ -1,0 +1,432 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+    /**
+     * @var {string} ourcontext
+     * @memberOf global
+     */
+    var ListenPort = "{{ListenPort}}";
+    $( document ).ready(function() {
+    $('.expand').each(function(){str = $(this).html();str = str.split(",").join("<br>");$(this).html(str);})
+});
+    $(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});
+    </script>
+
+<style>
+input:disabled::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #cacaca;
+}
+input:disabled:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #cacaca;
+}
+input:disabled::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #cacaca;
+}
+input:disabled:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #cacaca;
+}
+</style>
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+  <body>
+
+<div id="ListUsers">
+<div class="topheader">
+  <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="http://aptus.com/images/logo-slogan.png" alt=""></a> </div>
+</div>
+<div class="whiteBg">
+<div class="content userlist">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li class="active"><a href="/admin/users.php" data-toggle="tab">Users</a></li>
+        <li><a href="/license">License</a></li>
+        <li><a href="/admin/speeddials.php">Contacts</a></li>
+        <li><a href="/admin/config.php">Settings</a></li>
+    </ul>
+</div>
+</div>
+<div class="content userlist">
+<div class="choseExtGray">
+<p><strong>Choose which extensions you want to enable with FonB?</strong></p>
+<p>
+FonB License Statistics: 
+(Web: <span id="usedWeb"></span id="usedWeb">/<span id="WebMaxUsers">{{License.WebMaxUsers}}</span id="WebMaxUsers">)
+(Mobile: <span id="usedMobile"></span id="usedMobile">/<span id="MobileMaxUsers">{{License.MobileMaxUsers}}</span id="MobileMaxUsers">)
+</p>
+</div>
+</div>
+<table id="fields" class="table" style="font-size: 12px;" width="100%" >
+    <tbody class="field_tbody" id="fieldset_heading">
+
+    </tbody>
+</table>
+
+<form id="update_form" method="post">
+<!-- Print all the Extensions defined in Elastix -->
+                <table class="table userlist">
+                   <tbody class="field_tbody">
+                   	<thead>
+		        <tr class="field_row">
+		            <th style="width:5%;" class="field_column"></th>
+		            <th style="width:10%;" class="field_column"></th>
+		            <th style="width:4%;" class="field_column">Product <img 
+        data-toggle="tooltip" 
+        data-placement="top" 
+        title="" 
+        data-original-title="Select Product" src="http://aptus.com/images/question.png" title="Select Product"></th>
+		            <th style="width:5%;" class="field_column">Password <img data-toggle="tooltip" 
+        data-placement="top" 
+        title="" 
+        data-original-title="Write your VM Password" src="http://aptus.com/images/question.png"></th>
+		            <th style="width:12%;" class="field_column">Company</th>
+		            <th style="width:10%;" class="field_column">Department</th>
+		            <!-- <th style="width:10%;" class="field_column">BaseDir</th> -->
+		            <!-- <th style="width:5%;" class="field_column">Language</th> -->
+		            <th style="width:5%;" class="field_column"></th>
+					<th style="width:5%;" class="field_column">Spy</th>
+		            <th style="width:5%;" class="field_column">Ring Groups</th>
+		            <th style="width:5%;" class="field_column">Queues</th>
+		        </tr>
+		        </thead>
+{{#each Extensions}}
+		<tr class="field_row extensiondata" id="ext{{Extension}}">
+			<td style="width:5%;" class="field_column"><img src="../images/qd_internal.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:4%;" class="field_column">
+				<select class="product" name="{{Extension}}[Product]">
+				{{#Product}}
+					<option value="{{val}}" {{selected}}>{{text}}</option>
+				{{/Product}}
+				</select>
+			</td>
+			<td style="width:5%;" class="field_column">
+			<input class="password" type="text" value="{{Password}}" placeholder="VoiceMail" name="{{Extension}}[Password]"/>
+			</td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"><input type="text" value="{{Company}}" name="{{Extension}}[Company]"/></td>
+			<td style="width:10%;" class="field_column"><input type="text" value="{{Department}}" name="{{Extension}}[Department]"/></td>
+			<td style="width:5%;" class="field_column ColType">{{Type}}</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{Spy}}</p></a>
+			</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{RingGroups}}</p></a>
+			</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{Queues}}</p></a>
+			</td>
+				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
+				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
+				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
+				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
+				<!-- 
+				<input type="hidden" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/>
+				<input type="hidden" value="{{Language}}" name="{{Extension}}[Language]"/>
+				-->
+		</tr>
+{{/each}}
+
+<!-- Print all Deleted-Extensions defined in Elastix -->
+{{#if DeletedExtensions}}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+{{#each DeletedExtensions}}
+		<tr class="field_row deletedextensiondata">
+			<td style="width:5%;" class="field_column"><img src="../images/ch_deleted.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"><input type="text" value="{{Company}}" name="{{Extension}}[Company]"/></td>
+			<td style="width:10%;" class="field_column"><input type="text" value="{{Department}}" name="{{Extension}}[Department]"/></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{{Language}}" name="{{Extension}}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType">{{Type}}</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+
+		</tr>
+				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
+				<!--
+				<input type="hidden" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/>
+				<input type="hidden" value="{{Language}}" name="{{Extension}}[Language]"/>
+				-->
+				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
+				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
+				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
+				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+{{/each}}
+{{/if}}
+
+
+<!-- Print all the Ring Groups defined in Elastix -->
+{{#if RingGroups}}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+
+{{#each RingGroups}}
+		<tr class="field_row ringgroupdata">
+			<td style="width:5%;" class="field_column"><img src="../images/ch_ringgroup.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"></td>
+			<td style="width:10%;" class="field_column"></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{{Language}}" name="{{Extension}}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType"><span>{{Type}}</span></td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+		</tr>
+				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
+{{/each}}
+{{/if}}
+
+<!-- Print all the current Queues defined in Elastix -->
+{{#if Queues}}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+{{#each Queues}}
+		<tr class="field_row queuedata">
+			<td style="width:5%;" class="field_column"><img src="../images/ch_queue.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"></td>
+			<td style="width:10%;" class="field_column"></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{{Language}}" name="{{Extension}}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType">{{Type}}</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+		</tr>
+				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
+{{/each}}
+{{/if}}
+
+                    </tbody>
+    </table>
+
+<br>
+<input style="width: 181px;margin-left:85%;border-radius: 9px;padding:5px;height: 38px;background-color: #283360;color: #fff;font-size: 16px;" name="action" type="submit" value="Update"/>
+<br>
+</form>
+
+<form action="{$action}" method="post">
+    <table class="table">
+       <tbody class="field_tbody">
+	<tr class="field_row">
+		<th style="width:5%;" class="field_column">Extension</th>
+		<th style="width:10%;" class="field_column">Name</th>
+		<!-- <th style="width:5%;" class="field_column">Mobile</th> -->
+		<th style="width:12%;" class="field_column">Company</th>
+		<th style="width:10%;" class="field_column">Department</th>
+		<!-- <th style="width:10%;" class="field_column">BaseDir</th> -->
+		<th style="width:5%;" class="field_column">Password</th>
+		<!-- <th style="width:5%;" class="field_column">Language</th> -->
+		<th style="width:5%;" class="field_column">Spy</th>
+		<th style="width:5%;" class="field_column">Type</th>
+		<th style="width:5%;" class="field_column">Ring Groups</th>
+		<th style="width:5%;" class="field_column">Queues</th>
+		<th style="width:5%;"  class="field_column"></th>
+	</tr>
+        <tr class="field_row">
+            <td style="width:5%;" class="field_column"><input type="text" placeholder="Extension" name="new_extension[Extension]"/></td>
+            <td style="width:10%;" class="field_column"><input type="text" placeholder="Name" name="new_extension[Name]"/></td>
+            <!-- <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Mobile]"/></td> -->
+            <td style="width:12%;" class="field_column"><input type="text" placeholder="Company" name="new_extension[Company]"/></td>
+            <td style="width:10%;" class="field_column"><input type="text" placeholder="Department" name="new_extension[Department]"/></td>
+            <!-- <td style="width:10%;" class="field_column"><input type="text" name="new_extension[BaseDir]"/></td> -->
+            <td style="width:5%;" class="field_column"><input type="text" placeholder="VM pass here" name="new_extension[Password]"/></td>
+            <!-- <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Language]"/></td> -->
+            <td style="width:5%;" class="field_column"><input type="text" placeholder="Spy Ext." name="new_extension[Spy]"/></td>
+            <td style="width:5%;" class="field_column">
+                <select name="new_extension[Type]">
+                    <option value="internal">Extension</option>
+                    <option selected value="deleted">Deleted</option>
+                    <option value="ringgroup">Ring Group</option>
+                    <option value="queue">Queue</option>
+                </select>
+            </td>
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Queues]"/></td>
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[RingGroups]"/></td>
+            <td style="width:5%;"  class="field_column">
+                <input name="action" type="submit" value="Add" style="padding:5px;height: 38px;background-color: #283360;color: #fff;border-radius: 9px;font-size: 16px;"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</div id="ListUsers">
+
+
+
+<script type="text/javascript">
+
+    var phoneb = {};
+
+    phoneb.delete = function(extension){
+        if(confirm("Do you really want to delete?")){
+            $("#fieldset_"+extension +", #detail_"+extension).remove();
+            $('#update_form').submit();
+        }
+        return false;
+    }
+
+    phoneb.init = function(){
+        $("#addNewExtension").on("click", phoneb.addExtension);
+        $("input[type=text]").on("keypress", function(event){
+            if ( event.which == 13 ) {
+                $(this).parents("form").submit();
+            }
+        });
+    }
+    $(function(){
+        phoneb.init();
+    });
+
+	$( document ).ready(function() {
+		// Your code here.
+		$(".ColType").each(function(){
+			switch ( $(this).text() ) {
+				case "internal":
+					$(this).text("Extension");
+					break;
+				case "ringgroup":
+					$(this).text("Ring Group");
+					break;
+				case "queue":
+					$(this).text("Queue");
+					break;
+				case "deleted":
+					$(this).text("Deleted");
+					break;
+				default:
+					console.log($(this).text());
+					break;
+			}
+		}); // end of jQuery.each
+
+		$("tr.extensiondata select.product").click(function(){ 
+			CheckPasswordDisplay();
+		}); // end of click
+
+
+		CheckPasswordDisplay();
+	 
+	}); // end of JQuery.ready
+
+
+function CheckPasswordDisplay() {
+	var UserMobileCount = 0;
+	var UserWebCount = 0;
+	$("tr.extensiondata").each(function(){
+		var product = $(this).find("select.product").val();
+		if ( product == "none" ) {
+			$(this).addClass("gray").find("input.password").prop('disabled', true).css("background-color", "#CACACA").val("");
+		} else {
+			$(this).removeClass("gray").find("input.password").prop('disabled', false).css("background-color", "#FFF");
+		}	
+		
+		switch (product) {
+			case "combo":
+				UserMobileCount++;
+				UserWebCount++;
+				break
+			case "web":
+				UserWebCount++;
+				break
+			case "mobile":
+				UserMobileCount++;
+				break
+		}
+	}); // end of jQuery.each
+
+	// Set the User count
+	$("#usedWeb").text(UserWebCount);
+	$("#usedMobile").text(UserMobileCount);
+}
+
+</script>
+
+
+
+  </body>
+</html>
+

@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+// ###############################################################################
+// #
+// # APTUS FonB is Copyright (c) 2013 by APTUS, Inc.
+// # All rights reserved.
+// #
+// # APTUS FonB is confidential to APTUS and protected by Copyright and
+// # other bodies of law protecting intellectual property rights.
+// #
+// # Redistribution, reproduction and use in source and binary forms, with or without
+// # modification, are NOT permitted.
+// #
+// # A non­exclusive and
+// # non-transferable license for the internal evaluation and production use of
+// # this product is available from APTUS.
+// #
+// # Unless enforcement is prohibited by applicable law, you may not modify,
+// # decompile, or reverse engineer APTUS FonB. No right, title or interest
+// # in or to any trademark, service mark, logo or trade name of APTUS or its
+// # licensors is granted.
+// #
+// # APTUS FONB IS PROVIDED "AS IS," WITHOUT WARRANTY. ALL WARRANTIES,
+// # EXPRESS OR IMPLIED, CONDITIONS, AND REPRESENTATIONS, INCLUDING ANY IMPLIED
+// # WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR
+// # NON­INFRINGEMENT ARE DISCLAIMED
+// #
+// ###############################################################################
+-->
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>APTUS End-User Portal</title>
+    <link rel="shortcut icon" href="../images/CommManager_1.png">
+    <!-- Adding All CSS Files here -->
+    <link rel="stylesheet" href="../css/bonevojage.min.css" />
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    <!-- FoneB css -->
+    <link href="../css/responsive.css" rel="stylesheet" type="text/css" />
+    <!-- Placing it in end temporarily to avoid conflicts with above files. 
+    Using bootstrap to control grid, dropdowns, buttons and Layout-->
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/mainheader.css" rel="stylesheet" type="text/css" />
+    <link href="../css/common.css" type="text/css" rel="stylesheet"/>
+    <link href="../css/adminlistusers.css" type="text/css" rel="stylesheet"/>
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
+    <!-- We are using handlebars for templating support -->
+    <script type="text/javascript" src="../js/handlebars.js"></script>
+    <!-- Custom javascript  -->
+    <script type="text/javascript">
+    /**
+     * @var {string} TemplateLanguage
+     * @memberOf global
+     */
+    var TemplateLanguage = "{{Language}}";
+    </script>
+
+  </head>
+  <!-- body will get base.html template first then other pages. -->
+  <body>
+
+<div id="ListUsers">
+<div class="topheader">
+  <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="http://aptus.com/images/logo-slogan.png" alt=""></a> </div>
+</div>
+<div class="whiteBg">
+<div class="content userlist">
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a href="/admin/users.php">Users</a></li>
+        <li><a href="/license">License</a></li>
+        <li class="active"><a href="/admin/speeddials.php" data-toggle="tab">Contacts</a></li>
+        <li><a href="/admin/config.php">Settings</a></li>
+    </ul>
+</div>
+</div>
+<div class="content userlist">
+<div class="choseExtGray">
+<img src="/images/speeddial.png" width="30" height="30" style="
+    padding-right: 11px;
+"><strong>View, edit or Add your Speed Dial Contacts below</strong>
+</div>
+</div>
+<div style="padding:20px;">
+<!-- Print all the Extensions defined in Elastix -->
+        <table class="table userlist" style="margin-top:40px;">
+           <tbody class="field_tbody">
+           	<thead>
+        <tr class="field_row">
+            <th style="width:5%;" class="field_column">First Name</th>
+            <th style="width:10%;" class="field_column">Last Name</th>
+            <th style="width:4%;" class="field_column">Company</th>
+            <th style="width:5%;" class="field_column">Speed Dial</th>
+            <th style="width:10%;" class="field_column">Phone Number</th>
+		<th style="width:5%;" class="field_column"></th>
+		<th style="width:5%;" class="field_column"></th>
+        </tr>
+        </thead>
+{{#each SpeedDials}}
+		<tr class="field_row extensiondata" id="ext{{Extension}}">
+			<td style="width:5%;" class="field_column">{{fname}}</td>
+			<td style="width:10%;" class="field_column">{{lname}}</td>
+			<td style="width:4%;" class="field_column">
+				{{company}}
+			</td>
+			<td style="width:5%;" class="field_column">
+				{{tags}}
+			</td>
+			<td style="width:10%;" class="field_column">{{value}}</td>
+			<td style="width:5%;" class="field_column">
+                <a class="info" data-target="#editContact" id="editContact" data-toggle="modal" href="editspeeddial.php?id={{id}}">Edit</a>			
+            </td>
+            <div id="editContact" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                <div class="modal-body">
+                </div>
+            </div>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="delspeeddial.php?id={{id}}">Delete</a>
+			</td>
+		</tr>
+{{/each}}
+                    </tbody>
+    </table>
+</div>
+
+
+
+<form action="{$action}" method="post" class="addnew">
+    <table class="table">
+       <tbody class="field_tbody">
+	<tr class="field_row">
+		<th style="width:5%;" class="field_column">First Name</th>
+		<th style="width:10%;" class="field_column">Last name</th>
+		<th style="width:12%;" class="field_column">Company</th>
+		<th style="width:5%;" class="field_column">Speed Dial Code</th>
+		<th style="width:5%;" class="field_column">Phone Number</th>
+		<th style="width:5%;"  class="field_column"></th>
+	</tr>
+        <tr class="field_row">
+            <td style="width:10%;" class="field_column"><input placeholder="First Name" type="text" name="new_extension[Extension]"/></td>
+            <td style="width:10%;" class="field_column"><input placeholder="Last Name" type="text" name="new_extension[Name]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Company" type="text" name="new_extension[Mobile]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Speed Dial Code" type="text" name="new_extension[Company]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Phone Number" type="text" name="new_extension[Department]"/></td>
+            <td style="width:5%;"  class="field_column">
+                <input name="action" type="submit" value="Add" style="padding:5px;height: 31px;background-color: #283360;color: #fff;border-radius: 9px;font-size: 16px;"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
+</div id="ListUsers">
+
+
+
+<script type="text/javascript">
+
+    var phoneb = {};
+
+    phoneb.delete = function(extension){
+        if(confirm("Do you really want to delete?")){
+            $("#fieldset_"+extension +", #detail_"+extension).remove();
+            $('#update_form').submit();
+        }
+        return false;
+    }
+
+    phoneb.init = function(){
+        $("#addNewExtension").on("click", phoneb.addExtension);
+        $("input[type=text]").on("keypress", function(event){
+            if ( event.which == 13 ) {
+                $(this).parents("form").submit();
+            }
+        });
+    }
+    $(function(){
+        phoneb.init();
+    });
+
+	$( document ).ready(function() {
+		// Your code here.
+		$(".ColType").each(function(){
+			switch ( $(this).text() ) {
+				case "internal":
+					$(this).text("Extension");
+					break;
+				case "ringgroup":
+					$(this).text("Ring Group");
+					break;
+				case "queue":
+					$(this).text("Queue");
+					break;
+				case "deleted":
+					$(this).text("Deleted");
+					break;
+				default:
+					console.log($(this).text());
+					break;
+			}
+		}); // end of jQuery.each
+
+		$("tr.extensiondata select.product").click(function(){ 
+			CheckPasswordDisplay();
+		}); // end of click
+
+
+		CheckPasswordDisplay();
+	 
+	}); // end of JQuery.ready
+
+
+function CheckPasswordDisplay() {
+	var UserMobileCount = 0;
+	var UserWebCount = 0;
+	$("tr.extensiondata").each(function(){
+		var product = $(this).find("select.product").val();
+		if ( product == "none" ) {
+			$(this).addClass("gray").find("input.password").prop('disabled', true).css("background-color", "#CACACA").val("");
+		} else {
+			$(this).removeClass("gray").find("input.password").prop('disabled', false).css("background-color", "#FFF");
+		}	
+		
+		switch (product) {
+			case "combo":
+				UserMobileCount++;
+				UserWebCount++;
+				break
+			case "web":
+				UserWebCount++;
+				break
+			case "mobile":
+				UserMobileCount++;
+				break
+		}
+	}); // end of jQuery.each
+
+	// Set the User count
+	$("#usedWeb").text(UserWebCount);
+	$("#usedMobile").text(UserMobileCount);
+}
+
+</script>
+
+
+
+  </body>
+</html>
+

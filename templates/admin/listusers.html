@@ -1,0 +1,243 @@
+
+{if $message}
+    <p>{$message}</p>
+{/if}
+{if $console}
+    <code>{$console|html_entity_decode}</code>
+{/if}
+<div class="topheader">
+  <div class="codrops-top clearfix component activate" style="text-align: center;"> <a href="#"><img src="http://aptus.com/images/logo-slogan.png" alt=""></a> </div>
+</div>
+<div class="choseExt">
+{if $License}
+<p><strong>Choose which extensions you want to enable with FonB?</strong></p>
+<p>
+FonB License Statistics: 
+(Web: <span id="usedWeb">{$Usercount.Web}</span id="usedWeb">/<span id="WebMaxUsers">{$License.WebMaxUsers}</span id="WebMaxUsers">)
+(Mobile: <span id="usedMobile">{$Usercount.Mobile}</span id="usedMobile">/<span id="MobileMaxUsers">{$License.MobileMaxUsers}</span id="MobileMaxUsers">)
+</p>
+{else}
+<p><strong>Error: FonB Server is down</strong></p>
+{/if}
+</div>
+<table id="fields" class="table" style="font-size: 12px;" width="100%" >
+    <tbody class="field_tbody" id="fieldset_heading">
+
+    </tbody>
+</table>
+
+<form action="{$action}" id="update_form" method="post">
+<!-- Print all the Extensions defined in Elastix -->
+                <table class="table">
+                   <tbody class="field_tbody">
+		        <tr class="field_row">
+		            <th style="width:5%;" class="field_column"></th>
+		            <th style="width:10%;" class="field_column"></th>
+		            <th style="width:4%;" class="field_column">Product <img src="http://aptus.com/images/question.png" title="Select Product"></th>
+		            <th style="width:5%;" class="field_column">Password <img src="http://aptus.com/images/question.png" title="Select Product"></th>
+		            <th style="width:12%;" class="field_column">Company</th>
+		            <th style="width:10%;" class="field_column">Department</th>
+		            <!-- <th style="width:10%;" class="field_column">BaseDir</th> -->
+		            <!-- <th style="width:5%;" class="field_column">Language</th> -->
+		            <th style="width:5%;" class="field_column"></th>
+					<th style="width:5%;" class="field_column">Spy</th>
+		            <th style="width:5%;" class="field_column">Ring Groups</th>
+		            <th style="width:5%;" class="field_column">Queues</th>
+		        </tr>
+{foreach from=$extensiondata key=section item=fields name=extensions}
+		<tr class="field_row extensiondata" id="ext{$fields.Extension}">
+			<td style="width:5%;" class="field_column">{$fields.Extension}<input type="hidden" value="{$fields.Extension}" name="{$section}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{$fields.Name}<input type="hidden" value="{$fields.Name}" name="{$section}[Name]"/></td>
+			<td style="width:4%;" class="field_column">
+				<select class="product" name="{$section}[Product]">
+					<option {if $fields.Product == "combo"} selected {/if} value="combo">Web + Mobile</option>
+					<option {if $fields.Product == "web"} selected {/if} value="web">Web</option>
+					<option {if $fields.Product == "mobile"} selected {/if} value="mobile">Mobile</option>
+					<option {if $fields.Product == "none"} selected {/if} value="none">No Password</option>
+				</select>
+			</td>
+			<td style="width:5%;" class="field_column">
+			<input class="password" id="NormalPassword" placeholder="Normal Password" type="text" value="" name="{$section}[Password]"/>
+			</td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{$section}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"><input type="text" value="{$fields.Company}" name="{$section}[Company]"/></td>
+			<td style="width:10%;" class="field_column"><input type="text" value="{$fields.Department}" name="{$section}[Department]"/></td>
+			<td style="width:5%;" class="field_column ColType">{$fields.Type}</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="index.php{$action}&action=EditValues&Exten={$fields.Extension}" title="{$fields.Spy}">Edit</a>
+			</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="index.php{$action}&action=EditValues&Exten={$fields.Extension}" title="{$fields.RingGroups}">Edit</a>
+			</td>
+			<td style="width:5%;" class="field_column">
+                		<a class="info" href="index.php{$action}&action=EditValues&Exten={$fields.Extension}" title="{$fields.Queues}">Edit</a>
+			</td>
+				<input type="hidden" value="{$fields.Spy}" name="{$section}[Spy]"/>
+				<input type="hidden" value="{$fields.Type}" name="{$section}[Type]"/>
+				<input type="hidden" value="{$fields.ElastixRingGroups}" name="{$section}[ElastixRingGroups]"/>
+				<input type="hidden" value="{$fields.RingGroups}" name="{$section}[RingGroups]"/>
+				<input type="hidden" value="{$fields.ElastixQueues}" name="{$section}[ElastixQueues]"/>
+				<input type="hidden" value="{$fields.Queues}" name="{$section}[Queues]"/>
+				<!-- 
+				<input type="hidden" value="{$fields.BaseDir}" name="{$section}[BaseDir]"/>
+				<input type="hidden" value="{$fields.Language}" name="{$section}[Language]"/>
+				-->
+		</tr>
+{/foreach}
+
+<!-- Print all Deleted-Extensions defined in Elastix -->
+{if $deletedextensiondata}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+{foreach from=$deletedextensiondata key=section item=fields name=deletedextensions}
+		<tr class="field_row deletedextensiondata">
+			<td style="width:5%;" class="field_column">{$fields.Extension}<input type="hidden" value="{$fields.Extension}" name="{$section}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{$fields.Name}<input type="hidden" value="{$fields.Name}" name="{$section}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{$section}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"><input type="text" value="{$fields.Company}" name="{$section}[Company]"/></td>
+			<td style="width:10%;" class="field_column"><input type="text" value="{$fields.Department}" name="{$section}[Department]"/></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{$fields.BaseDir}" name="{$section}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Language}" name="{$section}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType">{$fields.Type}</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+
+		</tr>
+				<input type="hidden" value="{$fields.Type}" name="{$section}[Type]"/>
+				<!--
+				<input type="hidden" value="{$fields.BaseDir}" name="{$section}[BaseDir]"/>
+				<input type="hidden" value="{$fields.Language}" name="{$section}[Language]"/>
+				-->
+				<input type="hidden" value="{$fields.Spy}" name="{$section}[Spy]"/>
+				<input type="hidden" value="{$fields.ElastixRingGroups}" name="{$section}[ElastixRingGroups]"/>
+				<input type="hidden" value="{$fields.RingGroups}" name="{$section}[RingGroups]"/>
+				<input type="hidden" value="{$fields.Queues}" name="{$section}[Queues]"/>
+				<input type="hidden" value="{$fields.ElastixQueues}" name="{$section}[ElastixQueues]"/>
+{/foreach}
+{/if $deletedextensiondata}
+
+
+<!-- Print all the Ring Groups defined in Elastix -->
+{if $ringgroupdata}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+
+{foreach from=$ringgroupdata key=section item=fields name=ringgroups}
+		<tr class="field_row ringgroupdata">
+			<td style="width:5%;" class="field_column">{$fields.Extension}<input type="hidden" value="{$fields.Extension}" name="{$section}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{$fields.Name}<input type="hidden" value="{$fields.Name}" name="{$section}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{$section}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"></td>
+			<td style="width:10%;" class="field_column"></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{$fields.BaseDir}" name="{$section}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Language}" name="{$section}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType"><span>{$fields.Type}</span></td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+		</tr>
+				<input type="hidden" value="{$fields.Type}" name="{$section}[Type]"/>
+{/foreach}
+{/if $ringgroupdata}
+
+<!-- Print all the current Queues defined in Elastix -->
+{if $queuedata}
+		        <tr>
+				<td colspan="9"></td>
+		        </tr>
+{foreach from=$queuedata key=section item=fields name=queues}
+		<tr class="field_row queuedata">
+			<td style="width:5%;" class="field_column">{$fields.Extension}<input type="hidden" value="{$fields.Extension}" name="{$section}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{$fields.Name}<input type="hidden" value="{$fields.Name}" name="{$section}[Name]"/></td>
+			<td style="width:4%;" class="field_column"></td>
+			<td style="width:5%;" class="field_column"></td>
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{$section}[Mobile]"/></td> -->
+			<td style="width:12%;" class="field_column"></td>
+			<td style="width:10%;" class="field_column"></td>
+			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{$fields.BaseDir}" name="{$section}[BaseDir]"/></td> -->
+			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Language}" name="{$section}[Language]"/></td> -->
+			<td style="width:5%;" class="field_column ColType">{$fields.Type}</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+			<td style="width:5%;" class="field_column">
+			</td>
+		</tr>
+				<input type="hidden" value="{$fields.Type}" name="{$section}[Type]"/>
+{/foreach}
+{/if $queuedata}
+
+                    </tbody>
+    </table>
+
+<br>
+<input style="width: 181px;margin-left:85%;padding:5px;height: 38px;background-color: #283360;color: #fff;font-size: 16px;" name="action" type="submit" value="Update"/>
+<br>
+</form>
+
+
+<br>
+<br>
+<br>
+
+
+
+<form action="{$action}" method="post">
+    <table class="table">
+       <tbody class="field_tbody">
+	<tr class="field_row">
+		<th style="width:5%;" class="field_column">Extension</th>
+		<th style="width:10%;" class="field_column">Name</th>
+		<!-- <th style="width:5%;" class="field_column">Mobile</th> -->
+		<th style="width:12%;" class="field_column">Company</th>
+		<th style="width:10%;" class="field_column">Department</th>
+		<!-- <th style="width:10%;" class="field_column">BaseDir</th> -->
+		<th style="width:5%;" class="field_column">Password</th>
+		<!-- <th style="width:5%;" class="field_column">Language</th> -->
+		<th style="width:5%;" class="field_column">Spy</th>
+		<th style="width:5%;" class="field_column">Type</th>
+		<th style="width:5%;" class="field_column">Ring Groups</th>
+		<th style="width:5%;" class="field_column">Queues</th>
+		<th style="width:5%;"  class="field_column"></th>
+	</tr>
+        <tr class="field_row">
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Extension]"/></td>
+            <td style="width:10%;" class="field_column"><input type="text" name="new_extension[Name]"/></td>
+            <!-- <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Mobile]"/></td> -->
+            <td style="width:12%;" class="field_column"><input type="text" name="new_extension[Company]"/></td>
+            <td style="width:10%;" class="field_column"><input type="text" name="new_extension[Department]"/></td>
+            <!-- <td style="width:10%;" class="field_column"><input type="text" name="new_extension[BaseDir]"/></td> -->
+            <td style="width:5%;" class="field_column"><input type="text" placholder="VM pass here" name="new_extension[Password]"/></td>
+            <!-- <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Language]"/></td> -->
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Spy]"/></td>
+            <td style="width:5%;" class="field_column">
+                <select name="new_extension[Type]">
+                    <option value="internal">Extension</option>
+                    <option selected value="deleted">Deleted</option>
+                    <option value="ringgroup">Ring Group</option>
+                    <option value="queue">Queue</option>
+                </select>
+            </td>
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Queues]"/></td>
+            <td style="width:5%;" class="field_column"><input type="text" name="new_extension[RingGroups]"/></td>
+            <td style="width:5%;"  class="field_column">
+                <input name="action" type="submit" value="Add"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
