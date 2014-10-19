@@ -46,7 +46,7 @@
 		{{/if}}
 		{{#if Src.MyContacts}}
 		<span class="personal contact-name" style="display:none;">{{Src.MyContacts}}</span>
-		<span class="personal phonetype" style="display:none;jq">| {{Src.MyContactsType}}</span>
+		<span class="personal phonetype" style="display:none;">| {{Src.MyContactsType}}</span>
 		{{/if}}
 		{{#if Src.AsteriskPhonebook}}
 		<span class="asterisk contact-name" style="display:none;margin-left:3px;margin-left:5px;">{{Src.AsteriskPhonebookName}}</span>
@@ -60,14 +60,14 @@
 		{{/if}}
 		{{#if Src.GContacts}}
 		<span class="gcontacts" style="display:none;">{{Src.GContacts}}</span>
-		<span class="gcontacts phonetype" style="display:none;jq">| {{Src.GContactsType}}</span>
+		<span class="gcontacts phonetype" style="display:none;">| {{Src.GContactsType}}</span>
 		{{#each Src.GContactsGroups}}
 		<span class="gcontacts phonetype label label-important hide">{{this}}</span>
 		{{/each}}
 		{{/if}}
 		{{#if Src.Highrise}}
 		<span class="crm" style="display:none;">{{Src.Highrise}}</span>
-		<span class="crm phonetype" style="display:none;jq">| {{Src.HighriseType}}</span>
+		<span class="crm phonetype" style="display:none;">| {{Src.HighriseType}}</span>
 		{{#each Src.HighriseGroups}}
 		<span class="crm phonetype label label-info hide">{{this}}</span>
 		{{/each}}
@@ -117,7 +117,7 @@
 		{{/if}}
 		{{#if Dst.MyContacts}}
 		<span class="personal contact-name" style="display:none;">{{Dst.MyContacts}}</span>
-		<span class="personal phonetype" style="display:none;jq">| {{Dst.MyContactsType}}</span>
+		<span class="personal phonetype" style="display:none;">| {{Dst.MyContactsType}}</span>
 		{{/if}}
 		{{#if Dst.AsteriskPhonebook}}
 		<span class="asterisk contact-name" style="display:none;margin-left:5px;">{{Dst.AsteriskPhonebookName}}</span>
@@ -131,14 +131,14 @@
 		{{/if}}
 		{{#if Dst.GContacts}}
 		<span class="gcontacts" style="display:none;">{{Dst.GContacts}}</span>
-		<span class="gcontacts phonetype" style="display:none;jq">| {{Dst.GContactsType}}</span>
+		<span class="gcontacts phonetype" style="display:none;">| {{Dst.GContactsType}}</span>
 		{{#each Dst.GContactsGroups}}
 		<span class="gcontacts phonetype label label-info hide">{{this}}</span>
 		{{/each}}
 		{{/if}}
 		{{#if Dst.Highrise}}
 		<span class="crm" style="display:none;">{{Dst.Highrise}}</span>
-		<span class="crm phonetype" style="display:none;jq">| {{Dst.HighriseType}}</span>
+		<span class="crm phonetype" style="display:none;">| {{Dst.HighriseType}}</span>
 		{{#each Dst.HighriseGroups}}
 		<span class="crm label label-info phonetype hide">{{this}}</span>
 		{{/each}}
