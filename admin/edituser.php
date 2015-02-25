@@ -26,13 +26,16 @@ if ( isset($_POST['action']) && $_POST['action'] == "SAVE" ) {
 	$extension['Type'] = $extendata['Type'];
 	$extension['Department'] = $extendata['Department'];
 	$extension['Company'] = $extendata['Company'];
+	$extension['Product'] = $extendata['Product'];
 //	$extension['BaseDir'] = $extendata['BaseDir'];
 //	$extension['Language'] = $extendata['Language'];
 	$extension['Spy'] = TextBoxToArray($extendata['Spy']);
-	$extension['ElastixRingGroups'] = $extendata['ElastixRingGroups'] != 'yes'  ? "no":"yes";
+	$extension['HaveRingGroups'] = $extendata['HaveRingGroups'] != 'yes'  ? "no":"yes";
 	$extension['RingGroups'] = TextBoxToArray($extendata['RingGroups']);
-	$extension['ElastixQueues'] = $extendata['ElastixQueues'] != 'yes'  ? "no":"yes";
+	$extension['HaveQueues'] = $extendata['HaveQueues'] != 'yes'  ? "no":"yes";
 	$extension['Queues'] = TextBoxToArray($extendata['Queues']);
+	$extension['Context'] = "fonb-from-internal";
+	$extension['Terminal'] = "SIP/".$exten;
 
 	/// Get Users Configuration
 	$data = $users;
@@ -61,11 +64,12 @@ if ( isset($_POST['action']) && $_POST['action'] == "SAVE" ) {
 // Creat the listusers object
 $Json = Array();
 $Json['EditExtension'] =  $users[$exten];
+$Json['EditExtension']['Platform'] = GetPlatform();
 $Json['Departments'] = $fonb->getDepartments();
-$Json['RingGroups'] = getRingGroups();
-$Json['ElastixRingGroups'] = RingGroupsOf($exten);
-$Json['Queues'] = getQueues();
-$Json['ElastixQueues'] = QueuesOf($exten);
+//$Json['RingGroups'] = getRingGroups();
+$Json['RingGroups'] = RingGroupsOf($exten);
+//$Json['Queues'] = getQueues();
+$Json['Queues'] = QueuesOf($exten);
 $Json['DeletedExtensions'] = getDeletedExtensions();
 $Json['Extensions'] = MustacheReformatExtensions( getExtensions() );
 $Json['License'] = $fonb->getTotalUsersAllowed();

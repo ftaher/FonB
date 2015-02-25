@@ -64,6 +64,28 @@
      */
     var TemplateLanguage = "{{Language}}";
     </script>
+    <style type="text/css">
+    .portalbadge{
+    background-color: #f89406;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #ffffff;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    }
+    .portaltext{
+    text-decoration: none !important;
+    color: #ffffff;
+    }
+    </style>
 
   </head>
   <!-- body will get base.html template first then other pages. -->
@@ -76,11 +98,12 @@
 <div class="whiteBg">
 <div class="content userlist">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li><a href="/admin/users.php">Users</a></li>
+        <li><a href="users.php">Users</a></li>
         <li><a href="/license">License</a></li>
-        <li class="active"><a href="/admin/speeddials.php" data-toggle="tab">Contacts</a></li>
-        <li><a href="/admin/config.php">Settings</a></li>
+        <li class="active"><a href="speeddials.php" data-toggle="tab">Contacts</a></li>
+        <li><a href="config.php">Settings</a></li>
     </ul>
+    <span style="float: right" class="portalbadge"><a class="portaltext" href="javascript:;" onclick="location.href='../login'">Logout</a></span>
 </div>
 </div>
 <div class="content userlist">
@@ -88,16 +111,18 @@
 <img src="../images/speeddial.png" width="30" height="30" style="
     padding-right: 11px;
 "><strong>View, edit or Add your Speed Dial Contacts below</strong>
+
 </div>
 </div>
 <div style="padding:20px;">
 <!-- Print all the Extensions defined in Elastix -->
+
+
         <table class="table userlist" style="margin-top:40px;">
            <tbody class="field_tbody">
            	<thead>
         <tr class="field_row">
-            <th style="width:5%;" class="field_column">First Name</th>
-            <th style="width:10%;" class="field_column">Last Name</th>
+            <th style="width:5%;" class="field_column">Name</th>
             <th style="width:4%;" class="field_column">Company</th>
             <th style="width:5%;" class="field_column">Speed Dial</th>
             <th style="width:10%;" class="field_column">Phone Number</th>
@@ -107,15 +132,14 @@
         </thead>
 {{#each SpeedDials}}
 		<tr class="field_row extensiondata" id="ext{{Extension}}">
-			<td style="width:5%;" class="field_column">{{fname}}</td>
-			<td style="width:10%;" class="field_column">{{lname}}</td>
+			<td style="width:5%;" class="field_column">{{First_Name}} {{Last_Name}}</td>
 			<td style="width:4%;" class="field_column">
-				{{company}}
+				{{Company}}
 			</td>
 			<td style="width:5%;" class="field_column">
-				{{tags}}
+				{{Speed_Dial_Code}}
 			</td>
-			<td style="width:10%;" class="field_column">{{value}}</td>
+			<td style="width:10%;" class="field_column">{{Phone}}</td>
 			<td style="width:5%;" class="field_column">
                 <a class="info" data-target="#editContact" id="editContact" data-toggle="modal" href="editspeeddial.php?id={{id}}">Edit</a>			
             </td>
@@ -124,7 +148,8 @@
                 </div>
             </div>
 			<td style="width:5%;" class="field_column">
-                		<a class="info" href="delspeeddial.php?id={{id}}">Delete</a>
+                		
+                        <a calss="info" href="speeddials.php?id={{id}}&action=DELETE" onclick="return confirm('Are you sure you want to delete this Speed Dial?');">Delete</a>
 			</td>
 		</tr>
 {{/each}}
@@ -134,7 +159,7 @@
 
 
 
-<form action="{$action}" method="post" class="addnew">
+<form  method="post" class="addnew">
     <table class="table">
        <tbody class="field_tbody">
 	<tr class="field_row">
@@ -146,11 +171,11 @@
 		<th style="width:5%;"  class="field_column"></th>
 	</tr>
         <tr class="field_row">
-            <td style="width:10%;" class="field_column"><input placeholder="First Name" type="text" name="new_extension[Extension]"/></td>
-            <td style="width:10%;" class="field_column"><input placeholder="Last Name" type="text" name="new_extension[Name]"/></td>
-            <td style="width:5%;" class="field_column"><input placeholder="Company" type="text" name="new_extension[Mobile]"/></td>
-            <td style="width:5%;" class="field_column"><input placeholder="Speed Dial Code" type="text" name="new_extension[Company]"/></td>
-            <td style="width:5%;" class="field_column"><input placeholder="Phone Number" type="text" name="new_extension[Department]"/></td>
+            <td style="width:10%;" class="field_column"><input placeholder="First Name" type="text" name="new_speed_dial[First_name]"/></td>
+            <td style="width:10%;" class="field_column"><input placeholder="Last Name" type="text" name="new_speed_dial[Last_name]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Company" type="text" name="new_speed_dial[Company]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Speed Dial Code" type="text" name="new_speed_dial[Speed_Dial_Code]"/></td>
+            <td style="width:5%;" class="field_column"><input placeholder="Phone Number" type="text" name="new_speed_dial[Phone]"/></td>
             <td style="width:5%;"  class="field_column">
                 <input name="action" type="submit" value="Add" style="padding:5px;height: 31px;background-color: #283360;color: #fff;border-radius: 9px;font-size: 16px;"/>
             </td>

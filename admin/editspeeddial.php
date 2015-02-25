@@ -15,6 +15,7 @@ if ( isset($_POST['action']) && $_POST['action'] == "SAVE" ) {
 
 	// Get the Extension
 	$exten = $_POST['data']['Extension'];
+	
 
 	// ReFormat the Submission Form (Extension Settings)
 	$extendata = $_POST['data'];

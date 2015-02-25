@@ -63,7 +63,28 @@
      */
     var ListenPort = "{{ListenPort}}";
     </script>
-
+    <style type="text/css">
+    .portalbadge{
+    background-color: #f89406;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #ffffff;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    }
+    .portaltext{
+    text-decoration: none !important;
+    color: #ffffff;
+    }
+    </style>
   </head>
   <!-- body will get base.html template first then other pages. -->
 <body>
@@ -73,13 +94,14 @@
 <div class="whiteBg">
 <div class="content userlist">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li><a href="/admin/users.php">User</a></li>
+        <li><a href="users.php">User</a></li>
         <li><a href="/license">License</a></li>
-        <li><a href="/admin/speeddials.php">Contacts</a></li>
-        <li class="active"><a href="/admin/config.php">Settings</a></li>
+        <li><a href="speeddials.php">Contacts</a></li>
+        <li class="active"><a href="config.php">Settings</a></li>
         <li style="float:right;"> 
 </li>
     </ul>
+    <span style="float: right" class="portalbadge"><a class="portaltext" href="javascript:;" onclick="location.href='../login'">Logout</a></span>
 </div>
 </div>
 <div class="content userlist paddingTop">
@@ -95,10 +117,16 @@
         <td width="51%">&nbsp;</td>
       </tr>
       <tr>
+        <td><b>Adminisrator Password:</b></td>
+        <td><input type="text" name="PhoneB[AdminPassword]" value="{{PhoneB.AdminPassword}}"/></td>
+        <td>&nbsp;</td>
+        
+      </tr>
+      <tr>
         <td><b>FonB Listen Port:</b></td>
         <td><input type="text" name="PhoneB[ListenPort]" value="{{PhoneB.ListenPort}}"/></td>
         <td>&nbsp;</td>
-        <td><b>FreePBX/Elastix RedirectPath:</b></td>
+        <td><b>RedirectPath:</b></td>
         <td><input type="text" name="PhoneB[RedirectPath]" value="{{PhoneB.RedirectPath}}"/></td>
       </tr>
       <tr>
@@ -177,10 +205,10 @@
         <td bgcolor="#F7F7F7"><input type="text" name="AMI[ManagerUsername]" value="{{AMI.ManagerUsername}}"/></td>
         <td>&nbsp;</td>
         <td bgcolor="#F7F7F7"><b>Mysql Server Hostname:</b></td>
-        <td bgcolor="#F7F7F7"><input type="text" name="MysqlFonB[Host]" value="{{MysqlFonB.Host}}"/></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlFonB[Hostname]" value="{{MysqlFonB.Hostname}}"/></td>
         <td>&nbsp;</td>
         <td bgcolor="#F7F7F7"><b>Mysql Server Hostname:</b></td>
-        <td bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Host]" value="{{MysqlCdr.Host}}"/></td>
+        <td bgcolor="#F7F7F7"><input type="text" name="MysqlCdr[Hostname]" value="{{MysqlCdr.Hostname}}"/></td>
         <td>&nbsp;</td>
       </tr>
       <tr>

@@ -16,16 +16,51 @@
 	border-bottom-color: #666666;
 	border-left-color: #666666;
 }
+.portalbadge{
+  background-color: #f89406;
+  webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+.portaltext{
+  text-decoration: none;
+  color: #ffffff;
+}
 -->
 </style>
-<script type="text/javascript" src="js/jquery.min.js"></script>
+    <link href="../css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet">
+     
+    <!-- CSS FILE END  -->
+
+    <!-- Adding All JS and JS Files here -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- JQuery Ui for sortable, datepicker and slider -->
+    <script type="text/javascript" src="../js/jquery-ui-1.10.3.custom.min.js"></script>
+    <!-- bootstrap -->
+    <script type='text/javascript' src="../js/bootstrap.min.js"></script>
+    <script type='text/javascript' src='../js/bootstrap-notify.js'></script>
 </head>
 <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload = "focusLogin()">
  
 <script LANGUAGE="JavaScript">
 <!--
+$( document ).ready(function() {  
+    $("[data-toggle='tooltip']").tooltip(); 
+  });
 function focusLogin() {
-			document.forms[0].username.focus();
+			document.forms[0].password.focus();
 	    }
 function validate_login()
   {
@@ -52,12 +87,14 @@ function validate_login()
   		return false;
   	}
   	else{
+      configfilelogin=0;
       $.ajax({
         url : "adminlogin",
         data : $("form[name=login]").serialize(),
         type : 'post',
         success: function(data){
           window.location.href = "/admin/users.php";
+          //alert($("form[name=login]").serialize());
         } ,
         error : function(xhr,status,error){
           var message = "";
@@ -79,7 +116,7 @@ function validate_login()
   <table width="102%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="background-position: right; background-repeat: no-repeat;">
     <tr> 
       <td width="80%" height="80">&nbsp;</td>
-      <td width="20%" valign="top">&nbsp;</td>
+      <td width="20%" valign="top"><span class="portalbadge" style="margin-top: 30px"><a class="portaltext" href="javascript:;" onclick="location.href='login'">Go to User Portal</a></span></td>
     </tr>
   </table>
 </div>
@@ -88,7 +125,7 @@ function validate_login()
       <td width="465" colspan="2" bgcolor="#FFFFFF"><img src="images/headerofficial.gif" width="465" height="90"></td>
     <tr>
       <td colspan="2" bgcolor="#999999"><div align="center"> </div>
-        <div align="center"> <font color="#FFFFFF" face="Arial, Helvetica, sans-serif"><b><font color="#000000">Login</font></b></font><font color="#000000" size="2" face="Arial, Helvetica, sans-serif"></font></div>
+        <div align="center"> <font color="#FFFFFF" face="Arial, Helvetica, sans-serif"><b><font color="#000000">Admin Portal Login</font></b></font><font color="#000000" size="2" face="Arial, Helvetica, sans-serif"></font></div>
         </td>
     </tr>
     <tr > 
@@ -101,16 +138,17 @@ function validate_login()
 		<div align="center">
 			
 			<font face="Arial, Helvetica, sans-serif" size="2"><font color="#FF0000" id="errormsg"></font></font> 
-                  <br>
+                  
                 </div>
                 <table align="center">
                   <tr> 
-                    <td><div align="right"><strong><font face="Arial, Helvetica, sans-serif" size="2">Extension Number:</font></strong></div></td>
-                    <td> <input type="text" name="username"> </td>
+                    <td><div align="right"><strong><font face="Arial, Helvetica, sans-serif" size="2">Username:</font></strong></div></td>
+                    <td> <input type="text" name="username" value="admin"> </td>
                   </tr>
                   <tr> 
-                    <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2"><strong>Pin Code:</strong></font></div></td>
-                    <td> <input type="password" name="password"> </td>
+                    <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2"><strong>Password:</strong></font></div></td>
+                    <td> <input type="password" name="password">
+                    <img data-toggle="tooltip" data-placement="top" title="" data-original-title="You can get admin password by typing this command on your PBX CLI: grep AdminPassword /etc/phoneb/phoenb.cfg" src="http://aptus.com/images/question.png"> </td>
                   </tr>
                 </table>
                 <div align="center"> 

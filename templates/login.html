@@ -16,6 +16,26 @@
 	border-bottom-color: #666666;
 	border-left-color: #666666;
 }
+.portalbadge{
+  background-color: #f89406;
+  webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+.portaltext{
+  text-decoration: none;
+  color: #ffffff;
+}
 -->
 </style>
 <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -79,7 +99,7 @@ function validate_login()
   <table width="102%" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" style="background-position: right; background-repeat: no-repeat;">
     <tr> 
       <td width="80%" height="80">&nbsp;</td>
-      <td width="20%" valign="top">&nbsp;</td>
+      <td width="20%" valign="top"><span class="portalbadge" style="margin-top: 30px"><a class="portaltext" href="javascript:;" onclick="location.href='/admin'">Go to Admin Portal</a></span></td>
     </tr>
   </table>
 </div>
@@ -88,7 +108,7 @@ function validate_login()
       <td width="465" colspan="2" bgcolor="#FFFFFF"><img src="images/headerofficial.gif" width="465" height="90"></td>
     <tr>
       <td colspan="2" bgcolor="#999999"><div align="center"> </div>
-        <div align="center"> <font color="#FFFFFF" face="Arial, Helvetica, sans-serif"><b><font color="#000000">Login</font></b></font><font color="#000000" size="2" face="Arial, Helvetica, sans-serif"></font></div>
+        <div align="center"> <font color="#FFFFFF" face="Arial, Helvetica, sans-serif"><b><font color="#000000">User Portal Login</font></b></font><font color="#000000" size="2" face="Arial, Helvetica, sans-serif"></font></div>
         </td>
     </tr>
     <tr > 
@@ -101,7 +121,6 @@ function validate_login()
 		<div align="center">
 			
 			<font face="Arial, Helvetica, sans-serif" size="2"><font color="#FF0000" id="errormsg"></font></font> 
-                  <br>
                 </div>
                 <table align="center">
                   <tr> 

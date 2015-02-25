@@ -61,7 +61,29 @@
      */
     var ListenPort = "{{ListenPort}}";
     </script>
-
+    
+    <style type="text/css">
+    .portalbadge{
+    background-color: #f89406;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 2px 4px;
+    font-size: 11.844px;
+    font-weight: bold;
+    line-height: 14px;
+    color: #ffffff;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    }
+    .portaltext{
+    text-decoration: none !important;
+    color: #ffffff;
+    }
+    </style>
   </head>
   <!-- body will get base.html template first then other pages. -->
 <body>
@@ -71,11 +93,13 @@
 <div class="whiteBg">
 <div class="content userlist">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li class="active"><a href="/admin/users.php">User Admin Panel</a></li>
+        <li class="active"><a href="users.php">User Admin Panel</a></li>
         <li><a href="/license">FonB License</a></li>
         <li><a href="/admin" data-toggle="tab">FonB Corporate Contacts</a></li>
-        <li><a href="/admin/config.php">FonB Settings</a></li>
+        <li><a href="config.php">FonB Settings</a></li>
+        
     </ul>
+    <span style="float: right" class="portalbadge"><a class="portaltext" href="javascript:;" onclick="location.href='../login'">Logout</a></span>
 </div>
 </div>
 <div class="content userlist">
@@ -138,8 +162,8 @@
 <input type="hidden" value="{$extensiondata.Language}" name="data[Language]"/>
 -->
 <input type="hidden" value="{{EditExtension.Type}}" name="data[Type]"/>
-<input id="ElastixRingGroupsData" type="hidden" value="{{ElastixRingGroups}}" name="ElastixRingGroupsData"/>
-<input id="ElastixQueuesData" type="hidden" value="{{ElastixQueues}}" name="ElastixQueuesData"/></td>
+<input id="RingGroupsData" type="hidden" value="{{RingGroups}}" name="RingGroupsData"/>
+<input id="QueuesData" type="hidden" value="{{Queues}}" name="QueuesData"/></td>
       </tr>
       <tr>
         <td bgcolor="#F7F7F7"><p>&nbsp;</p>
@@ -236,14 +260,14 @@
         <td bgcolor="#F7F7F7">&nbsp;</td>
         <td bgcolor="#F7F7F7">&nbsp;</td>
         <td>&nbsp;</td>
-        <td bgcolor="#F7F7F7"><p>Apply Elastix RingGroups</p></td>
+        <td bgcolor="#F7F7F7"><p>Apply {{EditExtension.Platform}} RingGroups</p></td>
         <td bgcolor="#F7F7F7"><p>
-          <input id="ElastixRingGroups" type=checkbox name='data[ElastixRingGroups]' value="{{EditExtension.ElastixRingGroups}}">
+          <input id="HaveRingGroups" type="checkbox" name='data[HaveRingGroups]' value="{{EditExtension.HaveRingGroups}}">
         </p></td>
         <td>&nbsp;</td>
-        <td bgcolor="#F7F7F7"><p>Apply Elastix Queues</p></td>
+        <td bgcolor="#F7F7F7"><p>Apply {{EditExtension.Platform}} Queues</p></td>
         <td bgcolor="#F7F7F7"><p>
-          <input id="ElastixQueues" type=checkbox name='data[ElastixQueues]' value="{{EditExtension.ElastixQueues}}">
+          <input id="HaveQueues" type="checkbox" name='data[HaveQueues]' value="{{EditExtension.HaveQueues}}">
         </p></td>
         <td><p>&nbsp;
           </p>
@@ -328,15 +352,15 @@ function not_empty(value)
 
 var OldRingGroupsText
 var OldQueuesText
-var ElastixRingGroupsData
-var ElastixQueuesData
+var RingGroupsData
+var QueuesData
 
 $( document ).ready(function() {
-	ElastixRingGroupsData = $('#ElastixRingGroupsData').val();
-	ElastixRingGroupsData = ElastixRingGroupsData.split(",").join("\t\n");
+	RingGroupsData = $('#RingGroupsData').val();
+	RingGroupsData = RingGroupsData.split(",").join("\t\n");
 
-	ElastixQueuesData = $('#ElastixQueuesData').val();
-	ElastixQueuesData = ElastixQueuesData.split(",").join("\t\n");
+	QueuesData = $('#QueuesData').val();
+	QueuesData = QueuesData.split(",").join("\t\n");
 
 	var SpyText = $('#Spy').text();
 	SpyText = SpyText.split(",").join("\t\n");
@@ -350,42 +374,42 @@ $( document ).ready(function() {
 	QueuesText = QueuesText.split(",").join("\t\n");
 	$('#Queues').text(QueuesText);
 
-	if ( $('#ElastixRingGroups').val() != "no" ) {
-		$('#ElastixRingGroups').val("yes").prop('checked', true);
+	if ( $('#HaveRingGroups').val() != "no" ) {
+		$('#HaveRingGroups').val("yes").prop('checked', true);
 		$('#RingGroups').prop('disabled', true).css("background-color", "#CACACA");
 		$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
 	}
 
-	$('#ElastixRingGroups').click(function(){
-		if ( $('#ElastixRingGroups').val() != "yes" ) {
-			$('#ElastixRingGroups').val("yes").prop('checked', true);
+	$('#HaveRingGroups').click(function(){
+		if ( $('#HaveRingGroups').val() != "yes" ) {
+			$('#HaveRingGroups').val("yes").prop('checked', true);
 			OldRingGroupsText = $('#RingGroups').val();
-			$('#RingGroups').prop('disabled', true).css("background-color", "#CACACA").val(ElastixRingGroupsData);
+			$('#RingGroups').prop('disabled', true).css("background-color", "#CACACA").val(RingGroupsData);
 			$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
 		} else {
-			$('#ElastixRingGroups').val("no").prop('checked', false);
+			$('#HaveRingGroups').val("no").prop('checked', false);
 			$('#RingGroups').prop('disabled', false).css("background-color", "#FAFAFA").val(OldRingGroupsText);
 			$('#insRG').prop('disabled', false).css("background-color", "#FAFAFA");
 		}
 	});
 
 
-	if ( $('#ElastixQueues').val() != "no" ) {
-		$('#ElastixQueues').val("yes").prop('checked', true);
+	if ( $('#HaveQueues').val() != "no" ) {
+		$('#HaveQueues').val("yes").prop('checked', true);
 		$('#Queues').prop('disabled', true).css("background-color", "#CACACA");
-		$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+		$('#insQueues').prop('disabled', true).css("background-color", "#CACACA");
 	}
 
-	$('#ElastixQueues').click(function(){
-		if ( $('#ElastixQueues').val() != "yes" ) {
-			$('#ElastixQueues').val("yes").prop('checked', true);
+	$('#HaveQueues').click(function(){
+		if ( $('#HaveQueues').val() != "yes" ) {
+			$('#HaveQueues').val("yes").prop('checked', true);
 			OldQueuesText = $('#Queues').val();
-			$('#Queues').prop('disabled', true).css("background-color", "#CACACA").val(ElastixQueuesData);
-			$('#insRG').prop('disabled', true).css("background-color", "#CACACA");
+			$('#Queues').prop('disabled', true).css("background-color", "#CACACA").val(QueuesData);
+			$('#insQueues').prop('disabled', true).css("background-color", "#CACACA");
 		} else {
-			$('#ElastixQueues').val("no").prop('checked', false);
+			$('#HaveQueues').val("no").prop('checked', false);
 			$('#Queues').prop('disabled', false).css("background-color", "#FAFAFA").val(OldQueuesText);
-			$('#insRG').prop('disabled', false).css("background-color", "#FAFAFA");
+			$('#insQueues').prop('disabled', false).css("background-color", "#FAFAFA");
 		}
 	});
  

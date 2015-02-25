@@ -136,7 +136,7 @@ fonb_main = {
 				$("#quickdial").val($("#quickdial").val() + "" + $(this).text()).focus();//+"" for forcing string addition
 			}
 			for(var i=0;i<OurChannels.length;i++){
-				var action = {Action: "DTMF", Dial: $(this).text(), ReqID: OurChannels[i].ID};
+				var action = {Action: "DTMF", Digit: $(this).text(), Call: OurChannels[i].ID};
 				action = JSON.stringify(action);
 				socket.send(action);
 				console.log("sent dtmf: " + action);

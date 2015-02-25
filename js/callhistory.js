@@ -128,7 +128,6 @@ fonb_callhistory = {
 			$.ajax({
 				url : url,
 				success : function(data){
-					CallHistoryList[15]["VoiceMail"] = "";
 					$(".btn.voicemail_" +id).prop("disabled", false);
 					$(".btn.voicemail_" +id).siblings("img").hide();
 					$(".note.voicemail_" +id).after('<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert">&times;</a>Voicemail deleted successfully.</div>');

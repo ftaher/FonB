@@ -120,6 +120,29 @@ socket.onerror = function() {
 socket.onmessage = function(e) {
 	parseData(e.data);
 };
+
+var getLocation = function(href) {
+    var l = document.createElement("a");
+    l.href = href;
+    return l;
+};
+
+var Website = getLocation(document.URL)
+
+
+
+var WebPhoneUsername =  "FonBWebPhone" + getRandomId();
+var WebPhonePassword =  getRandomId();
+//var WebPhoneIPAddress = Website.hostname;
+//added webrtc.aptus.com to replace ip address
+var WebPhoneIPAddress = "webrtc.aptus.com";
+socket.onopen = function(e) {
+//	SetAction = {Action : "SetWebPhoneUserName", Username : WebPhoneUsername, Password : WebPhonePassword};
+//	socket.send( JSON.stringify(SetAction) );
+	console.log("Socket is open");
+	SIPml.init(readyCallback, errorCallback);
+};
+
 /**
  * called to parse incoming message from socket on server by {@link activecalls.WebSocket.MessageEvent.socket.onmessage}
  * @param  {activecalls.WebSocket.MessageEvent} data it's data property of onmessageevent from web socket
@@ -128,6 +151,10 @@ socket.onmessage = function(e) {
  */
 function parseData( data ) {
 	var packet = $.parseJSON(data);
+
+//	if (packet.FeedBacK == 'SetWebPhoneUserName' && packet.Message == 'Ready' ) {
+//		SIPml.init(readyCallback, errorCallback);
+//	}
 
 	switch ( packet.MessageType ) {
 	case 'ChannelsSummary':
@@ -819,40 +846,40 @@ function Conference( activenum ) {
 	return;*/
 }
 
-/* WebPhone */
-var phono = $.phono({
-
-apiKey: "3feb7ec665d9e5b34c47d6087fadf589",
-
-onReady: function() {
-	console.log("Phono Connected");
-	console.log("Phono Session ID: " + this.sessionId);
-	WebPhoneSipId = this.sessionId;
-	$('body').trigger('flashphoneready');
-	phono.config.logLevel = "OFF";
-	},
-
-onUnready: function() {
-	console.log("XXX Phone is Not Ready XXX");
-	},
-
-phone:	{
-	headset: true,
-	wideband: false,
-
-	onError: function() {
-		console.log("Call Error");
-		},
-
-	onIncomingCall: function(event) {
-		call = event.call;
-		//console.log("Auto-answering call with ID " + call.id);
-		// Answer the call
-		call.answer();
-		}
-	},
-
-});
+////* WebPhone */
+///var phono = $.phono({
+///
+///apiKey: "3feb7ec665d9e5b34c47d6087fadf589",
+///
+///onReady: function() {
+///	console.log("Phono Connected");
+///	console.log("Phono Session ID: " + this.sessionId);
+///	WebPhoneSipId = this.sessionId;
+///	$('body').trigger('flashphoneready');
+///	phono.config.logLevel = "OFF";
+///	},
+///
+///onUnready: function() {
+///	console.log("XXX Phone is Not Ready XXX");
+///	},
+///
+///phone:	{
+///	headset: true,
+///	wideband: false,
+///
+///	onError: function() {
+///		console.log("Call Error");
+///		},
+///
+///	onIncomingCall: function(event) {
+///		call = event.call;
+///		//console.log("Auto-answering call with ID " + call.id);
+///		// Answer the call
+///		call.answer();
+///		}
+///	},
+///
+///});
 /**
  * get a unique id for quick dial generated call
  * to test percentage of failure here's a small test you can run on console:
@@ -1189,3 +1216,198 @@ function getConferenceAdminId(){
 		}
 	}
 }
+/* sipml5 */
+/////////	Initialize the engine
+var readyCallback = function(e){
+	createSipStack(); // see next section
+};
+var errorCallback = function(e){
+	console.error('Failed to initialize the engine: ' + e.message);
+}
+        
+
+////////	Create a SIP stack
+var sipStack;
+function createSipStack(){
+	sipStack = new SIPml.Stack({
+			realm: 'asterisk', // mandatory: domain name
+			impi: WebPhoneUsername, // mandatory: authorization name (IMS Private Identity)
+			impu: 'sip:' + WebPhoneUsername + '@' + WebPhoneIPAddress, // mandatory: valid SIP Uri (IMS Public Identity)
+			password: WebPhonePassword, // optional
+			display_name: WebPhoneUsername, // optional
+//			websocket_proxy_url: 'ws://sipml5.org:5062', // optional
+			websocket_proxy_url: 'ws://webrtc.aptus.com:10060', // optional
+			outbound_proxy_url: 'udp://' + WebPhoneIPAddress  + ':5060', // optional
+			enable_rtcweb_breaker: true, // optional
+			events_listener: { events: '*', listener: eventsListener }, // optional: '*' means all events
+			sip_headers: [ // optional
+			        { name: 'User-Agent', value: 'IM-client/OMA1.0 sipML5-v1.0.0.0' },
+			        { name: 'Organization', value: 'Doubango Telecom' }
+			]
+	});
+	sipStack.start();
+}
+
+var oConfigCall = {
+	audio_remote: $('#audio_remote'),
+	audio_local: $('#audio_local'),
+//        events_listener: { events: '*', listener: callListener } // optional: '*' means all events
+};
+
+
+
+////////	Register/login
+var registerSession;
+var callListener = function(e){
+	console.info('session event = ' + e.type);
+	if(e.type == 'connected' && e.session == registerSession){
+		console.log("WebPhone Connected");
+		console.log("WebPhone Session ID: " + WebPhoneUsername);
+		$('body').trigger('flashphoneready');
+		WebPhoneSipId = "IAX2/guest@" + WebPhoneIPAddress + "/" + WebPhoneUsername;
+//		makeCall();
+	}
+}
+var login = function(){
+	registerSession = sipStack.newSession('register', {
+		events_listener: { events: '*', listener: callListener } // optional: '*' means all events
+	});
+	registerSession.register();
+}
+
+////////	Making/receiving audio/video call
+	var callSession;
+	var makeCall = function(){
+		callSession = sipStack.newSession('call-audio', {
+			audio_remote: $('#audio_remote'),
+			audio_local: $('#audio_local'),
+			events_listener: { events: '*', listener: eventsListener } // optional: '*' means all events
+		});
+		callSession.call('14805058877');
+	}
+
+
+/**************** fucntion to play sounds *******************/
+    function startRingTone() {
+        try { ringtone.play(); }
+        catch (e) {console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx Play") }
+    }
+
+    function stopRingTone() {
+        try { ringtone.pause(); }
+        catch (e) { console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx pause")}
+    }
+
+    function startRingbackTone() {
+	console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx Start Ring Back Tone")
+        try { ringbacktone.play(); }
+        catch (e) { console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx Start Ring Back Tone")}
+    }
+
+    function stopRingbackTone() {
+	console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx Stop Ring Back Tone")
+        try { ringbacktone.pause(); }
+        catch (e) {console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx Stop Ring Back Tone") }
+    }
+
+    function newmessageTone() {
+        try { newmsg.play(); }
+        catch (e) { console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxx New Mesg Tone")}
+    }
+
+function eventsListener(e) {
+	switch(e.type) {
+	
+		//If failed msg or error Log in console & Web Page
+		case 'failed_to_start': case 'failed_to_stop':  case 'stopping': case 'stopped': {
+
+			console.log("Failed to connect to SIP SERVER")
+			callSession = null;
+			registerSession = null;
+			sipStack.start()
+			break;
+		}
+
+		//If the msg is 'started' now try to Login to Sip server       				
+		case 'started': {
+		        console.log("Trying to Login");
+
+
+			login();//function to login in sip server
+	
+			break;
+		}
+
+		//If the msg 'connected' display the register OK in the web page 
+		case 'connected':{
+			break;
+		}
+
+		//If the msg 'Sent request' display that in the web page---Pattience
+		case 'sent_request':{
+
+			break;
+		}
+
+		//If the msg 'terminated' display that on the web---error maybe?
+		case 'terminated': {
+			//added
+			stopRingbackTone();
+                        stopRingTone();
+			callSession = null;
+
+			break;
+		}
+
+		//If the msg 'i_new_call' the browser has an incoming call
+		case 'i_new_call': {
+			console.log("***********************incoming call");
+                        stopRingbackTone();
+                        stopRingTone();
+//			e.newSession.setConfiguration(oConfigCall);
+			e.newSession.accept({
+				audio_remote: document.getElementById('audio_remote')
+				});
+
+
+                   //     //Accept the session call
+		   //     var mycallSession = e.newSession;
+		   //     mycallSession.setConfiguration(oConfigCall);
+                   //     mycallSession.accept();
+				//Change buttons values
+                        //	flag ='1';
+			//	callSession = e.newSession;
+
+
+			//	console.log("***********************Start Ringing");
+			//	//Start ringing in the browser
+        	       	//	startRingTone();
+
+			//	callSession.setConfiguration(oConfigCall);
+
+	
+			
+///				//Display in the web page who is calling
+///		                var sRemoteNumber = (callSession.getRemoteFriendlyName() || 'unknown');
+///        		        $("#mycallstatus").html("<i>Incoming call from [<b>" + sRemoteNumber + "</b>]</i>");
+///        			//showNotifICall(sRemoteNumber);
+			break;
+		}
+
+		case 'm_permission_requested':{
+                	break;
+        	}
+        	case 'm_permission_accepted':
+	        case 'm_permission_refused': {
+			if(e.type == 'm_permission_refused'){
+			        callSession = null;
+			        stopRingbackTone();
+			        stopRingTone();
+            		}
+            		break;
+        	}
+		case 'starting': default: break;
+        }
+}
+
+

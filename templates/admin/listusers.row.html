@@ -5,10 +5,10 @@
 <div class="whiteBg">
 <div class="content userlist">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li><a href="/admin/users.php">User Admin Panel</a></li>
-        <li><a href="/license">FonB License</a></li>
+        <li><a href="users.php">User Admin Panel</a></li>
+        <li><a href="license">FonB License</a></li>
         <li class="active"><a href="/admin" data-toggle="tab">FonB Corporate Contacts</a></li>
-        <li><a href="/admin/config.php">FonB Settings</a></li>
+        <li><a href="config.php">FonB Settings</a></li>
     </ul>
 </div>
 </div>
@@ -79,9 +79,9 @@ FonB License Statistics:
 			</td>
 				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
 				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
-				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{HaveRingGroups}}" name="{{Extension}}[HaveRingGroups]"/>
 				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
-				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+				<input type="hidden" value="{{HaveQueues}}" name="{{Extension}}[HaveQueues]"/>
 				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
 				<!-- 
 				<input type="hidden" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/>
@@ -90,7 +90,7 @@ FonB License Statistics:
 		</tr>
 {{/each}}
 
-<!-- Print all Deleted-Extensions defined in Elastix -->
+<!-- Print all Deleted-Extensions defined in Have -->
 {{#if DeletedExtensions}}
 		        <tr>
 				<td colspan="9"></td>
@@ -121,10 +121,10 @@ FonB License Statistics:
 				<input type="hidden" value="{{Language}}" name="{{Extension}}[Language]"/>
 				-->
 				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
-				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{HaveRingGroups}}" name="{{Extension}}[HaveRingGroups]"/>
 				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
 				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
-				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+				<input type="hidden" value="{{HaveQueues}}" name="{{Extension}}[HaveQueues]"/>
 {{/each}}
 {{/if}}
 

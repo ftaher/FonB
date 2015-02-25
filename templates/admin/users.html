@@ -63,12 +63,26 @@
     var ListenPort = "{{ListenPort}}";
     $( document ).ready(function() {
     $('.expand').each(function(){str = $(this).html();str = str.split(",").join("<br>");$(this).html(str);})
+    $.ajax({
+			url : "fonbUpdate.php",
+			success : function(data){
+				switch (data)
+				{
+					case "YES":
+					$('#fonbupdate').html("<img src='../images/needupdate.png'>FonB update available, please update fonb from CLI");
+					break;
+					case "NO":
+					$('#fonbupdate').html("<img src='../images/uptodate.png'>FonB is latest");
+					break;
+				}
+			}
+		});
+
 });
     $(function () { 
     $("[data-toggle='tooltip']").tooltip(); 
 });
     </script>
-
 <style>
 input:disabled::-webkit-input-placeholder { /* WebKit browsers */
     color:    #cacaca;
@@ -81,6 +95,26 @@ input:disabled::-moz-placeholder { /* Mozilla Firefox 19+ */
 }
 input:disabled:-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #cacaca;
+}
+.portalbadge{
+  background-color: #f89406;
+  webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffffff;
+  vertical-align: baseline;
+  white-space: nowrap;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  font-family: Verdana,Arial,Helvetica,sans-serif;
+}
+.portaltext{
+  text-decoration: none !important;
+  color: #ffffff;
 }
 </style>
   </head>
@@ -98,7 +132,9 @@ input:disabled:-ms-input-placeholder { /* Internet Explorer 10+ */
         <li><a href="/license">License</a></li>
         <li><a href="/admin/speeddials.php">Contacts</a></li>
         <li><a href="/admin/config.php">Settings</a></li>
+        <li id="fonbupdate" style="float: right"> <img src="../images/sync_active.gif"/>Checking for updates</li>
     </ul>
+     <span style="float: right" class="portalbadge"><a class="portaltext" href="javascript:;" onclick="location.href='../login'">Logout</a></span>
 </div>
 </div>
 <div class="content userlist">
@@ -118,36 +154,38 @@ FonB License Statistics:
 </table>
 
 <form id="update_form" method="post">
-<!-- Print all the Extensions defined in Elastix -->
+<!-- Print all the Extensions defined in Platform -->
                 <table class="table userlist">
                    <tbody class="field_tbody">
                    	<thead>
 		        <tr class="field_row">
 		            <th style="width:5%;" class="field_column"></th>
-		            <th style="width:10%;" class="field_column"></th>
-		            <th style="width:4%;" class="field_column">Product <img 
+		            <th style="width:10%;" class="field_column">Extensions</th>
+		            <th style="width:6%;" class="field_column">Product <img 
         data-toggle="tooltip" 
         data-placement="top" 
         title="" 
-        data-original-title="Select Product" src="http://aptus.com/images/question.png" title="Select Product"></th>
-		            <th style="width:5%;" class="field_column">Password <img data-toggle="tooltip" 
+        data-original-title="All extensions are set to No Password by default. You are required to select which extensions can access FonB." src="http://aptus.com/images/question.png" title="Select Product"></th>
+		            <th style="width:6%;" class="field_column">Password <img data-toggle="tooltip" 
         data-placement="top" 
         title="" 
-        data-original-title="Write your VM Password" src="http://aptus.com/images/question.png"></th>
+        data-original-title="Empty passwords will be set to Voicemail Password" src="http://aptus.com/images/question.png"></th>
 		            <th style="width:12%;" class="field_column">Company</th>
 		            <th style="width:10%;" class="field_column">Department</th>
 		            <!-- <th style="width:10%;" class="field_column">BaseDir</th> -->
 		            <!-- <th style="width:5%;" class="field_column">Language</th> -->
 		            <th style="width:5%;" class="field_column"></th>
 					<th style="width:5%;" class="field_column">Spy</th>
-		            <th style="width:5%;" class="field_column">Ring Groups</th>
+		            <th style="width:5%;" class="field_column">RingGroups</th>
 		            <th style="width:5%;" class="field_column">Queues</th>
 		        </tr>
 		        </thead>
 {{#each Extensions}}
 		<tr class="field_row extensiondata" id="ext{{Extension}}">
-			<td style="width:5%;" class="field_column"><img src="../images/qd_internal.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
-			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:10%;" class="field_column"><img src="../images/qd_internal.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/>
+				<input type="hidden" value="fonb-from-internal" name="{{Extension}}[Context]"/>
+			</td>
 			<td style="width:4%;" class="field_column">
 				<select class="product" name="{{Extension}}[Product]">
 				{{#Product}}
@@ -163,36 +201,41 @@ FonB License Statistics:
 			<td style="width:10%;" class="field_column"><input type="text" value="{{Department}}" name="{{Extension}}[Department]"/></td>
 			<td style="width:5%;" class="field_column ColType">{{Type}}</td>
 			<td style="width:5%;" class="field_column">
-                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{Spy}}</p></a>
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{#if Spy}}{{Spy}}{{else}}Add Spy{{/if}}</p></a>
 			</td>
 			<td style="width:5%;" class="field_column">
-                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{RingGroups}}</p></a>
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{#if RingGroups}}{{RingGroups}}{{else}}Add Ringgroups{{/if}}</p></a>
 			</td>
 			<td style="width:5%;" class="field_column">
-                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{Queues}}</p></a>
+                		<a class="info" href="edituser.php?action=EditValues&exten={{Extension}}" title=""><p class="expand">{{#if Queues}}{{Queues}}{{else}}Add Queues{{/if}}</p></a>
 			</td>
 				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
 				<input type="hidden" value="{{Type}}" name="{{Extension}}[Type]"/>
-				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{HaveRingGroups}}" name="{{Extension}}[HaveRingGroups]"/>
 				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
-				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+				<input type="hidden" value="{{HaveQueues}}" name="{{Extension}}[HaveQueues]"/>
 				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
+				<input type="hidden" value="{{Terminal}}" name="{{Extension}}[Terminal]"/>
 				<!-- 
 				<input type="hidden" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/>
 				<input type="hidden" value="{{Language}}" name="{{Extension}}[Language]"/>
 				-->
 		</tr>
 {{/each}}
-
-<!-- Print all Deleted-Extensions defined in Elastix -->
+{{#if NoExtensionErrorMessage}}
+	<b style='color: #FC0000'>{{NoExtensionErrorMessage}}</b>
+{{/if}}
+<!-- Print all Deleted-Extensions defined in Platform -->
 {{#if DeletedExtensions}}
 		        <tr>
 				<td colspan="9"></td>
 		        </tr>
 {{#each DeletedExtensions}}
 		<tr class="field_row deletedextensiondata">
-			<td style="width:5%;" class="field_column"><img src="../images/ch_deleted.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
-			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
+			<td style="width:10%;" class="field_column"><img src="../images/ch_deleted.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/>
+				<input type="hidden" value="fonb-from-internal" name="{{Extension}}[Context]"/>
+			</td>
 			<td style="width:4%;" class="field_column"></td>
 			<td style="width:5%;" class="field_column"></td>
 			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
@@ -215,15 +258,15 @@ FonB License Statistics:
 				<input type="hidden" value="{{Language}}" name="{{Extension}}[Language]"/>
 				-->
 				<input type="hidden" value="{{Spy}}" name="{{Extension}}[Spy]"/>
-				<input type="hidden" value="{{ElastixRingGroups}}" name="{{Extension}}[ElastixRingGroups]"/>
+				<input type="hidden" value="{{HaveRingGroups}}" name="{{Extension}}[HaveRingGroups]"/>
 				<input type="hidden" value="{{RingGroups}}" name="{{Extension}}[RingGroups]"/>
 				<input type="hidden" value="{{Queues}}" name="{{Extension}}[Queues]"/>
-				<input type="hidden" value="{{ElastixQueues}}" name="{{Extension}}[ElastixQueues]"/>
+				<input type="hidden" value="{{HaveQueues}}" name="{{Extension}}[HaveQueues]"/>
 {{/each}}
 {{/if}}
 
 
-<!-- Print all the Ring Groups defined in Elastix -->
+<!-- Print all the Ring Groups defined in Platform-->
 {{#if RingGroups}}
 		        <tr>
 				<td colspan="9"></td>
@@ -231,15 +274,8 @@ FonB License Statistics:
 
 {{#each RingGroups}}
 		<tr class="field_row ringgroupdata">
-			<td style="width:5%;" class="field_column"><img src="../images/ch_ringgroup.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
-			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
-			<td style="width:4%;" class="field_column"></td>
-			<td style="width:5%;" class="field_column"></td>
-			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
-			<td style="width:12%;" class="field_column"></td>
-			<td style="width:10%;" class="field_column"></td>
-			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/></td> -->
-			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{{Language}}" name="{{Extension}}[Language]"/></td> -->
+			<td style="width:10%;" class="field_column"><img src="../images/ch_ringgroup.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
+			<td colspan="5" style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
 			<td style="width:5%;" class="field_column ColType"><span>{{Type}}</span></td>
 			<td style="width:5%;" class="field_column">
 			</td>
@@ -252,7 +288,7 @@ FonB License Statistics:
 {{/each}}
 {{/if}}
 
-<!-- Print all the current Queues defined in Elastix -->
+<!-- Print all the current Queues defined in Platform -->
 {{#if Queues}}
 		        <tr>
 				<td colspan="9"></td>
@@ -260,14 +296,7 @@ FonB License Statistics:
 {{#each Queues}}
 		<tr class="field_row queuedata">
 			<td style="width:5%;" class="field_column"><img src="../images/ch_queue.png"> {{Extension}}<input type="hidden" value="{{Extension}}" name="{{Extension}}[Extension]"/></td>
-			<td style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
-			<td style="width:4%;" class="field_column"></td>
-			<td style="width:5%;" class="field_column"></td>
-			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{$fields.Mobile}" name="{{Extension}}[Mobile]"/></td> -->
-			<td style="width:12%;" class="field_column"></td>
-			<td style="width:10%;" class="field_column"></td>
-			<!-- <td style="width:10%;" class="field_column"><input type="text" value="{{BaseDir}}" name="{{Extension}}[BaseDir]"/></td> -->
-			<!-- <td style="width:5%;" class="field_column"><input type="text" value="{{Language}}" name="{{Extension}}[Language]"/></td> -->
+			<td colspan="5" style="width:10%;" class="field_column">{{Name}}<input type="hidden" value="{{Name}}" name="{{Extension}}[Name]"/></td>
 			<td style="width:5%;" class="field_column ColType">{{Type}}</td>
 			<td style="width:5%;" class="field_column">
 			</td>
@@ -283,12 +312,12 @@ FonB License Statistics:
                     </tbody>
     </table>
 
-<br>
-<input style="width: 181px;margin-left:85%;border-radius: 9px;padding:5px;height: 38px;background-color: #283360;color: #fff;font-size: 16px;" name="action" type="submit" value="Update"/>
+<br><br>
+<input style="width: 181px;margin-top:1%;margin-left:85%;border-radius: 9px;padding:5px;height: 38px;background-color: #283360;color: #fff;font-size: 16px;" name="action" type="submit" value="Update"/>
 <br>
 </form>
 
-<form action="{$action}" method="post">
+<form  method="post">
     <table class="table">
        <tbody class="field_tbody">
 	<tr class="field_row">
@@ -323,6 +352,7 @@ FonB License Statistics:
                     <option value="ringgroup">Ring Group</option>
                     <option value="queue">Queue</option>
                 </select>
+                <input type="hidden" value="fonb-from-internal" name="new_extension[Context]"/>
             </td>
             <td style="width:5%;" class="field_column"><input type="text" name="new_extension[Queues]"/></td>
             <td style="width:5%;" class="field_column"><input type="text" name="new_extension[RingGroups]"/></td>
@@ -400,8 +430,14 @@ function CheckPasswordDisplay() {
 		var product = $(this).find("select.product").val();
 		if ( product == "none" ) {
 			$(this).addClass("gray").find("input.password").prop('disabled', true).css("background-color", "#CACACA").val("");
+			$(this).find("a").css("display", "block").html("<p>None</p>");
+			
 		} else {
+			
 			$(this).removeClass("gray").find("input.password").prop('disabled', false).css("background-color", "#FFF");
+			if($(this).find("a").find("p").html() == ""){
+				$(this).find("a").css("display", "block").html("<p>Add</p>");
+	}
 		}	
 		
 		switch (product) {

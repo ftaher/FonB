@@ -11,10 +11,12 @@ if ( isset($_POST['action']) && $_POST['action'] == "Add" ) {
 	$data[$_POST['new_extension']['Extension']] = $_POST['new_extension'];
 	$_POST = $data;
 
+
 	// Save the file
 	$data = removeNonIntSections($_POST);
 	$data = removeEmptyPasswords($data);
 	$fonb->write_users($data);
+	prepareContext();
 	header("Location: users.php");
 	exit;
 }
@@ -26,6 +28,7 @@ if ( isset($_POST['action']) && $_POST['action'] == "Update" ) {
 	$data = removeNonIntSections($_POST);
 	$data = removeEmptyPasswords($data);
 	$fonb->write_users($data);
+	prepareContext();
 	header("Location: users.php");
 	exit;
 }
@@ -37,6 +40,7 @@ if ( isset($_POST['action']) && $_POST['action'] == "Update" ) {
 // Creat the listusers object
 $Json = Array();
 $Json['Extensions'] = MustacheReformatExtensions( getExtensions() );
+$Json['NoExtensionErrorMessage'] =  getNoExtensionErrorMessage() ;
 $Json['RingGroups'] = getRingGroups();
 $Json['Queues'] = getQueues();
 $Json['DeletedExtensions'] = getDeletedExtensions();
@@ -55,7 +59,7 @@ require 'Handlebars/Autoloader.php';
 Handlebars\Autoloader::register();
 use Handlebars\Handlebars;
 $engine = new Handlebars;
-echo $engine->render( $UsersTemplate , $Json );
-
+echo $engine->render( $UsersTemplate ,  $Json );
+//var_dump ( $Json );
 
 ?>

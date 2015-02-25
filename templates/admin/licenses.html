@@ -69,11 +69,11 @@ ul, ol {
 <div class="whiteBg">
 <div class="content userlist">
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-        <li><a href="/admin/users.php" data-toggle="tab">Users</a></li>
-        <li class="active"><a href="/license">License</a></li>
-        <li><a href="/admin/speeddials.php">Contacts</a></li>
-        <li><a href="/admin/config.php">Settings</a></li>
-        <a href=""><button class="btn btn-info" name="action" style="float: right;">Buy Fonb</button></a>
+        <li><a href="admin/users.php" data-toggle="tab">Users</a></li>
+        <li class="active"><a href="license">License</a></li>
+        <li><a href="admin/speeddials.php">Contacts</a></li>
+        <li><a href="admin/config.php">Settings</a></li>
+        <a href="http://aptus.com/prices.html" target="_blank"><button class="btn btn-info" name="action" style="float: right;">Buy Fonb</button></a>
     </ul>
 
 </div>
@@ -103,7 +103,7 @@ ul, ol {
         <li>Please buy additional licenses to use FonB for the add additional users. </li>
         <li>Alternatively you can comment out the password fields of exceeding users in users.cfg.</li>
       </ul>
-      <a href=""><button class="btn btn-danger getBtn" name="action">Buy FonB</button></a>
+      <a href="http://aptus.com/prices.html" target="_blank"><button class="btn btn-danger getBtn" name="action">Buy FonB</button></a>
     </div>
     {{/ErrorMaxUserLimit}}
     {{#ErrorZeroUser}}
@@ -114,7 +114,7 @@ ul, ol {
         <li>If you have already purchased the license, please activate them in the Activate Product field at the top of this page.</li>
         <li>Click <a href="http://aptus.com/download.html" target="_blank">here</a> if you wish to receive demo license valid for 30 days.</li>
       </ul>
-      <a href=""><button class="btn btn-danger getBtn" name="action">Get License</button></a>
+      <a href="http://aptus.com/download.html" target="_blank"><button class="btn btn-danger getBtn" name="action">Get License</button></a>
     </div>
     {{/ErrorZeroUser}}
     <table border="1" class="centerText">
@@ -183,7 +183,7 @@ ul, ol {
       <table border="1">
         <thead>
           <tr>
-            <th><h2>Mobility licenses</h2></th>
+            <th><h2>FonB Web licenses</h2></th>
             <th class="big">{{WebMaxUsers}}</th>
           </tr>
         </thead>
@@ -216,7 +216,7 @@ ul, ol {
       <table border="1">
         <thead>
           <tr>
-            <th><h2>User Portal Licenses</h2></th>
+            <th><h2>FonB Mobility Licenses</h2></th>
             <th class="big">{{MobileMaxUsers}}</th>
           </tr>
         </thead>

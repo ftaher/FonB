@@ -157,6 +157,23 @@
     </div>  <!-- body container row ends -->
   </div><!-- Contents end here -->
 </div><!--base template ends -->
+
+<!-- Audios -->
+<audio id="audio_remote" autoplay="autoplay" />
+<audio id="audio_local" autoplay="autoplay" />
+<audio id="ringtone" loop src="sounds/ringtone.wav" />
+<audio id="ringbacktone" loop src="sounds/ringbacktone.wav" />
+<audio id="dtmfTone" src="sounds/dtmf.wav" />
+
+<!-- 
+Microsoft Internet Explorer extension
+For now we use msi installer as we don't have trusted certificate yet :(
+-->
+<!--object id="webrtc4ieLooper" classid="clsid:7082C446-54A8-4280-A18D-54143846211A" CODEBASE="http://sipml5.org/deploy/webrtc4all.CAB"> </object-->
+
+
+
+
 <audio loop id="soundHandle" style="display: none;">
     <source src="flash/ring.mp3" type="audio/mpeg" />
     <source src="flash/ring.ogg" type="audio/ogg" />
